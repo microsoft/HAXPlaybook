@@ -28,12 +28,6 @@ interface CurrentPageChangedOptions {
   isPrevPage: boolean
 }
 
-function handleComplete(sender: ReactSurveyModel, options: SurveyCompleteOptions): void {
-  console.log("Complete", sender, options);
-  // Sends the survey back to the first page while keeping the response data
-  sender.clear(false);
-}
-
 function handleCurrentPageChanged(sender: ReactSurveyModel, options: CurrentPageChangedOptions): void {
   console.log("CurrentPageChanged", sender, options);
 }
@@ -56,22 +50,22 @@ const App: React.FunctionComponent = () => {
   if (showIntro) {
     return (
       <div className="App">
-        <Intro onStartClick={() => setShowIntro(false)}/>
+        <Intro onStartClick={() => setShowIntro(false)} />
       </div>
     );
   } else if (!surveyComplete) {
     return (
       <div className="App">
-        <Survey json={surveyJson} 
+        <Survey json={surveyJson}
           onValueChanged={handleValueChanged}
           onCurrentPageChanged={handleCurrentPageChanged}
-          onComplete={handleComplete}/>
+          onComplete={handleComplete} />
       </div>
     );
   } else {
     return (
       <div className="App">
-        <SurveyCompletionMessage onRestartClick={() => setSurveyComplete(false)}/>
+        <SurveyCompletionMessage onRestartClick={() => setSurveyComplete(false)} />
       </div>
     );
   }

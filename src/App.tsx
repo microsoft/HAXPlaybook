@@ -5,6 +5,7 @@ import './survey.min.css'
 import { PageModel, QuestionRadiogroupModel, ReactSurveyModel, Survey } from 'survey-react';
 import surveyJson from './data/survey.json';
 import Intro from './Intro';
+import SurveyCompletionMessage from './SurveyCompletionMessage';
 
 interface SurveyChangedOptions {
   name: string,
@@ -58,13 +59,19 @@ const App: React.FunctionComponent = () => {
         <Intro onStartClick={() => setShowIntro(false)}/>
       </div>
     );
-  } else {
+  } else if (!surveyComplete) {
     return (
       <div className="App">
         <Survey json={surveyJson} 
           onValueChanged={handleValueChanged}
           onCurrentPageChanged={handleCurrentPageChanged}
           onComplete={handleComplete}/>
+      </div>
+    );
+  } else {
+    return (
+      <div className="App">
+        <SurveyCompletionMessage onRestartClick={() => setSurveyComplete(false)}/>
       </div>
     );
   }

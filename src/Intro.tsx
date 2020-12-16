@@ -4,7 +4,7 @@ interface IntroProps {
   onStartClick(): void
 }
 
-const Intro: React.FunctionComponent<IntroProps> = (props) => {
+const Intro: React.FunctionComponent<IntroProps> = ({onStartClick}) => {
   return (
     <React.Fragment>
       <h1>AI Playbook</h1>
@@ -27,7 +27,7 @@ const Intro: React.FunctionComponent<IntroProps> = (props) => {
           </ul>
           <br/>
           <p>When you are ready, press start to begin your AI Playbook.</p><br/>
-          <p><button id="startPlaybook" className="btn btn-primary" type="button" onClick={() => props.onStartClick()}><i className="fa fa-play-circle" aria-hidden="true"></i>&nbsp;Start AI Playbook</button></p>
+          <p><button id="startPlaybook" className="btn btn-primary" type="button" onClick={onStartClick}><i className="fa fa-play-circle" aria-hidden="true"></i>&nbsp;Start AI Playbook</button></p>
       </div>
     </React.Fragment>
   );

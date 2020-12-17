@@ -14,11 +14,26 @@
         "isRequired": true,
         "hasOther": true,
         "choices": [
-        "Search",
-        "Recommendation",
-        "Conversational AI",
-        "Text Prediction and Assistance",
-        "Classification"
+          {
+            "value": "search",
+            "text": "Search"
+          },
+          {
+            "value": "recommendation",
+            "text": "Recommendation"
+          },
+          {
+            "value": "conversational_ai",
+            "text": "Conversational AI"
+          },
+          {
+            "value": "text_prediction_and_assistance",
+            "text": "Text Prediction and Assistance"
+          },
+          {
+            "value": "classification",
+            "text": "Classification"
+          }
         ]
       }
     ]

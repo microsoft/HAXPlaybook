@@ -1,0 +1,153 @@
+{
+  "systemDomain": {
+    "choices": [
+      {
+        "name": "search",
+        "helpCard": {
+          "topics": [
+            {
+              "name": "Search",
+              "level": "info",
+              "details": "A search system is a program or feature that searches for and identifies items in collection that correspond to keywords, phrases, or characters specified by the user."
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": [
+                "Search engines such as Bing generate matching results (e.g., movie title) along with contextually relevant information (e.g., showtimes) based on the user's current location and time.",
+                "An in-app search feature such as Microsoft Search in office products allows users to quickly find application specific information, from commands, help, to recently used files and more."
+              ]
+            }
+          ]
+        },
+        "taskCard": {
+          "title": "Correct Operation",
+          "tasks": [
+            {
+              "name": "System demonstrates normal operation",
+              "details": "Search works"
+            }
+          ]
+        }
+      },
+      {
+        "name": "recommendation",
+        "helpCard": {
+          "topics": [
+            {
+              "name": "Conversational AI",
+              "level": "info",
+              "details": "A recommendation system suggests content to the user that is likely to be of interest. In some cases, this is done by predicting the rating or preference a user would give to an item."
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": [
+                "Playlist generators for video and music services like Netflix, YouTube and Spotify.",
+                "Product recommender services such as Amazon.",
+                "Contextual assistant services such as Meeting Insights."
+              ]
+            }
+          ]
+        },
+        "taskCard": {
+          "title": "Correct Operation",
+          "tasks": [
+            {
+              "name": "System demonstrates normal operation",
+              "details": "it works"
+            }
+          ]
+        }
+      },
+      {
+        "name": "conversational_ai",
+        "helpCard": {
+          "topics": [
+            {
+              "name": "Recommendation",
+              "level": "info",
+              "details": "Conversational agents, or dialogue systems, interact with people through natural-language dialogue. Historically this is achieved by recognizing speech, classifying intents, and 'slot filling'."
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": [
+                "Voice assistants for productivity management or home automation like Cortana, Siri, and Alexa.",
+                "Chatbots for customer support in most ecommerce websites."
+              ]
+            }
+          ]
+        },
+        "taskCard": {
+          "title": "Correct Operation",
+          "tasks": [
+            {
+              "name": "System demonstrates normal operation",
+              "details": "it works"
+            }
+          ]
+        }
+      },
+      {
+        "name": "text_prediction_and_assistance",
+        "helpCard": {
+          "topics": [
+            {
+              "name": "Text Prediction and Assistance",
+              "level": "info",
+              "details": "Text prediction and writing assistants utilize machine learning to help users through various steps of the writing process, including research, grammar and tone checking, and localization."
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": [
+                "Predicting the next set of words or action commands based on the user's input.",
+                "Providing corrections for spelling, grammar, and punctuation mistakes.",
+                "Making suggestions for similar words, paraphrases, and alternative expressions."
+              ]
+            }
+          ]
+        },
+        "taskCard": {
+          "title": "Correct Operation",
+          "tasks": [
+            {
+              "name": "System demonstrates normal operation",
+              "details": "it works"
+            }
+          ]
+        }
+      },
+      {
+        "name": "classification",
+        "helpCard": {
+          "topics": [
+            {
+              "name": "Classification",
+              "level": "info",
+              "details": "Text or document classification refers to the process of categorizing text into organized groups by assigning predefined labels to them."
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": [
+                "Spam filters in email applications such as Microsoft Outlook.",
+                "Scheduling assistants that detect meeting appointments based on the content of email."
+              ]
+            }
+          ]
+        },
+        "taskCard": {
+          "title": "Correct Operation",
+          "tasks": [
+            {
+              "name": "System demonstrates normal operation",
+              "details": "it works"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

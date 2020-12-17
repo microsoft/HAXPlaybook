@@ -4,126 +4,21 @@ import './App.css';
 import './survey.min.css'
 import { PageModel, QuestionRadiogroupModel, ReactSurveyModel, Survey } from 'survey-react';
 import surveyData from './data/survey.json';
-import helpData from './data/data.json';
 import Intro from './Intro';
 import TaskList from './TaskList';
 import Help from './Help';
 import SurveyCompletionMessage from './SurveyCompletionMessage';
+import { CurrentPageChangedOptions, HelpCard, SurveyChangedOptions, SurveyCompleteOptions, TaskCard } from './Types';
 
-interface SurveyChangedOptions {
-  name: string,
-  question: QuestionRadiogroupModel,
-  value: string
-}
-
-interface SurveyCompleteOptions {
-  showDataSaving: (text: string) => any,
-  showDataSavingError: (text: string) => any,
-  showDataSavingSuccess: (text: string) => any,
-  showDataSavingClear: () => any,
-  isCompleteOnTrigger: () => boolean
-}
-
-interface CurrentPageChangedOptions {
-  oldCurrentPage: PageModel,
-  newCurrentPage: PageModel,
-  isNextPage: boolean,
-  isPrevPage: boolean
-}
-
-class HelpCard {
-  topics: HelpTopic[];
-
-  constructor(topics: HelpTopic[]) {
-    this.topics = topics;
-  }
-
-  static fromQuestionChoice(questionName: string, choiceValue: string) {
-    const data: any = helpData;
-    if (!(questionName in data)) {
-      throw new Error("Could not find " + questionName + " in data");
-    }
-    if (data[questionName].choices == null) {
-      throw new Error("Data for " + questionName + " contains null choices");
-    }
-    let choice = data[questionName].choices.find((c: any) => c.name === choiceValue);
-    if (choice == null || choice.helpCard == null || choice.helpCard.topics == null) {
-      console.log("Returning empty HelpCard for question %s choice %s", questionName, choiceValue);
-      return new HelpCard([]);
-    }
-    return new HelpCard(choice.helpCard.topics.map((topic: any) => {
-      const level = HelpLevel[topic.level as keyof typeof HelpLevel];
-      if (level == null) {
-        console.log("HelpLevel from data does not match expected values: ", topic.level);
-      }
-      return new HelpTopic(topic.name, topic.level, topic.details)
-    }));
-  }
-}
-
-class HelpTopic {
-  name: string;
-  level: HelpLevel;
-  details: string | string[];
-
-  constructor(name: string, level: HelpLevel, details: string | string[]) {
-    this.name = name;
-    this.level = level;
-    this.details = details;
-  }
-}
-
-enum HelpLevel {
-  info,
-  warning
-}
-
-class TaskCard {
-  title: string;
-  tasks: Task[];
-
-  constructor(title: string, tasks: Task[]) {
-    this.title = title;
-    this.tasks = tasks;
-  }
-
-  static fromQuestionChoice(questionName: string, choiceValue: string) {
-    const data: any = helpData;
-    if (!(questionName in data)) {
-      throw new Error("Could not find " + questionName + " in data");
-    }
-    if (data[questionName].choices == null) {
-      throw new Error("Data for " + questionName + " contains null choices");
-    }
-    let choice = data[questionName].choices.find((c: any) => c.name === choiceValue);
-    if (choice == null || choice.taskCard == null || choice.taskCard.tasks == null) {
-      console.log("Returning empty TaskCard for question %s choice %s", questionName, choiceValue);
-      return new TaskCard("", []);
-    }
-    return new TaskCard(choice.taskCard.title, choice.taskCard.tasks.map((task: any) => {
-      return new Task(task.name, task.details)
-    }));
-  }
-}
-
-class Task {
-  name: string;
-  details: string | string[];
-
-  constructor(name: string, details: string | string[]) {
-    this.name = name;
-    this.details = details;
-  }
-}
 
 const App: React.FunctionComponent = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [surveyComplete, setSurveyComplete] = useState(false);
   const [helpCard, setHelpCard] = useState(new HelpCard([]));
-  const [tasks, setTasks] = useState(new Map<string, TaskCard>());
+  const [taskMap, setTaskMap] = useState(new Map<string, TaskCard>());
 
   function logState() {
-    console.log("STATE: showIntro=", showIntro, " surveyComplete=", surveyComplete, " helpCard=", helpCard, " tasks=", tasks);
+    console.log("STATE: showIntro=", showIntro, " surveyComplete=", surveyComplete, " helpCard=", helpCard, " tasks=", taskMap);
   }
   logState();
 
@@ -139,7 +34,7 @@ const App: React.FunctionComponent = () => {
     const hc = HelpCard.fromQuestionChoice(options.name, options.value);
     const tc = TaskCard.fromQuestionChoice(options.name, options.value);
     setHelpCard(hc);
-    setTasks(tasks.set(options.name, tc));
+    setTaskMap(taskMap.set(options.name, tc));
     console.log("HelpCard: ", hc);
     console.log("TaskCard: ", tc);
   }
@@ -147,6 +42,8 @@ const App: React.FunctionComponent = () => {
   const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {
     console.log("CurrentPageChanged", sender, options);
   }
+
+  const tasks = Array.from(taskMap.values());
 
   if (showIntro) {
     return (

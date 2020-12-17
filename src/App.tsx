@@ -10,7 +10,6 @@ import Help from './Help';
 import SurveyCompletionMessage from './SurveyCompletionMessage';
 import { CurrentPageChangedOptions, HelpCard, SurveyChangedOptions, SurveyCompleteOptions, TaskCard } from './Types';
 
-
 const App: React.FunctionComponent = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [surveyComplete, setSurveyComplete] = useState(false);

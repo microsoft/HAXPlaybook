@@ -99,9 +99,9 @@ export class TaskCard {
 
 export class Task {
   name: string;
-  details: string | string[];
+  details: string;
 
-  constructor(name: string, details: string | string[]) {
+  constructor(name: string, details: string) {
     this.name = name;
     this.details = details;
   }

@@ -6,6 +6,7 @@ interface TaskProps {
 }
 
 const App: React.FunctionComponent<TaskProps> = ({ tasks }) => {
+  const _this = this;
   return (
     <React.Fragment>
       {tasks.map(card => (
@@ -14,7 +15,7 @@ const App: React.FunctionComponent<TaskProps> = ({ tasks }) => {
           {card.tasks.map(task => (
             <div>
               <h4>{task.name}</h4>
-              <span>{task.details}</span>
+              <div dangerouslySetInnerHTML={{ __html: task.details }} />
             </div>
           ))}
         </div>

@@ -35,7 +35,7 @@
         "helpCard": {
           "topics": [
             {
-              "name": "Conversational AI",
+              "name": "Recommendation",
               "level": "info",
               "details": "A recommendation system suggests content to the user that is likely to be of interest. In some cases, this is done by predicting the rating or preference a user would give to an item."
             },
@@ -65,7 +65,7 @@
         "helpCard": {
           "topics": [
             {
-              "name": "Recommendation",
+              "name": "Conversational AI",
               "level": "info",
               "details": "Conversational agents, or dialogue systems, interact with people through natural-language dialogue. Historically this is achieved by recognizing speech, classifying intents, and 'slot filling'."
             },
@@ -144,6 +144,154 @@
             {
               "name": "System demonstrates normal operation",
               "details": "it works"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "inputModality": {
+    "instructions": "Please make a selection to see more information about your primary input modality.",
+    "choices": [
+      {
+        "name": "text",
+        "helpCard": {
+          "topics": [
+            {
+              "name": "Text",
+              "level": "info",
+              "details": "Any input from keystrokes or text-bearing documents can be considered text input."
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": [
+                "Search systems enable users to retrieve information by entering text queries."
+              ]
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": [
+                "Recommender systems enable users to explore various contents, products or services that match their behavior or preferences by entering one or more keywords.",
+                "Music playlist generators will ask onboarding users to select a few songs or genres to tailor its recommendation.",
+                "Fitness apps will ask onboarding users to answer questions about lifestyle and routine behavior to tailor its recommendation."
+              ]
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": [
+                "Chatbots allow users to formulate their questions by entering text and retrieve relevant information."
+              ]
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": [
+                "Predictive text enables efficient use of keystrokes by suggesting a set or sequence of words given some preceding text."
+              ]
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": [
+                "Spam filters allow email users to specify (via text) categories of email messages that they want to filter out from their inbox."
+              ]
+            }
+          ]
+        },
+        "taskCard": {
+          "title": "Input Errors",
+          "message": "Your system will take text as its primary input modality. Here are some scenarios that you can consider including in your user testing protocol.",
+          "tasks": [
+            {
+              "name": "Spelling error results in wrong input",
+              "details": "<p>Spelling mistakes are a common source of text input errors, including missing letters, accidental letter additions, swapping and replacing letters. Here are some ways to simulate spelling errors:</p><ul> <li>Use a word scrambler to switch the position of any two adjacent letters.</li> <li>Use any of the four techniques to manipulate the user's utterance. <ul> <li><b>Truncation</b>: removing a vowel or consonant from a word (e.g., leter instead of letter)</li> <li><b>Substitution</b>: replacing a vowel or consonant with another one in their respective position in the word (e.g., fi<u>m</u>ite instead of fi<u>n</u>ite)</li> <li><b>Insertion</b>: adding an extra vowel or consonant to a word (e.g., mis<u>s</u>take instead of mistake)</li> <li><b>Swapping</b>: switching positions between two adjacent letters (e.g., rec<u>ie</u>ved instead of rec<u>ei</u>ved)</li> </ul> </li> </ul>"
+            }
+          ]
+        }
+      },
+      {
+        "name": "speech",
+        "helpCard": {
+          "topics": [
+            {
+              "name": "Speech",
+              "level": "info",
+              "details": "Speech input is widely used in conversational assistants such as home automation systems, dictation and language translation services."
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": "Search systems that are integrated into voice assistants enable users to retrieve information by entering speech queries."
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": [
+                "Recommender systems that are integrated into voice assistants enable users to explore relevant information by entering speech queries.",
+                "Home-based voice assistants such as Amazon Echo provide recommendations for specific recipes based on the speech query \"Show me recipes for pasta.\""
+              ]
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": "A voice assistant is a user interface that allows a user to complete an action or retrieve information simply by speaking a command."
+            }
+          ]
+        },
+        "taskCard": {
+          "title": "Input Errors",
+          "message": "Your system will take <b>speech</b> as its primary input modality. Here are some scenarios that you can consider including in your user testing protocol.",
+          "tasks": [
+            {
+              "name": "Speech recognition error results in wrong input",
+              "details": "<p>Speech recognition is often a common source of error in technologies that rely on language intelligence. Here are some ways to simulate speech recognition errors:</p> <ul> <li>Use an automated speech-to-text transcriber to convert user's utterance to text.</li> <li>Use any of the four techniques to manipulate the user's utterance. <ul> <li><b>Truncation</b>: removing inflected endings (e.g., \"-ing\", \"-s\", \"-ed\") or articles (\"the\")</li> <li><b>Substitution</b>: replacing utterance with a homo-phone/-nym, or words that share the same pronunciation, regardless of spelling.</li> <li><b>Insertion</b>: adding inflected endings (e.g., \"-ing\", \"-s\", \"-ed\")</li> <li><b>Extension</b> Splitting inflected endings (\"-s\") from words (\"cats\") to add a new word (e.g., cat<u>s</u> -> cat <u>s</u>it)</li> </ul> </li> </ul>"
+            },
+            {
+              "name": "System ignores speech input",
+              "details": "<p>Speech recognizers can ignore a user's utterance due to a disruptive noise signal.</p> <p>Simulate this error by turning off audio-visual feedback that indicates proper input registration.</p>"
+            },
+            {
+              "name": "System generates a non-response",
+              "details": "<p>Speech recognizers can also fail to make sense of a user's utterance due to a disruptive noise signal.</p> <p>Simulate this error by providing feedback to the user which indicates that the system has failed to register the user's input. For example, a system can respond with, \"Sorry, I did not hear what you said.\"</p>"
+            }
+          ]
+        }
+      },
+      {
+        "name": "action_sequence",
+        "helpCard": {
+          "topics": [
+            {
+              "name": "Action Sequence",
+              "level": "info",
+              "details": "Action sequence is a predefined event or sequence of events that can be used to trigger a system's intelligent feature. An action sequence can be initiated by the user or the system."
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": "Playlist generators rely on content that the user is currently playing or a history of accessed content to recommend new content that matches their preference."
+            },
+            {
+              "name": "Example",
+              "level": "warning",
+              "details": "Switching between a specific set of applications or closing an application can be classified as unique action sequences that inform ways to trigger an intelligent feature."
+            }
+          ]
+        },
+        "taskCard": {
+          "title": "Input Errors",
+          "message": "Your system will take <b>action sequence</b> as its primary input modality. Here are some scenarios that you can consider including in your user testing protocol.",
+          "tasks": [
+            {
+              "name": "System ignores correct action sequence",
+              "details": "<p>Your system could potentially ignore a correct signal when it classifies a correct action sequence as being incorrect. This is also known as a false negative</p> <p>Simulate this error by turning off audio-visual feedback that indicates proper input registration."
+            },
+            {
+              "name": "System registers incorrect action sequence",
+              "details": "<p>Your system could also classify an incorrect action sequence as being correct. This is also known as a false positive.</p> <p>Simulate this error by designating an incorrect action sequence, then turning on system audio-visual feedback when a user performs the incorrect action sequence. </p>"
             }
           ]
         }

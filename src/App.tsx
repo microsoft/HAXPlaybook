@@ -7,7 +7,7 @@ import surveyData from './data/survey.json';
 import helpData from './data/data.json';
 import Intro from './Intro';
 import TaskList from './TaskList';
-import HelpDisplay from './HelpDisplay';
+import Help from './Help';
 import SurveyCompletionMessage from './SurveyCompletionMessage';
 
 interface SurveyChangedOptions {
@@ -119,6 +119,13 @@ class Task {
 const App: React.FunctionComponent = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [surveyComplete, setSurveyComplete] = useState(false);
+  const [helpCard, setHelpCard] = useState(new HelpCard([]));
+  const [tasks, setTasks] = useState(new Map<string, TaskCard>());
+
+  function logState() {
+    console.log("STATE: showIntro=", showIntro, " surveyComplete=", surveyComplete, " helpCard=", helpCard, " tasks=", tasks);
+  }
+  logState();
 
   const handleComplete = (sender: ReactSurveyModel, options: SurveyCompleteOptions) => {
     console.log("Complete", sender, options);
@@ -129,10 +136,12 @@ const App: React.FunctionComponent = () => {
 
   const handleValueChanged = (sender: ReactSurveyModel, options: SurveyChangedOptions) => {
     console.log("ValueChanged", sender, options);
-    const helpCard = HelpCard.fromQuestionChoice(options.name, options.value);
-    const taskCard = TaskCard.fromQuestionChoice(options.name, options.value);
-    console.log("HelpCard: ", helpCard);
-    console.log("TaskCard: ", taskCard);
+    const hc = HelpCard.fromQuestionChoice(options.name, options.value);
+    const tc = TaskCard.fromQuestionChoice(options.name, options.value);
+    setHelpCard(hc);
+    setTasks(tasks.set(options.name, tc));
+    console.log("HelpCard: ", hc);
+    console.log("TaskCard: ", tc);
   }
 
   const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {
@@ -152,16 +161,16 @@ const App: React.FunctionComponent = () => {
           onValueChanged={handleValueChanged}
           onCurrentPageChanged={handleCurrentPageChanged}
           onComplete={handleComplete} />
-        <HelpDisplay />
-        <TaskList />
+        <Help card={helpCard}/>
+        <TaskList tasks={tasks}/>
       </div>
     );
   } else {
     return (
       <div className="App">
         <SurveyCompletionMessage onRestartClick={() => setSurveyComplete(false)} />
-        <HelpDisplay />
-        <TaskList />
+        <Help card={helpCard}/>
+        <TaskList tasks={tasks}/>
       </div>
     );
   }

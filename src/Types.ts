@@ -23,10 +23,7 @@ export interface CurrentPageChangedOptions {
   isPrevPage: boolean
 }
 
-export enum HelpLevel {
-  info,
-  warning
-}
+export type HelpLevel = "info" | "warning";
 
 export class HelpCard {
   topics: HelpTopic[];
@@ -49,10 +46,6 @@ export class HelpCard {
       return new HelpCard([]);
     }
     return new HelpCard(choice.helpCard.topics.map((topic: any) => {
-      const level = HelpLevel[topic.level as keyof typeof HelpLevel];
-      if (level == null) {
-        console.log("HelpLevel from data does not match expected values: ", topic.level);
-      }
       return new HelpTopic(topic.name, topic.level, topic.details)
     }));
   }

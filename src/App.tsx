@@ -9,6 +9,7 @@ import Help from './Help';
 import SurveyCompletionMessage from './SurveyCompletionMessage';
 import { CurrentPageChangedOptions, HelpCard, SurveyValueChangedOptions, SurveyCompleteOptions, TaskCard, Task } from './Types';
 import helpData from './data/data.json';
+import Instructions from './Instructions';
 
 const DEBUG = false;
 
@@ -29,8 +30,7 @@ const App: React.FunctionComponent = () => {
 
   const handleComplete = (sender: ReactSurveyModel, options: SurveyCompleteOptions) => {
     console.log("Complete", sender, options);
-    // Sends the survey back to the first page while keeping the response data
-    sender.clear(false);
+    sender.clear();
     setSurveyComplete(true);
   }
 
@@ -45,7 +45,6 @@ const App: React.FunctionComponent = () => {
       tc.tasks.concat(filtered);
     }
     setTaskMap(taskMap.set(category, tc));
-    //console.log("HelpCard: ", hc, "TaskCard: ", tc, "TaskMap: ", taskMap);
   }
 
   const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {
@@ -70,11 +69,7 @@ const App: React.FunctionComponent = () => {
           onValueChanged={handleValueChanged}
           onCurrentPageChanged={handleCurrentPageChanged}
           onComplete={handleComplete} />
-        {(instructions && instructions.length > 0) ? (
-          <div>
-            <h4>Instructions</h4>
-            <span>{instructions}</span>
-          </div>) : null }
+        <Instructions message={instructions} />
         <Help card={helpCard}/>
         {DEBUG ? <TaskList taskMap={taskMap}/> : null}
       </div>

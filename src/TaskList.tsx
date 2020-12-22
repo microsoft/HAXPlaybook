@@ -9,14 +9,14 @@ interface TaskListProps {
 const App: React.FunctionComponent<TaskListProps> = ({ taskMap }) => {
   const categories = Array.from(taskMap.keys());
   return (
-    <React.Fragment>
+    <div className="container">
       {categories.map(category => (
-        <div key={category}>
-          <h3>{category}</h3>
+        <div key={category} className="card mb-3">
+          <h3 className="card-header">{category}</h3>
           <TaskCardComponent card={taskMap.get(category) as TaskCard}/>
         </div>
       ))}
-    </React.Fragment>
+    </div>
   )
 }
 

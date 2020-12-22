@@ -10,7 +10,7 @@ const App: React.FunctionComponent<TaskCardProps> = ({ card }) => {
     <React.Fragment>
       <div dangerouslySetInnerHTML={{ __html: card.message }} />
       {card.tasks.map(task => (
-        <div id={task.name}>
+        <div id={task.id}>
           <h4>{task.name}</h4>
           <div dangerouslySetInnerHTML={{ __html: task.details }} />
         </div>

@@ -1,5 +1,6 @@
 import { PageModel, QuestionRadiogroupModel } from "survey-react";
 import helpData from './data/data.json';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface SurveyValueChangedOptions {
   name: string,
@@ -61,11 +62,13 @@ export class HelpTopic {
   name: string;
   level: HelpLevel;
   details: string;
+  id: string;
 
   constructor(name: string, level: HelpLevel, details: string) {
     this.name = name;
     this.level = level;
     this.details = details;
+    this.id = uuidv4();
   }
 }
 
@@ -103,10 +106,12 @@ export class Task {
   name: string;
   details: string;
   question: string;
+  id: string;
 
   constructor(name: string, details: string, question: string) {
     this.name = name;
     this.details = details;
     this.question = question;
+    this.id = uuidv4();
   }
 }

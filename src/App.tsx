@@ -54,6 +54,7 @@ const App: React.FunctionComponent = () => {
     const data: any = helpData;
     setInstructions(data[questionName].instructions);
     setCategory(data[questionName].category);
+    setHelpCard(new HelpCard([]));
   }
 
   if (showIntro) {
@@ -69,8 +70,11 @@ const App: React.FunctionComponent = () => {
           onValueChanged={handleValueChanged}
           onCurrentPageChanged={handleCurrentPageChanged}
           onComplete={handleComplete} />
-        <h4>Instructions</h4>
-        <span>{instructions}</span>
+        {(instructions && instructions.length > 0) ? (
+          <div>
+            <h4>Instructions</h4>
+            <span>{instructions}</span>
+          </div>) : null }
         <Help card={helpCard}/>
         {DEBUG ? <TaskList taskMap={taskMap}/> : null}
       </div>

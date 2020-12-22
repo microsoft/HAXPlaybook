@@ -23,7 +23,7 @@
           "tasks": [
             {
               "name": "System demonstrates normal operation",
-              "details": "Search works"
+              "details": ""
             }
           ]
         }
@@ -52,7 +52,7 @@
           "tasks": [
             {
               "name": "System demonstrates normal operation",
-              "details": "it works"
+              "details": ""
             }
           ]
         }
@@ -80,7 +80,7 @@
           "tasks": [
             {
               "name": "System demonstrates normal operation",
-              "details": "it works"
+              "details": ""
             }
           ]
         }
@@ -109,7 +109,7 @@
           "tasks": [
             {
               "name": "System demonstrates normal operation",
-              "details": "it works"
+              "details": ""
             }
           ]
         }
@@ -137,7 +137,7 @@
           "tasks": [
             {
               "name": "System demonstrates normal operation",
-              "details": "it works"
+              "details": ""
             }
           ]
         }

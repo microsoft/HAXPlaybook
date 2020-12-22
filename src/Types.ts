@@ -1,7 +1,7 @@
 import { PageModel, QuestionRadiogroupModel } from "survey-react";
 import helpData from './data/data.json';
 
-export interface SurveyChangedOptions {
+export interface SurveyValueChangedOptions {
   name: string,
   question: QuestionRadiogroupModel,
   value: string
@@ -20,6 +20,11 @@ export interface CurrentPageChangedOptions {
   newCurrentPage: PageModel,
   isNextPage: boolean,
   isPrevPage: boolean
+}
+
+export enum HelpLevel {
+  info,
+  warning
 }
 
 export class HelpCard {
@@ -55,26 +60,23 @@ export class HelpCard {
 export class HelpTopic {
   name: string;
   level: HelpLevel;
-  details: string | string[];
+  details: string;
 
-  constructor(name: string, level: HelpLevel, details: string | string[]) {
+  constructor(name: string, level: HelpLevel, details: string) {
     this.name = name;
     this.level = level;
     this.details = details;
   }
 }
 
-export enum HelpLevel {
-  info,
-  warning
-}
-
 export class TaskCard {
   title: string;
+  message: string;
   tasks: Task[];
 
-  constructor(title: string, tasks: Task[]) {
+  constructor(title: string, message: string, tasks: Task[]) {
     this.title = title;
+    this.message = message;
     this.tasks = tasks;
   }
 
@@ -89,10 +91,10 @@ export class TaskCard {
     let choice = data[questionName].choices.find((c: any) => c.name === choiceValue);
     if (choice == null || choice.taskCard == null || choice.taskCard.tasks == null) {
       console.log("Returning empty TaskCard for question %s choice %s", questionName, choiceValue);
-      return new TaskCard("", []);
+      return new TaskCard("", "", []);
     }
-    return new TaskCard(choice.taskCard.title, choice.taskCard.tasks.map((task: any) => {
-      return new Task(task.name, task.details)
+    return new TaskCard(choice.taskCard.title, choice.taskCard.message, choice.taskCard.tasks.map((task: any) => {
+      return new Task(task.name, task.details, questionName)
     }));
   }
 }
@@ -100,9 +102,11 @@ export class TaskCard {
 export class Task {
   name: string;
   details: string;
+  question: string;
 
-  constructor(name: string, details: string) {
+  constructor(name: string, details: string, question: string) {
     this.name = name;
     this.details = details;
+    this.question = question;
   }
 }

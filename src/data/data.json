@@ -1,5 +1,7 @@
 {
   "systemDomain": {
+    "instructions": "",
+    "category": "Correct Operation",
     "choices": [
       {
         "name": "search",
@@ -13,15 +15,11 @@
             {
               "name": "Example",
               "level": "warning",
-              "details": [
-                "Search engines such as Bing generate matching results (e.g., movie title) along with contextually relevant information (e.g., showtimes) based on the user's current location and time.",
-                "An in-app search feature such as Microsoft Search in office products allows users to quickly find application specific information, from commands, help, to recently used files and more."
-              ]
+              "details": "<ul> <li>Search engines such as Bing generate matching results (e.g., movie title) along with contextually relevant information (e.g., showtimes) based on the user's current location and time. </li> <li>An in-app search feature such as Microsoft Search in office products allows users to quickly find application specific information, from commands, help, to recently used files and more.</li> </ul>"
             }
           ]
         },
         "taskCard": {
-          "title": "Correct Operation",
           "tasks": [
             {
               "name": "System demonstrates normal operation",
@@ -51,7 +49,6 @@
           ]
         },
         "taskCard": {
-          "title": "Correct Operation",
           "tasks": [
             {
               "name": "System demonstrates normal operation",
@@ -80,7 +77,6 @@
           ]
         },
         "taskCard": {
-          "title": "Correct Operation",
           "tasks": [
             {
               "name": "System demonstrates normal operation",
@@ -110,7 +106,6 @@
           ]
         },
         "taskCard": {
-          "title": "Correct Operation",
           "tasks": [
             {
               "name": "System demonstrates normal operation",
@@ -139,7 +134,6 @@
           ]
         },
         "taskCard": {
-          "title": "Correct Operation",
           "tasks": [
             {
               "name": "System demonstrates normal operation",
@@ -152,6 +146,7 @@
   },
   "inputModality": {
     "instructions": "Please make a selection to see more information about your primary input modality.",
+    "category": "Input Errors",
     "choices": [
       {
         "name": "text",
@@ -202,7 +197,6 @@
           ]
         },
         "taskCard": {
-          "title": "Input Errors",
           "message": "Your system will take text as its primary input modality. Here are some scenarios that you can consider including in your user testing protocol.",
           "tasks": [
             {
@@ -242,7 +236,6 @@
           ]
         },
         "taskCard": {
-          "title": "Input Errors",
           "message": "Your system will take <b>speech</b> as its primary input modality. Here are some scenarios that you can consider including in your user testing protocol.",
           "tasks": [
             {
@@ -282,7 +275,6 @@
           ]
         },
         "taskCard": {
-          "title": "Input Errors",
           "message": "Your system will take <b>action sequence</b> as its primary input modality. Here are some scenarios that you can consider including in your user testing protocol.",
           "tasks": [
             {
@@ -300,6 +292,7 @@
   },
   "trigger": {
     "instructions": "Select a response to see more information.",
+    "category": "Trigger Errors",
     "choices": [
       {
         "name": "yes",
@@ -328,7 +321,6 @@
           ]
         },
         "taskCard": {
-          "title": "Trigger Errors",
           "message": "Your system will have a clear way of knowing when to <b>trigger</b>.",
           "tasks": []
         }
@@ -355,7 +347,6 @@
           ]
         },
         "taskCard": {
-          "title": "Trigger Errors",
           "message": "<p>Any uncertainty in knowing when to invoke the intelligent feature can sometimes result in triggering wrongfully, or triggering the system too early or often.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
           "tasks": [
             {
@@ -373,6 +364,7 @@
   },
   "delimiter": {
     "instruction": "Once the system begins the activation process, it will also need to have a clear way of <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"A delimiter is a sequence of one or more characters or events for specifying when a system should finish receiving the user's input.\">delimiting</a> the user's input. Select a response to see more information.",
+    "category": "Delimiter Errors",
     "choices": [
       {
         "name": "yes",
@@ -396,7 +388,6 @@
           ]
         },
         "taskCard": {
-          "title": "Delimiter Errors",
           "message": "<p>Your system will have a clear way of <b>delimiting</b> the user's input.</p>",
           "tasks": []
         }
@@ -428,7 +419,6 @@
           ]
         },
         "taskCard": {
-          "title": "Delimiter Errors",
           "message": "<p>Your system will likely produce errors when there is uncertainty in determining when the user's input has ended.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
           "tasks": [
             {
@@ -454,6 +444,7 @@
   },
   "interpretation": {
     "instructions": "Select a response to see more information.",
+    "category": "Response Generation Errors",
     "choices": [
       {
         "name": "yes",
@@ -487,7 +478,6 @@
           ]
         },
         "taskCard": {
-          "title": "Response Generation Errors",
           "message": "<p>Your system expects <b>multiple valid interpretations</b> of an input signal.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
           "tasks": [
             {
@@ -526,7 +516,6 @@
           ]
         },
         "taskCard": {
-          "title": "Response Generation Errors",
           "message": "<p>Your system only expects <b>one valid interpretation</b> of the input.</p>",
           "tasks": []
         }
@@ -535,6 +524,7 @@
   },
   "responseType": {
     "instructions": "Select a response to see more information",
+    "category": "Response Generation Errors",
     "choices": [
       {
         "name": "single_response",
@@ -563,7 +553,6 @@
           ]
         },
         "taskCard": {
-          "title": "Response Generation Errors",
           "message": "<p>Your system will generate a <b>single response</b>. Systems that rely on automatic response generation could produce a factually incorrect response, incoherent response, or partially correct response.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
           "tasks": [
             {
@@ -605,7 +594,6 @@
           ]
         },
         "taskCard": {
-          "title": "",
           "message": "",
           "tasks": [
             {
@@ -632,7 +620,6 @@
           ]
         },
         "taskCard": {
-          "title": "Response Generation Errors",
           "message": "<p>Your system will perform an <b>action execution</b>. Failure to understand the user's intent or context can result in precision or recall errors in the context of performing an action execution. </p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
           "tasks": [
             {
@@ -654,6 +641,7 @@
   },
   "responseMechanism": {
     "instructions": "Select a response to see more information.",
+    "category": "Response Generation Errors",
     "choices": [
       {
         "name": "generated",
@@ -672,7 +660,6 @@
           ]
         },
         "taskCard": {
-          "title": "Response Generation Errors",
           "message": "<p>Your system will <b>generate</b> a ranked list. Lists items can be automatically generated (instead of selected) and presented in ranked order. However, failure to understand user's intent or context can result in precision, recall, and ranking errors.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
           "tasks": [
             {
@@ -726,7 +713,6 @@
           ]
         },
         "taskCard": {
-          "title": "Response Generation Errors",
           "message": "<p>Your system will <b>select</b> list items from an existing set. However, failure to understand user's intent or context can result in precision, recall, and ranking errors.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
           "tasks": [
             {
@@ -752,6 +738,7 @@
   },
   "responseClassification": {
     "instructions": "Select a response to see more information.",
+    "category":"Response Generation Errors",
     "choices": [
       {
         "name": "binary",
@@ -770,7 +757,6 @@
           ]
         },
         "taskCard": {
-          "title": "Response Generation Errors",
           "message": "<p>Your system will perform a <b>binary</b> classification.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
           "tasks": [
             {
@@ -801,7 +787,6 @@
           ]
         },
         "taskCard": {
-          "title": "Response Generation Errors",
           "message": "<p>Your system will perform a <b>multi-class</b> classification.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
           "tasks": [
             {

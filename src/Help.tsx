@@ -11,8 +11,8 @@ const App: React.FunctionComponent<HelpProps> = ({card}) => {
       {card.topics.map(topic => (
         <div>
           <h4>{topic.name}</h4>
-          <span>{topic.details}</span>
-          <span>{topic.level}</span>
+          <div dangerouslySetInnerHTML={{ __html: topic.details }} />
+          <span>TOPIC LEVEL: {topic.level}</span>
         </div>
       ))}
     </React.Fragment>

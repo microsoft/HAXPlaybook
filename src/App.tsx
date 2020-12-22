@@ -1,23 +1,29 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import './survey.min.css'
-import { PageModel, QuestionRadiogroupModel, ReactSurveyModel, Survey } from 'survey-react';
+import {ReactSurveyModel, Survey } from 'survey-react';
 import surveyData from './data/survey.json';
 import Intro from './Intro';
 import TaskList from './TaskList';
 import Help from './Help';
 import SurveyCompletionMessage from './SurveyCompletionMessage';
-import { CurrentPageChangedOptions, HelpCard, SurveyChangedOptions, SurveyCompleteOptions, TaskCard } from './Types';
+import { CurrentPageChangedOptions, HelpCard, SurveyValueChangedOptions, SurveyCompleteOptions, TaskCard, Task } from './Types';
+import helpData from './data/data.json';
+
+const DEBUG = false;
 
 const App: React.FunctionComponent = () => {
   const [showIntro, setShowIntro] = useState(true);
   const [surveyComplete, setSurveyComplete] = useState(false);
+  const [instructions, setInstructions] = useState("");
+  const [category, setCategory] = useState("");
   const [helpCard, setHelpCard] = useState(new HelpCard([]));
   const [taskMap, setTaskMap] = useState(new Map<string, TaskCard>());
 
   function logState() {
-    console.log("STATE: showIntro=", showIntro, " surveyComplete=", surveyComplete, " helpCard=", helpCard, " tasks=", taskMap);
+    console.log("STATE: showIntro=", showIntro, " surveyComplete=", surveyComplete,
+                " instructions= ", instructions, " category=", category,
+                " helpCard=", helpCard, " tasks=", taskMap);
   }
   logState();
 
@@ -28,21 +34,27 @@ const App: React.FunctionComponent = () => {
     setSurveyComplete(true);
   }
 
-  const handleValueChanged = (sender: ReactSurveyModel, options: SurveyChangedOptions) => {
+  const handleValueChanged = (sender: ReactSurveyModel, options: SurveyValueChangedOptions) => {
     console.log("ValueChanged", sender, options);
     const hc = HelpCard.fromQuestionChoice(options.name, options.value);
     const tc = TaskCard.fromQuestionChoice(options.name, options.value);
     setHelpCard(hc);
-    setTaskMap(taskMap.set(options.name, tc));
-    console.log("HelpCard: ", hc);
-    console.log("TaskCard: ", tc);
+    const previousTasks = taskMap.get(category);
+    if (previousTasks != null) {
+      const filtered = previousTasks.tasks.filter((t: Task) => t.question !== options.question.name);
+      tc.tasks.concat(filtered);
+    }
+    setTaskMap(taskMap.set(category, tc));
+    //console.log("HelpCard: ", hc, "TaskCard: ", tc, "TaskMap: ", taskMap);
   }
 
   const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {
     console.log("CurrentPageChanged", sender, options);
+    const questionName = options.newCurrentPage.questions[0].name;
+    const data: any = helpData;
+    setInstructions(data[questionName].instructions);
+    setCategory(data[questionName].category);
   }
-
-  const tasks = Array.from(taskMap.values());
 
   if (showIntro) {
     return (
@@ -57,16 +69,17 @@ const App: React.FunctionComponent = () => {
           onValueChanged={handleValueChanged}
           onCurrentPageChanged={handleCurrentPageChanged}
           onComplete={handleComplete} />
+        <h4>Instructions</h4>
+        <span>{instructions}</span>
         <Help card={helpCard}/>
-        <TaskList tasks={tasks}/>
+        {DEBUG ? <TaskList taskMap={taskMap}/> : null}
       </div>
     );
   } else {
     return (
       <div className="App">
         <SurveyCompletionMessage onRestartClick={() => setSurveyComplete(false)} />
-        <Help card={helpCard}/>
-        <TaskList tasks={tasks}/>
+        <TaskList taskMap={taskMap}/>
       </div>
     );
   }

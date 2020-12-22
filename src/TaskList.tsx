@@ -1,23 +1,19 @@
 import React from 'react'
+import TaskCardComponent from './TaskCardComponent';
 import { TaskCard } from './Types';
 
-interface TaskProps {
-  tasks: TaskCard[];
+interface TaskListProps {
+  taskMap: Map<string, TaskCard>;
 }
 
-const App: React.FunctionComponent<TaskProps> = ({ tasks }) => {
-  const _this = this;
+const App: React.FunctionComponent<TaskListProps> = ({ taskMap }) => {
+  const categories = Array.from(taskMap.keys());
   return (
     <React.Fragment>
-      {tasks.map(card => (
-        <div>
-          <h3>{card.title}</h3>
-          {card.tasks.map(task => (
-            <div>
-              <h4>{task.name}</h4>
-              <div dangerouslySetInnerHTML={{ __html: task.details }} />
-            </div>
-          ))}
+      {categories.map(category => (
+        <div key={category}>
+          <h3>{category}</h3>
+          <TaskCardComponent card={taskMap.get(category) as TaskCard}/>
         </div>
       ))}
     </React.Fragment>

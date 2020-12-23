@@ -12,7 +12,7 @@ const Instructions: React.FunctionComponent<InstructionsProps> = ({ message }) =
   return (
     <div style={{margin: "1rem"}}>
       <h4>Instructions</h4>
-      <span>{message}</span>
+      <div dangerouslySetInnerHTML={{ __html: message }} />
     </div>
   );
 }

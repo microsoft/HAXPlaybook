@@ -33,19 +33,24 @@ export class HelpCard {
   }
 
   static fromQuestionChoice(questionName: string, choiceValue: string) {
-    const data: any = contentData;
-    const questions = data.questions;
+    const questions: any = contentData.questions;
+    
     if (!(questionName in questions)) {
-      throw new Error("Could not find " + questionName + " in data");
-    }
-    if (questions[questionName].choices == null) {
-      throw new Error("Data for " + questionName + " contains null choices");
-    }
-    let choice = questions[questionName].choices.find((c: any) => c.name === choiceValue);
-    if (choice == null || choice.helpCard == null || choice.helpCard.topics == null) {
-      console.log("Returning empty HelpCard for question %s choice %s", questionName, choiceValue);
+      console.log("Could not find question %s in content.json", questionName);
       return new HelpCard([]);
     }
+
+    if (questions[questionName].choices == null) {
+      console.log("Missing choices array for question %s", questionName);
+      return new HelpCard([]);
+    }
+
+    let choice = questions[questionName].choices.find((c: any) => c.name === choiceValue);
+    if (choice == null || choice.helpCard == null || choice.helpCard.topics == null) {
+      console.log("Missing help for question %s choice %s", questionName, choiceValue);
+      return new HelpCard([]);
+    }
+
     return new HelpCard(choice.helpCard.topics.map((topic: any) => {
       return new HelpTopic(topic.name, topic.level, topic.details)
     }));
@@ -78,19 +83,24 @@ export class TaskCard {
   }
 
   static fromQuestionChoice(questionName: string, choiceValue: string) {
-    const data: any = contentData;
-    const questions = data.questions;
+    const questions: any = contentData.questions;
+
     if (!(questionName in questions)) {
-      throw new Error("Could not find " + questionName + " in data");
+      console.log("Could not find question %s in content.json", questionName);
+      return new TaskCard("", "", []);
     }
+
     if (questions[questionName].choices == null) {
-      throw new Error("Data for " + questionName + " contains null choices");
+      console.log("Missing choices array for question %s", questionName);
+      return new TaskCard("", "", []);
     }
+
     let choice = questions[questionName].choices.find((c: any) => c.name === choiceValue);
     if (choice == null || choice.taskCard == null || choice.taskCard.tasks == null) {
       console.log("Returning empty TaskCard for question %s choice %s", questionName, choiceValue);
       return new TaskCard("", "", []);
     }
+
     return new TaskCard(choice.taskCard.title, choice.taskCard.message, choice.taskCard.tasks.map((task: any) => {
       return new Task(task.name, task.details, questionName)
     }));

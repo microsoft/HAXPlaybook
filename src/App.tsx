@@ -50,7 +50,6 @@ const App: React.FunctionComponent = () => {
   const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {
     console.log("CurrentPageChanged", sender, options);
     const questionName = options.newCurrentPage.questions[0].name;
-    const data: any = contentData;
     const questions: any = contentData.questions;
     setInstructions(questions[questionName].instructions);
     setCategory(questions[questionName].category);

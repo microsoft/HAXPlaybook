@@ -43,19 +43,15 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": [
-                  "Playlist generators for video and music services like Netflix, YouTube and Spotify.",
-                  "Product recommender services such as Amazon.",
-                  "Contextual assistant services such as Meeting Insights."
-                ]
+                "details": "<ul> <li>Playlist generators for video and music services like Netflix, YouTube and Spotify.</li> <li>Product recommender services such as Amazon.</li> <li>Contextual assistant services such as <a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Meeting Insights by Microsoft Outlook is an intelligent assistant that suggests meeting related information, including content presented during the meeting, sent meeting notes, and other relevant post-meeting material.\">Meeting Insights</a></li> </ul>"
               }
             ]
           },
           "taskCard": {
             "tasks": [
               {
-                "name": "System demonstrates normal operation",
-                "details": ""
+                "name": "Normal Operation",
+                "details": "System demonstrates normal operation"
               }
             ]
           }
@@ -67,15 +63,12 @@
               {
                 "name": "Conversational AI",
                 "level": "info",
-                "details": "Conversational agents, or dialogue systems, interact with people through natural-language dialogue. Historically this is achieved by recognizing speech, classifying intents, and 'slot filling'."
+                "details": "Conversational agents, or dialogue systems, interact with people through natural-language dialogue. Historically this is achieved by recognizing speech, classifying intents, and '<a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Slot Filling (SF) is a process for extracting values of certain types of attributes (or slots), such as car: make and model, for a given entity from a large collection of source documents\">slot filling</a>'."
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": [
-                  "Voice assistants for productivity management or home automation like Cortana, Siri, and Alexa.",
-                  "Chatbots for customer support in most ecommerce websites."
-                ]
+                "details": "<ul> <li>Voice assistants for productivity management or home automation like Cortana, Siri, and Alexa. </li> <li>Chatbots for customer support in most ecommerce websites.</li> </ul>"
               }
             ]
           },
@@ -100,11 +93,7 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": [
-                  "Predicting the next set of words or action commands based on the user's input.",
-                  "Providing corrections for spelling, grammar, and punctuation mistakes.",
-                  "Making suggestions for similar words, paraphrases, and alternative expressions."
-                ]
+                "details": "<ul> <li>Predicting the next set of words or action commands based on the user's input.</li> <li>Providing corrections for spelling, grammar, and punctuation mistakes.</li> <li>Making suggestions for similar words, paraphrases, and alternative expressions.</li> </ul>"
               }
             ]
           },
@@ -129,10 +118,7 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": [
-                  "Spam filters in email applications such as Microsoft Outlook.",
-                  "Scheduling assistants that detect meeting appointments based on the content of email."
-                ]
+                "details": "<ul> <li>Spam filters in email applications such as Microsoft Outlook.</li> <li>Scheduling assistants that detect meeting appointments based on the content of email.</li> </ul>"
               }
             ]
           },
@@ -148,7 +134,7 @@
       ]
     },
     "inputModality": {
-      "instructions": "Please make a selection to see more information about your primary input modality.",
+      "instructions": "Please make a selection to see more information about your <a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"While your system may have multiple input modalities, you should select the input that will be processed by the AI system.\">primary</a> input modality.",
       "category": "Input Errors",
       "choices": [
         {
@@ -163,39 +149,27 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": [
-                  "Search systems enable users to retrieve information by entering text queries."
-                ]
+                "details": "Search systems enable users to retrieve information by entering text queries."
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": [
-                  "Recommender systems enable users to explore various contents, products or services that match their behavior or preferences by entering one or more keywords.",
-                  "Music playlist generators will ask onboarding users to select a few songs or genres to tailor its recommendation.",
-                  "Fitness apps will ask onboarding users to answer questions about lifestyle and routine behavior to tailor its recommendation."
-                ]
+                "details": "<p>Recommender systems enable users to explore various contents, products or services that match their behavior or preferences by entering one or more keywords.</p> <ul> <li>Music playlist generators will ask onboarding users to select a few songs or genres to tailor its recommendation.</li> <li>Fitness apps will ask onboarding users to answer questions about lifestyle and routine behavior to tailor its recommendation.</li> </ul>"
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": [
-                  "Chatbots allow users to formulate their questions by entering text and retrieve relevant information."
-                ]
+                "details": "Chatbots allow users to formulate their questions by entering text and retrieve relevant information."
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": [
-                  "Predictive text enables efficient use of keystrokes by suggesting a set or sequence of words given some preceding text."
-                ]
+                "details": "Predictive text enables efficient use of keystrokes by suggesting a set or sequence of words given some preceding text."
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": [
-                  "Spam filters allow email users to specify (via text) categories of email messages that they want to filter out from their inbox."
-                ]
+                "details": "Spam filters allow email users to specify (via text) categories of email messages that they want to filter out from their inbox."
               }
             ]
           },
@@ -226,10 +200,7 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": [
-                  "Recommender systems that are integrated into voice assistants enable users to explore relevant information by entering speech queries.",
-                  "Home-based voice assistants such as Amazon Echo provide recommendations for specific recipes based on the speech query \"Show me recipes for pasta.\""
-                ]
+                "details": "<p>Recommender systems that are integrated into voice assistants enable users to explore relevant information by entering speech queries.</p> <ul> <li>Home-based voice assistants such as Amazon Echo provide recommendations for specific recipes based on the speech query \"Show me recipes for pasta.\"</li> </ul>"
               },
               {
                 "name": "Example",
@@ -263,12 +234,12 @@
               {
                 "name": "Action Sequence",
                 "level": "info",
-                "details": "Action sequence is a predefined event or sequence of events that can be used to trigger a system's intelligent feature. An action sequence can be initiated by the user or the system."
+                "details": "Action sequence is a predefined <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Example events include clicking a button, opening an application, receiving an email, or responding to a notification\">event</a> or sequence of events that can be used to trigger a system's intelligent feature. An action sequence can be initiated by the user or the system."
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "Playlist generators rely on content that the user is currently playing or a history of accessed content to recommend new content that matches their preference."
+                "details": "<a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Example playlist generators include YouTube, Netflix, or Spotify\">Playlist generators</a> rely on content that the user is currently playing or a history of accessed content to recommend new content that matches their preference."
               },
               {
                 "name": "Example",

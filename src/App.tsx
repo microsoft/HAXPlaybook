@@ -49,11 +49,17 @@ const App: React.FunctionComponent = () => {
 
   const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {
     console.log("CurrentPageChanged", sender, options);
-    const questionName = options.newCurrentPage.questions[0].name;
+    const question = options.newCurrentPage.questions[0];
     const questions: any = contentData.questions;
-    setInstructions(questions[questionName].instructions);
-    setCategory(questions[questionName].category);
-    setHelpCard(new HelpCard([]));
+    setInstructions(questions[question.name].instructions);
+    setCategory(questions[question.name].category);
+
+    if (question.isValueEmpty(question.value)) {
+      setHelpCard(new HelpCard([]));
+    } else {
+      const hc = HelpCard.fromQuestionChoice(question.name, question.value);
+      setHelpCard(hc);
+    }
   }
 
   if (showIntro) {
@@ -77,7 +83,10 @@ const App: React.FunctionComponent = () => {
   } else {
     return (
       <div className="App">
-        <SurveyCompletionMessage onRestartClick={() => setSurveyComplete(false)} />
+        <SurveyCompletionMessage onRestartClick={() => {
+          setSurveyComplete(false);
+          setShowIntro(true);
+        }} />
         <TaskList taskMap={taskMap}/>
       </div>
     );

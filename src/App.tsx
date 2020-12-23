@@ -8,7 +8,7 @@ import TaskList from './TaskList';
 import Help from './Help';
 import SurveyCompletionMessage from './SurveyCompletionMessage';
 import { CurrentPageChangedOptions, HelpCard, SurveyValueChangedOptions, SurveyCompleteOptions, TaskCard, Task } from './Types';
-import helpData from './data/data.json';
+import contentData from './data/content.json';
 import Instructions from './Instructions';
 
 const DEBUG = false;
@@ -50,9 +50,10 @@ const App: React.FunctionComponent = () => {
   const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {
     console.log("CurrentPageChanged", sender, options);
     const questionName = options.newCurrentPage.questions[0].name;
-    const data: any = helpData;
-    setInstructions(data[questionName].instructions);
-    setCategory(data[questionName].category);
+    const data: any = contentData;
+    const questions: any = contentData.questions;
+    setInstructions(questions[questionName].instructions);
+    setCategory(questions[questionName].category);
     setHelpCard(new HelpCard([]));
   }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { HelpCard, HelpLevel } from './Types';
+import { HelpCard } from './Types';
 
 interface HelpProps {
   card: HelpCard;

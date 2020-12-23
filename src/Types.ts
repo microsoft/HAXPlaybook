@@ -1,5 +1,5 @@
 import { PageModel, QuestionRadiogroupModel } from "survey-react";
-import helpData from './data/data.json';
+import contentData from './data/content.json';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface SurveyValueChangedOptions {
@@ -33,14 +33,15 @@ export class HelpCard {
   }
 
   static fromQuestionChoice(questionName: string, choiceValue: string) {
-    const data: any = helpData;
-    if (!(questionName in data)) {
+    const data: any = contentData;
+    const questions = data.questions;
+    if (!(questionName in questions)) {
       throw new Error("Could not find " + questionName + " in data");
     }
-    if (data[questionName].choices == null) {
+    if (questions[questionName].choices == null) {
       throw new Error("Data for " + questionName + " contains null choices");
     }
-    let choice = data[questionName].choices.find((c: any) => c.name === choiceValue);
+    let choice = questions[questionName].choices.find((c: any) => c.name === choiceValue);
     if (choice == null || choice.helpCard == null || choice.helpCard.topics == null) {
       console.log("Returning empty HelpCard for question %s choice %s", questionName, choiceValue);
       return new HelpCard([]);
@@ -77,14 +78,15 @@ export class TaskCard {
   }
 
   static fromQuestionChoice(questionName: string, choiceValue: string) {
-    const data: any = helpData;
-    if (!(questionName in data)) {
+    const data: any = contentData;
+    const questions = data.questions;
+    if (!(questionName in questions)) {
       throw new Error("Could not find " + questionName + " in data");
     }
-    if (data[questionName].choices == null) {
+    if (questions[questionName].choices == null) {
       throw new Error("Data for " + questionName + " contains null choices");
     }
-    let choice = data[questionName].choices.find((c: any) => c.name === choiceValue);
+    let choice = questions[questionName].choices.find((c: any) => c.name === choiceValue);
     if (choice == null || choice.taskCard == null || choice.taskCard.tasks == null) {
       console.log("Returning empty TaskCard for question %s choice %s", questionName, choiceValue);
       return new TaskCard("", "", []);

@@ -5,7 +5,7 @@ interface InstructionsProps {
 }
 
 const Instructions: React.FunctionComponent<InstructionsProps> = ({ message }) => {
-  if (message == null || message.length == 0) {
+  if (message == null || message.length === 0) {
     return null;
   }
 

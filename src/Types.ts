@@ -74,12 +74,16 @@ export class HelpTopic {
 export class TaskCard {
   title: string;
   message: string;
+  question: string;
+  id: string;
   tasks: Task[];
 
-  constructor(title: string, message: string, tasks: Task[]) {
+  constructor(title: string, message: string, question: string, tasks: Task[]) {
     this.title = title;
     this.message = message;
     this.tasks = tasks;
+    this.question = question;
+    this.id = uuidv4();
   }
 
   static fromQuestionChoice(questionName: string, choiceValue: string) {
@@ -87,36 +91,33 @@ export class TaskCard {
 
     if (!(questionName in questions)) {
       console.log("Could not find question %s in content.json", questionName);
-      return new TaskCard("", "", []);
+      return null;
     }
 
     if (questions[questionName].choices == null) {
       console.log("Missing choices array for question %s", questionName);
-      return new TaskCard("", "", []);
+      return null;
     }
 
     let choice = questions[questionName].choices.find((c: any) => c.name === choiceValue);
     if (choice == null || choice.taskCard == null || choice.taskCard.tasks == null) {
-      console.log("Returning empty TaskCard for question %s choice %s", questionName, choiceValue);
-      return new TaskCard("", "", []);
+      console.log("Null taskcard for question %s choice %s", questionName, choiceValue);
+      return null;
     }
 
-    return new TaskCard(choice.taskCard.title, choice.taskCard.message, choice.taskCard.tasks.map((task: any) => {
-      return new Task(task.name, task.details, questionName)
-    }));
+    const tasks = choice.taskCard.tasks.map((task: any) => { return new Task(task.name, task.details) });
+    return new TaskCard(choice.taskCard.title, choice.taskCard.message, questionName, tasks);
   }
 }
 
 export class Task {
   name: string;
   details: string;
-  question: string;
   id: string;
 
-  constructor(name: string, details: string, question: string) {
+  constructor(name: string, details: string) {
     this.name = name;
     this.details = details;
-    this.question = question;
     this.id = uuidv4();
   }
 }

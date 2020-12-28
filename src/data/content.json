@@ -566,15 +566,6 @@
                 "details": "Your system will produce a ranked list if there are multiple valid responses available. Items in a ranked list are presented in order of items with the highest contextual relevance to the user's needs."
               }
             ]
-          },
-          "taskCard": {
-            "message": "",
-            "tasks": [
-              {
-                "name": "",
-                "details": ""
-              }
-            ]
           }
         },
         {

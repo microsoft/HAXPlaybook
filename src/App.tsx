@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import './App.css';
-import './survey.min.css'
+import './survey.min.css';
 import {ReactSurveyModel, Survey } from 'survey-react';
 import surveyData from './data/survey.json';
 import Intro from './Intro';
 import TaskList from './TaskList';
 import Help from './Help';
 import SurveyCompletionMessage from './SurveyCompletionMessage';
-import { CurrentPageChangedOptions, HelpCard, SurveyValueChangedOptions, SurveyCompleteOptions, TaskCard, Task } from './Types';
+import { CurrentPageChangedOptions, HelpCard, SurveyValueChangedOptions, SurveyCompleteOptions, TaskCard } from './Types';
 import contentData from './data/content.json';
 import Instructions from './Instructions';
-
-const DEBUG = false;
 
 const App: React.FunctionComponent = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -19,7 +17,7 @@ const App: React.FunctionComponent = () => {
   const [instructions, setInstructions] = useState("");
   const [category, setCategory] = useState("");
   const [helpCard, setHelpCard] = useState(new HelpCard([]));
-  const [taskMap, setTaskMap] = useState(new Map<string, TaskCard>());
+  const [taskMap, setTaskMap] = useState(new Map<string, TaskCard[]>());
 
   function logState() {
     console.log("STATE: showIntro=", showIntro, " surveyComplete=", surveyComplete,
@@ -37,14 +35,22 @@ const App: React.FunctionComponent = () => {
   const handleValueChanged = (sender: ReactSurveyModel, options: SurveyValueChangedOptions) => {
     console.log("ValueChanged", sender, options);
     const hc = HelpCard.fromQuestionChoice(options.name, options.value);
-    const tc = TaskCard.fromQuestionChoice(options.name, options.value);
     setHelpCard(hc);
-    const previousTasks = taskMap.get(category);
-    if (previousTasks != null) {
-      const filtered = previousTasks.tasks.filter((t: Task) => t.question !== options.question.name);
-      tc.tasks.concat(filtered);
+
+    const tc = TaskCard.fromQuestionChoice(options.name, options.value);
+    if (tc == null) {
+      return;
     }
-    setTaskMap(taskMap.set(category, tc));
+
+    let categoryTasks = taskMap.get(category);
+    if (categoryTasks) {
+      const filtered = categoryTasks.filter((t: TaskCard) => t.question !== options.question.name);
+      filtered.push(tc);
+      categoryTasks = filtered;
+    } else {
+      categoryTasks = [tc];
+    }
+    setTaskMap(taskMap.set(category, categoryTasks));
   }
 
   const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {
@@ -53,13 +59,8 @@ const App: React.FunctionComponent = () => {
     const questions: any = contentData.questions;
     setInstructions(questions[question.name].instructions);
     setCategory(questions[question.name].category);
-
-    if (question.isValueEmpty(question.value)) {
-      setHelpCard(new HelpCard([]));
-    } else {
-      const hc = HelpCard.fromQuestionChoice(question.name, question.value);
-      setHelpCard(hc);
-    }
+    setHelpCard(question.isValueEmpty(question.value) ?
+                  new HelpCard([]) : HelpCard.fromQuestionChoice(question.name, question.value));
   }
 
   if (showIntro) {
@@ -77,7 +78,6 @@ const App: React.FunctionComponent = () => {
           onComplete={handleComplete} />
         <Instructions message={instructions} />
         <Help card={helpCard}/>
-        {DEBUG ? <TaskList taskMap={taskMap}/> : null}
       </div>
     );
   } else {

@@ -3,7 +3,7 @@ import TaskCardComponent from './TaskCardComponent';
 import { TaskCard } from './Types';
 
 interface TaskListProps {
-  taskMap: Map<string, TaskCard>;
+  taskMap: Map<string, TaskCard[]>;
 }
 
 const App: React.FunctionComponent<TaskListProps> = ({ taskMap }) => {
@@ -13,7 +13,7 @@ const App: React.FunctionComponent<TaskListProps> = ({ taskMap }) => {
       {categories.map(category => (
         <div key={category} className="card mb-3">
           <h3 className="card-header">{category}</h3>
-          <TaskCardComponent card={taskMap.get(category) as TaskCard}/>
+          {taskMap.get(category)?.map(tc => <TaskCardComponent key={tc.id} card={tc} /> )}
         </div>
       ))}
     </div>

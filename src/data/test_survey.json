@@ -1,0 +1,83 @@
+{
+  "pages": [
+   {
+    "name": "page1",
+    "elements": [
+     {
+      "type": "dropdown",
+      "name": "favorite_color",
+      "title": "What's your favorite color?",
+      "choices": [
+       {
+        "value": "blue",
+        "text": "blue"
+       },
+       {
+        "value": "red",
+        "text": "red"
+       },
+       {
+        "value": "green",
+        "text": "green"
+       }
+      ]
+     }
+    ],
+    "title": "Test Survey P1",
+    "description": "This survey is intended for testing purposes only."
+   },
+   {
+    "name": "page2",
+    "elements": [
+     {
+      "type": "radiogroup",
+      "name": "question2",
+      "title": "Which continent are you from?",
+      "choices": [
+       {
+        "value": "northamerica",
+        "text": "North America"
+       },
+       {
+        "value": "southamerica",
+        "text": "South America"
+       },
+       {
+        "value": "africa",
+        "text": "Africa"
+       },
+       {
+        "value": "europe",
+        "text": "Europe"
+       },
+       {
+        "value": "asia",
+        "text": "Asia"
+       },
+       {
+        "value": "australia",
+        "text": "Australia"
+       },
+       {
+        "value": "antarctica",
+        "text": "Antarctica"
+       }
+      ]
+     }
+    ],
+    "title": "Test Survey P2"
+   },
+   {
+    "name": "page3",
+    "elements": [
+     {
+      "type": "boolean",
+      "name": "chocolate",
+      "title": "Do you like chocolate?",
+      "valueName": "likes_chocolate"
+     }
+    ],
+    "title": "Test Survey P3"
+   }
+  ]
+ }

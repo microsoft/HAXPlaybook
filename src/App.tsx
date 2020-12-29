@@ -34,10 +34,10 @@ const App: React.FunctionComponent = () => {
 
   const handleValueChanged = (sender: ReactSurveyModel, options: SurveyValueChangedOptions) => {
     console.log("ValueChanged", sender, options);
-    const hc = HelpCard.fromQuestionChoice(options.name, options.value);
+    const hc = HelpCard.fromQuestionChoice(options.question.name, options.value);
     setHelpCard(hc);
 
-    const tc = TaskCard.fromQuestionChoice(options.name, options.value);
+    const tc = TaskCard.fromQuestionChoice(options.question.name, options.value);
     if (tc == null) {
       return;
     }

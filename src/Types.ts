@@ -25,15 +25,11 @@ export interface CurrentPageChangedOptions {
 
 export type HelpLevel = "info" | "warning";
 
-export class HelpCard {
-  topics: HelpTopic[];
-
-  constructor(topics: HelpTopic[]) {
-    this.topics = topics;
-  }
-
-  static fromQuestionChoice(questionName: string, choiceValue: string) {
+function getChoice(questionName: string, choiceValue: string) {
     const questions: any = contentData.questions;
+    // The surveyjs framework sends a boolean value instead of string
+    // for boolean questions, so we need to force it to be a string
+    choiceValue = choiceValue.toString();
     
     if (!(questionName in questions)) {
       console.log("Could not find question %s in content.json", questionName);
@@ -45,7 +41,18 @@ export class HelpCard {
       return new HelpCard([]);
     }
 
-    let choice = questions[questionName].choices.find((c: any) => c.name === choiceValue);
+    return questions[questionName].choices.find((c: any) => c.name === choiceValue);
+}
+
+export class HelpCard {
+  topics: HelpTopic[];
+
+  constructor(topics: HelpTopic[]) {
+    this.topics = topics;
+  }
+
+  static fromQuestionChoice(questionName: string, choiceValue: string) {
+    const choice = getChoice(questionName, choiceValue);
     if (choice == null || choice.helpCard == null || choice.helpCard.topics == null) {
       console.log("Missing help for question %s choice %s", questionName, choiceValue);
       return new HelpCard([]);
@@ -87,19 +94,7 @@ export class TaskCard {
   }
 
   static fromQuestionChoice(questionName: string, choiceValue: string) {
-    const questions: any = contentData.questions;
-
-    if (!(questionName in questions)) {
-      console.log("Could not find question %s in content.json", questionName);
-      return null;
-    }
-
-    if (questions[questionName].choices == null) {
-      console.log("Missing choices array for question %s", questionName);
-      return null;
-    }
-
-    let choice = questions[questionName].choices.find((c: any) => c.name === choiceValue);
+    const choice = getChoice(questionName, choiceValue);
     if (choice == null || choice.taskCard == null || choice.taskCard.tasks == null) {
       console.log("Null taskcard for question %s choice %s", questionName, choiceValue);
       return null;

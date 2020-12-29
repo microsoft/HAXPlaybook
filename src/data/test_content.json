@@ -276,43 +276,55 @@
       "category": "Chocolate",
       "choices": [
         {
-          "name": "yes",
+          "name": "true",
           "helpCard": {
             "topics": [
               {
-                "name": "Yes",
+                "name": "True",
                 "level": "info",
-                "details": "yes: info"
+                "details": "true: info"
               },
               {
                 "name": "Warning",
                 "level": "warning",
-                "details": "yes: warning"
+                "details": "true: warning"
               }
             ]
           },
           "taskCard": {
-            "message": "You like chocolate."
+            "message": "You like chocolate.",
+            "tasks": [
+              {
+                "name": "Likes chocolate",
+                "details": "You <b>like</b> chocolate."
+              }
+            ]
           }
         },
         {
-          "name": "no",
+          "name": "false",
           "helpCard": {
             "topics": [
               {
-                "name": "No",
+                "name": "False",
                 "level": "info",
-                "details": "no: info"
+                "details": "false: info"
               },
               {
                 "name": "Warning",
                 "level": "warning",
-                "details": "no: warning"
+                "details": "false: warning"
               }
             ]
           },
           "taskCard": {
-            "message": "You don't like chocolate!"
+            "message": "You don't like chocolate.",
+            "tasks": [
+              {
+                "name": "Dislikes chocolate",
+                "details": "You <b>don't like</b> chocolate."
+              }
+            ]
           }
         }
       ]

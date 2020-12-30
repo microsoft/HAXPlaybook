@@ -26,22 +26,22 @@ export interface CurrentPageChangedOptions {
 export type HelpLevel = "info" | "warning";
 
 function getChoice(questionName: string, choiceValue: string) {
-    const questions: any = contentData.questions;
+    const metadata: any = contentData.questions.find((q: any) => q.name === questionName);
     // The surveyjs framework sends a boolean value instead of string
     // for boolean questions, so we need to force it to be a string
     choiceValue = choiceValue.toString();
     
-    if (!(questionName in questions)) {
+    if (metadata == null) {
       console.log("Could not find question %s in content.json", questionName);
       return new HelpCard([]);
     }
 
-    if (questions[questionName].choices == null) {
+    if (metadata.choices == null) {
       console.log("Missing choices array for question %s", questionName);
       return new HelpCard([]);
     }
 
-    return questions[questionName].choices.find((c: any) => c.name === choiceValue);
+    return metadata.choices.find((c: any) => c.name === choiceValue);
 }
 
 export class HelpCard {

@@ -56,9 +56,9 @@ const App: React.FunctionComponent = () => {
   const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {
     console.log("CurrentPageChanged", sender, options);
     const question = options.newCurrentPage.questions[0];
-    const questions: any = contentData.questions;
-    setInstructions(questions[question.name].instructions);
-    setCategory(questions[question.name].category);
+    const metadata: any = contentData.questions.find((q: any) => q.name === question.name);
+    setInstructions(metadata.instructions);
+    setCategory(metadata.category);
     setHelpCard(question.isValueEmpty(question.value) ?
                   new HelpCard([]) : HelpCard.fromQuestionChoice(question.name, question.value));
   }

@@ -1,8 +1,9 @@
 {
   "introduction": "Welcome to the test survey!",
   "farewell": "You are a wonderful person. Take care.",
-  "questions": {
-    "favorite_color": {
+  "questions": [
+    {
+      "name": "favorite_color",
       "instructions": "Pick your favorite color",
       "category": "Favorite Color",
       "choices": [
@@ -83,7 +84,8 @@
         }
       ]
     },
-    "continent": {
+    {
+      "name": "continent",
       "instructions": "Please pick a continent.",
       "category": "Continent",
       "choices": [
@@ -271,7 +273,8 @@
         }
       ]
     },
-    "chocolate": {
+    {
+      "name": "chocolate",
       "instructions": "Chocolate.",
       "category": "Chocolate",
       "choices": [
@@ -329,5 +332,5 @@
         }
       ]
     }
-  }
+  ]
 }

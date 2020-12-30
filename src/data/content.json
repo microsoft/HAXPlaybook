@@ -1,8 +1,9 @@
 {
   "introduction": "<h1>AI Playbook</h1><div> <p>In this session, we'll ask you to walk us through key defining features of a system you are designing. These features will determine various types of scenarios that your users might encounter as they interact with your system. This playbook will guide you through some of these scenarios and help you understand several techniques that you and your team can consider including in user testing.</p> <p>You will be asked to complete a total of two tasks. In each task, you will answer a set of multiple choice questions (up to 7) related to your design of a feature or system. You will be provided with tips and examples in the help center to help guide your selection of choices. As you are answering the questions, you will also see a preview of a list of scenarios that you could potetially include in user testing. Once you have completed answering the questions, you will see the full list of scenarios and recommendations for simulating the expected outcomes (including errors) of an AI system given each scenario.</p> <b>Task 1</b> (5 min) <p>Design a simple <u>chatbot system</u> that will help its users find a rental apartment that best suits their preference.</p> <b>Task 2</b> (10 min) <p>Design a <u>feature or system that you will work on</u>. Here are some things to keep in mind while completing this task:</p> <ul> <li>Pick an idea that you and your team have just began to conceptualize.</li> <li>You can also start with a project that you recently worked on, but has not yet reached full integration with AI.</li> <li>Please use this Playbook as if it is now part of your practice during early prototyping or design phases. </li> </ul> <p>When you are ready, press start to begin your AI Playbook.</p> </div>",
   "farewell": "<p><b>Thank you for using the AI Playbook!</b> You may access the live AI Playbook Report anytime.</p> <p>You may also return to the AI Playbook questionnaire to explore and revise your options. Once you are done, you may download a pdf version of the latest report.</p>",
-  "questions": {
-    "systemDomain": {
+  "questions": [
+    {
+      "name": "systemDomain",
       "instructions": "",
       "category": "Correct Operation",
       "choices": [
@@ -133,7 +134,8 @@
         }
       ]
     },
-    "inputModality": {
+    {
+      "name": "inputModality",
       "instructions": "Please make a selection to see more information about your <a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"While your system may have multiple input modalities, you should select the input that will be processed by the AI system.\">primary</a> input modality.",
       "category": "Input Errors",
       "choices": [
@@ -264,7 +266,8 @@
         }
       ]
     },
-    "trigger": {
+    {
+      "name": "trigger",
       "instructions": "Select a response to see more information.",
       "category": "Trigger Errors",
       "choices": [
@@ -336,7 +339,8 @@
         }
       ]
     },
-    "delimiter": {
+    {
+      "name": "delimiter",
       "instruction": "Once the system begins the activation process, it will also need to have a clear way of <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"A delimiter is a sequence of one or more characters or events for specifying when a system should finish receiving the user's input.\">delimiting</a> the user's input. Select a response to see more information.",
       "category": "Delimiter Errors",
       "choices": [
@@ -416,7 +420,8 @@
         }
       ]
     },
-    "interpretation": {
+    {
+      "name": "interpretation",
       "instructions": "Select a response to see more information.",
       "category": "Response Generation Errors",
       "choices": [
@@ -460,11 +465,11 @@
               },
               {
                 "name": "System correctly interprets intent, but adds a new detail",
-                "details": "<p>While your system has the correct interpretation of an intent, it could potentially add new details or components that were not part of the original input.</p> <p>Simulate this error by inserting a component to the input.</p> <ol> <li>Choose a certain detail or component that you want your system to add to an input.</li> <li>Insert the component to the input.</li> <li>(Optional) Use a randomizer to insert the component at a variable rate or a fixed rate that you specify.</li> </ol>" 
+                "details": "<p>While your system has the correct interpretation of an intent, it could potentially add new details or components that were not part of the original input.</p> <p>Simulate this error by inserting a component to the input.</p> <ol> <li>Choose a certain detail or component that you want your system to add to an input.</li> <li>Insert the component to the input.</li> <li>(Optional) Use a randomizer to insert the component at a variable rate or a fixed rate that you specify.</li> </ol>"
               },
               {
                 "name": "System correctly interprets intent, but mis-resolves provided details",
-                "details": "<p>While your system has the correct interpretation of an intent, it could potentially mis-resolve details or assign incorrect attributes (e.g., wrong timezone) to a certain component (e.g., time) of the input.</p> <p>Simulate this error by replacing a default attribute (e.g., Pacific Standard Time) that is originally assigned to the component (e.g., 1:00pm) that you specify.</p> <ol> <li>Choose a certain component that you want your system to manipulate.</li> <li>Attach a unique identifier to the component of an input signal.</li> <li>Use the identifier to replace a default attribute that is assigned to the component.</li> <li>(Optional) Use a randomizer to replace a default attribute at a variable rate or a fixed rate that you specify.</li> </ol>" 
+                "details": "<p>While your system has the correct interpretation of an intent, it could potentially mis-resolve details or assign incorrect attributes (e.g., wrong timezone) to a certain component (e.g., time) of the input.</p> <p>Simulate this error by replacing a default attribute (e.g., Pacific Standard Time) that is originally assigned to the component (e.g., 1:00pm) that you specify.</p> <ol> <li>Choose a certain component that you want your system to manipulate.</li> <li>Attach a unique identifier to the component of an input signal.</li> <li>Use the identifier to replace a default attribute that is assigned to the component.</li> <li>(Optional) Use a randomizer to replace a default attribute at a variable rate or a fixed rate that you specify.</li> </ol>"
               },
               {
                 "name": "System fails to interpret intent from input",
@@ -496,7 +501,8 @@
         }
       ]
     },
-    "responseType": {
+    {
+      "name": "responseType",
       "instructions": "Select a response to see more information",
       "category": "Response Generation Errors",
       "choices": [
@@ -604,7 +610,8 @@
         }
       ]
     },
-    "responseMechanism": {
+    {
+      "name": "responseMechanism",
       "instructions": "Select a response to see more information.",
       "category": "Response Generation Errors",
       "choices": [
@@ -701,9 +708,10 @@
         }
       ]
     },
-    "responseClassification": {
+    {
+      "name": "responseClassification",
       "instructions": "Select a response to see more information.",
-      "category":"Response Generation Errors",
+      "category": "Response Generation Errors",
       "choices": [
         {
           "name": "binary",
@@ -767,5 +775,5 @@
         }
       ]
     }
-  }
+  ]
 }

@@ -12,7 +12,6 @@ if (args.length != 2) {
 
 const rawData = fs.readFileSync(args[0]);
 const survey = JSON.parse(rawData);
-console.log(survey);
 
 const content = {
   introduction: "",
@@ -40,7 +39,6 @@ survey.pages.forEach(page => {
   }
 
   const q = array[0];
-  console.log(q);
 
   const metadata = {
     name: q.name,
@@ -49,7 +47,9 @@ survey.pages.forEach(page => {
     choices: [],
   }
 
-  q.choices.forEach(c => {
+  const choices = q.type === "boolean" ? [{value: "true"}, {value: "false"}] : q.choices;
+
+  choices.forEach(c => {
     const choiceMeta = {
       name: c.value,
       helpCard: {
@@ -77,6 +77,5 @@ survey.pages.forEach(page => {
   content.questions.push(metadata);
 });
 
-console.log(content);
 const data = JSON.stringify(content);
 fs.writeFileSync(args[1], data);

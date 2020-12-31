@@ -7,13 +7,13 @@ interface SurveyCompletionMessageProps {
 
 const SurveyCompletionMessage: FunctionComponent<SurveyCompletionMessageProps> = ({ onRestartClick }) => {
   return (
-    <React.Fragment>
-      <div dangerouslySetInnerHTML={{ __html: contentData.farewell }} />
-      <div className="mb-3">
-        <button className="btn btn-primary mr-3" onClick={onRestartClick}>&nbsp;Revisit AI Playbook</button>
-        <button onClick={() => window.print()} className="btn btn-primary">&nbsp;Download Report</button>
+    <div className="container mt-5 mb-3 pb-5 border-bottom">
+      <div className="row" dangerouslySetInnerHTML={{ __html: contentData.farewell }} />
+      <div className="row justify-content-center">
+        <button className="btn btn-primary mr-3" onClick={onRestartClick}>Revisit AI Playbook</button>
+        <button onClick={() => window.print()} className="btn btn-primary">Download Report</button>
       </div>
-    </React.Fragment>
+    </div>
   );
 }
 

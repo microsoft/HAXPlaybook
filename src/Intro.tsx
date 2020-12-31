@@ -8,10 +8,10 @@ interface IntroProps {
 const Intro: React.FunctionComponent<IntroProps> = ({ onStartClick }) => {
   // Should the button text be customizable?
   return (
-    <React.Fragment>
+    <div className="my-5">
       <div dangerouslySetInnerHTML={{ __html: contentData.introduction }} />
       <button className="btn btn-primary" onClick={onStartClick}>Start</button>
-    </React.Fragment>
+    </div>
   );
 }
 

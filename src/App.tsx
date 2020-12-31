@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import './survey.min.css';
-import {ReactSurveyModel, Survey } from 'survey-react';
+import { ReactSurveyModel, Survey } from 'survey-react';
 import surveyData from './data/survey.json';
 import Intro from './Intro';
 import TaskList from './TaskList';
@@ -21,8 +21,8 @@ const App: React.FunctionComponent = () => {
 
   function logState() {
     console.log("STATE: showIntro=", showIntro, " surveyComplete=", surveyComplete,
-                " instructions= ", instructions, " category=", category,
-                " helpCard=", helpCard, " tasks=", taskMap);
+      " instructions= ", instructions, " category=", category,
+      " helpCard=", helpCard, " tasks=", taskMap);
   }
   logState();
 
@@ -60,34 +60,40 @@ const App: React.FunctionComponent = () => {
     setInstructions(metadata.instructions);
     setCategory(metadata.category);
     setHelpCard(question.isValueEmpty(question.value) ?
-                  new HelpCard([]) : HelpCard.fromQuestionChoice(question.name, question.value));
+      new HelpCard([]) : HelpCard.fromQuestionChoice(question.name, question.value));
   }
 
   if (showIntro) {
     return (
-      <div className="App">
+      <div className="row justify-content-center">
         <Intro onStartClick={() => setShowIntro(false)} />
       </div>
     );
   } else if (!surveyComplete) {
     return (
-      <div className="App">
-        <Survey json={surveyData}
-          onValueChanged={handleValueChanged}
-          onCurrentPageChanged={handleCurrentPageChanged}
-          onComplete={handleComplete} />
-        <Instructions message={instructions} />
-        <Help card={helpCard}/>
-      </div>
+      <React.Fragment>
+        <div className="row">
+          <Survey json={surveyData}
+            onValueChanged={handleValueChanged}
+            onCurrentPageChanged={handleCurrentPageChanged}
+            onComplete={handleComplete} />
+        </div>
+        <div className="row">
+          <Instructions message={instructions} />
+        </div>
+        <div className="row justify-content-center mt-3">
+          <Help card={helpCard} />
+        </div>
+      </React.Fragment>
     );
   } else {
     return (
-      <div className="App">
+      <div className="row justify-content-center">
         <SurveyCompletionMessage onRestartClick={() => {
           setSurveyComplete(false);
           setShowIntro(true);
         }} />
-        <TaskList taskMap={taskMap}/>
+        <TaskList taskMap={taskMap} />
       </div>
     );
   }

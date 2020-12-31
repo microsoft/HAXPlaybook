@@ -5,20 +5,18 @@ interface HelpProps {
   card: HelpCard;
 }
 
-const App: React.FunctionComponent<HelpProps> = ({card}) => {
+const App: React.FunctionComponent<HelpProps> = ({ card }) => {
   return (
-    <div className="container">
-      <div className="row">
-        {card.topics.map(topic => (
-          <div key={topic.id} 
-               className={"card " + (topic.level === "info" ? "border-primary" : "border-warning")}
-               style={{width: "25rem", padding: "1rem", margin: "0.5rem"}}>
-            <h4 className="card-title">{topic.name}</h4>
-            <div className="card-text" dangerouslySetInnerHTML={{ __html: topic.details }} />
-          </div>
-        ))}
-      </div>
-    </div>
+    <React.Fragment>
+      {card.topics.map(topic => (
+        <div key={topic.id}
+          className={"card " + (topic.level === "info" ? "border-primary" : "border-warning")}
+          style={{ width: "25rem", padding: "1rem", margin: "0.5rem" }}>
+          <h4 className="card-title">{topic.name}</h4>
+          <div className="card-text" dangerouslySetInnerHTML={{ __html: topic.details }} />
+        </div>
+      ))}
+    </React.Fragment>
   )
 }
 

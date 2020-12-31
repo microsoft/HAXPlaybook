@@ -10,7 +10,7 @@ const Instructions: React.FunctionComponent<InstructionsProps> = ({ message }) =
   }
 
   return (
-    <div style={{margin: "1rem"}}>
+    <div className="mt-3">
       <h4>Instructions</h4>
       <div dangerouslySetInnerHTML={{ __html: message }} />
     </div>

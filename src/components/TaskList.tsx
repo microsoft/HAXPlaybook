@@ -1,6 +1,8 @@
+// This component renders the list of all task cards from the survey results
+
 import React from 'react'
 import TaskCardComponent from './TaskCardComponent';
-import { TaskCard } from './Types';
+import { TaskCard } from '../models/Types';
 
 interface TaskListProps {
   taskMap: Map<string, TaskCard[]>;

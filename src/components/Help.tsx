@@ -1,5 +1,7 @@
+// This component renders the help cards shown below the survey
+
 import React from 'react'
-import { HelpCard } from './Types';
+import { HelpCard } from '../models/Types';
 
 interface HelpProps {
   card: HelpCard;

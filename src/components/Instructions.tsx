@@ -1,3 +1,6 @@
+// This component renders the instructions for the current survey question.
+// If no instructions were provided, then nothing is rendered.
+
 import React from 'react'
 
 interface InstructionsProps {

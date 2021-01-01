@@ -1,5 +1,8 @@
+// This component renders a message shown at the end of the survey,
+// a button to restart the survey, and a button to print out the results.
+
 import React, { FunctionComponent } from 'react';
-import contentData from './data/content.json';
+import contentData from '../data/content.json';
 
 interface SurveyCompletionMessageProps {
   onRestartClick(): void,

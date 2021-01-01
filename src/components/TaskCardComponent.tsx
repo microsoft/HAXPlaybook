@@ -1,5 +1,7 @@
+// This component renders the card for a task
+
 import React from 'react'
-import { TaskCard } from './Types';
+import { TaskCard } from '../models/Types';
 
 interface TaskCardProps {
   card: TaskCard;

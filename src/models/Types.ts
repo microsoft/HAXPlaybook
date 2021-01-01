@@ -1,27 +1,7 @@
-import { PageModel, QuestionRadiogroupModel } from "survey-react";
-import contentData from './data/content.json';
+// This file defines the types used in the application.
+
+import contentData from '../data/content.json';
 import { v4 as uuidv4 } from 'uuid';
-
-export interface SurveyValueChangedOptions {
-  name: string,
-  question: QuestionRadiogroupModel,
-  value: string
-}
-
-export interface SurveyCompleteOptions {
-  showDataSaving: (text: string) => any,
-  showDataSavingError: (text: string) => any,
-  showDataSavingSuccess: (text: string) => any,
-  showDataSavingClear: () => any,
-  isCompleteOnTrigger: () => boolean
-}
-
-export interface CurrentPageChangedOptions {
-  oldCurrentPage: PageModel,
-  newCurrentPage: PageModel,
-  isNextPage: boolean,
-  isPrevPage: boolean
-}
 
 export type HelpLevel = "info" | "warning";
 

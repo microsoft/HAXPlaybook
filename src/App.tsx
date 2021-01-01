@@ -1,15 +1,19 @@
+// The App component is the top-level component of the application.
+// This component manages the state of the survey and determines
+// which page to show based on the status of the survey.
+
 import React, { useState } from 'react';
-import './App.css';
-import './survey.min.css';
 import { ReactSurveyModel, Survey } from 'survey-react';
+import Intro from './components/Intro';
+import TaskList from './components/TaskList';
+import Help from './components/Help';
+import SurveyCompletionMessage from './components/SurveyCompletionMessage';
+import Instructions from './components/Instructions';
+import { HelpCard, TaskCard } from './models/Types';
+import { CurrentPageChangedOptions, SurveyValueChangedOptions, SurveyCompleteOptions } from './models/SurveyCallbackTypes'
 import surveyData from './data/survey.json';
-import Intro from './Intro';
-import TaskList from './TaskList';
-import Help from './Help';
-import SurveyCompletionMessage from './SurveyCompletionMessage';
-import { CurrentPageChangedOptions, HelpCard, SurveyValueChangedOptions, SurveyCompleteOptions, TaskCard } from './Types';
 import contentData from './data/content.json';
-import Instructions from './Instructions';
+import './css/survey.min.css';
 
 const App: React.FunctionComponent = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -38,19 +42,17 @@ const App: React.FunctionComponent = () => {
     setHelpCard(hc);
 
     const tc = TaskCard.fromQuestionChoice(options.question.name, options.value);
-    if (tc == null) {
-      return;
+    if (tc != null) {
+      let categoryTasks = taskMap.get(category);
+      if (categoryTasks) {
+        const filtered = categoryTasks.filter((t: TaskCard) => t.question !== options.question.name);
+        filtered.push(tc);
+        categoryTasks = filtered;
+      } else {
+        categoryTasks = [tc];
+      }
+      setTaskMap(taskMap.set(category, categoryTasks));
     }
-
-    let categoryTasks = taskMap.get(category);
-    if (categoryTasks) {
-      const filtered = categoryTasks.filter((t: TaskCard) => t.question !== options.question.name);
-      filtered.push(tc);
-      categoryTasks = filtered;
-    } else {
-      categoryTasks = [tc];
-    }
-    setTaskMap(taskMap.set(category, categoryTasks));
   }
 
   const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {

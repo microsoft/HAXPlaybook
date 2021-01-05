@@ -17,7 +17,7 @@
         "Search",
         "Recommendation",
         "Conversational AI",
-        "Text Prediction and Assistance",
+        "Text prediction and assistance",
         "Classification"
         ]
       }
@@ -44,7 +44,7 @@
           {
             "value": "action_sequence",
             "visibleIf": "{systemDomain} = 'Recommendation' or {systemDomain} = 'Classification' or {systemDomain} = 'other'",
-            "text": "Action Sequence"
+            "text": "Action sequence"
           }
         ]
       }
@@ -75,7 +75,7 @@
       {
         "type": "radiogroup",
         "name": "delimiter",
-        "title": "Once activated, will your {systemDomain} system have a clear way of delimiting the user's input?",
+        "title": "When activated, will your {systemDomain} system have a clear way of delimiting the user's input?",
         "isRequired": true,
         "choices": [
           {
@@ -100,7 +100,7 @@
         "choices": [
           {
             "value": "yes",
-            "text": "Yes, there will be multiple valid interpretations of the user's input"
+            "text": "Yes, there are multiple valid interpretations of the user's input"
           },
           {
             "value": "no",
@@ -126,7 +126,7 @@
           },
           {
             "value": "ranked_list",
-            "visibleIf": "{systemDomain}='Search' or {systemDomain}='Conversational AI' or {systemDomain}='Text Prediction and Assistance' or {systemDomain}='other'",
+            "visibleIf": "{systemDomain}='Search' or {systemDomain}='Conversational AI' or {systemDomain}='Text prediction and assistance' or {systemDomain}='other'",
             "text": "Ranked list"
           },
           {

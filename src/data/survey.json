@@ -28,7 +28,7 @@
           },
           {
             "value": "text_prediction_and_assistance",
-            "text": "Text Prediction and Assistance"
+            "text": "Text prediction and assistance"
           },
           {
             "value": "classification",
@@ -59,7 +59,7 @@
           {
             "value": "action_sequence",
             "visibleIf": "{systemDomain} = 'recommendation' or {systemDomain} = 'classification' or {systemDomain} = 'other'",
-            "text": "Action Sequence"
+            "text": "Action sequence"
           }
         ]
       }
@@ -90,7 +90,7 @@
       {
         "type": "radiogroup",
         "name": "delimiter",
-        "title": "Once activated, will your {systemDomain} system have a clear way of delimiting the user's input?",
+        "title": "When activated, will your {systemDomain} system have a clear way of delimiting the user's input?",
         "isRequired": true,
         "choices": [
           {
@@ -110,7 +110,7 @@
       {
         "type": "radiogroup",
         "name": "interpretation",
-        "title": "Are there multiple valid interpretations of the user's input?",
+        "title": "Will there be multiple valid interpretations of the user's input?",
         "isRequired": true,
         "choices": [
           {

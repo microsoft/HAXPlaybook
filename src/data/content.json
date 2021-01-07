@@ -4,7 +4,7 @@
   "questions": [
     {
       "name": "systemDomain",
-      "instructions": "",
+      "instructions": "Select a response to see more information.",
       "category": "Correct Operation",
       "choices": [
         {
@@ -26,8 +26,8 @@
           "taskCard": {
             "tasks": [
               {
-                "name": "System demonstrates normal operation",
-                "details": ""
+                "name": "Normal Operation",
+                "details": "System demonstrates normal operation"
               }
             ]
           }
@@ -76,8 +76,8 @@
           "taskCard": {
             "tasks": [
               {
-                "name": "System demonstrates normal operation",
-                "details": ""
+                "name": "Normal Operation",
+                "details": "System demonstrates normal operation"
               }
             ]
           }
@@ -101,8 +101,8 @@
           "taskCard": {
             "tasks": [
               {
-                "name": "System demonstrates normal operation",
-                "details": ""
+                "name": "Normal Operation",
+                "details": "System demonstrates normal operation"
               }
             ]
           }
@@ -126,8 +126,8 @@
           "taskCard": {
             "tasks": [
               {
-                "name": "System demonstrates normal operation",
-                "details": ""
+                "name": "Normal Operation",
+                "details": "System demonstrates normal operation"
               }
             ]
           }
@@ -341,7 +341,7 @@
     },
     {
       "name": "delimiter",
-      "instruction": "Once the system begins the activation process, it will also need to have a clear way of <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"A delimiter is a sequence of one or more characters or events for specifying when a system should finish receiving the user's input.\">delimiting</a> the user's input. Select a response to see more information.",
+      "instructions": "Once the system begins the activation process, it will also need to have a clear way of <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"A delimiter is a sequence of one or more characters or events for specifying when a system should finish receiving the user's input.\">delimiting</a> the user's input. Select a response to see more information.",
       "category": "Delimiter Errors",
       "choices": [
         {
@@ -503,7 +503,7 @@
     },
     {
       "name": "responseType",
-      "instructions": "Select a response to see more information",
+      "instructions": "Select a response to see more information.",
       "category": "Response Generation Errors",
       "choices": [
         {

@@ -1,9 +1,10 @@
 # Introduction
 
-The HAX Playbook is a web application that conducts a survey about a system being built and
-displays a list of scenarios for user testing. A default survey about designing an AI
-system has been included in this repository. It provides a demonstration of all the features
-supported by the web app.
+The HAX Playbook is an interactive tool for generating interaction scenarios to test when designing
+user-facing AI systems.
+
+A default survey about designing an AI system is included in this repository. It provides a 
+demonstration of the features supported by the web app.
 
 The web app's features include fully customizable contextual help cards, salutation message,
 farewell message, and a list of tasks based on survey results. All of these components are read

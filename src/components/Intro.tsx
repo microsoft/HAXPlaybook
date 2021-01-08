@@ -2,16 +2,16 @@
 // a message and a button to start the survey.
 
 import React from 'react';
-import contentData from '../data/content.json';
 
 interface IntroProps {
+  introduction: string,
   onStartClick(): void
 }
 
-const Intro: React.FunctionComponent<IntroProps> = ({ onStartClick }) => {
+const Intro: React.FunctionComponent<IntroProps> = ({ introduction, onStartClick }) => {
   return (
     <div className="my-5">
-      <div dangerouslySetInnerHTML={{ __html: contentData.introduction }} />
+      <div dangerouslySetInnerHTML={{ __html: introduction }} />
       <button className="btn btn-primary" onClick={onStartClick}>Start</button>
     </div>
   );

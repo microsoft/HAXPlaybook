@@ -31,7 +31,7 @@
     "elements": [
      {
       "type": "radiogroup",
-      "name": "question2",
+      "name": "continent",
       "title": "Which continent are you from?",
       "choices": [
        {

@@ -11,7 +11,7 @@ from a JSON file. See the Extension section for more details.
 
 # Getting Started
 
-To run the app, open a terminal in the root directory of the repository and run
+To run the app, open a terminal in the root directory of the repository and run:
 
 ```
 $> npm install

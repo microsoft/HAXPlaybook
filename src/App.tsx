@@ -66,12 +66,20 @@ const App: React.FunctionComponent = () => {
   }
 
   if (showIntro) {
-    return (
-      <div className="row justify-content-center">
-        <Intro onStartClick={() => setShowIntro(false)} />
-      </div>
-    );
-  } else if (!surveyComplete) {
+    // Only show intro page if introduction message is defined
+    const data: any = contentData;
+    if (data.introduction == null || data.introduction.length === 0) {
+      setShowIntro(false);
+    } else {
+      return (
+        <div className="row justify-content-center">
+          <Intro introduction={data.introduction} onStartClick={() => setShowIntro(false)} />
+        </div>
+      );
+    }
+  }
+  
+  if (!surveyComplete) {
     return (
       <React.Fragment>
         <div className="row">

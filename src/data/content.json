@@ -1,5 +1,6 @@
 {
-  "farewell": "<p><b>Thank you for using the AI Playbook!</b> You may access the live AI Playbook Report anytime.</p> <p>You may also return to the AI Playbook questionnaire to explore and revise your options. Once you are done, you may download a pdf version of the latest report.</p>",
+  "introduction": "<h1>HAX Playbook</h1><div> <p>In this session, we'll ask you to walk us through key defining features of a system you are designing. These features will determine various types of scenarios that your users might encounter as they interact with your system. This playbook will guide you through some of these scenarios and help you understand several techniques that you and your team can consider including in user testing.</p> <p>You will be asked to complete a total of two tasks. In each task, you will answer a set of multiple choice questions (up to 7) related to your design of a feature or system. You will be provided with tips and examples in the help center to help guide your selection of choices. As you are answering the questions, you will also see a preview of a list of scenarios that you could potentially include in user testing. Once you have completed answering the questions, you will see the full list of scenarios and recommendations for simulating the expected outcomes (including errors) of an AI system given each scenario.</p> <b>Task 1</b> (5 min) <p>Design a simple <u>chatbot system</u> that will help its users find a rental apartment that best suits their preference.</p> <b>Task 2</b> (10 min) <p>Design a <u>feature or system that you will work on</u>. Here are some things to keep in mind while completing this task:</p> <ul> <li>Pick an idea that you and your team have just begun to conceptualize.</li> <li>You can also start with a project that you recently worked on but has not yet reached full integration with AI.</li> <li>Please use this playbook as if it is now part of your practice during early prototyping or design phases. </li> </ul> <p>When you are ready, press start to begin your HAX Playbook.</p> </div>",
+  "farewell": "<p><b>Thank you for using the HAX Playbook!</b> You may access the live HAX Playbook Report anytime.</p> <p>You may also return to the HAX Playbook questionnaire to explore and revise your options. When you are done, you may download a pdf version of the latest report.</p>",
   "questions": [
     {
       "name": "systemDomain",
@@ -13,12 +14,12 @@
               {
                 "name": "Search",
                 "level": "info",
-                "details": "A search system is a program or feature that searches for and identifies items in collection that correspond to keywords, phrases, or characters specified by the user."
+                "details": "A search system is a program or feature that searches for and identifies items in a collection that correspond to keywords, phrases, or characters specified by the user."
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<ul> <li>Search engines such as Bing generate matching results (e.g., movie title) along with contextually relevant information (e.g., showtimes) based on the user's current location and time. </li> <li>An in-app search feature such as Microsoft Search in office products allows users to quickly find application specific information, from commands, help, to recently used files and more.</li> </ul>"
+                "details": "<ul> <li>Search engines, such as Bing, generate matching results (e.g., movie title) along with contextually relevant information (e.g., show times) based on the user's current location and time. </li> <li>An in-app search feature, such as Microsoft Search in Office products, allows users to quickly find application-specific information, from commands or help to recently used files and more.</li> </ul>"
               }
             ]
           },
@@ -38,12 +39,12 @@
               {
                 "name": "Recommendation",
                 "level": "info",
-                "details": "A recommendation system suggests content to the user that is likely to be of interest. In some cases, this is done by predicting the rating or preference a user would give to an item."
+                "details": "A recommendation system suggests content to the user that is likely to be of interest. In some cases this is done by predicting the rating or preference a user would give to an item."
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<ul> <li>Playlist generators for video and music services like Netflix, YouTube and Spotify.</li> <li>Product recommender services such as Amazon.</li> <li>Contextual assistant services such as <a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Meeting Insights by Microsoft Outlook is an intelligent assistant that suggests meeting related information, including content presented during the meeting, sent meeting notes, and other relevant post-meeting material.\">Meeting Insights</a></li> </ul>"
+                "details": "<ul> <li>Playlist generators for video and music services like Netflix, YouTube, and Spotify.</li> <li>Product recommender services, such as Amazon.</li> <li>Contextual assistant services such as, <a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Meeting Insights by Microsoft Outlook is an intelligent assistant that suggests meeting related information, including content presented during the meeting, sent meeting notes, and other relevant post-meeting material.\">Meeting Insights</a></li> </ul>"
               }
             ]
           },
@@ -68,7 +69,7 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<ul> <li>Voice assistants for productivity management or home automation like Cortana, Siri, and Alexa. </li> <li>Chatbots for customer support in most ecommerce websites.</li> </ul>"
+                "details": "<ul> <li>Voice assistants for productivity management or home automation, like Cortana, Siri, and Alexa. </li> <li>Chatbots for customer support in most e-commerce websites.</li> </ul>"
               }
             ]
           },
@@ -135,8 +136,8 @@
     },
     {
       "name": "inputModality",
-      "instructions": "Please make a selection to see more information about your <a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"While your system may have multiple input modalities, you should select the input that will be processed by the AI system.\">primary</a> input modality.",
-      "category": "Input Errors",
+      "instructions": "Please make a selection to see more information about your <a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Although your system may have multiple input modalities, you should select the input that will be processed by the AI system.\">primary</a> input modality.",
+      "category": "Input errors",
       "choices": [
         {
           "name": "text",
@@ -155,7 +156,7 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<p>Recommender systems enable users to explore various contents, products or services that match their behavior or preferences by entering one or more keywords.</p> <ul> <li>Music playlist generators will ask onboarding users to select a few songs or genres to tailor its recommendation.</li> <li>Fitness apps will ask onboarding users to answer questions about lifestyle and routine behavior to tailor its recommendation.</li> </ul>"
+                "details": "<p>Recommender systems enable users to explore various content, products, or services that match their behavior or preferences by entering one or more keywords.</p> <ul> <li>Music playlist generators will ask onboarding users to select a few songs or genres to tailor recommendations.</li> <li>Fitness apps will ask onboarding users to answer questions about lifestyle and routine behavior to tailor recommendations.</li> </ul>"
               },
               {
                 "name": "Example",
@@ -165,7 +166,7 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "Predictive text enables efficient use of keystrokes by suggesting a set or sequence of words given some preceding text."
+                "details": "Predictive text enables efficient use of keystrokes by suggesting a set or sequence of words, given some preceding text."
               },
               {
                 "name": "Example",
@@ -179,7 +180,7 @@
             "tasks": [
               {
                 "name": "Spelling error results in wrong input",
-                "details": "<p>Spelling mistakes are a common source of text input errors, including missing letters, accidental letter additions, swapping and replacing letters. Here are some ways to simulate spelling errors:</p><ul> <li>Use a word scrambler to switch the position of any two adjacent letters.</li> <li>Use any of the four techniques to manipulate the user's utterance. <ul> <li><b>Truncation</b>: removing a vowel or consonant from a word (e.g., leter instead of letter)</li> <li><b>Substitution</b>: replacing a vowel or consonant with another one in their respective position in the word (e.g., fi<u>m</u>ite instead of fi<u>n</u>ite)</li> <li><b>Insertion</b>: adding an extra vowel or consonant to a word (e.g., mis<u>s</u>take instead of mistake)</li> <li><b>Swapping</b>: switching positions between two adjacent letters (e.g., rec<u>ie</u>ved instead of rec<u>ei</u>ved)</li> </ul> </li> </ul>"
+                "details": "<p>Spelling mistakes are a common source of text input errors, including missing letters, accidental letter additions, or swapping and replacing letters. Here are some ways to simulate spelling errors:</p><ul> <li>Use a word scrambler to switch the position of any two adjacent letters.</li> <li>Use any of these four techniques to manipulate the user's utterance. <ul> <li><b>Truncation</b>: removing a vowel or consonant from a word (e.g., le<u>t</u>er instead of le<u>tt</u>er)</li> <li><b>Substitution</b>: replacing a vowel or consonant with another in their respective position in the word (e.g., fi<u>m</u>ite instead of fi<u>n</u>ite)</li> <li><b>Insertion</b>: adding an extra vowel or consonant to a word (e.g., mis<u>s</u>take instead of mistake)</li> <li><b>Swapping</b>: switching positions between two adjacent letters (e.g., rec<u>ie</u>ved instead of rec<u>ei</u>ved)</li> </ul> </li> </ul>"
               }
             ]
           }
@@ -191,7 +192,7 @@
               {
                 "name": "Speech",
                 "level": "info",
-                "details": "Speech input is widely used in conversational assistants such as home automation systems, dictation and language translation services."
+                "details": "Speech input is widely used in conversational assistants, such as home automation systems or dictation and language-translation services."
               },
               {
                 "name": "Example",
@@ -201,7 +202,7 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<p>Recommender systems that are integrated into voice assistants enable users to explore relevant information by entering speech queries.</p> <ul> <li>Home-based voice assistants such as Amazon Echo provide recommendations for specific recipes based on the speech query \"Show me recipes for pasta.\"</li> </ul>"
+                "details": "<p>Recommender systems that are integrated into voice assistants enable users to explore relevant information by entering speech queries.</p> <ul> <li>Home-based voice assistants, such as Amazon Echo, provide recommendations for specific recipes based on the speech query, \"Show me recipes for pasta.\"</li> </ul>"
               },
               {
                 "name": "Example",
@@ -223,7 +224,7 @@
               },
               {
                 "name": "System generates a non-response",
-                "details": "<p>Speech recognizers can also fail to make sense of a user's utterance due to a disruptive noise signal.</p> <p>Simulate this error by providing feedback to the user which indicates that the system has failed to register the user's input. For example, a system can respond with, \"Sorry, I did not hear what you said.\"</p>"
+                "details": "<p>Speech recognizers can also fail to make sense of a user's utterance due to a disruptive noise signal.</p> <p>Simulate this error by providing feedback to the user that indicates the system has failed to register the user's input. For example, a system can respond with, \"Sorry, I did not hear what you said.\"</p>"
               }
             ]
           }
@@ -233,7 +234,7 @@
           "helpCard": {
             "topics": [
               {
-                "name": "Action Sequence",
+                "name": "Action sequence",
                 "level": "info",
                 "details": "Action sequence is a predefined <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Example events include clicking a button, opening an application, receiving an email, or responding to a notification\">event</a> or sequence of events that can be used to trigger a system's intelligent feature. An action sequence can be initiated by the user or the system."
               },
@@ -254,7 +255,7 @@
             "tasks": [
               {
                 "name": "System ignores correct action sequence",
-                "details": "<p>Your system could potentially ignore a correct signal when it classifies a correct action sequence as being incorrect. This is also known as a false negative</p> <p>Simulate this error by turning off audio-visual feedback that indicates proper input registration."
+                "details": "<p>Your system could potentially ignore a correct signal when it classifies a correct action sequence as being incorrect. This is also known as a false negative.</p> <p>Simulate this error by turning off audio-visual feedback that indicates proper input registration."
               },
               {
                 "name": "System registers incorrect action sequence",
@@ -268,7 +269,7 @@
     {
       "name": "trigger",
       "instructions": "Select a response to see more information.",
-      "category": "Trigger Errors",
+      "category": "Trigger errors",
       "choices": [
         {
           "name": "yes",
@@ -287,12 +288,12 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<p>Speech-based systems will typically know when to begin listening to the user through its 'wake-word' invocation method. Example 'wake-words' include:</p> <ul> <li>\"Hey Cortana\" by Microsoft Cortana</li> <li>\"Alexa\" by Amazon Echo</li> <li>\"Ok Google\" by Google Home</li> </ul>"
+                "details": "<p>Speech-based systems will typically know when to begin listening to the user through its wake-word invocation method. Example wake words include:</p> <ul> <li>\"Hey Cortana,\" by Microsoft Cortana</li> <li>\"Alexa,\" by Amazon Echo</li> <li>\"Ok Google,\" by Google Home</li> </ul>"
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<p>Systems that rely on action sequence will typically know to trigger when the user or system has initiated an action. Some of these actions include:</p> <ul> <li>Switching between different screens or applications.</li> <li>Using Geofencing to trigger a reminder for buying groceries.</li> </ul>"
+                "details": "<p>Systems that rely on action sequence will typically know to trigger when the user or system has initiated an action. Some of these actions include:</p> <ul> <li>Switching between different screens or applications.</li> <li>Using geofencing to trigger a reminder for buying groceries.</li> </ul>"
               }
             ]
           },
@@ -318,12 +319,12 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "Systems that take action sequence as its primary input will sometimes have difficulty knowing when to trigger if it's unclear whether a predefined action sequence took place or not."
+                "details": "Systems that take action sequence as primary input will sometimes have difficulty knowing when to trigger if it's unclear whether a predefined action sequence took place."
               }
             ]
           },
           "taskCard": {
-            "message": "<p>Any uncertainty in knowing when to invoke the intelligent feature can sometimes result in triggering wrongfully, or triggering the system too early or often.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
+            "message": "<p>Any uncertainty in knowing when to invoke the intelligent feature can sometimes result in triggering wrongfully, or triggering the system too early or too often.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
             "tasks": [
               {
                 "name": "System triggers too early",
@@ -340,8 +341,8 @@
     },
     {
       "name": "delimiter",
-      "instructions": "Once the system begins the activation process, it will also need to have a clear way of <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"A delimiter is a sequence of one or more characters or events for specifying when a system should finish receiving the user's input.\">delimiting</a> the user's input. Select a response to see more information.",
-      "category": "Delimiter Errors",
+      "instruction": "When the system begins the activation process, it will also need to have a clear way of <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"A delimiter is a sequence of one or more characters or events for specifying when a system should finish receiving the user's input.\">delimiting</a> the user's input. Select a response to see more information.",
+      "category": "Delimiter errors",
       "choices": [
         {
           "name": "yes",
@@ -355,7 +356,7 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<p>In text-based systems, an example of a delimiter are punctuation characters, which act as separators for distinct ideas. A delimiter may also be a group of characters or words.</p>"
+                "details": "<p>In text-based systems, an example of a delimiter is punctuation characters, which act as separators for distinct ideas. A delimiter may also be a group of characters or words.</p>"
               },
               {
                 "name": "Example",
@@ -386,12 +387,12 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<p>In speech-based systems, an example of a delimiter are momentary pauses after an utterance or changes in intonation.</p> <p>There is also uncertainty in determining whether the spoken utterance is semantically or grammatically complete. Your system might have difficulty delimiting the user's input in the following example:</p> <ul> <li>How is the weather [pause] <b>in Redmond, Seattle</b>?</li> </ul>"
+                "details": "<p>In speech-based systems, an example of a delimiter is a momentary pause after an utterance or a change in intonation.</p> <p>There is also uncertainty in determining whether the spoken utterance is semantically or grammatically complete. Your system might have difficulty delimiting the user's input in the following example:</p> <ul> <li>How is the weather [pause] <b>in Redmond, Seattle</b>?</li> </ul>"
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<p>Writing Assistants might rely on underspecified rules for delimiting user input, such as phrasal expressions or whole sentences, to support a natural, uninterrupted writing experience. Your system might have difficulty delimiting the user's input in the following example:</p> <ul> <li>Students should follow...</li> <li>Students should follow <b>these guidelines</b>...</li> <li>Students should follow <b>up with their mentors</b>...</li> </ul>"
+                "details": "<p>Writing assistants might rely on underspecified rules for delimiting user input, such as phrasal expressions or whole sentences, to support a natural, uninterrupted writing experience. Your system might have difficulty delimiting the user's input in the following example:</p> <ul> <li>Students should follow...</li> <li>Students should follow <b>these guidelines</b>...</li> <li>Students should follow <b>up with their mentors</b>...</li> </ul>"
               }
             ]
           },
@@ -404,15 +405,15 @@
               },
               {
                 "name": "System triggers based on incomplete input signal",
-                "details": "<p>Your system might trigger based on an incomplete input signal.</p> <p>Simulate this error by removing parts of input.</p> <ol> <li>Choose a considerably long time span (e.g., 10 seconds) between the beginning of the user's input and system feedback that indicates receipt of input.</li> <li>Use this time span as a condition to trigger system feedback.</li> <li>(Speech only) Use a speech-to-text transcriber to convert user's spoken utterances into text. <li>(Text and Speech only) Remove the last one or two words from the text utterance.</li> </ol>"
+                "details": "<p>Your system might trigger based on an incomplete input signal.</p> <p>Simulate this error by removing parts of input.</p> <ol> <li>Choose a considerably long time span (e.g., 10 seconds) between the beginning of the user's input and system feedback that indicates receipt of input.</li> <li>Use this time span as a condition to trigger system feedback.</li> <li>(Speech only) Use a speech-to-text transcriber to convert user's spoken utterances into text. <li>(Text and speech only) Remove the last one or two words from the text utterance.</li> </ol>"
               },
               {
                 "name": "System ignores user input after delayed time",
-                "details": "<p>Although it may have no problem trigger, your system could potentially ignore a user input after a passage of time.</p> <p>Simulate this error by turning off any audio or visual feedback.</p> <ol> <li>Set up a long time delay (e.g., 10 seconds) between the beginning of the user's input and system feedback that indicates receipt of input.</li> <li>(Optional) Consider displaying continuous system feedback (e.g., revolving light ring) to indicate that the system is still receiving user input.</li> <li>Turn off system feedback once the set time threshold has passed.</li> </ol>"
+                "details": "<p>Although it may have no problem trigger, your system could potentially ignore a user input after a passage of time.</p> <p>Simulate this error by turning off any audio or visual feedback.</p> <ol> <li>Set up a long time delay (e.g., 10 seconds) between the beginning of the user's input and system feedback that indicates receipt of input.</li> <li>(Optional) Consider displaying continuous system feedback (e.g., revolving light ring) to indicate that the system is still receiving user input.</li> <li>Turn off system feedback when the set time threshold has passed.</li> </ol>"
               },
               {
                 "name": "System generates a non-response",
-                "details": "<p>Your system could also generate a non-response after some passage of time.</p> <p>Simulate this error by inserting audio or visual feedback.</p> <ol> <li>Set up a long time delay (e.g., 10 seconds) between the beginning of the user's input and system feedback that indicates receipt of input.</li> <li>(Optional) Consider displaying continuous system feedback (e.g., revolving light ring) to indicate that the system is still receiving user input.</li> <li>Turn off system feedback once the set time threshold has passed.</li> <li>Provide system feedback to the user which indicates that the system has failed to register the user's input. For example, a system can respond with, \"Sorry, I'm having trouble processing your request. Please try again.\"</li> </ol>"
+                "details": "<p>Your system could also generate a non-response after some passage of time.</p> <p>Simulate this error by inserting audio or visual feedback.</p> <ol> <li>Set up a long time delay (e.g., 10 seconds) between the beginning of the user's input and system feedback that indicates receipt of input.</li> <li>(Optional) Consider displaying continuous system feedback (e.g., revolving light ring) to indicate that the system is still receiving user input.</li> <li>Turn off system feedback once the set time threshold has passed.</li> <li>Provide system feedback to the user that indicates the system has failed to register the user's input. For example, a system can respond with, \"Sorry, I'm having trouble processing your request. Please try again.\"</li> </ol>"
               }
             ]
           }
@@ -422,7 +423,7 @@
     {
       "name": "interpretation",
       "instructions": "Select a response to see more information.",
-      "category": "Response Generation Errors",
+      "category": "Response generation errors",
       "choices": [
         {
           "name": "yes",
@@ -436,12 +437,12 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<p>In text-based systems, multiple interpretations of the same word can happen in the following ways:</p> <ul> <li><u>Ontario</u>, province of Canada; or <u>Ontario</u>, city in the state of California.</li> <li><u>May</u> the fifth month of the year; or <u>may</u>, a verb used to express possible opportunities.</li> </ul>"
+                "details": "<p>In text-based systems, multiple interpretations of the same word can happen in the following ways:</p> <ul> <li><u>Ontario</u>, province of Canada; or <u>Ontario</u>, city in the state of California.</li> <li><u>May</u>, the fifth month of the year; or <u>may</u>, a verb used to express possibility.</li> </ul>"
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<p>In speech-based systems, multiple interpretations of similar sounding speech utterances can happen in the following ways:</p> <ul> <li>Interpreting <u>whether</u> as <u>weather</u>.</li> <li>Interpreting <u>palate</u> as <u>palette</u>, or <u>pallet</u>.</li> </ul>"
+                "details": "<p>In speech-based systems, multiple interpretations of similar-sounding speech utterances can happen in the following ways:</p> <ul> <li>Interpreting <u>whether</u> as <u>weather</u>.</li> <li>Interpreting <u>palate</u> as <u>palette</u>, or <u>pallet</u>.</li> </ul>"
               },
               {
                 "name": "Example",
@@ -451,7 +452,7 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<p>Multiple interpretations of the same email message can happen when certain details of the email are underspecified.</p> <ul> <li>Meeting request <u>on the weekend</u> as beginning on Friday, Saturday or Sunday.</li> <li>Meeting request for <u>next month</u> as exactly 29 days, 23 hours, 59 minutes and 59 seconds from the current time.</li> </ul>"
+                "details": "<p>Multiple interpretations of the same email message can happen when certain details of the email are underspecified.</p> <ul> <li>Meeting request <u>on the weekend</u> as beginning on Friday, Saturday, or Sunday.</li> <li>Meeting request for <u>next month</u> as exactly 29 days, 23 hours, 59 minutes, and 59 seconds from the current time.</li> </ul>"
               }
             ]
           },
@@ -460,19 +461,19 @@
             "tasks": [
               {
                 "name": "System correctly interprets intent, but ignores provided details",
-                "details": "<p>While your system has the correct interpretation of an intent, it could potentially ignore important details such as the date/time or a person's name.</p> <p>Simulate this error by removing a component from the input.</p> <ol> <li>Choose a certain detail or component of an input signal that you want your system to ignore.</li> <li>Attach a unique identifier to the detail or property of an input signal.</li> <li>Use the identifier to consistently remove the said component upon receiving the user's input.</li> <li>(Optional) Use a randomizer to remove the component at a variable rate or a fixed rate that you specify.</li> </ol>"
+                "details": "<p>While your system has the correct interpretation of an intent, it could potentially ignore important details such as the date/time or a person's name.</p> <p>Simulate this error by removing a component from the input.</p> <ol> <li>Choose a certain detail or component of an input signal that you want your system to ignore.</li> <li>Attach a unique identifier to the detail or property of an input signal.</li> <li>Use the identifier to consistently remove said component upon receiving the user's input.</li> <li>(Optional) Use a randomizer to remove the component at a variable rate or a fixed rate that you specify.</li> </ol>"
               },
               {
                 "name": "System correctly interprets intent, but adds a new detail",
-                "details": "<p>While your system has the correct interpretation of an intent, it could potentially add new details or components that were not part of the original input.</p> <p>Simulate this error by inserting a component to the input.</p> <ol> <li>Choose a certain detail or component that you want your system to add to an input.</li> <li>Insert the component to the input.</li> <li>(Optional) Use a randomizer to insert the component at a variable rate or a fixed rate that you specify.</li> </ol>"
+                "details": "<p>Although your system has the correct interpretation of an intent, it could potentially add new details or components that were not part of the original input.</p> <p>Simulate this error by inserting a component to the input.</p> <ol> <li>Choose a certain detail or component that you want your system to add to an input.</li> <li>Insert the component to the input.</li> <li>(Optional) Use a randomizer to insert the component at a variable rate or a fixed rate that you specify.</li> </ol>"
               },
               {
-                "name": "System correctly interprets intent, but mis-resolves provided details",
-                "details": "<p>While your system has the correct interpretation of an intent, it could potentially mis-resolve details or assign incorrect attributes (e.g., wrong timezone) to a certain component (e.g., time) of the input.</p> <p>Simulate this error by replacing a default attribute (e.g., Pacific Standard Time) that is originally assigned to the component (e.g., 1:00pm) that you specify.</p> <ol> <li>Choose a certain component that you want your system to manipulate.</li> <li>Attach a unique identifier to the component of an input signal.</li> <li>Use the identifier to replace a default attribute that is assigned to the component.</li> <li>(Optional) Use a randomizer to replace a default attribute at a variable rate or a fixed rate that you specify.</li> </ol>"
+                "name": "System correctly interprets intent, but incorrectly resolves provided details",
+                "details": "<p>While your system has the correct interpretation of an intent, it could potentially incorrectly resolve details or assign incorrect attributes (e.g., wrong time zone) to a certain component (e.g., time) of the input.</p> <p>Simulate this error by replacing a default attribute (e.g., Pacific Standard Time) that is originally assigned to the component (e.g., 1:00 p.m.) that you specify.</p> <ol> <li>Choose a certain component that you want your system to manipulate.</li> <li>Attach a unique identifier to the component of an input signal.</li> <li>Use the identifier to replace a default attribute that is assigned to the component.</li> <li>(Optional) Use a randomizer to replace a default attribute at a variable rate or a fixed rate that you specify.</li> </ol>"
               },
               {
                 "name": "System fails to interpret intent from input",
-                "details": "<p>Your system could fail to interpret an intent from the user's input.</p> <p>Simulate this error using a language translator.</p> <ol> <li>[Speech] If your system uses speech as the primary input, use a speech-to-text transcriber to convert the spoken utterance to text.</li> <li>Repeat rounds of translations between the text input and any other language (e.g., german).</li> </ol>"
+                "details": "<p>Your system could fail to interpret an intent from the user's input.</p> <p>Simulate this error using a language translator.</p> <ol> <li>[Speech] If your system uses speech as the primary input, use a speech-to-text transcriber to convert the spoken utterance to text.</li> <li>Repeat rounds of translations between the text input and any other language (e.g., German).</li> </ol>"
               }
             ]
           }
@@ -489,12 +490,12 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<p>Formulating highly specific queries can lead to very few or one valid interpretation(s) of the user's input. The query in the following example would only result in one valid interpretation because the day, time and location is specified:</p> <ul> <li>How is the weather <u>tomorrow</u> in <u>Seattle, Washington</u> from <u>1 to 2pm</u>?</li> </ul>"
+                "details": "<p>Formulating highly specific queries can lead to very few or only one valid interpretation(s) of the user's input. The query in the following example would result in only one valid interpretation because the day, time, and location is specified:</p> <ul> <li>How is the weather <u>tomorrow</u> in <u>Seattle, Washington</u> from <u>1 to 2pm</u>?</li> </ul>"
               }
             ]
           },
           "taskCard": {
-            "message": "<p>Your system only expects <b>one valid interpretation</b> of the input.</p>",
+            "message": "<p>Your system expects only <b>one valid interpretation</b> of the input.</p>",
             "tasks": []
           }
         }
@@ -502,22 +503,22 @@
     },
     {
       "name": "responseType",
-      "instructions": "Select a response to see more information.",
-      "category": "Response Generation Errors",
+      "instructions": "Select a response to see more information",
+      "category": "Response generation errors",
       "choices": [
         {
           "name": "single_response",
           "helpCard": {
             "topics": [
               {
-                "name": "Single Response",
+                "name": "Single response",
                 "level": "info",
-                "details": "Your system will produce a single response if there is only one valid response available, or if there are time, screen size, usability related constraints that only allow the system to produce one response."
+                "details": "Your system will produce a single response if there is only one valid response available, or if there are time, screen size, or usability related constraints that allow the system to produce only one response."
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "Advanced chatbot systems can generate short blurbs of text in interactive conversations by building on the tone and relevant topics that are detected from user's utterances."
+                "details": "Advanced chatbot systems can generate short blurbs of text in interactive conversations by building on the tone and relevant topics that are detected from user utterances."
               },
               {
                 "name": "Example",
@@ -536,7 +537,7 @@
             "tasks": [
               {
                 "name": "System generates an irrelevant response",
-                "details": "<p>Your system could generate a topically irrelevant response given a user input.</p> <p>Simulate this error by using a machine translator to paraphrase the target response string to one that has lowest relevance to it.</p>"
+                "details": "<p>Your system could generate a topically irrelevant response given a user input.</p> <p>Simulate this error by using a machine translator to paraphrase the target response string to one that has lowest relevance.</p>"
               },
               {
                 "name": "System generates a factually incorrect response",
@@ -547,16 +548,16 @@
                 "details": "<p>Your system could generate an incoherent response when it relies on an imperfect topic model. </p> <p>Simulate this error in the following manner:</p> <ol> <li>Use a topic modeler to capture candidate topics that are inherent in the generated response.</li> <li>Among the identified topics, choose and replace a topic with one that has lowest relevance to the target topic.</li> <li>Use the revised topic model to generate a response</li> </ol>"
               },
               {
-                "name": "System generates a partially correct response.",
-                "details": "<p>Your system could generate a partially correct response when it is missing a key information for the generated response.</p> <p>Simulate this error in the following manner:</p> <ol> <li>Identify a part-of-speech (e.g., noun, verb or object) that you want to manipulate.</li> <li>Remove the identified word.</li> </ol>"
+                "name": "System generates a partially correct response",
+                "details": "<p>Your system could generate a partially correct response when it is missing key information for the generated response.</p> <p>Simulate this error in the following manner:</p> <ol> <li>Identify a part of speech (e.g., noun, verb or object) that you want to manipulate.</li> <li>Remove the identified word.</li> </ol>"
               },
               {
-                "name": "System fails to generate a valid response.",
-                "details": "<p>Your system could fail to formulate a valid response.</p> <p>Simulate this error by removing all words from the target response string except for certain parts of speech such as pronouns, conjunctions, or articles.</p>"
+                "name": "System fails to generate a valid response",
+                "details": "<p>Your system could fail to formulate a valid response.</p> <p>Simulate this error by removing all words from the target response string except for certain parts of speech, such as pronouns, conjunctions, or articles.</p>"
               },
               {
-                "name": "System generates a non-response.",
-                "details": "<p>Your system could also generate a non-response.</p> <p>Simulate this error by providing feedback that suggests failure to generate a valid response. For example, your system can display or read the following message. \"Sorry I cannot answer your question at this time.\"</p>"
+                "name": "System generates a non-response",
+                "details": "<p>Your system could also generate a non-response.</p> <p>Simulate this error by providing feedback that suggests failure to generate a valid response. For example, your system can display or read the following message. \"Sorry, I cannot answer your question at this time.\"</p>"
               }
             ]
           }
@@ -585,7 +586,7 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<ul> <li>Displaying a screen or opening a new application.</li> <li>Performing physical actions such as emitting light or vibrotactile feedback.</li> </ul>"
+                "details": "<ul> <li>Displaying a screen or opening a new application.</li> <li>Performing physical actions, such as emitting light or vibrotactile feedback.</li> </ul>"
               }
             ]
           },
@@ -601,7 +602,7 @@
                 "details": "<p>Your system could also not perform an action at all.</p> <p>Simulate this error by turning off any system feedback.</p>"
               },
               {
-                "name": "System generates a non-response.",
+                "name": "System generates a non-response",
                 "details": "<p>Your system could also not perform an action at all and generate a non-response.</p> <p>Simulate this error by generating a system feedback in the following ways:</p> <ul> <li>Display continuous audio or visual feedback for a certain period that indicates the system is prepared to generate a response.</li> <li>Respond with text or speech, \"Sorry, I cannot complete your request at this time.\"</li> </ul>"
               }
             ]
@@ -612,7 +613,7 @@
     {
       "name": "responseMechanism",
       "instructions": "Select a response to see more information.",
-      "category": "Response Generation Errors",
+      "category": "Response generation errors",
       "choices": [
         {
           "name": "generated",
@@ -631,7 +632,7 @@
             ]
           },
           "taskCard": {
-            "message": "<p>Your system will <b>generate</b> a ranked list. Lists items can be automatically generated (instead of selected) and presented in ranked order. However, failure to understand user's intent or context can result in precision, recall, and ranking errors.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
+            "message": "<p>Your system will <b>generate</b> a ranked list. List items can be automatically generated (instead of selected) and presented in ranked order. However, failure to understand user's intent or context can result in precision, recall, and ranking errors.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
             "tasks": [
               {
                 "name": "System generates poorly ranked list",
@@ -642,11 +643,11 @@
                 "details": "<p>Your system could fail to generate individual or multiple list items due to precision and recall errors.</p> <p>Simulate this error by removing a list item or replace a prepopulated string with an empty value.</p>"
               },
               {
-                "name": "System generates a list with reduced diversity.",
-                "details": "<p>Your system could generate a list with redundant items if it fails to account for the diversity of list items.</p> <p>Simulate this error in following ways:</p> <ul> <li>Insert a duplicate item to the list.</li> <li>Add or remove inflected endings (e.g., \"-ing\", \"-s\", \"-ed\") to the duplicate item.</li> <li>Add or remove articles (e.g., \"an\", \"the\") to and from a list item</li> </ul>"
+                "name": "System generates a list with reduced diversity",
+                "details": "<p>Your system could generate a list with redundant items if it fails to account for the diversity of list items.</p> <p>Simulate this error in the following ways:</p> <ul> <li>Insert a duplicate item to the list.</li> <li>Add or remove inflected endings (e.g., \"-ing\", \"-s\", \"-ed\") to the duplicate item.</li> <li>Add or remove articles (e.g., \"an\", \"the\") to and from a list item</li> </ul>"
               },
               {
-                "name": "System does not generate a valid response.",
+                "name": "System does not generate a valid response",
                 "details": "<p>Your system could also generate a non-response.</p> <p>Simulate this error in following ways:</p> <ul> <li>Replace a single item with a string that does not have any meaningful value (e.g., \"null\") </li> <li>Display a system feedback that replaces the entire list, saying \"Sorry your requested information is not available at this time.\"</li> </ul>"
               }
             ]
@@ -664,22 +665,22 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<ul> <li>Search engine results comprise a list of several webpages in the order of a predetermined ranked index.</li> <li>In-app search results, such as files, commands, or help documentation are listed in order of recency or transitional probability.</li> </ul>"
+                "details": "<ul> <li>Search engine results comprise a list of several web pages in the order of a predetermined ranked index.</li> <li>In-app search results, such as files, commands, or help documentation, are listed in order of recency or transitional probability.</li> </ul>"
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<ul> <li>List of recommended products in ecommerce websites are ranked in order of conditional probability that a user will purchase an item.</li> <li>List of recommended music or video content in playlist generators are ranked in order of likelihood that a user will consume the content.</li> </ul>"
+                "details": "<ul> <li>List of recommended products in e-commerce websites are ranked in order of conditional probability that a user will purchase an item.</li> <li>List of recommended music or video content in playlist generators are ranked in order of likelihood that a user will consume the content.</li> </ul>"
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<ul> <li>Customer support for ecommerce websites, in which users are provided multiple options to return or exchange a purchased item.</li> <li>Navigating insurance policy quotes, in which users are provided several different pricing options based on insurance coverage and deductibles.</li> </ul>"
+                "details": "<ul> <li>Customer support for e-commerce websites, in which users are provided multiple options to return or exchange a purchased item.</li> <li>Navigating insurance policy quotes, in which users are provided several different pricing options based on insurance coverage and deductibles.</li> </ul>"
               },
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "<ul> <li>Predictive text suggests a set of words that the user will type with high probability given some preceding text.</li> <li>Spell checkers suggest a list of correctly spelled words that are closest to the one that is intended in writing.</li> </ul>"
+                "details": "<ul> <li>Predictive text suggests a set of words that the user will type with high probability, given some preceding text.</li> <li>Spell checkers suggest a list of correctly spelled words that are closest to the one that is intended in writing.</li> </ul>"
               }
             ]
           },
@@ -692,15 +693,15 @@
               },
               {
                 "name": "System fails to populate list item(s)",
-                "details": "<p>Your system could fail to populate individual or multiple list items due to precision and recall errors.</p> <p>Simulate this error in the following ways:</p> <ul> <li>Remove an item from the list.</li> <li>Replace a prepopulated string with an empty value</li> <li>If your list item is selected from an external source, shift the string value by one or two words to the left or right of the target string.</li> </ul>"
+                "details": "<p>Your system could fail to populate individual or multiple list items due to precision and recall errors.</p> <p>Simulate this error in the following ways:</p> <ul> <li>Remove an item from the list.</li> <li>Replace a prepopulated string with an empty value.</li> <li>If your list item is selected from an external source, shift the string value by one or two words to the left or right of the target string.</li> </ul>"
               },
               {
-                "name": "System creates a list with reduced diversity.",
-                "details": "<p>Your list can sometimes contain redundant items if it fails to account for the diversity of list items.</p> <p>Simulate this error in following ways:</p> <ul> <li>Insert a duplicate item to the list.</li> <li>Add or remove inflected endings (e.g., \"-ing\", \"-s\", \"-ed\") to a duplicate item.</li> <li>Add or remove articles (e.g., \"an\", \"the\") to and from a list item.</li> </ul>"
+                "name": "System creates a list with reduced diversity",
+                "details": "<p>Your list can sometimes contain redundant items if it fails to account for the diversity of list items.</p> <p>Simulate this error in the following ways:</p> <ul> <li>Insert a duplicate item to the list.</li> <li>Add or remove inflected endings (e.g., \"-ing\", \"-s\", \"-ed\") to a duplicate item.</li> <li>Add or remove articles (e.g., \"an\", \"the\") to and from a list item.</li> </ul>"
               },
               {
-                "name": "System does not generate a valid response.",
-                "details": "<p>Your system could also generate a non-response.</p> <p>Simulate this error in following ways:</p> <ul> <li>Replace a single item with a string that does not have any meaningful value (e.g., \"null\") </li> <li>Display a system feedback that replaces the entire list, saying \"Sorry your requested information is not available at this time.\"</li> </ul>"
+                "name": "System does not generate a valid response",
+                "details": "<p>Your system could also generate a non-response.</p> <p>Simulate this error in following ways:</p> <ul> <li>Replace a single item with a string that does not have any meaningful value (e.g., \"null\"). </li> <li>Display a system feedback that replaces the entire list, saying \"Sorry, your requested information is not available at this time.\"</li> </ul>"
               }
             ]
           }
@@ -710,7 +711,7 @@
     {
       "name": "responseClassification",
       "instructions": "Select a response to see more information.",
-      "category": "Response Generation Errors",
+      "category": "Response generation errors",
       "choices": [
         {
           "name": "binary",
@@ -724,7 +725,7 @@
               {
                 "name": "Example",
                 "level": "warning",
-                "details": "Email spam filters apply binary classification rules to determine whether it should label an email as junk or not."
+                "details": "Email spam filters apply binary classification rules to determine whether to label an email as junk."
               }
             ]
           },
@@ -736,7 +737,7 @@
                 "details": "<p>False negatives comprise one outcome of a binary classification task.</p> <p>Simulate this error by assigning a negative label (e.g., not a meeting request) to a data point when it should been positive (e.g., meeting request).</p>"
               },
               {
-                "name": "System produces a false positive.",
+                "name": "System produces a false positive",
                 "details": "<p>False positives comprise another outcome of a binary classification task.</p> <p>Simulate this error by assigning a positive label (e.g., meeting request) to a data point when it should been negative (e.g., not a meeting request).</p>"
               }
             ]
@@ -762,11 +763,11 @@
             "message": "<p>Your system will perform a <b>multi-class</b> classification.</p> <p>Here are some scenarios that you can consider including in your user testing protocol.</p>",
             "tasks": [
               {
-                "name": "System fails to produce correct classifications among close categories.",
+                "name": "System fails to produce correct classifications among close categories",
                 "details": "<p>Your system could potentially confuse two similar but different categories, leading to a classification error.</p> <p>Simulate this error in the following ways:</p> <ol> <li>Identify two or more data points that share similar features (e.g., meeting summary vs. meeting request).</li> <li>Assign same classification to those data points.</li> </ol>"
               },
               {
-                "name": "System fails to produce correct classifications among distant categories.",
+                "name": "System fails to produce correct classifications among distant categories",
                 "details": "<p>Your system could also confuse two distant categories.</p> <p>Simulate this error in the following ways:</p> <ol> <li>Identify two or more data points that share minimal features (e.g., To-do list vs. meeting request).</li> <li>Assign same classification to those data points.</li> </ol>"
               }
             ]

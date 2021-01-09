@@ -78,35 +78,44 @@ const App: React.FunctionComponent = () => {
       );
     }
   }
-  
+
   if (!surveyComplete) {
     return (
       <React.Fragment>
         <div className="row">
-          <Survey json={surveyData}
-            onValueChanged={handleValueChanged}
-            onCurrentPageChanged={handleCurrentPageChanged}
-            onComplete={handleComplete} />
-        </div>
-        <div className="row">
-          <Instructions message={instructions} />
-        </div>
-        <div className="row justify-content-center mt-3">
-          <Help card={helpCard} />
+          <div className="col">
+            <div className="container">
+              <div className="row">
+                <Survey json={surveyData}
+                  onValueChanged={handleValueChanged}
+                  onCurrentPageChanged={handleCurrentPageChanged}
+                  onComplete={handleComplete} />
+              </div>
+              <div className="row">
+                <Instructions message={instructions} />
+              </div>
+              <div className="row justify-content-center mt-3">
+                <Help card={helpCard} />
+              </div>
+            </div>
+          </div>
+          <div className="col mx-5">
+            <TaskList taskMap={taskMap} />
+          </div>
         </div>
       </React.Fragment>
     );
-  } else {
-    return (
-      <div className="row justify-content-center">
-        <SurveyCompletionMessage onRestartClick={() => {
-          setSurveyComplete(false);
-          setShowIntro(true);
-        }} />
-        <TaskList taskMap={taskMap} />
-      </div>
-    );
   }
+
+  return (
+    <div className="row justify-content-center">
+      <SurveyCompletionMessage onRestartClick={() => {
+        setSurveyComplete(false);
+        setShowIntro(true);
+      }} />
+      <TaskList taskMap={taskMap} />
+    </div>
+  );
 }
 
 export default App;

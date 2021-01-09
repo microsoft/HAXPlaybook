@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <div className="container">
+    <div className="container-fluid">
       <App />
     </div>
   </React.StrictMode>,

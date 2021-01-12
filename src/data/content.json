@@ -15,6 +15,7 @@
       "choices": [
         {
           "name": "search",
+          "definition": "a program or feature that searches for and identifies items in a collection",
           "helpCard": {
             "topics": [
               {
@@ -40,6 +41,7 @@
         },
         {
           "name": "recommendation",
+          "definition": "suggests content to the user that is likely to be of interest",
           "helpCard": {
             "topics": [
               {
@@ -147,6 +149,7 @@
       "choices": [
         {
           "name": "text",
+          "definition": "test long message test long message test long message test long message test long message test long message test long message test long message test long message test long message test long message test long message test long message test long message test long message test long message test long message test long message ",
           "helpCard": {
             "topics": [
               {

@@ -1,6 +1,6 @@
 {
   "showQuestionNumbers": "off",
-  "showProgressBar": "top",
+  "showProgressBar": "off",
   "goNextPageAutomatic": false,
   "showNavigationButtons": true,
   "showCompletedPage": false,

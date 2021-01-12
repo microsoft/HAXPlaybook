@@ -9,12 +9,14 @@ import TaskList from './components/TaskList';
 import Help from './components/Help';
 import Instructions from './components/Instructions';
 import { HelpCard, TaskCard } from './models/Types';
-import { CurrentPageChangedOptions, SurveyValueChangedOptions, SurveyCompleteOptions } from './models/SurveyCallbackTypes'
-import surveyData from './data/survey.json';
-import contentData from './data/content.json';
-import './css/survey.min.css';
+import { SurveyValueChangedOptions, SurveyCompleteOptions } from './models/SurveyCallbackTypes'
 
-const App: React.FunctionComponent = () => {
+interface AppProps {
+  surveyData: any,
+  contentData: any
+}
+
+const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
   const [showIntro, setShowIntro] = useState(true);
   const [helpCard, setHelpCard] = useState(new HelpCard([]));
   const [taskMap, setTaskMap] = useState(new Map<string, TaskCard[]>());
@@ -48,15 +50,6 @@ const App: React.FunctionComponent = () => {
       setTaskMap(taskMap.set(category, categoryTasks));
     }
   }
-
-  /*
-  const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {
-    console.log("CurrentPageChanged", sender, options);
-    const question = options.newCurrentPage.questions[0];
-    setHelpCard(question.isValueEmpty(question.value) ?
-      new HelpCard([]) : HelpCard.fromQuestionChoice(question.name, question.value));
-  }
-  */
 
   if (showIntro) {
     // Only show intro page if introduction message is defined

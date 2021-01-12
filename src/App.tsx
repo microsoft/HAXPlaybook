@@ -7,7 +7,6 @@ import { ReactSurveyModel, Survey } from 'survey-react';
 import Intro from './components/Intro';
 import TaskList from './components/TaskList';
 import Help from './components/Help';
-import SurveyCompletionMessage from './components/SurveyCompletionMessage';
 import Instructions from './components/Instructions';
 import { HelpCard, TaskCard } from './models/Types';
 import { CurrentPageChangedOptions, SurveyValueChangedOptions, SurveyCompleteOptions } from './models/SurveyCallbackTypes'
@@ -17,23 +16,17 @@ import './css/survey.min.css';
 
 const App: React.FunctionComponent = () => {
   const [showIntro, setShowIntro] = useState(true);
-  const [surveyComplete, setSurveyComplete] = useState(false);
-  const [instructions, setInstructions] = useState("");
-  const [category, setCategory] = useState("");
   const [helpCard, setHelpCard] = useState(new HelpCard([]));
   const [taskMap, setTaskMap] = useState(new Map<string, TaskCard[]>());
 
   function logState() {
-    console.log("STATE: showIntro=", showIntro, " surveyComplete=", surveyComplete,
-      " instructions= ", instructions, " category=", category,
-      " helpCard=", helpCard, " tasks=", taskMap);
+    console.log("STATE: showIntro=", showIntro, " helpCard=", helpCard, " tasks=", taskMap);
   }
   logState();
 
   const handleComplete = (sender: ReactSurveyModel, options: SurveyCompleteOptions) => {
     console.log("Complete", sender, options);
-    sender.clear();
-    setSurveyComplete(true);
+    sender.clear(false);
   }
 
   const handleValueChanged = (sender: ReactSurveyModel, options: SurveyValueChangedOptions) => {
@@ -43,6 +36,7 @@ const App: React.FunctionComponent = () => {
 
     const tc = TaskCard.fromQuestionChoice(options.question.name, options.value);
     if (tc != null) {
+      const category: any = contentData.questions.find((q: any) => q.name === options.question.name)?.category;
       let categoryTasks = taskMap.get(category);
       if (categoryTasks) {
         const filtered = categoryTasks.filter((t: TaskCard) => t.question !== options.question.name);
@@ -55,15 +49,14 @@ const App: React.FunctionComponent = () => {
     }
   }
 
+  /*
   const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {
     console.log("CurrentPageChanged", sender, options);
     const question = options.newCurrentPage.questions[0];
-    const metadata: any = contentData.questions.find((q: any) => q.name === question.name);
-    setInstructions(metadata.instructions);
-    setCategory(metadata.category);
     setHelpCard(question.isValueEmpty(question.value) ?
       new HelpCard([]) : HelpCard.fromQuestionChoice(question.name, question.value));
   }
+  */
 
   if (showIntro) {
     // Only show intro page if introduction message is defined
@@ -79,43 +72,30 @@ const App: React.FunctionComponent = () => {
     }
   }
 
-  if (!surveyComplete) {
-    return (
-      <React.Fragment>
-        <div className="row">
-          <div className="col">
-            <div className="container">
-              <div className="row">
-                <Survey json={surveyData}
-                  onValueChanged={handleValueChanged}
-                  onCurrentPageChanged={handleCurrentPageChanged}
-                  onComplete={handleComplete} />
-              </div>
-              <div className="row">
-                <Instructions message={instructions} />
-              </div>
-              <div className="row justify-content-center mt-3">
-                <Help card={helpCard} />
-              </div>
+  return (
+    <React.Fragment>
+      <div className="row">
+        <div className="col page-column" style={{ backgroundColor: "white" }}>
+          <div className="container">
+            <div className="row">
+              <Instructions title={contentData.surveyInstructions.title} message={contentData.surveyInstructions.message} />
+            </div>
+            <div className="row">
+              <Survey json={surveyData}
+                onValueChanged={handleValueChanged}
+                onComplete={handleComplete} />
             </div>
           </div>
-          <div className="col mx-5">
-            <TaskList taskMap={taskMap} />
+        </div>
+        <div className="col page-column">
+          <div className="container">
+            <TaskList taskMap={taskMap} title={contentData.scenarioInstructions.title} message={contentData.scenarioInstructions.message} />
           </div>
         </div>
-      </React.Fragment>
-    );
-  }
-
-  return (
-    <div className="row justify-content-center">
-      <SurveyCompletionMessage onRestartClick={() => {
-        setSurveyComplete(false);
-        setShowIntro(true);
-      }} />
-      <TaskList taskMap={taskMap} />
-    </div>
+      </div>
+    </React.Fragment>
   );
+
 }
 
 export default App;

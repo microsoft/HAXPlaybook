@@ -43,3 +43,8 @@ code {
   font-size: 1.75rem;
   cursor: pointer;
 }
+
+.page-column {
+  border: solid black 1px;
+  border-radius: 25px;
+}

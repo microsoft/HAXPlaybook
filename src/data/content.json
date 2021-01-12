@@ -1,9 +1,16 @@
 {
   "farewell": "<p><b>Thank you for using the HAX Playbook!</b> You may access the live HAX Playbook Report anytime.</p> <p>You may also return to the HAX Playbook questionnaire to explore and revise your options. When you are done, you may download a pdf version of the latest report.</p>",
+  "surveyInstructions": {
+    "title": "DESCRIBE YOUR AI FEATURE",
+    "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tristique in nisl eget ornare. Sed laoreet erat at iaculis tristique. Praesent pharetra lectus a efficitur elementum. In at nulla vel sapien molestie pretium. Pellentesque ullamcorper ullamcorper nulla, non dignissim mi faucibus ut. Duis sodales molestie quam, quis laoreet neque. Nulla aliquet tristique purus, ut posuere est tincidunt sed. Phasellus finibus metus sit amet purus finibus, id rutrum augue tempor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sed ex a nunc faucibus pulvinar quis id mauris. Praesent eget eros rutrum, varius tellus quis, rhoncus purus. Cras pellentesque est sit amet mollis aliquam. In hac habitasse platea dictumst. Proin euismod, felis sit amet cursus auctor, orci nulla sollicitudin ex, et suscipit mauris dolor quis purus. Integer vel odio in felis laoreet interdum quis at dui. Mauris placerat sapien et leo efficitur pretium."
+  },
+  "scenarioInstructions": {
+    "title": "RECOMMENDED SCENARIOS TO TEST",
+    "message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tristique in nisl eget ornare. Sed laoreet erat at iaculis tristique. Praesent pharetra lectus a efficitur elementum. In at nulla vel sapien molestie pretium. Pellentesque ullamcorper ullamcorper nulla, non dignissim mi faucibus ut. Duis sodales molestie quam, quis laoreet neque. Nulla aliquet tristique purus, ut posuere est tincidunt sed. Phasellus finibus metus sit amet purus finibus, id rutrum augue tempor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Cras sed ex a nunc faucibus pulvinar quis id mauris. Praesent eget eros rutrum, varius tellus quis, rhoncus purus. Cras pellentesque est sit amet mollis aliquam. In hac habitasse platea dictumst. Proin euismod, felis sit amet cursus auctor, orci nulla sollicitudin ex, et suscipit mauris dolor quis purus. Integer vel odio in felis laoreet interdum quis at dui. Mauris placerat sapien et leo efficitur pretium."
+  },
   "questions": [
     {
       "name": "systemDomain",
-      "instructions": "Select a response to see more information.",
       "category": "Correct Operation",
       "choices": [
         {

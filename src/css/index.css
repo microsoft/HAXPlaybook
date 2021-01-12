@@ -1,5 +1,3 @@
-@import "bootstrap-icons/font/bootstrap-icons.css"
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -23,9 +21,9 @@ code {
 }
 
 .circle-text-large {
-  width: 3.5rem;
-  height: 3.5rem;
-  line-height: 3.5rem;
+  width: 3.5em;
+  height: 3.5em;
+  line-height: 3.5em;
 }
 
 .circle-text-small {
@@ -36,11 +34,12 @@ code {
 }
 
 .scenario-section-header {
-  margin-top: 2.5rem;
-  background-color: #c2c2c2;
-  border: solid black 2px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 0.3em;
+  background-color: #dddddd;
+  border: solid black 1px;
   border-radius: 5px;
-  padding: 0.5rem;
-  font-size: 2rem;
+  font-size: 1.75rem;
   cursor: pointer;
 }

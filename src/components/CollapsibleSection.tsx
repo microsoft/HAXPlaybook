@@ -1,7 +1,8 @@
 
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { TaskCard } from '../models/Types';
 import TaskCardComponent from './TaskCardComponent';
+import { BsFillCaretRightFill, BsFillCaretDownFill } from 'react-icons/bs';
 
 interface CollapsibleSectionProps {
   taskMap: Map<string, TaskCard[]>;
@@ -10,15 +11,17 @@ interface CollapsibleSectionProps {
 
 const CollapsibleSection: React.FunctionComponent<CollapsibleSectionProps> = ({ taskMap, category }) => {
   const [isExpanded, setExpanded] = useState(true);
+  const numTasks = taskMap.get(category)?.map(task => task.tasks.length).reduce((prev, n) => prev + n);
   return (
     <React.Fragment>
-      <div className="scenario-section-header">
-        <i className="bi bi-arrow-down"></i>{category}
-        <div className="circle-text circle-text-small" style={{ marginLeft: "1rem", backgroundColor: "#73c7ff" }}>
-          {taskMap.get(category)?.map(task => task.tasks.length).reduce((prev, n) => prev + n)}
+      <div className="scenario-section-header" onClick={() => setExpanded(!isExpanded)}>
+        {isExpanded ? <BsFillCaretDownFill /> : <BsFillCaretRightFill />}
+        <span style={{ marginLeft: "0.5em" }}>{category}</span>
+        <div className="circle-text circle-text-small" style={{ marginLeft: "0.75em", backgroundColor: "white" }}>
+          {numTasks}
         </div>
       </div>
-      {taskMap.get(category)?.map(tc => <TaskCardComponent key={tc.id} card={tc} />)}
+      {isExpanded ? taskMap.get(category)?.map(tc => <TaskCardComponent key={tc.id} card={tc} />) : null}
     </React.Fragment>
   )
 }

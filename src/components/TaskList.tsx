@@ -29,7 +29,7 @@ const TaskList: React.FunctionComponent<TaskListProps> = ({ taskMap, title, mess
       <div>
         {message}
       </div>
-      <div className="row justify-content-end">
+      <div className="row mt-2 justify-content-end">
         <button onClick={() => window.print()} className="btn btn-primary">Download Report</button>
       </div>
       {categories.map(category => (

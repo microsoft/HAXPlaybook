@@ -71,9 +71,9 @@ const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
         <div className="col page-column" style={{ backgroundColor: "white" }}>
           <div className="container">
             <div className="row">
-              <Instructions title={contentData.surveyInstructions.title} message={contentData.surveyInstructions.message} />
+              <Instructions title={contentData.surveyInstructions?.title} message={contentData.surveyInstructions?.message} />
             </div>
-            <div className="row">
+            <div className="row my-1">
               <Survey json={surveyData}
                 onValueChanged={handleValueChanged}
                 onComplete={handleComplete} />
@@ -82,7 +82,7 @@ const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
         </div>
         <div className="col page-column">
           <div className="container">
-            <TaskList taskMap={taskMap} title={contentData.scenarioInstructions.title} message={contentData.scenarioInstructions.message} />
+            <TaskList taskMap={taskMap} title={contentData.scenarioInstructions?.title} message={contentData.scenarioInstructions?.message} />
           </div>
         </div>
       </div>

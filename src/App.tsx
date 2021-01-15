@@ -44,7 +44,8 @@ const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
       } else {
         categoryTasks = [tc];
       }
-      setTaskMap(taskMap.set(category, categoryTasks));
+      const result = new Map(taskMap.set(category, categoryTasks));
+      setTaskMap(result);
     }
   }
 

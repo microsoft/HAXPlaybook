@@ -1,13 +1,13 @@
 // This component renders the help cards shown below the survey
 
 import React from 'react'
-import { HelpCard } from '../models/Types';
 
 interface HelpProps {
-  card: HelpCard;
 }
 
-const App: React.FunctionComponent<HelpProps> = ({ card }) => {
+const App: React.FunctionComponent<HelpProps> = ({ }) => {
+  return null;
+  /*
   return (
     <React.Fragment>
       {card.topics.map(topic => (
@@ -20,6 +20,7 @@ const App: React.FunctionComponent<HelpProps> = ({ card }) => {
       ))}
     </React.Fragment>
   )
+  */
 }
 
 export default App;

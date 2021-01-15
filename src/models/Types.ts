@@ -28,40 +28,6 @@ function getChoice(questionName: string, choiceValue: string) {
     return metadata.choices.find((c: any) => c.name === choiceValue);
 }
 
-export class HelpCard {
-  topics: HelpTopic[];
-
-  constructor(topics: HelpTopic[]) {
-    this.topics = topics;
-  }
-
-  static fromQuestionChoice(questionName: string, choiceValue: string) {
-    const choice = getChoice(questionName, choiceValue);
-    if (choice == null || choice.helpCard == null || choice.helpCard.topics == null) {
-      console.log("Missing help for question %s choice %s", questionName, choiceValue);
-      return new HelpCard([]);
-    }
-
-    return new HelpCard(choice.helpCard.topics.map((topic: any) => {
-      return new HelpTopic(topic.name, topic.level, topic.details)
-    }));
-  }
-}
-
-export class HelpTopic {
-  name: string;
-  level: HelpLevel;
-  details: string;
-  id: string;
-
-  constructor(name: string, level: HelpLevel, details: string) {
-    this.name = name;
-    this.level = level;
-    this.details = details;
-    this.id = uuidv4();
-  }
-}
-
 export class TaskCard {
   title: string;
   message: string;

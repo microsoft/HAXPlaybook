@@ -8,7 +8,7 @@ import Intro from './components/Intro';
 import TaskList from './components/TaskList';
 import Help from './components/Help';
 import Instructions from './components/Instructions';
-import { HelpCard, TaskCard } from './models/Types';
+import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions, SurveyCompleteOptions } from './models/SurveyCallbackTypes'
 
 interface AppProps {
@@ -18,11 +18,10 @@ interface AppProps {
 
 const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
   const [showIntro, setShowIntro] = useState(true);
-  const [helpCard, setHelpCard] = useState(new HelpCard([]));
   const [taskMap, setTaskMap] = useState(new Map<string, TaskCard[]>());
 
   function logState() {
-    console.log("STATE: showIntro=", showIntro, " helpCard=", helpCard, " tasks=", taskMap);
+    console.log("STATE: showIntro=", showIntro,  " tasks=", taskMap);
   }
   logState();
 
@@ -33,8 +32,6 @@ const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
 
   const handleValueChanged = (sender: ReactSurveyModel, options: SurveyValueChangedOptions) => {
     console.log("ValueChanged", sender, options);
-    const hc = HelpCard.fromQuestionChoice(options.question.name, options.value);
-    setHelpCard(hc);
 
     const tc = TaskCard.fromQuestionChoice(options.question.name, options.value);
     if (tc != null) {

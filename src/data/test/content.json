@@ -1,0 +1,336 @@
+{
+  "introduction": "Welcome to the test survey!",
+  "farewell": "You are a wonderful person. Take care.",
+  "questions": [
+    {
+      "name": "favorite_color",
+      "instructions": "Pick your favorite color",
+      "category": "Favorite Color",
+      "choices": [
+        {
+          "name": "blue",
+          "helpCard": {
+            "topics": [
+              {
+                "name": "Blue",
+                "level": "info",
+                "details": "info: blue"
+              },
+              {
+                "name": "Warning",
+                "level": "warning",
+                "details": "warning: blue"
+              }
+            ]
+          },
+          "taskCard": {
+            "tasks": [
+              {
+                "name": "Task: color",
+                "details": "You like the color blue"
+              }
+            ]
+          }
+        },
+        {
+          "name": "red",
+          "helpCard": {
+            "topics": [
+              {
+                "name": "Red",
+                "level": "info",
+                "details": "info: red"
+              },
+              {
+                "name": "Warning",
+                "level": "warning",
+                "details": "warning: red"
+              }
+            ]
+          },
+          "taskCard": {
+            "tasks": [
+              {
+                "name": "Task: color",
+                "details": "You like the color red"
+              }
+            ]
+          }
+        },
+        {
+          "name": "green",
+          "helpCard": {
+            "topics": [
+              {
+                "name": "Green",
+                "level": "info",
+                "details": "info: green"
+              },
+              {
+                "name": "Warning",
+                "level": "warning",
+                "details": "warning: green"
+              }
+            ]
+          },
+          "taskCard": {
+            "tasks": [
+              {
+                "name": "Task: color",
+                "details": "You like the color green"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "continent",
+      "instructions": "Please pick a continent.",
+      "category": "Continent",
+      "choices": [
+        {
+          "name": "northamerica",
+          "helpCard": {
+            "topics": [
+              {
+                "name": "NA",
+                "level": "info",
+                "details": "info: NA"
+              },
+              {
+                "name": "NA warning",
+                "level": "Warning",
+                "details": "warning: NA"
+              }
+            ]
+          },
+          "taskCard": {
+            "message": "You are from North America",
+            "tasks": [
+              {
+                "name": "North America",
+                "details": "<a href=\"https://en.wikipedia.org/wiki/North_America\" >North America</a> on Wikipedia"
+              }
+            ]
+          }
+        },
+        {
+          "name": "southamerica",
+          "helpCard": {
+            "topics": [
+              {
+                "name": "SA",
+                "level": "info",
+                "details": "info: SA"
+              },
+              {
+                "name": "SA warning",
+                "level": "Warning",
+                "details": "warning: SA"
+              }
+            ]
+          },
+          "taskCard": {
+            "message": "You are from South America",
+            "tasks": [
+              {
+                "name": "South America",
+                "details": "<a href=\"https://en.wikipedia.org/wiki/South_America\" >South America</a> on Wikipedia"
+              }
+            ]
+          }
+        },
+        {
+          "name": "africa",
+          "helpCard": {
+            "topics": [
+              {
+                "name": "Africa",
+                "level": "info",
+                "details": "info: Africa"
+              },
+              {
+                "name": "Africa warning",
+                "level": "Warning",
+                "details": "warning: Africa"
+              }
+            ]
+          },
+          "taskCard": {
+            "message": "You are from Africa",
+            "tasks": [
+              {
+                "name": "Africa",
+                "details": "<a href=\"https://en.wikipedia.org/wiki/Africa\">Africa</a> on Wikipedia"
+              }
+            ]
+          }
+        },
+        {
+          "name": "europe",
+          "helpCard": {
+            "topics": [
+              {
+                "name": "Europe",
+                "level": "info",
+                "details": "info: Europe"
+              },
+              {
+                "name": "Europe warning",
+                "level": "Warning",
+                "details": "warning: Europe"
+              }
+            ]
+          },
+          "taskCard": {
+            "message": "You are from Europe",
+            "tasks": [
+              {
+                "name": "Europe",
+                "details": "<a href=\"https://en.wikipedia.org/wiki/Europe\">Europe</a> on Wikipedia"
+              }
+            ]
+          }
+        },
+        {
+          "name": "asia",
+          "helpCard": {
+            "topics": [
+              {
+                "name": "Asia",
+                "level": "info",
+                "details": "info: Asia"
+              },
+              {
+                "name": "Asia warning",
+                "level": "Warning",
+                "details": "warning: Asia"
+              }
+            ]
+          },
+          "taskCard": {
+            "message": "You are from Asia",
+            "tasks": [
+              {
+                "name": "Europe",
+                "details": "<a href=\"https://en.wikipedia.org/wiki/Asia\">Asia</a> on Wikipedia"
+              }
+            ]
+          }
+        },
+        {
+          "name": "australia",
+          "helpCard": {
+            "topics": [
+              {
+                "name": "Australia",
+                "level": "info",
+                "details": "info: Australia"
+              },
+              {
+                "name": "Australia warning",
+                "level": "Warning",
+                "details": "warning: Australia"
+              }
+            ]
+          },
+          "taskCard": {
+            "message": "You are from Australia",
+            "tasks": [
+              {
+                "name": "Europe",
+                "details": "<a href=\"https://en.wikipedia.org/wiki/Australia\">Australia</a> on Wikipedia"
+              }
+            ]
+          }
+        },
+        {
+          "name": "antarctica",
+          "helpCard": {
+            "topics": [
+              {
+                "name": "Antarctica",
+                "level": "info",
+                "details": "info: Antarctica"
+              },
+              {
+                "name": "Antarctica warning",
+                "level": "Warning",
+                "details": "warning: Antarctica"
+              }
+            ]
+          },
+          "taskCard": {
+            "message": "You are from Antarctica",
+            "tasks": [
+              {
+                "name": "Europe",
+                "details": "<a href=\"https://en.wikipedia.org/wiki/Antarctica\">Antarctica</a> on Wikipedia"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "chocolate",
+      "instructions": "Chocolate.",
+      "category": "Chocolate",
+      "choices": [
+        {
+          "name": "true",
+          "helpCard": {
+            "topics": [
+              {
+                "name": "True",
+                "level": "info",
+                "details": "true: info"
+              },
+              {
+                "name": "Warning",
+                "level": "warning",
+                "details": "true: warning"
+              }
+            ]
+          },
+          "taskCard": {
+            "message": "You like chocolate.",
+            "tasks": [
+              {
+                "name": "Likes chocolate",
+                "details": "You <b>like</b> chocolate."
+              }
+            ]
+          }
+        },
+        {
+          "name": "false",
+          "helpCard": {
+            "topics": [
+              {
+                "name": "False",
+                "level": "info",
+                "details": "false: info"
+              },
+              {
+                "name": "Warning",
+                "level": "warning",
+                "details": "false: warning"
+              }
+            ]
+          },
+          "taskCard": {
+            "message": "You don't like chocolate.",
+            "tasks": [
+              {
+                "name": "Dislikes chocolate",
+                "details": "You <b>don't like</b> chocolate."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

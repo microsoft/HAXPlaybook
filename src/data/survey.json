@@ -14,11 +14,26 @@
         "isRequired": true,
         "hasOther": true,
         "choices": [
-        "Search",
-        "Recommendation",
-        "Conversational AI",
-        "Text Prediction and Assistance",
-        "Classification"
+          {
+            "value": "search",
+            "text": "Search"
+          },
+          {
+            "value": "recommendation",
+            "text": "Recommendation"
+          },
+          {
+            "value": "conversational_ai",
+            "text": "Conversational AI"
+          },
+          {
+            "value": "text_prediction_and_assistance",
+            "text": "Text prediction and assistance"
+          },
+          {
+            "value": "classification",
+            "text": "Classification"
+          }
         ]
       }
     ]
@@ -38,13 +53,13 @@
           },
           {
             "value": "speech",
-            "visibleIf": "{systemDomain} = 'Search' or {systemDomain} = 'Recommendation' or {systemDomain} = 'Conversational AI' or {systemDomain} = 'other'",
+            "visibleIf": "{systemDomain} = 'search' or {systemDomain} = 'recommendation' or {systemDomain} = 'conversational_ai' or {systemDomain} = 'other'",
             "text": "Speech"
           },
           {
             "value": "action_sequence",
-            "visibleIf": "{systemDomain} = 'Recommendation' or {systemDomain} = 'Classification' or {systemDomain} = 'other'",
-            "text": "Action Sequence"
+            "visibleIf": "{systemDomain} = 'recommendation' or {systemDomain} = 'classification' or {systemDomain} = 'other'",
+            "text": "Action sequence"
           }
         ]
       }
@@ -75,7 +90,7 @@
       {
         "type": "radiogroup",
         "name": "delimiter",
-        "title": "Once activated, will your {systemDomain} system have a clear way of delimiting the user's input?",
+        "title": "When activated, will your {systemDomain} system have a clear way of delimiting the user's input?",
         "isRequired": true,
         "choices": [
           {
@@ -95,7 +110,7 @@
       {
         "type": "radiogroup",
         "name": "interpretation",
-        "title": "Are there multiple valid interpretations of the user's input?",
+        "title": "Will there be multiple valid interpretations of the user's input?",
         "isRequired": true,
         "choices": [
           {
@@ -117,21 +132,21 @@
         "name": "responseType",
         "title": "What form does the output take?",
         "isRequired": true,
-        "visibleIf": "{systemDomain}='Search' or {systemDomain}='Recommendation' or {systemDomain}='Conversational AI' or {systemDomain}='Text Prediction and Assistance' or {systemDomain}='other'",
+        "visibleIf": "{systemDomain}='search' or {systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other'",
         "choices": [
           {
             "value": "single_response",
-            "visibleIf": "{systemDomain}='Recommendation' or {systemDomain}='Conversational AI' or {systemDomain}='Text Prediction and Assistance' or {systemDomain}='other'",
+            "visibleIf": "{systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other'",
             "text": "Single response"
           },
           {
             "value": "ranked_list",
-            "visibleIf": "{systemDomain}='Search' or {systemDomain}='Conversational AI' or {systemDomain}='Text Prediction and Assistance' or {systemDomain}='other'",
+            "visibleIf": "{systemDomain}='search' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other'",
             "text": "Ranked list"
           },
           {
             "value": "action_execution",
-            "visibleIf": "{systemDomain}='Search' or {systemDomain}='Recommendation' or {systemDomain}='Conversational AI' or {systemDomain}='other'",
+            "visibleIf": "{systemDomain}='search' or {systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='other'",
             "text": "Action execution"
           }
         ]
@@ -166,7 +181,7 @@
         "name": "responseClassification",
         "title": "How many classifications are there?",
         "isRequired": true,
-        "visibleIf": "{systemDomain} = 'Classification'",
+        "visibleIf": "{systemDomain} = 'classification'",
         "choices": [
           {
             "value": "binary",

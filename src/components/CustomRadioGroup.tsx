@@ -17,14 +17,12 @@ export class CustomRadiogroup extends SurveyQuestionRadiogroup {
     const elements = this.question.visibleChoices.map(choice => {
       const contentChoice = contentQuestion.choices.find((cq: any) => cq.name === choice.value);
       return (
-        <div>
-          { contentChoice != null ? (
-            <div style={{ marginLeft: "28px", marginTop: "-15px"}}>
-              <div style={{ color: "#848b91", fontSize: "0.75rem", display: "inline" }} dangerouslySetInnerHTML={{__html: contentChoice.definition}}></div>
-              <BsFillQuestionCircleFill style={{cursor: 'pointer', marginLeft: "0.75em", marginTop: "-3px"}} onClick={() => console.log(contentChoice.examples)} />
-            </div>
-          ) : null}
-        </div>
+        contentChoice != null ? (
+          <div key={contentChoice.name + "__customradiogroup"} style={{ marginLeft: "28px", marginTop: "-15px" }}>
+            <div style={{ color: "#848b91", fontSize: "0.75rem", display: "inline" }} dangerouslySetInnerHTML={{ __html: contentChoice.definition }}></div>
+            <BsFillQuestionCircleFill style={{ cursor: 'pointer', marginLeft: "0.75em", marginTop: "-3px" }} />
+          </div>
+        ) : null
       )
 
     })

@@ -13,7 +13,7 @@
               {
                 "name": "Search",
                 "level": "info",
-                "details": "A search system is a program or feature that searches for and identifies items in a collection that correspond to keywords, phrases, or characters specified by the user."
+                "details": "A search system locates items that correspond to user-specified keywords, phrases, or characters."
               },
               {
                 "name": "Example",
@@ -38,7 +38,7 @@
               {
                 "name": "Recommendation",
                 "level": "info",
-                "details": "A recommendation system suggests content to the user that is likely to be of interest. In some cases this is done by predicting the rating or preference a user would give to an item."
+                "details": "A recommendation system makes preferred-content suggestions, sometimes by predicting the user’s rating of the content."
               },
               {
                 "name": "Example",
@@ -63,7 +63,7 @@
               {
                 "name": "Conversational AI",
                 "level": "info",
-                "details": "Conversational agents, or dialogue systems, interact with people through natural-language dialogue. Historically this is achieved by recognizing speech, classifying intents, and '<a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Slot Filling (SF) is a process for extracting values of certain types of attributes (or slots), such as car: make and model, for a given entity from a large collection of source documents\">slot filling</a>'."
+                "details": "Conversational agents interact with people through natural-language dialogue, using speech recognition, intent classification, and '<a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"slot filling, which extracts an entity's attribute values (e.g., car: make and model) from source documents,\">slot filling</a>'."
               },
               {
                 "name": "Example",
@@ -88,7 +88,7 @@
               {
                 "name": "Text Prediction and Assistance",
                 "level": "info",
-                "details": "Text prediction and writing assistants utilize machine learning to help users through various steps of the writing process, including research, grammar and tone checking, and localization."
+                "details": "Text prediction and writing assistants help with the writing process, including research, grammar, tone, and localization."
               },
               {
                 "name": "Example",
@@ -113,7 +113,7 @@
               {
                 "name": "Classification",
                 "level": "info",
-                "details": "Text or document classification refers to the process of categorizing text into organized groups by assigning predefined labels to them."
+                "details": "Text or document classification categorizes text in groups organized by predefined labels."
               },
               {
                 "name": "Example",
@@ -145,7 +145,7 @@
               {
                 "name": "Text",
                 "level": "info",
-                "details": "Any input from keystrokes or text-bearing documents can be considered text input."
+                "details": "Keystrokes or text-bearing documents can be considered text input."
               },
               {
                 "name": "Example",
@@ -191,7 +191,7 @@
               {
                 "name": "Speech",
                 "level": "info",
-                "details": "Speech input is widely used in conversational assistants, such as home automation systems or dictation and language-translation services."
+                "details": "Speech input is widely used in conversational assistants like home automation systems or language-translation services."
               },
               {
                 "name": "Example",
@@ -235,7 +235,7 @@
               {
                 "name": "Action sequence",
                 "level": "info",
-                "details": "Action sequence is a predefined <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Example events include clicking a button, opening an application, receiving an email, or responding to a notification\">event</a> or sequence of events that can be used to trigger a system's intelligent feature. An action sequence can be initiated by the user or the system."
+                "details": "Action sequence is a predefined <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Examples include clicking a button, opening an application, receiving an email, or any events that trigger a system’s intelligent feature, initiated either by user or system\">event</a>."
               },
               {
                 "name": "Example",
@@ -277,7 +277,7 @@
               {
                 "name": "Yes",
                 "level": "info",
-                "details": "Your system will not encounter any errors if it has a clear way of knowing when it should trigger."
+                "details": "Your system won’t encounter errors if it has a clear way of knowing when to trigger."
               },
               {
                 "name": "Example",
@@ -308,7 +308,7 @@
               {
                 "name": "No",
                 "level": "info",
-                "details": "Your system will have difficulty knowing when to trigger if it needs to rely on loosely defined user utterances or action sequences."
+                "details": "Your system will have difficulty knowing when to trigger if it has to rely on loosely defined user utterances or action sequences."
               },
               {
                 "name": "Example",
@@ -431,7 +431,7 @@
               {
                 "name": "Yes",
                 "level": "info",
-                "details": "Multiple interpretations of the same text, acoustic properties of the speech utterance, or action sequence can exist when there is no clear signal that helps the system disambiguate similar or identical input signals."
+                "details": "Multiple interpretations can exist when there is no clear signal to help the system disambiguate similar or identical input of text, speech utterance, or action sequence."
               },
               {
                 "name": "Example",
@@ -484,7 +484,7 @@
               {
                 "name": "No",
                 "level": "info",
-                "details": "Your system will not encounter any errors if there is only one valid interpretation of the user's input."
+                "details": "Your system won't encounter any errors if there's only one valid interpretation of the user's input."
               },
               {
                 "name": "Example",
@@ -512,7 +512,7 @@
               {
                 "name": "Single response",
                 "level": "info",
-                "details": "Your system will produce a single response if there is only one valid response available, or if there are time, screen size, or usability related constraints that allow the system to produce only one response."
+                "details": "Your system will produce a single response if only one valid response is available, or if time-, screen-, or usability-related constraints allow for only one."
               },
               {
                 "name": "Example",
@@ -568,7 +568,7 @@
               {
                 "name": "Ranked list",
                 "level": "info",
-                "details": "Your system will produce a ranked list if there are multiple valid responses available. Items in a ranked list are presented in order of items with the highest contextual relevance to the user's needs."
+                "details": "Your system will produce a ranked list in order of contextual relevance to user needs if multiple valid responses are available."
               }
             ]
           }
@@ -621,7 +621,7 @@
               {
                 "name": "Generated",
                 "level": "info",
-                "details": "Automated response generation is a software process that transforms structured data into natural language to generate new content."
+                "details": "Automated response generation transforms structured data into natural language to generate new content."
               },
               {
                 "name": "Example",
@@ -659,7 +659,7 @@
               {
                 "name": "Selected from a list",
                 "level": "info",
-                "details": "Response selection from a list of candidate responses is suited for applications that rely on content retrieved from a database with minimal or no modifications applied to the response."
+                "details": "Response selection from a list of candidate responses is suited for applications that rely on content from a database with minimal or no modifications applied to the response."
               },
               {
                 "name": "Example",

@@ -7,22 +7,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import surveyData from './data/survey.json';
 import contentData from './data/content.json';
+import { ReactQuestionFactory } from 'survey-react';
+import { CustomRadiogroup } from './components/CustomRadioGroup';
 
-// Add the definitions to the survey choice text
-// We assume there's always exactly 1 page
-const questions = surveyData.pages[0].elements;
-for (let i=0; i<questions.length; i++) {
-  const contentQuestion: any = contentData.questions.find(q => q.name === questions[i].name);
-  if (contentQuestion == null) {
-    continue;
-  }
-  for (let j=0; j<questions[i].choices.length; j++) {
-    const contentChoice = contentQuestion.choices.find((c: any) => c.name === questions[i].choices[j].value);
-    if (contentChoice != null && contentChoice.definition != null) {
-      surveyData.pages[0].elements[i].choices[j].text += " — " + contentChoice.definition;
-    }
-  }
-}
+// ReactQuestionFactory sets the type of component that will be rendered for a given
+// type of question
+ReactQuestionFactory.Instance.registerQuestion("radiogroup", (props) => {
+  return React.createElement(CustomRadiogroup, props);
+});
 
 ReactDOM.render(
   <React.StrictMode>

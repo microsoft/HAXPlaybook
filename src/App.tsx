@@ -68,7 +68,7 @@ const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
   return (
     <React.Fragment>
       <div className="row">
-        <div className="col page-column" style={{ backgroundColor: "white" }}>
+        <div className="col page-column" style={{ backgroundColor: "white", borderRight: "dotted black 2px"}}>
           <div className="container">
             <div className="row">
               <Instructions title={contentData.surveyInstructions?.title} message={contentData.surveyInstructions?.message} />

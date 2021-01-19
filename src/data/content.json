@@ -272,7 +272,7 @@
       "choices": [
         {
           "name": "yes",
-          "definition": "<p class=\"callout callout-info\">Your system will not encounter any errors if it has a clear way of <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"A delimiter is a sequence of one or more characters or events for specifying when a system should finish receiving the user's input.\">delimiting</a> the user's input.</p>",
+          "definition": "Your system will not encounter any errors if it has a clear way of <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"A delimiter is a sequence of one or more characters or events for specifying when a system should finish receiving the user's input.\">delimiting</a> the user's input.",
           "examples": [
             {
               "name": "Example",

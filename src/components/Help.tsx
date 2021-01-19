@@ -1,26 +1,40 @@
 // This component renders the help cards shown below the survey
 
-import React from 'react'
+import React, { useState } from 'react'
+import { Button, Modal } from 'react-bootstrap'
 
 interface HelpProps {
+  name: string,
+  examples: Array<any>
+  show: boolean,
+  onClose: () => void
 }
 
-const App: React.FunctionComponent<HelpProps> = ({ }) => {
-  return null;
-  /*
+const App: React.FunctionComponent<HelpProps> = ({ name, examples, show, onClose }) => {
+  const body = examples?.map(example => {
+    return (
+      <>
+        <h5>{example.name}</h5>
+        <div dangerouslySetInnerHTML={{ __html: example.details }} className="mb-3"></div>
+      </>
+    );
+  })
+
   return (
-    <React.Fragment>
-      {card.topics.map(topic => (
-        <div key={topic.id}
-          className={"card " + (topic.level === "info" ? "border-primary" : "border-warning")}
-          style={{ width: "25rem", padding: "1rem", margin: "0.5rem" }}>
-          <h4 className="card-title">{topic.name}</h4>
-          <div className="card-text" dangerouslySetInnerHTML={{ __html: topic.details }} />
-        </div>
-      ))}
-    </React.Fragment>
-  )
-  */
+    <>
+      <Modal show={show} onHide={onClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{body}</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={onClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 }
 
 export default App;

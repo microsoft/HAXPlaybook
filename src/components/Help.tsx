@@ -17,8 +17,8 @@ const App: React.FunctionComponent<HelpProps> = ({ name, examples, show, onClose
         <h5>{example.name}</h5>
         <div dangerouslySetInnerHTML={{ __html: example.details }} className="mb-3"></div>
       </>
-    );
-  })
+    )
+  });
 
   return (
     <>

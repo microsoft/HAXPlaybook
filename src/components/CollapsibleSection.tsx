@@ -14,10 +14,10 @@ const CollapsibleSection: React.FunctionComponent<CollapsibleSectionProps> = ({ 
   const numTasks = taskMap.get(category)?.map(task => task.tasks.length).reduce((prev, n) => prev + n);
   return (
     <React.Fragment>
-      <div className="scenario-section-header" onClick={() => setExpanded(!isExpanded)}>
+      <div className="scenario-bar" onClick={() => setExpanded(!isExpanded)}>
         {isExpanded ? <BsFillCaretDownFill /> : <BsFillCaretRightFill />}
-        <span style={{ marginLeft: "0.5em" }}>{category}</span>
-        <div className="circle-text circle-text-small" style={{ marginLeft: "0.75em", backgroundColor: "white" }}>
+        <span className="scenario-bar-text">{category}</span>
+        <div className="circle-text circle-text-small">
           {numTasks}
         </div>
       </div>

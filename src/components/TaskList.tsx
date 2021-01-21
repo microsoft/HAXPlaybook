@@ -20,10 +20,10 @@ const TaskList: React.FunctionComponent<TaskListProps> = ({ taskMap, title, mess
                        .reduce((prev, n) => prev + n);
   return (
     <React.Fragment>
-      <div className="my-3" style={{ display: "flex", flexDirection: "row" }}>
-        <h1>{title}</h1>
-        <div className="circle-text circle-text-large ml-3" style={{ backgroundColor: "blue", color: "white" }}>
-          <h1>{numTasks}</h1>
+      <div className="my-3 column-header" >
+        <span>{title}</span>
+        <div className="circle-text circle-text-large">
+          {numTasks}
         </div>
       </div>
       <div>

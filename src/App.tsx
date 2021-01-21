@@ -116,20 +116,20 @@ const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
   return (
     <React.Fragment>
       <div className="row">
-        <div className="col page-column" style={{ backgroundColor: "white", borderRight: "dotted black 2px"}}>
+        <div className="col left-column">
           <div className="container mb-3">
             <div className="row">
               <Instructions title={contentData.surveyInstructions?.title} message={contentData.surveyInstructions?.message} />
             </div>
+            <button onClick={handleUndo} className="btn btn-secondary mr-3">Undo</button>
+            <button onClick={handleClear} className="btn btn-secondary">Clear Answers</button>
             <div className="row my-1">
               <Survey json={surveyData}
                 onValueChanged={handleValueChanged} />
             </div>
-            <button onClick={handleUndo} className="btn btn-secondary mr-3">Undo</button>
-            <button onClick={handleClear} className="btn btn-secondary">Clear Answers</button>
           </div>
         </div>
-        <div className="col page-column">
+        <div className="col right-column">
           <div className="container">
             <TaskList taskMap={taskMap} title={contentData.scenarioInstructions?.title} message={contentData.scenarioInstructions?.message} />
           </div>

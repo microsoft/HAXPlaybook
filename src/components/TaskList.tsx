@@ -1,25 +1,22 @@
 // This component renders the list of all task cards from the survey results
 
 import React from 'react'
-import TaskCardComponent from './TaskCardComponent';
 import { TaskCard } from '../models/Types';
+import CollapsibleSection from './CollapsibleSection';
 
 interface TaskListProps {
-  taskMap: Map<string, TaskCard[]>;
+  taskMap: Map<string, TaskCard[]>
 }
 
-const App: React.FunctionComponent<TaskListProps> = ({ taskMap }) => {
+const TaskList: React.FunctionComponent<TaskListProps> = ({ taskMap }) => {
   const categories = Array.from(taskMap.keys());
   return (
-    <div>
+    <React.Fragment>
       {categories.map(category => (
-        <React.Fragment>
-          <h1 style={{marginTop: "2.5rem"}}>{category}</h1>
-          {taskMap.get(category)?.map(tc => <TaskCardComponent key={tc.id} card={tc} /> )}
-        </React.Fragment>
+        <CollapsibleSection taskMap={taskMap} category={category}/>
       ))}
-    </div>
+    </React.Fragment>
   )
 }
 
-export default App;
+export default TaskList;

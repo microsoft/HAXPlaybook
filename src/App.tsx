@@ -7,62 +7,96 @@ import { ReactSurveyModel, Survey } from 'survey-react';
 import Intro from './components/Intro';
 import TaskList from './components/TaskList';
 import Help from './components/Help';
-import SurveyCompletionMessage from './components/SurveyCompletionMessage';
 import Instructions from './components/Instructions';
-import { HelpCard, TaskCard } from './models/Types';
-import { CurrentPageChangedOptions, SurveyValueChangedOptions, SurveyCompleteOptions } from './models/SurveyCallbackTypes'
-import surveyData from './data/survey.json';
-import contentData from './data/content.json';
-import './css/survey.min.css';
+import { TaskCard } from './models/Types';
+import { SurveyValueChangedOptions, SurveyCompleteOptions } from './models/SurveyCallbackTypes'
+import TaskHeader from './components/TaskHeader';
 
-const App: React.FunctionComponent = () => {
-  const [showIntro, setShowIntro] = useState(true);
-  const [surveyComplete, setSurveyComplete] = useState(false);
-  const [instructions, setInstructions] = useState("");
-  const [category, setCategory] = useState("");
-  const [helpCard, setHelpCard] = useState(new HelpCard([]));
-  const [taskMap, setTaskMap] = useState(new Map<string, TaskCard[]>());
+interface AppProps {
+  surveyData: any,
+  contentData: any
+}
 
-  function logState() {
-    console.log("STATE: showIntro=", showIntro, " surveyComplete=", surveyComplete,
-      " instructions= ", instructions, " category=", category,
-      " helpCard=", helpCard, " tasks=", taskMap);
-  }
-  logState();
+// Captures the survey model object upon the first time handleValueChanged is called
+// Exposes some encapsulated state needed for undo functionality
+let surveyModel: ReactSurveyModel;
 
-  const handleComplete = (sender: ReactSurveyModel, options: SurveyCompleteOptions) => {
-    console.log("Complete", sender, options);
-    sender.clear();
-    setSurveyComplete(true);
-  }
-
-  const handleValueChanged = (sender: ReactSurveyModel, options: SurveyValueChangedOptions) => {
-    console.log("ValueChanged", sender, options);
-    const hc = HelpCard.fromQuestionChoice(options.question.name, options.value);
-    setHelpCard(hc);
-
-    const tc = TaskCard.fromQuestionChoice(options.question.name, options.value);
+function createTaskMap(contentData: any) {
+  const questions = surveyModel?.getAllQuestions() ?? [];
+  const taskMap = new Map<string, TaskCard[]>();
+  questions.forEach(q => {
+    const tc = TaskCard.fromQuestionChoice(q.name, q.value);
     if (tc != null) {
+      const category: any = contentData.questions.find((cq: any) => cq.name === q.name)?.category;
       let categoryTasks = taskMap.get(category);
       if (categoryTasks) {
-        const filtered = categoryTasks.filter((t: TaskCard) => t.question !== options.question.name);
+        const filtered = categoryTasks.filter((t: TaskCard) => t.question !== q.name);
         filtered.push(tc);
         categoryTasks = filtered;
       } else {
         categoryTasks = [tc];
       }
-      setTaskMap(taskMap.set(category, categoryTasks));
+      taskMap.set(category, categoryTasks);
+    }
+  });
+  return taskMap;
+}
+
+const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => {
+  const [showIntro, setShowIntro] = useState(true);
+  const [undoStack, setUndoStack] = useState(new Array<Map<string, string>>());
+
+  console.log("STATE: showIntro=", showIntro, " undo=", undoStack);
+
+  const handleValueChanged = (sender: ReactSurveyModel, options: SurveyValueChangedOptions) => {
+    console.log("ValueChanged", sender, options);
+    surveyModel = sender;
+    const questions = sender.getAllQuestions();
+    const valueMap = new Map<string, string>();
+    questions.forEach(q => {
+      if (!q.isVisible) {
+        q.clearValue();
+      }
+      valueMap.set(q.name, q.value);
+    });
+    setUndoStack([...undoStack, valueMap]);
+  }
+
+  const handleUndo = () => {
+    if (surveyModel == null) {
+      console.log("Can't undo: surveyModel is undefined");
+      return;
+    }
+
+    const questions = surveyModel.getAllQuestions();
+    questions.forEach(q => {
+      q.clearValue();
+    });
+
+    if (undoStack.length > 1) {
+      // The last thing pushed on the stack is the current state
+      // We need to pop it off first to get the old state
+      undoStack.pop();
+      const oldState = undoStack[undoStack.length - 1];
+      questions.forEach(q => {
+        q.value = oldState?.get(q.name);
+      });
+      setUndoStack([...undoStack]);
+    } else {
+      setUndoStack([]);
     }
   }
 
-  const handleCurrentPageChanged = (sender: ReactSurveyModel, options: CurrentPageChangedOptions) => {
-    console.log("CurrentPageChanged", sender, options);
-    const question = options.newCurrentPage.questions[0];
-    const metadata: any = contentData.questions.find((q: any) => q.name === question.name);
-    setInstructions(metadata.instructions);
-    setCategory(metadata.category);
-    setHelpCard(question.isValueEmpty(question.value) ?
-      new HelpCard([]) : HelpCard.fromQuestionChoice(question.name, question.value));
+  const handleClear = () => {
+    if (surveyModel == null) {
+      console.log("Can't clear: surveyModel is undefined");
+      return;
+    }
+
+    const questions = surveyModel.getAllQuestions();
+    questions.forEach(q => {
+      q.clearValue();
+    });
   }
 
   if (showIntro) {
@@ -78,35 +112,82 @@ const App: React.FunctionComponent = () => {
       );
     }
   }
-  
-  if (!surveyComplete) {
-    return (
-      <React.Fragment>
-        <div className="row">
-          <Survey json={surveyData}
-            onValueChanged={handleValueChanged}
-            onCurrentPageChanged={handleCurrentPageChanged}
-            onComplete={handleComplete} />
+
+  const taskMap = createTaskMap(contentData);
+  const instructionsHeader = contentData.surveyInstructions?.title;
+  const instructionsMsg = contentData.surveyInstructions?.message;
+  const scenarioMsg = contentData.scenarioInstructions?.message;
+
+  return (
+    <div className="container-fluid vh-100">
+        <div className="row title-bar d-flex justify-content-center">
+          HAX Playbook
         </div>
         <div className="row">
-          <Instructions message={instructions} />
+          <div className="col left-column">
+            <div className="my-3 column-header">
+              <span>{instructionsHeader}</span>
+            </div>
+          </div>
+          <div className="col right-column">
+            <TaskHeader taskMap={taskMap} title={contentData.scenarioInstructions?.title} />
+          </div>
         </div>
-        <div className="row justify-content-center mt-3">
-          <Help card={helpCard} />
+        <div className="row">
+          <div className="col left-column">
+            <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} />
+          </div>
+          <div className="col right-column">
+            <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: scenarioMsg }} />
+          </div>
         </div>
-      </React.Fragment>
-    );
-  } else {
-    return (
-      <div className="row justify-content-center">
-        <SurveyCompletionMessage onRestartClick={() => {
-          setSurveyComplete(false);
-          setShowIntro(true);
-        }} />
-        <TaskList taskMap={taskMap} />
+        <div className="row">
+          <div className="col left-column">
+            <button onClick={handleUndo} className="btn btn-secondary mr-3">Undo</button>
+            <button onClick={handleClear} className="btn btn-secondary">Clear Answers</button>
+          </div>
+          <div className="col right-column d-flex justify-content-end">
+            <button onClick={() => window.print()} className="btn btn-secondary">Download Report</button>
+          </div>
+        </div>
+        <div className="row vh-100">
+          <div className="col left-column pt-3">
+            <Survey json={surveyData} onValueChanged={handleValueChanged} />
+          </div>
+          <div className="col right-column">
+            <div className="container">
+              <TaskList taskMap={taskMap} />
+            </div>
+          </div>
+        </div>
       </div>
-    );
-  }
+  );
+
+  /*
+
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col left-column">
+          <div className="container mb-3">
+            <div className="row">
+              <Instructions title={contentData.surveyInstructions?.title} message={contentData.surveyInstructions?.message} />
+            </div>
+            <button onClick={handleUndo} className="btn btn-secondary mr-3">Undo</button>
+            <button onClick={handleClear} className="btn btn-secondary">Clear Answers</button>
+            <div className="row my-1">
+              <Survey json={surveyData}
+                onValueChanged={handleValueChanged} />
+            </div>
+          </div>
+        </div>
+        <div className="col right-column">
+          <div className="container">
+            <TaskList taskMap={taskMap} title={contentData.scenarioInstructions?.title} message={contentData.scenarioInstructions?.message} />
+          </div>
+        </div>
+      </div>
+    </div>
+    */
 }
 
 export default App;

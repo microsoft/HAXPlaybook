@@ -1,199 +1,175 @@
 {
   "showQuestionNumbers": "off",
-  "showProgressBar": "top",
+  "showProgressBar": "off",
   "goNextPageAutomatic": false,
   "showNavigationButtons": true,
   "showCompletedPage": false,
   "pages": [
-  {
-    "questions": [
-      {
-        "type": "radiogroup",
-        "name": "systemDomain",
-        "title": "Which of these systems is closest to what you are designing?",
-        "isRequired": true,
-        "hasOther": true,
-        "choices": [
-          {
-            "value": "search",
-            "text": "Search"
-          },
-          {
-            "value": "recommendation",
-            "text": "Recommendation"
-          },
-          {
-            "value": "conversational_ai",
-            "text": "Conversational AI"
-          },
-          {
-            "value": "text_prediction_and_assistance",
-            "text": "Text prediction and assistance"
-          },
-          {
-            "value": "classification",
-            "text": "Classification"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "questions": [
-      {
-        "type": "radiogroup",
-        "name": "inputModality",
-        "title": "What is the primary input modality for your {systemDomain} system?",
-        "isRequired": true,
-        "choices": [
-          {
-            "value": "text",
-            "visibleIf": "{systemDomain} notempty",
-            "text": "Text"
-          },
-          {
-            "value": "speech",
-            "visibleIf": "{systemDomain} = 'search' or {systemDomain} = 'recommendation' or {systemDomain} = 'conversational_ai' or {systemDomain} = 'other'",
-            "text": "Speech"
-          },
-          {
-            "value": "action_sequence",
-            "visibleIf": "{systemDomain} = 'recommendation' or {systemDomain} = 'classification' or {systemDomain} = 'other'",
-            "text": "Action sequence"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "questions": [
-      {
-        "type": "radiogroup",
-        "name": "trigger",
-        "title": "Will your {systemDomain} system have a clear way of knowing when it should trigger?",
-        "isRequired": true,
-        "choices": [
-          {
-            "value": "yes",
-            "text": "Yes, it will have a clear way of knowing when to trigger"
-          },
-          {
-            "value": "no",
-            "text": "No, it will not have a clear way of knowing when to trigger"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "questions": [
-      {
-        "type": "radiogroup",
-        "name": "delimiter",
-        "title": "When activated, will your {systemDomain} system have a clear way of delimiting the user's input?",
-        "isRequired": true,
-        "choices": [
-          {
-            "value": "yes",
-            "text": "Yes, it will have a clear way of delimiting the user's input"
-          },
-          {
-            "value": "no",
-            "text": "No, it will not have a clear way of delimiting the user's input"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "questions": [
-      {
-        "type": "radiogroup",
-        "name": "interpretation",
-        "title": "Will there be multiple valid interpretations of the user's input?",
-        "isRequired": true,
-        "choices": [
-          {
-            "value": "yes",
-            "text": "Yes, there will be multiple valid interpretations of the user's input"
-          },
-          {
-            "value": "no",
-            "text": "No, there is only one valid interpretation of the user's input"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "questions": [
-      {
-        "type": "radiogroup",
-        "name": "responseType",
-        "title": "What form does the output take?",
-        "isRequired": true,
-        "visibleIf": "{systemDomain}='search' or {systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other'",
-        "choices": [
-          {
-            "value": "single_response",
-            "visibleIf": "{systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other'",
-            "text": "Single response"
-          },
-          {
-            "value": "ranked_list",
-            "visibleIf": "{systemDomain}='search' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other'",
-            "text": "Ranked list"
-          },
-          {
-            "value": "action_execution",
-            "visibleIf": "{systemDomain}='search' or {systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='other'",
-            "text": "Action execution"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "questions": [
-      {
-        "type": "radiogroup",
-        "name": "responseMechanism",
-        "title": "Is the {responseType} generated or selected from an existing set?",
-        "isRequired": true,
-        "visibleIf": "{responseType} = 'ranked_list'",
-        "choices": [
-          {
-            "value": "generated",
-            "text": "Generated"
-          },
-          {
-            "value": "selected",
-            "text": "Selected from an existing set"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "questions": [
-      {
-        "type": "radiogroup",
-        "name": "responseClassification",
-        "title": "How many classifications are there?",
-        "isRequired": true,
-        "visibleIf": "{systemDomain} = 'classification'",
-        "choices": [
-          {
-            "value": "binary",
-            "text": "Binary classification"
-          },
-          {
-            "value": "multiple",
-            "text": "Multi-class classification"
-          }
-        ]
-      }
-    ]
-  }
-]
+    {
+      "elements": [
+        {
+          "type": "radiogroup",
+          "name": "systemDomain",
+          "title": "Which of these systems is closest to what you are designing?",
+          "isRequired": true,
+          "hasOther": true,
+          "choices": [
+            {
+              "value": "search",
+              "text": "Search"
+            },
+            {
+              "value": "recommendation",
+              "text": "Recommendation"
+            },
+            {
+              "value": "conversational_ai",
+              "text": "Conversational AI"
+            },
+            {
+              "value": "text_prediction_and_assistance",
+              "text": "Text prediction and assistance"
+            },
+            {
+              "value": "classification",
+              "text": "Classification"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "inputModality",
+          "title": "What is the primary input modality for your {systemDomain} system?",
+          "visibleIf": "{systemDomain} notempty",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "text",
+              "visibleIf": "{systemDomain} notempty",
+              "text": "Text"
+            },
+            {
+              "value": "speech",
+              "visibleIf": "{systemDomain} = 'search' or {systemDomain} = 'recommendation' or {systemDomain} = 'conversational_ai' or {systemDomain} = 'other'",
+              "text": "Speech"
+            },
+            {
+              "value": "action_sequence",
+              "visibleIf": "{systemDomain} = 'recommendation' or {systemDomain} = 'classification' or {systemDomain} = 'other'",
+              "text": "Action sequence"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "trigger",
+          "title": "Will your {systemDomain} system have a clear way of knowing when it should trigger?",
+          "visibleIf": "{inputModality} notempty",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "yes",
+              "text": "Yes, it will have a clear way of knowing when to trigger"
+            },
+            {
+              "value": "no",
+              "text": "No, it will not have a clear way of knowing when to trigger"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "delimiter",
+          "title": "When activated, will your {systemDomain} system have a clear way of delimiting the user's input?",
+          "visibleIf": "{trigger} notempty",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "yes",
+              "text": "Yes, it will have a clear way of delimiting the user's input"
+            },
+            {
+              "value": "no",
+              "text": "No, it will not have a clear way of delimiting the user's input"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "interpretation",
+          "title": "Will there be multiple valid interpretations of the user's input?",
+          "visibleIf": "{delimiter} notempty",
+          "isRequired": true,
+          "choices": [
+            {
+              "value": "yes",
+              "text": "Yes, there will be multiple valid interpretations of the user's input"
+            },
+            {
+              "value": "no",
+              "text": "No, there is only one valid interpretation of the user's input"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "responseType",
+          "title": "What form does the output take?",
+          "isRequired": true,
+          "visibleIf": "{interpretation} notempty and ({systemDomain}='search' or {systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other')",
+          "choices": [
+            {
+              "value": "single_response",
+              "visibleIf": "{systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other'",
+              "text": "Single response"
+            },
+            {
+              "value": "ranked_list",
+              "visibleIf": "{systemDomain}='search' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other'",
+              "text": "Ranked list"
+            },
+            {
+              "value": "action_execution",
+              "visibleIf": "{systemDomain}='search' or {systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='other'",
+              "text": "Action execution"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "responseMechanism",
+          "title": "Is the {responseType} generated or selected from an existing set?",
+          "isRequired": true,
+          "visibleIf": "{responseType} = 'ranked_list'",
+          "choices": [
+            {
+              "value": "generated",
+              "text": "Generated"
+            },
+            {
+              "value": "selected",
+              "text": "Selected from an existing set"
+            }
+          ]
+        },
+        {
+          "type": "radiogroup",
+          "name": "responseClassification",
+          "title": "How many classifications are there?",
+          "isRequired": true,
+          "visibleIf": "{interpretation} notempty and {systemDomain} = 'classification'",
+          "choices": [
+            {
+              "value": "binary",
+              "text": "Binary classification"
+            },
+            {
+              "value": "multiple",
+              "text": "Multi-class classification"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

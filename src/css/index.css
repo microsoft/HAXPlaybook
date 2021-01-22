@@ -11,3 +11,99 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.title-bar {
+  background-color: black;
+  color: white;
+  font-size: 2.5rem;
+}
+
+.column-header {
+  display: flex;
+  flex-direction: row;
+  font-size: 2.5rem;
+}
+
+.circle-text {
+  border-radius: 50%;
+  border-color: black;
+  border-style: groove;
+  border-width: 2px;
+  text-align: center;
+}
+
+.circle-text-large {
+  width: 1.8em;
+  height: 1.8em;
+  line-height: 1.55em;
+  font-size: 0.75em;
+  margin-left: auto;
+  background-color: #004578;
+  color: white;
+}
+
+.circle-text-small {
+  line-height: 1.3em;
+  height: 1.5em;
+  width: 1.5em;
+  background-color: white;
+  margin-left: auto;
+}
+
+.scenario-bar {
+  display: flex;
+  align-items: center;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  background-color: #dddddd;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.scenario-bar-text {
+  margin-left: 0.25em;
+}
+
+.light-text {
+  font-weight: 200;
+}
+
+.normal-text {
+  font-weight: normal;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.left-column {
+  background-color: #004578;
+  color: white;
+}
+
+.sv_complete_btn {
+  display: none
+}
+
+.sv_main {
+  font-size: 1rem !important;
+}
+
+.sv_main .sv_body {
+  background-color: #004578 !important;
+  border-top: 1px solid white !important;
+}
+
+.sv_main .sv_container {
+  color: white !important;
+}
+
+.sv_main .sv_p_root > .sv_row:nth-child(odd) {
+  background-color: #004478 !important;
+}
+
+.sv_main .sv_p_root > .sv_row:nth-child(even) {
+  background-color: #004578 !important;
+}

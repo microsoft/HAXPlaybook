@@ -18,9 +18,7 @@ ReactQuestionFactory.Instance.registerQuestion("radiogroup", (props) => {
 
 ReactDOM.render(
   <React.StrictMode>
-    <div className="container-fluid">
-      <App surveyData={surveyData} contentData={contentData} />
-    </div>
+    <App surveyData={surveyData} contentData={contentData} />
   </React.StrictMode>,
   document.getElementById('root')
 );

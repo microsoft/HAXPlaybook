@@ -10,6 +10,7 @@ import Help from './components/Help';
 import Instructions from './components/Instructions';
 import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions, SurveyCompleteOptions } from './models/SurveyCallbackTypes'
+import TaskHeader from './components/TaskHeader';
 
 interface AppProps {
   surveyData: any,
@@ -41,10 +42,9 @@ function createTaskMap(contentData: any) {
   return taskMap;
 }
 
-const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
+const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => {
   const [showIntro, setShowIntro] = useState(true);
   const [undoStack, setUndoStack] = useState(new Array<Map<string, string>>());
-  const taskMap = createTaskMap(contentData);
 
   console.log("STATE: showIntro=", showIntro, " undo=", undoStack);
 
@@ -56,7 +56,7 @@ const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
     questions.forEach(q => {
       if (!q.isVisible) {
         q.clearValue();
-      } 
+      }
       valueMap.set(q.name, q.value);
     });
     setUndoStack([...undoStack, valueMap]);
@@ -77,7 +77,7 @@ const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
       // The last thing pushed on the stack is the current state
       // We need to pop it off first to get the old state
       undoStack.pop();
-      const oldState = undoStack[undoStack.length-1];
+      const oldState = undoStack[undoStack.length - 1];
       questions.forEach(q => {
         q.value = oldState?.get(q.name);
       });
@@ -92,7 +92,7 @@ const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
       console.log("Can't clear: surveyModel is undefined");
       return;
     }
-    
+
     const questions = surveyModel.getAllQuestions();
     questions.forEach(q => {
       q.clearValue();
@@ -113,8 +113,59 @@ const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
     }
   }
 
+  const taskMap = createTaskMap(contentData);
+  const instructionsHeader = contentData.surveyInstructions?.title;
+  const instructionsMsg = contentData.surveyInstructions?.message;
+  const scenarioMsg = contentData.scenarioInstructions?.message;
+
   return (
-    <React.Fragment>
+    <div className="container-fluid vh-100">
+        <div className="row title-bar d-flex justify-content-center">
+          HAX Playbook
+        </div>
+        <div className="row">
+          <div className="col left-column">
+            <div className="my-3 column-header">
+              <span>{instructionsHeader}</span>
+            </div>
+          </div>
+          <div className="col right-column">
+            <TaskHeader taskMap={taskMap} title={contentData.scenarioInstructions?.title} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col left-column">
+            <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} />
+          </div>
+          <div className="col right-column">
+            <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: scenarioMsg }} />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col left-column">
+            <button onClick={handleUndo} className="btn btn-secondary mr-3">Undo</button>
+            <button onClick={handleClear} className="btn btn-secondary">Clear Answers</button>
+          </div>
+          <div className="col right-column d-flex justify-content-end">
+            <button onClick={() => window.print()} className="btn btn-secondary">Download Report</button>
+          </div>
+        </div>
+        <div className="row vh-100">
+          <div className="col left-column pt-3">
+            <Survey json={surveyData} onValueChanged={handleValueChanged} />
+          </div>
+          <div className="col right-column">
+            <div className="container">
+              <TaskList taskMap={taskMap} />
+            </div>
+          </div>
+        </div>
+      </div>
+  );
+
+  /*
+
+    <div className="container-fluid">
       <div className="row">
         <div className="col left-column">
           <div className="container mb-3">
@@ -135,9 +186,8 @@ const App: React.FunctionComponent<AppProps> = ({surveyData, contentData}) => {
           </div>
         </div>
       </div>
-    </React.Fragment>
-  );
-
+    </div>
+    */
 }
 
 export default App;

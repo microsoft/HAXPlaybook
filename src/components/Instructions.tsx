@@ -15,10 +15,6 @@ const Instructions: React.FunctionComponent<InstructionsProps> = ({ title, messa
 
   return (
     <>
-      <div className="my-3 column-header">
-        <span>{title}</span>
-      </div>
-      <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: message }} />
     </>
   );
 }

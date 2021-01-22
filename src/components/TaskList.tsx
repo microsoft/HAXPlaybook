@@ -5,33 +5,13 @@ import { TaskCard } from '../models/Types';
 import CollapsibleSection from './CollapsibleSection';
 
 interface TaskListProps {
-  taskMap: Map<string, TaskCard[]>,
-  title: string,
-  message: string
+  taskMap: Map<string, TaskCard[]>
 }
 
-const TaskList: React.FunctionComponent<TaskListProps> = ({ taskMap, title, message }) => {
+const TaskList: React.FunctionComponent<TaskListProps> = ({ taskMap }) => {
   const categories = Array.from(taskMap.keys());
-  const numTasks = categories.length === 0 ? 0 :
-                     categories.map(category => taskMap.get(category) as TaskCard[])
-                       .flat()
-                       .map(card => card.tasks)
-                       .map(tasks => tasks.length)
-                       .reduce((prev, n) => prev + n);
   return (
     <React.Fragment>
-      <div className="my-3 column-header" >
-        <span>{title}</span>
-        <div className="circle-text circle-text-large">
-          {numTasks}
-        </div>
-      </div>
-      <div>
-        {message}
-      </div>
-      <div className="row mt-2 justify-content-end">
-        <button onClick={() => window.print()} className="btn btn-primary">Download Report</button>
-      </div>
       {categories.map(category => (
         <CollapsibleSection taskMap={taskMap} category={category}/>
       ))}

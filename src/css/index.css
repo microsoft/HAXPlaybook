@@ -12,6 +12,12 @@ code {
     monospace;
 }
 
+.title-bar {
+  background-color: black;
+  color: white;
+  font-size: 2.5rem;
+}
+
 .column-header {
   display: flex;
   flex-direction: row;
@@ -47,8 +53,6 @@ code {
 .scenario-bar {
   display: flex;
   align-items: center;
-  margin-top: 1em;
-  margin-bottom: 1em;
   padding-top: 0.3em;
   padding-bottom: 0.3em;
   padding-left: 0.5em;

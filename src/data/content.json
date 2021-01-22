@@ -182,8 +182,8 @@
         },
         {
           "name": "action_sequence",
-          "definiiton": "Action sequence is a predefined <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Example events include clicking a button, opening an application, receiving an email, or responding to a notification\">event</a> or sequence of events that can be used to trigger a system's intelligent feature. An action sequence can be initiated by the user or the system.",
-          "helpCard": [
+          "definition": "Action sequence is a predefined <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Example events include clicking a button, opening an application, receiving an email, or responding to a notification\">event</a> or sequence of events that can be used to trigger a system's intelligent feature. An action sequence can be initiated by the user or the system.",
+          "examples": [
             {
               "name": "Example",
               "details": "<a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Example playlist generators include YouTube, Netflix, or Spotify\">Playlist generators</a> rely on content that the user is currently playing or a history of accessed content to recommend new content that matches their preference."

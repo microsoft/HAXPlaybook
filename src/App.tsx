@@ -9,6 +9,7 @@ import TaskList from './components/TaskList';
 import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions, SurveyCompleteOptions } from './models/SurveyCallbackTypes'
 import TaskHeader from './components/TaskHeader';
+import { BsArrowCounterclockwise } from 'react-icons/bs';
 
 interface AppProps {
   surveyData: any,
@@ -115,20 +116,33 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   const instructionsHeader = contentData.surveyInstructions?.title;
   const instructionsMsg = contentData.surveyInstructions?.message;
   const scenarioMsg = contentData.scenarioInstructions?.message;
+  const categories = Array.from(taskMap.keys());
+  const numTasks = categories.length === 0 ? 0 :
+                     categories.map(category => taskMap.get(category) as TaskCard[])
+                       .flat()
+                       .map(card => card.tasks)
+                       .map(tasks => tasks.length)
+                       .reduce((prev, n) => prev + n);
 
   return (
-    <div className="container-fluid vh-100">
-        <div className="row title-bar d-flex justify-content-center">
-          HAX Playbook
+      <div className="container-fluid">
+        <div className="row title-bar">
+          <span>HAX Playbook</span>
+          <div className="title-circle-container">
+            <div className="circle-text circle-text-large">
+              {numTasks}
+            </div>
+            <a onClick={handleUndo} className="circle-text circle-text-large undo-button"><BsArrowCounterclockwise /></a>
+          </div>
         </div>
-        <div className="row">
+        <div className="row" style={{marginTop: "3rem"}}>
           <div className="col-6 left-column">
             <div className="my-3 column-header">
               <span>{instructionsHeader}</span>
             </div>
           </div>
           <div className="col-6 right-column">
-            <TaskHeader taskMap={taskMap} title={contentData.scenarioInstructions?.title} />
+            <TaskHeader title={contentData.scenarioInstructions?.title} />
           </div>
         </div>
         <div className="row">
@@ -141,7 +155,6 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         </div>
         <div className="row">
           <div className="col-6 left-column">
-            <button onClick={handleUndo} className="blue-button mr-3">Undo</button>
             <button onClick={handleClear} className="blue-button">Start Over</button>
           </div>
           <div className="col-6 right-column d-flex justify-content-end">
@@ -160,32 +173,6 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         </div>
       </div>
   );
-
-  /*
-
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col left-column">
-          <div className="container mb-3">
-            <div className="row">
-              <Instructions title={contentData.surveyInstructions?.title} message={contentData.surveyInstructions?.message} />
-            </div>
-            <button onClick={handleUndo} className="btn btn-secondary mr-3">Undo</button>
-            <button onClick={handleClear} className="btn btn-secondary">Clear Answers</button>
-            <div className="row my-1">
-              <Survey json={surveyData}
-                onValueChanged={handleValueChanged} />
-            </div>
-          </div>
-        </div>
-        <div className="col right-column">
-          <div className="container">
-            <TaskList taskMap={taskMap} title={contentData.scenarioInstructions?.title} message={contentData.scenarioInstructions?.message} />
-          </div>
-        </div>
-      </div>
-    </div>
-    */
 }
 
 export default App;

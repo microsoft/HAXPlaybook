@@ -11,8 +11,6 @@
           "type": "radiogroup",
           "name": "systemDomain",
           "title": "Which of these systems is closest to what you are designing?",
-          "isRequired": true,
-          "hasOther": true,
           "choices": [
             {
               "value": "search",
@@ -41,7 +39,6 @@
           "name": "inputModality",
           "title": "What is the primary input modality for your {systemDomain} system?",
           "visibleIf": "{systemDomain} notempty",
-          "isRequired": true,
           "choices": [
             {
               "value": "text",
@@ -65,7 +62,6 @@
           "name": "trigger",
           "title": "Will your {systemDomain} system have a clear way of knowing when it should trigger?",
           "visibleIf": "{inputModality} notempty",
-          "isRequired": true,
           "choices": [
             {
               "value": "yes",
@@ -82,7 +78,6 @@
           "name": "delimiter",
           "title": "When activated, will your {systemDomain} system have a clear way of delimiting the user's input?",
           "visibleIf": "{trigger} notempty",
-          "isRequired": true,
           "choices": [
             {
               "value": "yes",
@@ -99,7 +94,6 @@
           "name": "interpretation",
           "title": "Will there be multiple valid interpretations of the user's input?",
           "visibleIf": "{delimiter} notempty",
-          "isRequired": true,
           "choices": [
             {
               "value": "yes",
@@ -115,7 +109,6 @@
           "type": "radiogroup",
           "name": "responseType",
           "title": "What form does the output take?",
-          "isRequired": true,
           "visibleIf": "{interpretation} notempty and ({systemDomain}='search' or {systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other')",
           "choices": [
             {
@@ -139,7 +132,6 @@
           "type": "radiogroup",
           "name": "responseMechanism",
           "title": "Is the {responseType} generated or selected from an existing set?",
-          "isRequired": true,
           "visibleIf": "{responseType} = 'ranked_list'",
           "choices": [
             {
@@ -156,7 +148,6 @@
           "type": "radiogroup",
           "name": "responseClassification",
           "title": "How many classifications are there?",
-          "isRequired": true,
           "visibleIf": "{interpretation} notempty and {systemDomain} = 'classification'",
           "choices": [
             {

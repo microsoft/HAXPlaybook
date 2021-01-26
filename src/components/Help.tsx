@@ -24,7 +24,7 @@ const App: React.FunctionComponent<HelpProps> = ({ name, examples, show, onClose
     <>
       <Modal show={show} onHide={onClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{name} Examples</Modal.Title>
+          <Modal.Title>{name} examples</Modal.Title>
         </Modal.Header>
         <Modal.Body>{body}</Modal.Body>
         <Modal.Footer>

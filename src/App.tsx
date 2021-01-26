@@ -6,8 +6,6 @@ import React, { useState } from 'react';
 import { ReactSurveyModel, Survey } from 'survey-react';
 import Intro from './components/Intro';
 import TaskList from './components/TaskList';
-import Help from './components/Help';
-import Instructions from './components/Instructions';
 import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions, SurveyCompleteOptions } from './models/SurveyCallbackTypes'
 import TaskHeader from './components/TaskHeader';
@@ -124,37 +122,37 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           HAX Playbook
         </div>
         <div className="row">
-          <div className="col left-column">
+          <div className="col-6 left-column">
             <div className="my-3 column-header">
               <span>{instructionsHeader}</span>
             </div>
           </div>
-          <div className="col right-column">
+          <div className="col-6 right-column">
             <TaskHeader taskMap={taskMap} title={contentData.scenarioInstructions?.title} />
           </div>
         </div>
         <div className="row">
-          <div className="col left-column">
+          <div className="col-6 left-column">
             <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} />
           </div>
-          <div className="col right-column">
+          <div className="col-6 right-column">
             <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: scenarioMsg }} />
           </div>
         </div>
         <div className="row">
-          <div className="col left-column">
-            <button onClick={handleUndo} className="btn btn-secondary mr-3">Undo</button>
-            <button onClick={handleClear} className="btn btn-secondary">Clear Answers</button>
+          <div className="col-6 left-column">
+            <button onClick={handleUndo} className="blue-button mr-3">Undo</button>
+            <button onClick={handleClear} className="blue-button">Start Over</button>
           </div>
-          <div className="col right-column d-flex justify-content-end">
-            <button onClick={() => window.print()} className="btn btn-secondary">Download Report</button>
+          <div className="col-6 right-column d-flex justify-content-end">
+            <button onClick={() => window.print()} className="blue-button">Download Report</button>
           </div>
         </div>
         <div className="row vh-100">
-          <div className="col left-column pt-3">
+          <div className="col-6 left-column pt-3">
             <Survey json={surveyData} onValueChanged={handleValueChanged} />
           </div>
-          <div className="col right-column">
+          <div className="col-6 right-column">
             <div className="container">
               <TaskList taskMap={taskMap} />
             </div>

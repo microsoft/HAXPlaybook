@@ -24,11 +24,11 @@ const App: React.FunctionComponent<HelpProps> = ({ name, examples, show, onClose
     <>
       <Modal show={show} onHide={onClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{name}</Modal.Title>
+          <Modal.Title>{name} Examples</Modal.Title>
         </Modal.Header>
         <Modal.Body>{body}</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={onClose}>
+          <Button variant="primary" onClick={onClose}>
             Close
           </Button>
         </Modal.Footer>

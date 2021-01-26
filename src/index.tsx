@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './css/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/survey.min.css';
+import './css/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import surveyData from './data/survey.json';

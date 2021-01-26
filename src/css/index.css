@@ -12,8 +12,40 @@ code {
     monospace;
 }
 
+a {
+  color: #00ECF2;
+}
+
+.modal-body a {
+  color: #007bff;
+}
+
+a:hover, a:visited, a:active {
+  text-decoration: underline;
+}
+
+.blue-button {
+  background-color: #01395E;
+  border-radius: 5px;
+  color: #00ECF2;
+  border: solid #00ECF2 1px;
+  padding: 0.25em 1.2em;
+  transition-duration: 0.3s;
+}
+
+.blue-button:hover {
+  background-color: #00ECF2;
+  color: #01395E;
+}
+
+.blue-button:active, .blue-button:focus {
+  background-color: #00B8BC;
+  color: #01395E;
+  outline: none;
+}
+
 .title-bar {
-  background-color: black;
+  background-color: #001B2E;
   color: white;
   font-size: 2.5rem;
 }
@@ -26,19 +58,17 @@ code {
 
 .circle-text {
   border-radius: 50%;
-  border-color: black;
-  border-style: groove;
-  border-width: 2px;
   text-align: center;
 }
 
 .circle-text-large {
   width: 1.8em;
   height: 1.8em;
-  line-height: 1.55em;
+  line-height: 1.75em;
   font-size: 0.75em;
   margin-left: auto;
-  background-color: #004578;
+  flex-shrink: 0;
+  background-color: #01395E;
   color: white;
 }
 
@@ -46,6 +76,7 @@ code {
   line-height: 1.3em;
   height: 1.5em;
   width: 1.5em;
+  border: solid black 1px;
   background-color: white;
   margin-left: auto;
 }
@@ -79,7 +110,7 @@ code {
 }
 
 .left-column {
-  background-color: #004578;
+  background-color: #01395E;
   color: white;
 }
 
@@ -92,7 +123,7 @@ code {
 }
 
 .sv_main .sv_body {
-  background-color: #004578 !important;
+  background-color: #01395E !important;
   border-top: 1px solid white !important;
 }
 
@@ -101,9 +132,13 @@ code {
 }
 
 .sv_main .sv_p_root > .sv_row:nth-child(odd) {
-  background-color: #004478 !important;
+  background-color:#01395E !important;
 }
 
 .sv_main .sv_p_root > .sv_row:nth-child(even) {
-  background-color: #004578 !important;
+  background-color: #01395E !important;
+}
+
+.sv_main .sv_container .sv_body .sv_p_root fieldset.sv_qcbc .light-text {
+  line-height: 1em;
 }

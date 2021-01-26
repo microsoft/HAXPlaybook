@@ -12,10 +12,10 @@ const RadioDefinition: React.FunctionComponent<RadioDefinitionProps> = ({ name, 
   const [showHelp, setShowHelp] = useState(false);
 
   return (
-    <div style={{ marginLeft: "calc(1.75em + 3px)", marginTop: "-15px" }}>
-      <div className="light-text" style={{display: "inline", fontSize: "0.85em", marginRight: "0.75em"}} dangerouslySetInnerHTML={{ __html: definition }}></div>
+    <div style={{ marginLeft: "calc(1.75em + 3px)", marginTop: "-0.8em", lineHeight: "1.4em" }}>
+      <div className="light-text" style={{ display: "inline", fontSize: "0.85em", marginRight: "0.75em" }} dangerouslySetInnerHTML={{ __html: definition }}></div>
       <Help name={name} examples={examples} show={showHelp} onClose={() => setShowHelp(false)} />
-      <BsFillQuestionCircleFill style={{ cursor: 'pointer', marginTop: "-3px" }} onClick={() => setShowHelp(true)} />
+      <BsFillQuestionCircleFill color="#00ECF2" style={{ cursor: 'pointer', marginTop: "-3px" }} onClick={() => setShowHelp(true)} />
     </div>);
 }
 

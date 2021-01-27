@@ -11,11 +11,12 @@ interface HelpProps {
 }
 
 const App: React.FunctionComponent<HelpProps> = ({ name, examples, show, onClose }) => {
-  const body = examples?.map(example => {
+  const body = examples?.map((example, i) => {
     return (
       <>
         <h5>{example.name}</h5>
-        <div dangerouslySetInnerHTML={{ __html: example.details }} className="mb-3"></div>
+        <div dangerouslySetInnerHTML={{ __html: example.details }}></div>
+        {i < examples.length-1 ? (<hr style={{ width: "90%", marginTop: "1.5em", marginBottom: "1.5em" }}/>) : null}
       </>
     )
   });
@@ -28,9 +29,9 @@ const App: React.FunctionComponent<HelpProps> = ({ name, examples, show, onClose
         </Modal.Header>
         <Modal.Body>{body}</Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={onClose}>
+          <button className="blue-button" onClick={onClose}>
             Close
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </>

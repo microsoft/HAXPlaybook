@@ -129,10 +129,10 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         <div className="row title-bar">
           <span>HAX Playbook</span>
           <div className="title-circle-container">
+            <button onClick={handleUndo} disabled={undoStack.length === 0} className="circle-text circle-text-large undo-button"><BsArrowCounterclockwise /></button>
             <div className="circle-text circle-text-large">
               {numTasks}
             </div>
-            <button onClick={handleUndo} disabled={undoStack.length === 0} className="circle-text circle-text-large undo-button"><BsArrowCounterclockwise /></button>
           </div>
         </div>
         <div className="row" style={{marginTop: "3rem"}}>
@@ -155,10 +155,10 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         </div>
         <div className="row">
           <div className="col-6 left-column">
-            <button onClick={handleClear} className="blue-button">Start Over</button>
+            <button onClick={handleClear} className="blue-button">Start over</button>
           </div>
           <div className="col-6 right-column d-flex justify-content-end">
-            <button onClick={() => window.print()} className="blue-button">Download Report</button>
+            <button onClick={() => window.print()} className="blue-button">Download report</button>
           </div>
         </div>
         <div className="row vh-100">

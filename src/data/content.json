@@ -229,7 +229,7 @@
             }
           ],
           "taskCard": {
-            "message": "Your system will have a clear way of knowing when to <b>trigger</b>.",
+            "message": "",
             "tasks": []
           }
         },
@@ -281,7 +281,7 @@
             }
           ],
           "taskCard": {
-            "message": "<p>Your system will have a clear way of <b>delimiting</b> the user's input.</p>",
+            "message": "",
             "tasks": []
           }
         },
@@ -383,7 +383,7 @@
             }
           ],
           "taskCard": {
-            "message": "<p>Your system expects only <b>one valid interpretation</b> of the input.</p>",
+            "message": "",
             "tasks": []
           }
         }

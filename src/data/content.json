@@ -1,11 +1,11 @@
 {
   "farewell": "<p><b>Thank you for using the HAX Playbook!</b> You may access the live HAX Playbook Report anytime.</p> <p>You may also return to the HAX Playbook questionnaire to explore and revise your options. When you are done, you may download a pdf version of the latest report.</p>",
   "surveyInstructions": {
-    "title": "DESCRIBE YOUR AI FEATURE",
+    "title": "Describe your AI feature",
     "message": ""
   },
   "scenarioInstructions": {
-    "title": "RECOMMENDED SCENARIOS TO TEST",
+    "title": "Test these scenarios",
     "message": ""
   },
   "questions": [

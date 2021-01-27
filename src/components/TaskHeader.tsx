@@ -1,5 +1,4 @@
 import React from 'react'
-import { TaskCard } from '../models/Types';
 
 interface TaskHeaderProps {
   title: string,

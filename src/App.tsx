@@ -7,7 +7,7 @@ import { ReactSurveyModel, Survey } from 'survey-react';
 import Intro from './components/Intro';
 import TaskList from './components/TaskList';
 import { TaskCard } from './models/Types';
-import { SurveyValueChangedOptions, SurveyCompleteOptions } from './models/SurveyCallbackTypes'
+import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes'
 import TaskHeader from './components/TaskHeader';
 import { BsArrowCounterclockwise } from 'react-icons/bs';
 
@@ -115,7 +115,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   const taskMap = createTaskMap(contentData);
   const instructionsHeader = contentData.surveyInstructions?.title;
   const instructionsMsg = contentData.surveyInstructions?.message;
-  const scenarioMsg = contentData.scenarioInstructions?.message;
+  const scenarioMsg = contentData.taskInstructions?.message;
   const categories = Array.from(taskMap.keys());
   const numTasks = categories.length === 0 ? 0 :
                      categories.map(category => taskMap.get(category) as TaskCard[])
@@ -132,7 +132,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <div className="circle-text circle-text-large">
               {numTasks}
             </div>
-            <a onClick={handleUndo} className="circle-text circle-text-large undo-button"><BsArrowCounterclockwise /></a>
+            <button onClick={handleUndo} disabled={undoStack.length === 0} className="circle-text circle-text-large undo-button"><BsArrowCounterclockwise /></button>
           </div>
         </div>
         <div className="row" style={{marginTop: "3rem"}}>
@@ -142,7 +142,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             </div>
           </div>
           <div className="col-6 right-column">
-            <TaskHeader title={contentData.scenarioInstructions?.title} />
+            <TaskHeader title={contentData.taskInstructions?.title} />
           </div>
         </div>
         <div className="row">

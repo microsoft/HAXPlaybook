@@ -29,18 +29,26 @@ as instructed below.
 The survey is defined in `src/data/survey.json`. SurveyJS is the library used to render
 the survey. To create your own survey, use the [survey creator](https://surveyjs.io/create-survey) on the SurveyJS website.
 
-To make sure your survey is supported, please adhere to the following guidelines:
-- Only include 1 question per page.
-- Only use the radio group, dropdown, and boolean survey components.
-- Specify a `value name` for each question. You can specify it in the `Data` section of the `Properties` toolbar on the right side of the survey builder.
-
 To export the survey you've created, click on the `JSON Editor` tab and copy the contents, then paste into `src/data/survey.json`. 
+
+### Survey guidelines
+To make sure your survey is supported, please adhere to the following guidelines:
+- Only use the radio group, dropdown, and boolean survey components.
+- Specify a `name` for each question. A default name like `question1` will be provided automatically in the SurveyJS builder. It's a good idea to use a more descriptive name to make the generated `content.json` file more readable.
+
+### How to create a cascading survey
+The survey included with the HAX Playbook has a cascading question effect, causing new questions appear when the user selects an answer.
+Cascading questions are implemented by configuring the visibility rules for questions in the survey.
+The visibility rules can be configured in the SurveyJS builder or in the JSON file.
+To configure visibility in the SurveyJS builder, select the question to modify, then select the `Visible if` rule in the `Logic` section of the `Properties` toolbar.
+A cascading question effect is implemented by using the rule `{previous_question_name} is not empty`.
+This rule effectively says, "if an answer has been selected for the previous question, then show this question."
+
 
 ## Textual Content
 
 All of the content outside of the survey itself is defined in `src/data/content.json`. This content is used to enrich the user experience
-by providing an introduction, instructions for each survey question, contextual help for each choice, results for each choice, and a
-farewell message. HTML is supported inside of each component.
+by providing an introduction, instructions for each survey question, contextual help for each choice, and tasks for each choice. HTML is supported inside of each component.
 
 ### Generating a starter file
 A starter content.json file can be generated from a survey.json file. The starter file will contain a skeleton of the data with empty strings
@@ -61,29 +69,31 @@ If you can't run node locally, there is also an API available. Send your `survey
 ### Explanation of properties in content.json
 
 #### Top-level properties
-- introduction: The message displayed before the survey begins.
-- farewell: The message displayed when the survey is finished.
+- introduction: The message displayed before the survey begins. This is optional.
+- surveyInstructions: The message to display above the survey. This property has a `title` and a `message`.
+- taskInstructions: The message to display above the list of tasks. This property also has a `title` and a `message`.
 
 #### Question properties
-- instructions: Instructions for the question.
-- category: The category for the question. Used to consolidate results at the end of the survey.
+- name: The name of the question. Must match the question name in `survey.json`.
+- category: The category for the question. Tasks will be consolidated into sections by category.
 
 #### Choice properties
-- helpCard: Contains an array of topics, where each topic is an individual card shown for that question choice.
+- name: The name of the choice. Must match the choice name in `survey.json`.
+- definition: A message that will appear below the survey choice, along with the ? button.
+- examples: Contains an array of examples. These examples are shown in the help popup when the ? button is clicked for that choice.
 - taskCard: Defines the tasks corresponding to the question. Tasks are shown in the survey results page.
 
-#### Help card topic properties
-- name: The title of the help topic.
-- level: The level of importance. Controls the border color. Options: `warning` or `info`.
-- details: The message to show in the card.
+#### Example properties
+- name: The title of the example. Appears in the help dialog as a heading.
+- details: The message for the example. HTML is supported.
 
 #### Task card properties
 - message: A message to show for the entire group of tasks.
 - tasks: An array of tasks.
 
-#### Tasks properties
+#### Task properties
 - name: The title of the task.
-- details: The message corresponding to the task.
+- details: The message for to the task. HTML is supported.
 
 ## Contributing
 

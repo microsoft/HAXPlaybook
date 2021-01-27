@@ -21,77 +21,75 @@ module.exports = async function (context, req) {
       return;
   }
 
-  const content = {
+  function generateContent(survey) {
+    const content = {
       introduction: "",
-      farewell: "",
+      surveyInstructions: {
+        title: "",
+        message: ""
+      },
+      taskInstructions: {
+        title: "",
+        message: ""
+      },
       questions: [],
-  }
-
-  for (let i=0; i<survey.pages.length; i++) {
-      const page = survey.pages[i];
+    }
+  
+    survey.pages.forEach(page => {
       // pages can contain either "questions" or "elements", both which
       // seem to be the same thing. "Questions" were probably renamed to "elements"
       // in a newer version of the library.
-      let array;
+      let questions;
       if (page.questions == null && page.elements == null) {
-          makeErrorResponse("Survey contains a page with no questions");
-          return;
+        console.error("Error: Survey contains a page with no questions");
+        return;
       } else if (page.questions != null) {
-          array = page.questions;
+        questions = page.questions;
       } else {
-          array = page.elements;
+        questions = page.elements;
       }
-
-      if (array.length > 1) {
-          makeErrorResponse("Only 1 question allowed per page");
-          return;
-      }
-
-      const q = array[0];
-
-      const metadata = {
+  
+      questions.forEach(q => {
+        const metadata = {
           name: q.name,
-          instructions: "",
           category: "",
           choices: [],
-      }
-
-      const choices = q.type === "boolean" ? [{value: "true"}, {value: "false"}] : q.choices;
-
-      if (choices != null) {
-          choices.forEach(c => {
-              const choiceMeta = {
-                  name: c.value,
-                  helpCard: {
-                      topics: [
-                      {
-                          name: "",
-                          level: "",
-                          details: "",
-                      }
-                      ]
-                  },
-                  taskCard: {
-                      message: "",
-                      tasks: [
-                      {
-                          name: "",
-                          details: ""
-                      }
-                      ]
-                  }
+        }
+  
+        const choices = q.type === "boolean" ? [{ value: "true" }, { value: "false" }] : q.choices;
+  
+        choices.forEach(c => {
+          const choiceMeta = {
+            name: c.value,
+            definition: "",
+            examples: [
+              {
+                name: "",
+                details: "",
               }
-              metadata.choices.push(choiceMeta);
-          });
-      }
-
-      content.questions.push(metadata);
+            ],
+            taskCard: {
+              message: "",
+              tasks: [
+                {
+                  name: "",
+                  details: ""
+                }
+              ]
+            }
+          }
+          metadata.choices.push(choiceMeta);
+        })
+        content.questions.push(metadata);
+      });
+    });
+  
+    return content;
   }
 
-  const data = JSON.stringify(content);
-
+  const content = generateContent(survey);
   context.res = {
       // status: 200, /* Defaults to 200 */
-      body: data
+      body: JSON.stringify(content)
   };
 }

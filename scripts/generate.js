@@ -13,69 +13,71 @@ if (args.length != 2) {
 const rawData = fs.readFileSync(args[0]);
 const survey = JSON.parse(rawData);
 
-const content = {
-  introduction: "",
-  farewell: "",
-  questions: [],
+function generateContent(survey) {
+  const content = {
+    introduction: "",
+    surveyInstructions: {
+      title: "",
+      message: ""
+    },
+    taskInstructions: {
+      title: "",
+      message: ""
+    },
+    questions: [],
+  }
+
+  survey.pages.forEach(page => {
+    // pages can contain either "questions" or "elements", both which
+    // seem to be the same thing. "Questions" were probably renamed to "elements"
+    // in a newer version of the library.
+    let questions;
+    if (page.questions == null && page.elements == null) {
+      console.error("Error: Survey contains a page with no questions");
+      return;
+    } else if (page.questions != null) {
+      questions = page.questions;
+    } else {
+      questions = page.elements;
+    }
+
+    questions.forEach(q => {
+      const metadata = {
+        name: q.name,
+        category: "",
+        choices: [],
+      }
+
+      const choices = q.type === "boolean" ? [{ value: "true" }, { value: "false" }] : q.choices;
+
+      choices.forEach(c => {
+        const choiceMeta = {
+          name: c.value,
+          definition: "",
+          examples: [
+            {
+              name: "",
+              details: "",
+            }
+          ],
+          taskCard: {
+            message: "",
+            tasks: [
+              {
+                name: "",
+                details: ""
+              }
+            ]
+          }
+        }
+        metadata.choices.push(choiceMeta);
+      })
+      content.questions.push(metadata);
+    });
+  });
+
+  return content;
 }
 
-survey.pages.forEach(page => {
-  // pages can contain either "questions" or "elements", both which
-  // seem to be the same thing. "Questions" were probably renamed to "elements"
-  // in a newer version of the library.
-  let array;
-  if (page.questions == null && page.elements == null) {
-    console.error("Error: Survey contains a page with no questions");
-    return;
-  } else if (page.questions != null) {
-    array = page.questions;
-  } else {
-    array = page.elements;
-  }
-
-  if (array.length > 1) {
-    console.error("Error: Only 1 question allowed per page");
-    return;
-  }
-
-  const q = array[0];
-
-  const metadata = {
-    name: q.name,
-    instructions: "",
-    category: "",
-    choices: [],
-  }
-
-  const choices = q.type === "boolean" ? [{value: "true"}, {value: "false"}] : q.choices;
-
-  choices.forEach(c => {
-    const choiceMeta = {
-      name: c.value,
-      helpCard: {
-        topics: [
-          {
-            name: "",
-            level: "",
-            details: "",
-          }
-        ]
-      },
-      taskCard: {
-        message: "",
-        tasks: [
-          {
-            name: "",
-            details: ""
-          }
-        ]
-      }
-    }
-    metadata.choices.push(choiceMeta);
-  })
-
-  content.questions.push(metadata);
-});
-
-const data = JSON.stringify(content);
-fs.writeFileSync(args[1], data);
+const content = generateContent(survey);
+fs.writeFileSync(args[1], JSON.stringify(content));

@@ -1,7 +1,7 @@
 // This component renders the help cards shown below the survey
 
-import React, { useState } from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import React from 'react'
+import { Modal } from 'react-bootstrap'
 
 interface HelpProps {
   name: string,
@@ -16,7 +16,7 @@ const App: React.FunctionComponent<HelpProps> = ({ name, examples, show, onClose
       <>
         <h5>{example.name}</h5>
         <div dangerouslySetInnerHTML={{ __html: example.details }}></div>
-        {i < examples.length-1 ? (<hr style={{ width: "90%", marginTop: "1.5em", marginBottom: "1.5em" }}/>) : null}
+        {i < examples.length-1 ? (<hr style={{ width: "100%", marginTop: "1.5em", marginBottom: "1.5em" }}/>) : null}
       </>
     )
   });

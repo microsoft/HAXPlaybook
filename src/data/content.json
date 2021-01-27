@@ -1,10 +1,9 @@
 {
-  "farewell": "<p><b>Thank you for using the HAX Playbook!</b> You may access the live HAX Playbook Report anytime.</p> <p>You may also return to the HAX Playbook questionnaire to explore and revise your options. When you are done, you may download a pdf version of the latest report.</p>",
   "surveyInstructions": {
     "title": "DESCRIBE YOUR AI FEATURE",
     "message": ""
   },
-  "scenarioInstructions": {
+  "taskInstructions": {
     "title": "RECOMMENDED SCENARIOS TO TEST",
     "message": ""
   },
@@ -107,7 +106,6 @@
     },
     {
       "name": "inputModality",
-      "instructions": "Please make a selection to see more information about your <a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Although your system may have multiple input modalities, you should select the input that will be processed by the AI system.\">primary</a> input modality.",
       "category": "Input errors",
       "choices": [
         {
@@ -211,7 +209,6 @@
     },
     {
       "name": "trigger",
-      "instructions": "Select a response to see more information.",
       "category": "Trigger errors",
       "choices": [
         {
@@ -331,7 +328,6 @@
     },
     {
       "name": "interpretation",
-      "instructions": "Select a response to see more information.",
       "category": "Response generation errors",
       "choices": [
         {
@@ -395,7 +391,6 @@
     },
     {
       "name": "responseType",
-      "instructions": "Select a response to see more information",
       "category": "Response generation errors",
       "choices": [
         {
@@ -481,7 +476,6 @@
     },
     {
       "name": "responseMechanism",
-      "instructions": "Select a response to see more information.",
       "category": "Response generation errors",
       "choices": [
         {
@@ -562,7 +556,6 @@
     },
     {
       "name": "responseClassification",
-      "instructions": "Select a response to see more information.",
       "category": "Response generation errors",
       "choices": [
         {

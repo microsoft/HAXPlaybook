@@ -1,9 +1,7 @@
 import { SurveyQuestionRadiogroup } from 'survey-react';
 import * as React from 'react';
-import surveyData from '../data/survey.json';
 import contentData from '../data/content.json';
 import RadioDefinition from './RadioDefinition';
-import Help from './Help';
 
 export class CustomRadiogroup extends SurveyQuestionRadiogroup {
   protected getItems(cssClasses: any): Array<any> {

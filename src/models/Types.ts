@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 // This file defines the types used in the application.
 
 import contentData from '../data/content.json';

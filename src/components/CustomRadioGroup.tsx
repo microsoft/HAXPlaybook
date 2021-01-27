@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import { SurveyQuestionRadiogroup } from 'survey-react';
 import * as React from 'react';
 import contentData from '../data/content.json';

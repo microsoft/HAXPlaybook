@@ -1,3 +1,5 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
 
 import React, { useState } from 'react';
 import { TaskCard } from '../models/Types';

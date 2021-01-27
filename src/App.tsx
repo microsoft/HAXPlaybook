@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 // The App component is the top-level component of the application.
 // This component manages the state of the survey and determines
 // which page to show based on the status of the survey.

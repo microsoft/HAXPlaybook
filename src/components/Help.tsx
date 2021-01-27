@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 // This component renders the help cards shown below the survey
 
 import React from 'react'

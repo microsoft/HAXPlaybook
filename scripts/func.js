@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 // This is intended to run as an Azure Function
 // Send a POST request with the survey data in the request body
 // The response will contain the generated metadata

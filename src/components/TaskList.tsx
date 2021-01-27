@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 // This component renders the list of all task cards from the survey results
 
 import React from 'react'

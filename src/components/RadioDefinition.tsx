@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 import React, { useState } from 'react'
 import { BsFillQuestionCircleFill } from 'react-icons/bs'
 import Help from './Help';

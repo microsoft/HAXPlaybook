@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 // This component renders the introduction page for the survey, including
 // a message and a button to start the survey.
 

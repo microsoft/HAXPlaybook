@@ -18,7 +18,7 @@
           "definition": "A search system locates items that correspond to user-specified keywords, phrases, or characters.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "<ul> <li>Search engines, such as Bing, generate matching results (e.g., movie title) along with contextually relevant information (e.g., show times) based on the user's current location and time. </li> <li>An in-app search feature, such as Microsoft Search in Office products, allows users to quickly find application-specific information, from commands or help to recently used files and more.</li> </ul>"
             }
           ],
@@ -36,7 +36,7 @@
           "definition": "A recommendation system makes preferred-content suggestions, sometimes by predicting the user’s rating of the content.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "<ul> <li>Playlist generators for video and music services like Netflix, YouTube, and Spotify.</li> <li>Product recommender services, such as Amazon.</li> <li>Contextual assistant services such as, <a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Meeting Insights by Microsoft Outlook is an intelligent assistant that suggests meeting related information, including content presented during the meeting, sent meeting notes, and other relevant post-meeting material.\">Meeting Insights</a></li> </ul>"
             }
           ],
@@ -54,7 +54,7 @@
           "definition": "Conversational agents interact with people through natural-language dialogue, using speech recognition, intent classification, and '<a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"slot filling, which extracts an entity's attribute values (e.g., car: make and model) from source documents,\">slot filling</a>'.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "<ul> <li>Voice assistants for productivity management or home automation, like Cortana, Siri, and Alexa. </li> <li>Chatbots for customer support in most e-commerce websites.</li> </ul>"
             }
           ],
@@ -72,7 +72,7 @@
           "definition": "Text prediction and writing assistants help with the writing process, including research, grammar, tone, and localization.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "<ul> <li>Predicting the next set of words or action commands based on the user's input.</li> <li>Providing corrections for spelling, grammar, and punctuation mistakes.</li> <li>Making suggestions for similar words, paraphrases, and alternative expressions.</li> </ul>"
             }
           ],
@@ -90,7 +90,7 @@
           "definition": "Text or document classification categorizes text in groups organized by predefined labels.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "<ul> <li>Spam filters in email applications such as Microsoft Outlook.</li> <li>Scheduling assistants that detect meeting appointments based on the content of email.</li> </ul>"
             }
           ],
@@ -115,23 +115,23 @@
           "definition": "Keystrokes or text-bearing documents can be considered text input.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "Search systems enable users to retrieve information by entering text queries."
             },
             {
-              "name": "Example 2",
+              "name": "",
               "details": "<p>Recommender systems enable users to explore various content, products, or services that match their behavior or preferences by entering one or more keywords.</p> <ul> <li>Music playlist generators will ask onboarding users to select a few songs or genres to tailor recommendations.</li> <li>Fitness apps will ask onboarding users to answer questions about lifestyle and routine behavior to tailor recommendations.</li> </ul>"
             },
             {
-              "name": "Example 3",
+              "name": "",
               "details": "Chatbots allow users to formulate their questions by entering text and retrieve relevant information."
             },
             {
-              "name": "Example 4",
+              "name": "",
               "details": "Predictive text enables efficient use of keystrokes by suggesting a set or sequence of words, given some preceding text."
             },
             {
-              "name": "Example 5",
+              "name": "",
               "details": "Spam filters allow email users to specify (via text) categories of email messages that they want to filter out from their inbox."
             }
           ],
@@ -150,15 +150,15 @@
           "definition": "Speech input is widely used in conversational assistants like home automation systems or language-translation services.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "Search systems that are integrated into voice assistants enable users to retrieve information by entering speech queries."
             },
             {
-              "name": "Example 2",
+              "name": "",
               "details": "<p>Recommender systems that are integrated into voice assistants enable users to explore relevant information by entering speech queries.</p> <ul> <li>Home-based voice assistants, such as Amazon Echo, provide recommendations for specific recipes based on the speech query, \"Show me recipes for pasta.\"</li> </ul>"
             },
             {
-              "name": "Example 3",
+              "name": "",
               "details": "A voice assistant is a user interface that allows a user to complete an action or retrieve information simply by speaking a command."
             }
           ],
@@ -185,11 +185,11 @@
           "definition": "Action sequence is a predefined <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Examples include clicking a button, opening an application, receiving an email, or any events that trigger a system’s intelligent feature, initiated either by user or system\">event</a>.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "<a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Example playlist generators include YouTube, Netflix, or Spotify\">Playlist generators</a> rely on content that the user is currently playing or a history of accessed content to recommend new content that matches their preference."
             },
             {
-              "name": "Example 2",
+              "name": "",
               "details": "Switching between a specific set of applications or closing an application can be classified as unique action sequences that inform ways to trigger an intelligent feature."
             }
           ],
@@ -219,15 +219,15 @@
           "definition": "Your system won’t encounter errors if it has a clear way of knowing when to trigger.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "Text-based systems will typically know to trigger when the user has started entering or selecting text."
             },
             {
-              "name": "Example 2",
+              "name": "",
               "details": "<p>Speech-based systems will typically know when to begin listening to the user through its wake-word invocation method. Example wake words include:</p> <ul> <li>\"Hey Cortana,\" by Microsoft Cortana</li> <li>\"Alexa,\" by Amazon Echo</li> <li>\"Ok Google,\" by Google Home</li> </ul>"
             },
             {
-              "name": "Example 3",
+              "name": "",
               "details": "<p>Systems that rely on action sequence will typically know to trigger when the user or system has initiated an action. Some of these actions include:</p> <ul> <li>Switching between different screens or applications.</li> <li>Using geofencing to trigger a reminder for buying groceries.</li> </ul>"
             }
           ],
@@ -241,11 +241,11 @@
           "definition": "Your system will have difficulty knowing when to trigger if it has to rely on loosely defined user utterances or action sequences.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "Speech-based systems that do not rely on an explicit invocation method may have difficulty knowing when to trigger. For example, multiple people with similar voice profiles could unintentionally trigger the system."
             },
             {
-              "name": "Example 2",
+              "name": "",
               "details": "Systems that take action sequence as primary input will sometimes have difficulty knowing when to trigger if it's unclear whether a predefined action sequence took place."
             }
           ],
@@ -275,11 +275,11 @@
           "definition": "Your system will not encounter any errors if it has a clear way of <a href=\"#\" class=\"toolTip\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"A delimiter is a sequence of one or more characters or events for specifying when a system should finish receiving the user's input.\">delimiting</a> the user's input.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "<p>In text-based systems, an example of a delimiter is punctuation characters, which act as separators for distinct ideas. A delimiter may also be a group of characters or words.</p>"
             },
             {
-              "name": "Example 2",
+              "name": "",
               "details": "<p>Systems that rely on action sequences usually have a clear way of knowing when to delimit the user's input. Example action sequences that are clearly delimited include:</p> <ul> <li>Hovering over a text for 2 seconds</li> <li>Releasing a button press after 5 seconds</li> </ul>"
             }
           ],
@@ -293,15 +293,15 @@
           "definition": "Your system might be relying on loosely defined user utterances or action sequences.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "<p>In text-based systems, this could happen when there is uncertainty in determining whether the formulated utterance is semantically or grammatically complete. Your system might have difficulty delimiting the user's input in the following example:</p> <ul> <li>How is the weather?</li> <li>How is the weather <b>in Redmond, Seattle</b>?</li> </ul>"
             },
             {
-              "name": "Example 2",
+              "name": "",
               "details": "<p>In speech-based systems, an example of a delimiter is a momentary pause after an utterance or a change in intonation.</p> <p>There is also uncertainty in determining whether the spoken utterance is semantically or grammatically complete. Your system might have difficulty delimiting the user's input in the following example:</p> <ul> <li>How is the weather [pause] <b>in Redmond, Seattle</b>?</li> </ul>"
             },
             {
-              "name": "Example 3",
+              "name": "",
               "details": "<p>Writing assistants might rely on underspecified rules for delimiting user input, such as phrasal expressions or whole sentences, to support a natural, uninterrupted writing experience. Your system might have difficulty delimiting the user's input in the following example:</p> <ul> <li>Students should follow...</li> <li>Students should follow <b>these guidelines</b>...</li> <li>Students should follow <b>up with their mentors</b>...</li> </ul>"
             }
           ],
@@ -339,19 +339,19 @@
           "definition": "Multiple interpretations can exist when there is no clear signal to help the system disambiguate similar or identical input of text, speech utterance, or action sequence.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "<p>In text-based systems, multiple interpretations of the same word can happen in the following ways:</p> <ul> <li><u>Ontario</u>, province of Canada; or <u>Ontario</u>, city in the state of California.</li> <li><u>May</u>, the fifth month of the year; or <u>may</u>, a verb used to express possibility.</li> </ul>"
             },
             {
-              "name": "Example 2",
+              "name": "",
               "details": "<p>In speech-based systems, multiple interpretations of similar-sounding speech utterances can happen in the following ways:</p> <ul> <li>Interpreting <u>whether</u> as <u>weather</u>.</li> <li>Interpreting <u>palate</u> as <u>palette</u>, or <u>pallet</u>.</li> </ul>"
             },
             {
-              "name": "Example 3",
+              "name": "",
               "details": "<ul> <li>Skipping two songs in a playlist in order to listen to the third song.</li> <li>Skipping two songs in a playlist in order to see different recommendations for songs.</li> </ul>"
             },
             {
-              "name": "Example 4",
+              "name": "",
               "details": "<p>Multiple interpretations of the same email message can happen when certain details of the email are underspecified.</p> <ul> <li>Meeting request <u>on the weekend</u> as beginning on Friday, Saturday, or Sunday.</li> <li>Meeting request for <u>next month</u> as exactly 29 days, 23 hours, 59 minutes, and 59 seconds from the current time.</li> </ul>"
             }
           ],
@@ -382,7 +382,7 @@
           "definition": "Your system won't encounter any errors if there's only one valid interpretation of the user's input.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "<p>Formulating highly specific queries can lead to very few or only one valid interpretation(s) of the user's input. The query in the following example would result in only one valid interpretation because the day, time, and location is specified:</p> <ul> <li>How is the weather <u>tomorrow</u> in <u>Seattle, Washington</u> from <u>1 to 2pm</u>?</li> </ul>"
             }
           ],
@@ -403,15 +403,15 @@
           "definition": "Your system will produce a single response if only one valid response is available, or if time-, screen-, or usability-related constraints allow for only one.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "Advanced chatbot systems can generate short blurbs of text in interactive conversations by building on the tone and relevant topics that are detected from user utterances."
             },
             {
-              "name": "Example 2",
+              "name": "",
               "details": "<p>A single response to a question related to weather might include:</p> <ul> <li>It is 81 degrees Fahrenheit.</li> </ul>"
             },
             {
-              "name": "Example 3",
+              "name": "",
               "details": "Advanced writing assistants often generate a single response to suggest a paraphrase or sentence that eliminates a grammatical error or redundant information."
             }
           ],
@@ -455,7 +455,7 @@
           "definition": "Performing an action is a common response type for systems that generate nonverbal cues",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "<ul> <li>Displaying a screen or opening a new application.</li> <li>Performing physical actions, such as emitting light or vibrotactile feedback.</li> </ul>"
             }
           ],
@@ -489,7 +489,7 @@
           "definition": "Automated response generation transforms structured data into natural language to generate new content.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "Email reply prediction systems use automated response generation to suggest a list of phrases that the user can use to begin composing a reply email."
             }
           ],
@@ -520,19 +520,19 @@
           "definition": "Response selection from a list of candidate responses is suited for applications that rely on content from a database with minimal or no modifications applied to the response.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "<ul> <li>Search engine results comprise a list of several web pages in the order of a predetermined ranked index.</li> <li>In-app search results, such as files, commands, or help documentation, are listed in order of recency or transitional probability.</li> </ul>"
             },
             {
-              "name": "Example 2",
+              "name": "",
               "details": "<ul> <li>List of recommended products in e-commerce websites are ranked in order of conditional probability that a user will purchase an item.</li> <li>List of recommended music or video content in playlist generators are ranked in order of likelihood that a user will consume the content.</li> </ul>"
             },
             {
-              "name": "Example 3",
+              "name": "",
               "details": "<ul> <li>Customer support for e-commerce websites, in which users are provided multiple options to return or exchange a purchased item.</li> <li>Navigating insurance policy quotes, in which users are provided several different pricing options based on insurance coverage and deductibles.</li> </ul>"
             },
             {
-              "name": "Example 4",
+              "name": "",
               "details": "<ul> <li>Predictive text suggests a set of words that the user will type with high probability, given some preceding text.</li> <li>Spell checkers suggest a list of correctly spelled words that are closest to the one that is intended in writing.</li> </ul>"
             }
           ],
@@ -570,7 +570,7 @@
           "definition": "Binary classification is the task of classifying datapoints of a given set into two categories.",
           "examples": [
             {
-              "name": "Example 1",
+              "name": "",
               "details": "Email spam filters apply binary classification rules to determine whether to label an email as junk."
             }
           ],

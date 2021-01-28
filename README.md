@@ -10,7 +10,7 @@ The web app's features include fully customizable contextual help cards, salutat
 farewell message, and a list of tasks based on survey results. All of these components are read
 from a JSON file. See the Extension section for more details.
 
-# Getting Started
+# Getting started
 
 To run the app, open a terminal in the root directory of the repository and run:
 
@@ -19,7 +19,7 @@ $> npm install
 $> npm start
 ```
 
-# Extension
+# Extending survey functionality
 
 The survey and textual content are defined in JSON files. To add your own content, modify the JSON files
 as instructed below.
@@ -45,7 +45,7 @@ A cascading question effect is implemented by using the rule `{previous_question
 This rule effectively says, "if an answer has been selected for the previous question, then show this question."
 
 
-## Textual Content
+## Textual content
 
 All of the content outside of the survey itself is defined in `src/data/content.json`. This content is used to enrich the user experience
 by providing an introduction, instructions for each survey question, contextual help for each choice, and tasks for each choice. HTML is supported inside of each component.
@@ -95,24 +95,32 @@ If you can't run node locally, there is also an API available. Send your `survey
 - name: The title of the task.
 - details: The message for to the task. HTML is supported.
 
-## Contributing
+# Contributing
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+Check [CONTRIBUTING](CONTRIBUTING.md) page.
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+# Research and acknowledgements 
+This project materializes and implements ideas from ongoing research on Human-AI interaction. Here is a list of development and research contributors:
+
+**Current Contributors**: [Nicholas King](https://www.nickbking.com/), [Kathleen Walker](https://www.linkedin.com/in/kathleenedits/), [Mihaela Vorvoreanu](https://mihaelav.com/), [Xavier Fernandes](https://www.linkedin.com/in/praphat-xavier-fernandes-86574814/), [Juan Lema](http://juanlema.com), [Adam Fourney](https://www.adamfourney.com/),  [Saleema Amershi](https://www.linkedin.com/in/saleema-amershi/)
+
+**Research Contributors**: [Matthew K. Hong](https://www.matthewkhong.com/), [Adam Fourney](https://www.adamfourney.com/), [Derek DeBellis](https://www.linkedin.com/in/derekdebellis/), [Saleema Amershi](https://www.linkedin.com/in/saleema-amershi/)
+
+**ACM Reference Format**:
+Matthew K. Hong, Adam Fourney, Derek DeBellis, and Saleema Amershi. 2021. Planning for Natural Language Failures with the AI
+Playbook. In CHI Conference on Human Factors in Computing Systems (CHI ’21), May 8–13, 2021, Yokohama, Japan. ACM, New York,
+NY, USA, 16 pages. https://doi.org/10.1145/1122445.1122456
+
+# Microsoft Open Source Code of Conduct
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/)
+or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-## Trademarks
+# License
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+This project is licensed under the terms of the MIT license. See [LICENSE.txt](LICENSE.txt) for additional details.
+
+# Trademarks
+
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft trademarks or logos is subject to and must follow [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general). Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship. Any use of third-party trademarks or logos are subject to those third-party's policies.

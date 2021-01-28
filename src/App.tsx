@@ -132,7 +132,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         <div className="row title-bar">
           <span>HAX Playbook</span>
           <div className="title-circle-container">
-            <button onClick={handleUndo} disabled={undoStack.length === 0} className="circle-text circle-text-large undo-button"><BsArrowCounterclockwise /></button>
+            <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="circle-text circle-text-large undo-button"><BsArrowCounterclockwise /></button>
             <div className="circle-text circle-text-large">
               {numTasks}
             </div>
@@ -173,6 +173,11 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
               <TaskList taskMap={taskMap} />
             </div>
           </div>
+        </div>
+        <div className="row footer">
+          <span className="mx-3">Copyright (c) Microsoft Corporation</span>
+          <a style={{marginLeft: "auto", marginRight: "1em" }} href="https://microsoft.sharepoint.com/teams/HAXToolkit" target="_blank" rel="noopener noreferrer">HAX Toolkit</a>
+          <a style={{marginLeft: "1em", marginRight: "1em"}} href="mailto:aiguidelines@microsoft.com">Contact us</a>
         </div>
       </div>
   );

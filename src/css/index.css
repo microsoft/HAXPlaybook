@@ -82,6 +82,14 @@ a:hover, a:visited, a:active {
   top:0px;
 }
 
+.footer {
+  display: flex;
+  justify-content: left;
+  background-color: #001B2E;
+  color: white;
+  font-size: 1rem;
+}
+
 .column-header {
   display: flex;
   flex-direction: row;

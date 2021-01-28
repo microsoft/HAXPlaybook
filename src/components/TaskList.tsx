@@ -14,11 +14,11 @@ interface TaskListProps {
 const TaskList: React.FunctionComponent<TaskListProps> = ({ taskMap }) => {
   const categories = Array.from(taskMap.keys());
   return (
-    <React.Fragment>
+    <div style={{marginBottom: "3rem"}}>
       {categories.map(category => (
         <CollapsibleSection taskMap={taskMap} category={category}/>
       ))}
-    </React.Fragment>
+    </div>
   )
 }
 

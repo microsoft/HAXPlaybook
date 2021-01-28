@@ -175,7 +175,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           </div>
         </div>
         <div className="row footer">
-          <span className="mx-3">Copyright (c) Microsoft Corporation</span>
+          <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
           <a style={{marginLeft: "auto", marginRight: "1em"}} href="mailto:aiguidelines@microsoft.com">Contact us</a>
         </div>
       </div>

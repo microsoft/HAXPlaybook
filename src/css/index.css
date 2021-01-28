@@ -84,6 +84,11 @@ a:hover, a:visited, a:active {
 
 .footer {
   display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  padding-right: 1em;
+  padding-left: 1em;
   justify-content: left;
   background-color: #001B2E;
   color: white;

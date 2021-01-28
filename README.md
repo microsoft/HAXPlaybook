@@ -34,21 +34,21 @@ To export the survey you've created, click on the `JSON Editor` tab and copy the
 ### Survey guidelines
 To make sure your survey is supported, please adhere to the following guidelines:
 - Only use the radio group, dropdown, and boolean survey components.
-- Specify a `name` for each question. A default name like `question1` will be provided automatically in the SurveyJS builder. It's a good idea to use a more descriptive name to make the generated `content.json` file more readable.
+- Specify a `name` for each question. A default name like `question1` will be provided automatically in the SurveyJS builder. It's better to use a descriptive name to make the generated `content.json` file more readable.
 
 ### How to create a cascading survey
-The survey included with the HAX Playbook has a cascading question effect, causing new questions appear when the user selects an answer.
+The survey included with the HAX Playbook has a cascading-question effect, causing new questions to appear when the user selects an answer.
 Cascading questions are implemented by configuring the visibility rules for questions in the survey.
 The visibility rules can be configured in the SurveyJS builder or in the JSON file.
 To configure visibility in the SurveyJS builder, select the question to modify, then select the `Visible if` rule in the `Logic` section of the `Properties` toolbar.
-A cascading question effect is implemented by using the rule `{previous_question_name} is not empty`.
-This rule effectively says, "if an answer has been selected for the previous question, then show this question."
+A cascading-question effect is implemented by using the rule `{previous_question_name} is not empty`.
+Effectively, this rule says, "if an answer has been selected for the previous question, then show this question."
 
 
 ## Textual content
 
 All of the content outside of the survey itself is defined in `src/data/content.json`. This content is used to enrich the user experience
-by providing an introduction, instructions for each survey question, contextual help for each choice, and tasks for each choice. HTML is supported inside of each component.
+by providing an introduction, instructions for each survey question, contextual help for each choice, and tasks for each choice. HTML is supported inside each component.
 
 ### Generating a starter file
 A starter content.json file can be generated from a survey.json file. The starter file will contain a skeleton of the data with empty strings
@@ -80,7 +80,7 @@ If you can't run node locally, there is also an API available. Send your `survey
 #### Choice properties
 - name: The name of the choice. Must match the choice name in `survey.json`.
 - definition: A message that will appear below the survey choice, along with the ? button.
-- examples: Contains an array of examples. These examples are shown in the help popup when the ? button is clicked for that choice.
+- examples: Contains an array of examples. These examples are shown in the help pop-up when the ? button is clicked for that choice.
 - taskCard: Defines the tasks corresponding to the question. Tasks are shown in the survey results page.
 
 #### Example properties

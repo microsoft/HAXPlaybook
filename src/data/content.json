@@ -1,16 +1,16 @@
 {
   "surveyInstructions": {
-    "title": "DESCRIBE YOUR AI FEATURE",
+    "title": "Describe your AI feature",
     "message": ""
   },
   "taskInstructions": {
-    "title": "RECOMMENDED SCENARIOS TO TEST",
+    "title": "Recommended scenarios to test",
     "message": ""
   },
   "questions": [
     {
       "name": "systemDomain",
-      "category": "Correct Operation",
+      "category": "Correct operation",
       "choices": [
         {
           "name": "search",
@@ -24,7 +24,7 @@
           "taskCard": {
             "tasks": [
               {
-                "name": "Normal Operation",
+                "name": "Normal operation",
                 "details": "System demonstrates normal operation"
               }
             ]
@@ -42,7 +42,7 @@
           "taskCard": {
             "tasks": [
               {
-                "name": "Normal Operation",
+                "name": "Normal operation",
                 "details": "System demonstrates normal operation"
               }
             ]
@@ -50,7 +50,7 @@
         },
         {
           "name": "conversational_ai",
-          "definition": "Conversational agents interact with people through natural-language dialogue, using speech recognition, intent classification, and '<a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"slot filling, which extracts an entity's attribute values (e.g., car: make and model) from source documents,\">slot filling</a>'.",
+          "definition": "Conversational agents interact with people through natural-language dialogue, using speech recognition, intent classification, and <a href=\"#\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"slot filling extracts an entity's attribute values (e.g., car: make and model) from source documents\">slot filling</a>.",
           "examples": [
             {
               "name": "",
@@ -60,7 +60,7 @@
           "taskCard": {
             "tasks": [
               {
-                "name": "Normal Operation",
+                "name": "Normal operation",
                 "details": "System demonstrates normal operation"
               }
             ]
@@ -78,7 +78,7 @@
           "taskCard": {
             "tasks": [
               {
-                "name": "Normal Operation",
+                "name": "Normal operation",
                 "details": "System demonstrates normal operation"
               }
             ]
@@ -96,7 +96,7 @@
           "taskCard": {
             "tasks": [
               {
-                "name": "Normal Operation",
+                "name": "Normal operation",
                 "details": "System demonstrates normal operation"
               }
             ]

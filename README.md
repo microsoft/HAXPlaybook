@@ -109,7 +109,7 @@ This project materializes and implements ideas from ongoing research on Human-AI
 **ACM Reference Format**:
 Matthew K. Hong, Adam Fourney, Derek DeBellis, and Saleema Amershi. 2021. Planning for Natural Language Failures with the AI
 Playbook. In CHI Conference on Human Factors in Computing Systems (CHI ’21), May 8–13, 2021, Yokohama, Japan. ACM, New York,
-NY, USA, 16 pages. https://doi.org/10.1145/1122445.1122456
+NY, USA, 16 pages. https://doi.org/10.1145/3411764.3445735
 
 # Microsoft Open Source Code of Conduct
 

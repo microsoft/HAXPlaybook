@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT License.
+
 // This file defines the types used in the application.
 
 import contentData from '../data/content.json';
@@ -6,6 +9,10 @@ import { v4 as uuidv4 } from 'uuid';
 export type HelpLevel = "info" | "warning";
 
 function getChoice(questionName: string, choiceValue: string) {
+    if  (questionName == null || choiceValue == null) {
+      console.log("getChoice null args: questionName %s choiceValue %s", questionName, choiceValue);
+      return null;
+    }
     const metadata: any = contentData.questions.find((q: any) => q.name === questionName);
     // The surveyjs framework sends a boolean value instead of string
     // for boolean questions, so we need to force it to be a string
@@ -13,49 +20,15 @@ function getChoice(questionName: string, choiceValue: string) {
     
     if (metadata == null) {
       console.log("Could not find question %s in content.json", questionName);
-      return new HelpCard([]);
+      return null;
     }
 
     if (metadata.choices == null) {
       console.log("Missing choices array for question %s", questionName);
-      return new HelpCard([]);
+      return null;
     }
 
     return metadata.choices.find((c: any) => c.name === choiceValue);
-}
-
-export class HelpCard {
-  topics: HelpTopic[];
-
-  constructor(topics: HelpTopic[]) {
-    this.topics = topics;
-  }
-
-  static fromQuestionChoice(questionName: string, choiceValue: string) {
-    const choice = getChoice(questionName, choiceValue);
-    if (choice == null || choice.helpCard == null || choice.helpCard.topics == null) {
-      console.log("Missing help for question %s choice %s", questionName, choiceValue);
-      return new HelpCard([]);
-    }
-
-    return new HelpCard(choice.helpCard.topics.map((topic: any) => {
-      return new HelpTopic(topic.name, topic.level, topic.details)
-    }));
-  }
-}
-
-export class HelpTopic {
-  name: string;
-  level: HelpLevel;
-  details: string;
-  id: string;
-
-  constructor(name: string, level: HelpLevel, details: string) {
-    this.name = name;
-    this.level = level;
-    this.details = details;
-    this.id = uuidv4();
-  }
 }
 
 export class TaskCard {

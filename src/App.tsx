@@ -21,7 +21,7 @@ interface AppProps {
 
 // Captures the survey model object upon the first time handleValueChanged is called
 // Exposes some encapsulated state needed for undo functionality
-let surveyModel: ReactSurveyModel;
+export let surveyModel: ReactSurveyModel;
 
 function createTaskMap(contentData: any) {
   const questions = surveyModel?.getAllQuestions() ?? [];

@@ -5,6 +5,8 @@
 
 import React from 'react'
 import { Modal } from 'react-bootstrap'
+import { surveyModel } from '../App'
+import { ConditionRunner } from 'survey-react'
 
 interface HelpProps {
   name: string,
@@ -13,13 +15,26 @@ interface HelpProps {
   onClose: () => void
 }
 
+function filterExamples(examples: Array<any>) {
+  if (surveyModel) {
+    const values = surveyModel.getAllValues();
+    const properties = surveyModel.getFilteredProperties();
+    return examples.filter(ex => new ConditionRunner(ex.visibleIf ?? "true").run(values, properties));
+  } else {
+    console.log("Could not filter examples because surveyModel is null");
+    return examples;
+  }
+}
+
 const App: React.FunctionComponent<HelpProps> = ({ name, examples, show, onClose }) => {
-  const body = examples?.map((example, i) => {
+  const visibleExamples = filterExamples(examples);
+  console.log(`Filtered ${visibleExamples.length} visible examples out of ${examples.length} total examples for help=${name}`);
+  const body = visibleExamples?.map((example, i) => {
     return (
       <>
         <h5>{example.name}</h5>
         <div dangerouslySetInnerHTML={{ __html: example.details }}></div>
-        {i < examples.length-1 ? (<hr style={{ width: "100%", marginTop: "1.5em", marginBottom: "1.5em" }}/>) : null}
+        {i < visibleExamples.length-1 ? (<hr style={{ width: "100%", marginTop: "1.5em", marginBottom: "1.5em" }}/>) : null}
       </>
     )
   });

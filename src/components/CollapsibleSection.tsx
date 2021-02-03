@@ -13,8 +13,9 @@ interface CollapsibleSectionProps {
 
 const CollapsibleSection: React.FunctionComponent<CollapsibleSectionProps> = ({ taskMap, category }) => {
   const [isExpanded, setExpanded] = useState(true);
-  const numTasks = taskMap.get(category)?.map(task => task.tasks.length).reduce((prev, n) => prev + n) ?? 0;
-  const hasMessage = taskMap.get(category)?.find(tc => !!tc.message) != null;
+  const tasks = TaskCard.filterTasks(taskMap.get(category) ?? []);
+  const numTasks = tasks.map(task => task.tasks.length).reduce((prev, n) => prev + n) ?? 0;
+  const hasMessage = tasks.find(tc => !!tc.message) != null;
   // If there are no tasks and there's no message for the category, then render nothing
   return (numTasks > 0 || hasMessage) ? (
     <React.Fragment>
@@ -25,7 +26,7 @@ const CollapsibleSection: React.FunctionComponent<CollapsibleSectionProps> = ({ 
           {numTasks}
         </div>
       </div>
-      {isExpanded ? taskMap.get(category)?.map(tc => <TaskCardComponent key={tc.id} card={tc} />) : null}
+      {isExpanded ? tasks.map(tc => <TaskCardComponent key={tc.id} card={tc} />) : null}
     </React.Fragment>
   ) : null;
 }

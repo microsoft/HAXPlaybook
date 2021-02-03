@@ -4,13 +4,12 @@
 // This file defines the types used in the application.
 
 import contentData from '../data/content.json';
+import { ConditionRunner } from 'survey-react'
+import { surveyModel } from '../App'
 import { v4 as uuidv4 } from 'uuid';
 
-export type HelpLevel = "info" | "warning";
-
-function getChoice(questionName: string, choiceValue: string) {
+function getChoiceFromContent(questionName: string, choiceValue: string) {
     if  (questionName == null || choiceValue == null) {
-      console.log("getChoice null args: questionName %s choiceValue %s", questionName, choiceValue);
       return null;
     }
     const metadata: any = contentData.questions.find((q: any) => q.name === questionName);
@@ -47,25 +46,42 @@ export class TaskCard {
   }
 
   static fromQuestionChoice(questionName: string, choiceValue: string) {
-    const choice = getChoice(questionName, choiceValue);
+    const choice = getChoiceFromContent(questionName, choiceValue);
     if (choice == null || choice.taskCard == null || choice.taskCard.tasks == null) {
       console.log("Null taskcard for question %s choice %s", questionName, choiceValue);
       return null;
     }
 
-    const tasks = choice.taskCard.tasks.map((task: any) => { return new Task(task.name, task.details) });
+    const tasks = choice.taskCard.tasks.map((task: any) => { return new Task(task.name, task.details, task.visibleIf) });
     return new TaskCard(choice.taskCard.title, choice.taskCard.message, questionName, tasks);
+  }
+
+  static filterTasks(taskCards: TaskCard[]) {
+    if (surveyModel) {
+      const values = surveyModel.getAllValues();
+      const properties = surveyModel.getFilteredProperties();
+      const filteredCards: TaskCard[] = [];
+      taskCards.forEach(tc => {
+        const filtered = tc.tasks.filter(task => new ConditionRunner(task.visibleIf ?? "true").run(values, properties))
+        filteredCards.push(new TaskCard(tc.title, tc.message, tc.question, filtered));
+      })
+      return filteredCards;
+    } else {
+      return taskCards;
+    }
   }
 }
 
 export class Task {
   name: string;
   details: string;
+  visibleIf: string;
   id: string;
 
-  constructor(name: string, details: string) {
+  constructor(name: string, details: string, visibleIf: string) {
     this.name = name;
     this.details = details;
+    this.visibleIf = visibleIf;
     this.id = uuidv4();
   }
 }

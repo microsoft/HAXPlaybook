@@ -5,7 +5,7 @@
 // This component manages the state of the survey and determines
 // which page to show based on the status of the survey.
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactSurveyModel, Survey } from 'survey-react';
 import Intro from './components/Intro';
 import TaskList from './components/TaskList';
@@ -101,6 +101,16 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     });
   }
 
+  useEffect(() => {
+    if (showIntro) return;
+    const titleBar = document.getElementById("title-bar");
+    const grid = document.getElementById("grid-container");
+    const footer = document.getElementById("footer");
+    if (grid) {
+      grid.style.height = `calc(100vh - ${footer?.offsetHeight}px - ${titleBar?.offsetHeight}px)`;
+    }
+  });
+
   if (showIntro) {
     // Only show intro page if introduction message is defined
     const data: any = contentData;
@@ -116,8 +126,9 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   }
 
   const taskMap = createTaskMap(contentData);
-  const instructionsHeader = contentData.surveyInstructions?.title;
+  const instructionHeader = contentData.surveyInstructions?.title;
   const instructionsMsg = contentData.surveyInstructions?.message;
+  const scenarioHeader = contentData.taskInstructions?.title;
   const scenarioMsg = contentData.taskInstructions?.message;
   const categories = Array.from(taskMap.keys());
   const numTasks = categories.length === 0 ? 0 :
@@ -128,8 +139,8 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
                        .reduce((prev, n) => prev + n);
 
   return (
-      <div className="container-fluid">
-        <div className="row title-bar">
+      <>
+        <div id="title-bar" className="title-bar">
           <span>HAX Playbook</span>
           <div className="title-circle-container">
             <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="circle-text circle-text-large undo-button"><BsArrowCounterclockwise /></button>
@@ -138,47 +149,41 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             </div>
           </div>
         </div>
-        <div className="row" style={{marginTop: "3rem"}}>
-          <div className="col-6 left-column">
+        <div id="grid-container" className="grid-container">
+          <div className="left-column">
             <div className="my-3 column-header">
-              <span>{instructionsHeader}</span>
+              <span>{instructionHeader}</span>
             </div>
           </div>
-          <div className="col-6 right-column">
-            <TaskHeader title={contentData.taskInstructions?.title} />
+          <div className="right-column">
+            <TaskHeader title={scenarioHeader} />
           </div>
-        </div>
-        <div className="row">
-          <div className="col-6 left-column">
+          <div className="left-column">
             <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} />
           </div>
-          <div className="col-6 right-column">
+          <div className="right-column">
             <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: scenarioMsg }} />
           </div>
-        </div>
-        <div className="row">
-          <div className="col-6 left-column">
+          <div className="left-column">
             <button onClick={handleClear} className="blue-button">Start over</button>
           </div>
-          <div className="col-6 right-column d-flex justify-content-end">
+          <div className="right-column d-flex justify-content-end">
             <button onClick={() => window.print()} className="blue-button">Download report</button>
           </div>
-        </div>
-        <div className="row vh-100">
-          <div className="col-6 left-column pt-3">
+          <div className="left-column pt-3 scroll-pane">
             <Survey json={surveyData} onValueChanged={handleValueChanged} />
           </div>
-          <div className="col-6 right-column">
-            <div className="container">
+          <div className="right-column scroll-pane">
+            <div className="">
               <TaskList taskMap={taskMap} />
             </div>
           </div>
         </div>
-        <div className="row footer">
+        <div id="footer" className="footer">
           <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
           <a style={{marginLeft: "auto", marginRight: "1em"}} href="mailto:aiguidelines@microsoft.com">Contact us</a>
         </div>
-      </div>
+      </>
   );
 }
 

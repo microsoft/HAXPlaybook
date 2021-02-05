@@ -86,6 +86,7 @@ If you can't run node locally, there is also an API available. Send your `survey
 #### Example properties
 - name: The title of the example. Appears in the help dialog as a heading.
 - details: The message for the example. HTML is supported.
+- visibleIf: A logic expression that controls whether or not this example is visible. This can be used to provide contextual examples based on the user's choices in the survey. [Syntax documentation](#syntax-for-visibleif-logic)
 
 #### Task card properties
 - message: A message to show for the entire group of tasks.
@@ -94,6 +95,14 @@ If you can't run node locally, there is also an API available. Send your `survey
 #### Task properties
 - name: The title of the task.
 - details: The message for to the task. HTML is supported.
+- visibleIf: A logic expression that controls whether or not this task is visible. This can be used to provide contextual tasks based on the user's choices in the survey. [Syntax documentation](#syntax-for-visibleif-logic)
+
+### Syntax for visibleIf logic
+SurveyJS includes a robust domain-specific language for controlling the flow of the survey. See https://surveyjs.io/Documentation/Library#conditions for the official documentation and examples. Configuring logic in the [survey creator](https://surveyjs.io/create-survey) is a good option if you don't want to handwrite code.
+
+Here are some basic examples to get you started.
+- Check if the user selected a certain choice: `"visibleIf": "{questionName} = 'choice'"`
+- Check if the user **did not** select a choice: `"visibleIf": "{questionName} <> 'choice'"`
 
 # Contributing
 

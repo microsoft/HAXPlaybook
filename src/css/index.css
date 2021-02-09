@@ -1,29 +1,6 @@
 /* Copyright (c) Microsoft Corporation.
    Licensed under the MIT License. */
 
-@media (max-width: 768px) {
-  html {
-    font-size: 62.5%;
-  }
-  .sv_main {
-    width: 100%;
-  }
-  .sv_row {
-    min-width: 100% !important;
-    max-width: 100% !important;
-  }
-  [class*="sq_"] {
-    min-width: 100% !important;
-    max-width: 100% !important;
-  }
-}
-
-@media (max-width: 576px) {
-  html {
-    font-size: 50%;
-  }
-}
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -157,7 +134,7 @@ a:hover, a:visited, a:active {
   line-height: 1.75em;
   margin-top: 0.15em;
   margin-bottom: 0.15em;
-  font-size: 1.75rem;
+  font-size: 0.7em;
   margin-right: 0.75em;
   flex-shrink: 0;
   background-color: white;
@@ -231,4 +208,36 @@ a:hover, a:visited, a:active {
 
 .sv_main .sv_container .sv_body .sv_p_root fieldset.sv_qcbc .light-text {
   line-height: 1em;
+}
+
+/*****************/
+/* Media queries */
+/*****************/
+@media (max-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+  .title-bar {
+    font-size: 1.5rem;
+  }
+  .column-header {
+    font-size: 1.5rem;
+  }
+  .sv_main {
+    width: 100%;
+  }
+  .sv_row {
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+  [class*="sq_"] {
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 50%;
+  }
 }

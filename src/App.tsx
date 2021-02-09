@@ -13,6 +13,9 @@ import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes'
 import TaskHeader from './components/TaskHeader';
 import { BsArrowCounterclockwise } from 'react-icons/bs';
+import { saveAs } from 'file-saver';
+import { Octokit } from "@octokit/rest";
+import { throttling } from "@octokit/plugin-throttling";
 
 interface AppProps {
   surveyData: any,
@@ -127,6 +130,29 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
                        .map(tasks => tasks.length)
                        .reduce((prev, n) => prev + n);
 
+  const handleAdoExport = () => {
+    let csv = "Work Item Type,Title,Description\n";
+    for (const category of categories) {
+      const taskCards = taskMap.get(category) ?? [];
+      for (const card of taskCards) {
+        for (const task of card.tasks) {
+          // In CSV, quotation marks are escaped with 2 quotation marks
+          // e.g. "Hello World" => ""Hello World""
+          const name = task.name.replaceAll(/"/g, "\"\"");
+          const details = task.details.replaceAll(/"/g, "\"\"");
+          csv += `"Issue","${category}: ${name}","${details}"\n`;
+        }
+      }
+    }
+    const blob = new Blob([csv], {type: "text/csv"});
+    saveAs(blob, "scenarios.csv");
+  }
+
+  const handleGithubExport = () => {
+    const octokit = new Octokit({auth: "token"});
+    
+  }
+
   return (
       <div className="container-fluid">
         <div className="row title-bar">
@@ -161,7 +187,9 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <button onClick={handleClear} className="blue-button">Start over</button>
           </div>
           <div className="col-6 right-column d-flex justify-content-end">
-            <button onClick={() => window.print()} className="blue-button">Download report</button>
+            <button onClick={handleAdoExport} className="blue-button">Export to ADO</button>
+            <button onClick={() => window.print()} className="blue-button ml-2">Export to Gihub</button>
+            <button onClick={() => window.print()} className="blue-button ml-2">Download report</button>
           </div>
         </div>
         <div className="row vh-100">

@@ -124,11 +124,11 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   const scenarioMsg = contentData.taskInstructions?.message;
   const categories = Array.from(taskMap.keys());
   const numTasks = categories.length === 0 ? 0 :
-                     categories.map(category => TaskCard.filterTasks(taskMap.get(category) ?? []))
-                       .flat()
-                       .map(card => card.tasks)
-                       .map(tasks => tasks.length)
-                       .reduce((prev, n) => prev + n);
+    categories.map(category => TaskCard.filterTasks(taskMap.get(category) ?? []))
+      .flat()
+      .map(card => card.tasks)
+      .map(tasks => tasks.length)
+      .reduce((prev, n) => prev + n);
 
   const handleAdoExport = () => {
     let csv = "Work Item Type,Title,Description\n";
@@ -144,69 +144,100 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         }
       }
     }
-    const blob = new Blob([csv], {type: "text/csv"});
+    const blob = new Blob([csv], { type: "text/csv" });
     saveAs(blob, "scenarios.csv");
   }
 
   const handleGithubExport = () => {
-    const octokit = new Octokit({auth: "token"});
-    
+    // TODO: Abstract away the hardcoded parameters
+    const Throttlekit = Octokit.plugin(throttling);
+    const octokit = new Throttlekit({
+      auth: "<paste auth token here>",
+      throttle: {
+        onRateLimit: (retryAfter: any, options: any, octokit: any) => {
+          octokit.log.warn(`Request quota exhausted for request ${options.method} ${options.url}`);
+          if (options.request.retryCount === 0) {
+            // only retries once
+            octokit.log.info(`Retrying after ${retryAfter} seconds!`);
+            return true;
+          }
+        },
+        onAbuseLimit: (retryAfter: any, options: any, octokit: any) => {
+          // does not retry, only logs a warning
+          octokit.log.warn(`Abuse detected for request ${options.method} ${options.url}`);
+        },
+      },
+    });
+    for (const category of categories) {
+      const taskCards = taskMap.get(category) ?? [];
+      for (const card of taskCards) {
+        for (const task of card.tasks) {
+          octokit.issues.create({
+            owner: "Nking92",
+            repo: "testissues",
+            title: `${category}: ${task.name}`,
+            body: task.details
+          }).then(() => console.log("Issue creation success!"))
+            .catch(() => console.log("Issue creation failed :("));
+        }
+      }
+    }
   }
 
   return (
-      <div className="container-fluid">
-        <div className="row title-bar">
-          <span>HAX Playbook</span>
-          <div className="title-circle-container">
-            <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="circle-text circle-text-large undo-button"><BsArrowCounterclockwise /></button>
-            <div className="circle-text circle-text-large">
-              {numTasks}
-            </div>
+    <div className="container-fluid">
+      <div className="row title-bar">
+        <span>HAX Playbook</span>
+        <div className="title-circle-container">
+          <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="circle-text circle-text-large undo-button"><BsArrowCounterclockwise /></button>
+          <div className="circle-text circle-text-large">
+            {numTasks}
           </div>
-        </div>
-        <div className="row" style={{marginTop: "3rem"}}>
-          <div className="col-6 left-column">
-            <div className="my-3 column-header">
-              <span>{instructionsHeader}</span>
-            </div>
-          </div>
-          <div className="col-6 right-column">
-            <TaskHeader title={contentData.taskInstructions?.title} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-6 left-column">
-            <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} />
-          </div>
-          <div className="col-6 right-column">
-            <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: scenarioMsg }} />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-6 left-column">
-            <button onClick={handleClear} className="blue-button">Start over</button>
-          </div>
-          <div className="col-6 right-column d-flex justify-content-end">
-            <button onClick={handleAdoExport} className="blue-button">Export to ADO</button>
-            <button onClick={() => window.print()} className="blue-button ml-2">Export to Gihub</button>
-            <button onClick={() => window.print()} className="blue-button ml-2">Download report</button>
-          </div>
-        </div>
-        <div className="row vh-100">
-          <div className="col-6 left-column pt-3">
-            <Survey json={surveyData} onValueChanged={handleValueChanged} />
-          </div>
-          <div className="col-6 right-column">
-            <div className="container">
-              <TaskList taskMap={taskMap} />
-            </div>
-          </div>
-        </div>
-        <div className="row footer">
-          <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
-          <a style={{marginLeft: "auto", marginRight: "1em"}} href="mailto:aiguidelines@microsoft.com">Contact us</a>
         </div>
       </div>
+      <div className="row" style={{ marginTop: "3rem" }}>
+        <div className="col-6 left-column">
+          <div className="my-3 column-header">
+            <span>{instructionsHeader}</span>
+          </div>
+        </div>
+        <div className="col-6 right-column">
+          <TaskHeader title={contentData.taskInstructions?.title} />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-6 left-column">
+          <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} />
+        </div>
+        <div className="col-6 right-column">
+          <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: scenarioMsg }} />
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-6 left-column">
+          <button onClick={handleClear} className="blue-button">Start over</button>
+        </div>
+        <div className="col-6 right-column d-flex justify-content-end">
+          <button onClick={handleAdoExport} className="blue-button">Export to ADO</button>
+          <button onClick={handleGithubExport} className="blue-button ml-2">Export to Gihub</button>
+          <button onClick={() => window.print()} className="blue-button ml-2">Download report</button>
+        </div>
+      </div>
+      <div className="row vh-100">
+        <div className="col-6 left-column pt-3">
+          <Survey json={surveyData} onValueChanged={handleValueChanged} />
+        </div>
+        <div className="col-6 right-column">
+          <div className="container">
+            <TaskList taskMap={taskMap} />
+          </div>
+        </div>
+      </div>
+      <div className="row footer">
+        <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
+        <a style={{ marginLeft: "auto", marginRight: "1em" }} href="mailto:aiguidelines@microsoft.com">Contact us</a>
+      </div>
+    </div>
   );
 }
 

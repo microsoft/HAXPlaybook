@@ -1,6 +1,29 @@
 /* Copyright (c) Microsoft Corporation.
    Licensed under the MIT License. */
 
+@media (max-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+  .sv_main {
+    width: 100%;
+  }
+  .sv_row {
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+  [class*="sq_"] {
+    min-width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+@media (max-width: 576px) {
+  html {
+    font-size: 50%;
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

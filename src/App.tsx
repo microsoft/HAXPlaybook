@@ -219,7 +219,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         </div>
         <div className="col-6 right-column d-flex justify-content-end">
           <button onClick={handleAdoExport} className="blue-button">Export to ADO</button>
-          <button onClick={handleGithubExport} className="blue-button ml-2">Export to Gihub</button>
+          <button onClick={handleGithubExport} className="blue-button ml-2">Export to Github</button>
           <button onClick={() => window.print()} className="blue-button ml-2">Download report</button>
         </div>
       </div>

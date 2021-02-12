@@ -21,7 +21,7 @@ interface AppProps {
 
 // Captures the survey model object upon the first time handleValueChanged is called
 // Exposes some encapsulated state needed for undo functionality
-let surveyModel: ReactSurveyModel;
+export let surveyModel: ReactSurveyModel;
 
 function createTaskMap(contentData: any) {
   const questions = surveyModel?.getAllQuestions() ?? [];
@@ -121,7 +121,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   const scenarioMsg = contentData.taskInstructions?.message;
   const categories = Array.from(taskMap.keys());
   const numTasks = categories.length === 0 ? 0 :
-                     categories.map(category => taskMap.get(category) as TaskCard[])
+                     categories.map(category => TaskCard.filterTasks(taskMap.get(category) ?? []))
                        .flat()
                        .map(card => card.tasks)
                        .map(tasks => tasks.length)

@@ -114,11 +114,13 @@
           "examples": [
             {
               "name": "",
-              "details": "Search systems enable users to retrieve information by entering text queries."
+              "details": "Search systems enable users to retrieve information by entering text queries.",
+              "visibleIf": "{systemDomain} = 'search'"
             },
             {
               "name": "",
-              "details": "<p>Recommender systems enable users to explore various content, products, or services that match their behavior or preferences by entering one or more keywords.</p> <ul> <li>Music playlist generators will ask onboarding users to select a few songs or genres to tailor recommendations.</li> <li>Fitness apps will ask onboarding users to answer questions about lifestyle and routine behavior to tailor recommendations.</li> </ul>"
+              "details": "<p>Recommender systems enable users to explore various content, products, or services that match their behavior or preferences by entering one or more keywords.</p> <ul> <li>Music playlist generators will ask onboarding users to select a few songs or genres to tailor recommendations.</li> <li>Fitness apps will ask onboarding users to answer questions about lifestyle and routine behavior to tailor recommendations.</li> </ul>",
+              "visibleIf": "{systemDomain} = 'recommendation'"
             },
             {
               "name": "",

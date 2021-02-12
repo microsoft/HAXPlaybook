@@ -178,6 +178,12 @@ a:hover, a:visited, a:active {
   font-weight: bold;
 }
 
+.radio-definition {
+  margin-left: calc(1.75em + 3px);
+  margin-top: -0.8em;
+  line-height: 1.4em;
+}
+
 /****************************/
 /* SurveyJS style overrides */
 /****************************/
@@ -213,9 +219,15 @@ a:hover, a:visited, a:active {
 /*****************/
 /* Media queries */
 /*****************/
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   html {
-    font-size: 62.5%;
+    font-size: 85%;
+  }
+}
+
+@media (max-width: 992px) {
+  html {
+    font-size: 75%;
   }
   .title-bar {
     font-size: 1.5rem;
@@ -223,16 +235,25 @@ a:hover, a:visited, a:active {
   .column-header {
     font-size: 1.5rem;
   }
+  .radio-definition {
+    margin-left: 0px;
+  }
   .sv_main {
-    width: 100%;
+    width: 100% !important;
   }
   .sv_row {
     min-width: 100% !important;
     max-width: 100% !important;
   }
-  [class*="sq_"] {
+  div[id*="sq_"] {
     min-width: 100% !important;
     max-width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 62.5%;
   }
 }
 

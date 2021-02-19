@@ -13,6 +13,10 @@ import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes'
 import TaskHeader from './components/TaskHeader';
 import { BsArrowCounterclockwise } from 'react-icons/bs';
+import { Modal } from 'react-bootstrap'
+import { saveAs } from 'file-saver';
+import { Octokit } from "@octokit/rest";
+import { throttling } from "@octokit/plugin-throttling";
 
 interface AppProps {
   surveyData: any,
@@ -47,6 +51,12 @@ function createTaskMap(contentData: any) {
 const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => {
   const [showIntro, setShowIntro] = useState(true);
   const [undoStack, setUndoStack] = useState(new Array<Map<string, string>>());
+
+  // hooks for Github export form
+  const [showForm, setShowForm] = useState(false);
+  const [authToken, setAuthToken] = useState("");
+  const [repoOwner, setRepoOwner] = useState("");
+  const [repoName, setRepoName] = useState("");
 
   console.log("STATE: showIntro=", showIntro, " undo=", undoStack);
 
@@ -138,6 +148,59 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
                        .map(tasks => tasks.length)
                        .reduce((prev, n) => prev + n);
 
+  const handleAdoExport = () => {
+    let csv = "Work Item Type,Title,Description\n";
+    for (const category of categories) {
+      const taskCards = taskMap.get(category) ?? [];
+      for (const card of taskCards) {
+        for (const task of card.tasks) {
+          // In CSV, quotation marks are escaped with 2 quotation marks
+          // e.g. "Hello World" => ""Hello World""
+          const name = task.name.replaceAll(/"/g, "\"\"");
+          const details = task.details.replaceAll(/"/g, "\"\"");
+          csv += `"Issue","${category}: ${name}","${details}"\n`;
+        }
+      }
+    }
+    const blob = new Blob([csv], {type: "text/csv"});
+    saveAs(blob, "scenarios.csv");
+  }
+
+  const handleGithubExport = () => {
+    const Throttlekit = Octokit.plugin(throttling);
+    const octokit = new Throttlekit({
+      auth: authToken,
+      throttle: {
+        onRateLimit: (retryAfter: any, options: any, octokit: any) => {
+          octokit.log.warn(`Request quota exhausted for request ${options.method} ${options.url}`);
+          if (options.request.retryCount === 0) {
+            // only retries once
+            octokit.log.info(`Retrying after ${retryAfter} seconds!`);
+            return true;
+          }
+        },
+        onAbuseLimit: (retryAfter: any, options: any, octokit: any) => {
+          // does not retry, only logs a warning
+          octokit.log.warn(`Abuse detected for request ${options.method} ${options.url}`);
+        },
+      },
+    });
+    for (const category of categories) {
+      const taskCards = taskMap.get(category) ?? [];
+      for (const card of taskCards) {
+        for (const task of card.tasks) {
+          octokit.issues.create({
+            owner: repoOwner,
+            repo: repoName,
+            title: `${category}: ${task.name}`,
+            body: task.details
+          }).then(() => console.log("Issue creation success!"))
+            .catch(() => console.log("Issue creation failed :("));
+        }
+      }
+    }
+  }
+
   return (
       <>
         <div id="title-bar" className="title-bar">
@@ -168,7 +231,9 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <button onClick={handleClear} className="blue-button">Start over</button>
           </div>
           <div className="right-column d-flex justify-content-end">
-            <button onClick={() => window.print()} className="blue-button">Download report</button>
+            <button onClick={handleAdoExport} className="blue-button">Export to ADO</button>
+            <button onClick={() => setShowForm(true)} className="blue-button ml-2">Export to Github</button>
+            <button onClick={() => window.print()} className="blue-button ml-2">Download report</button>
           </div>
           <div className="left-column pt-3 scroll-pane">
             <Survey json={surveyData} onValueChanged={handleValueChanged} />
@@ -179,6 +244,26 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             </div>
           </div>
         </div>
+        <Modal show={showForm} onHide={() => setShowForm(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Github Export</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <form onSubmit={handleGithubExport}>
+              <label>Repo owner: <input type="text" value={repoOwner} onChange={(event) => setRepoOwner(event.target.value)} /></label>
+              <label>Repo name: <input type="text" value={repoName} onChange={(event) => setRepoName(event.target.value)} /></label>
+              <label>Auth token: <input type="text" value={authToken} onChange={(event) => setAuthToken(event.target.value)} /></label>
+            </form>
+          </Modal.Body>
+          <Modal.Footer>
+            <button className="blue-button" onClick={() => setShowForm(false)}>
+              Close
+            </button>
+            <button className="blue-button" onClick={handleGithubExport}>
+              Export
+            </button>
+          </Modal.Footer>
+        </Modal>
         <div id="footer" className="footer">
           <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
           <a style={{marginLeft: "auto", marginRight: "1em"}} href="mailto:aiguidelines@microsoft.com">Contact us</a>

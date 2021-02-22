@@ -178,6 +178,13 @@ a:hover, a:visited, a:active {
   font-weight: bold;
 }
 
+.task-card {
+  border-left: 1px solid #008deb;
+  padding-left: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .radio-definition {
   margin-left: calc(1.75em + 3px);
   margin-top: -0.8em;

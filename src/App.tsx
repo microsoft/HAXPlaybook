@@ -113,11 +113,26 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
 
   useEffect(() => {
     if (showIntro) return;
+    
     const titleBar = document.getElementById("title-bar");
     const grid = document.getElementById("grid-container");
     const footer = document.getElementById("footer");
     if (grid) {
       grid.style.height = `calc(100vh - ${footer?.offsetHeight}px - ${titleBar?.offsetHeight}px)`;
+    }
+
+    const svRows = document.getElementsByClassName("sv_row");
+    if (svRows.length > 0) {
+      svRows[svRows.length-1].scrollIntoView(true);
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const autoScrollScenarios = urlParams.get('autoScrollScenarios');
+    if (autoScrollScenarios === "true") {
+      const taskCards = document.getElementsByClassName("task-card");
+      if (taskCards.length > 0) {
+        taskCards[taskCards.length-1].scrollIntoView(true);
+      }
     }
   });
 

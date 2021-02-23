@@ -10,7 +10,7 @@
   "questions": [
     {
       "name": "systemDomain",
-      "category": "Correct Operation",
+      "category": "Correct operation",
       "choices": [
         {
           "name": "search",
@@ -178,7 +178,7 @@
               },
               {
                 "name": "Noisy channel",
-                "details": "<p> User input is corrupted by background noise, including by capturing other people who may be speaking in the background.</p> <p>Simulate this error by turning including unrelated text in the transcription, or by removing portions of correctly transcribed text.</p>"
+                "details": "<p> User input is corrupted by background noise, including by capturing other people who may be speaking in the background.</p> <p>Simulate this error by including unrelated text in the transcription, or by removing portions of correctly transcribed text.</p>"
               }
             ]
           }
@@ -238,7 +238,7 @@
               },
 {
                 "name": "Delayed trigger",
-                "details": "<p>The system detects a valid triggering event but responds too late to be useful. This reflects a tradeoff between waiting for more data to increase confidence versus needing to be responsive.</p> <p>Simulate this error by artificially inserting a short delay between the user’s input and the system’s output. Experiment with the different delay lengths to better understand the abovementioned tradeoff.</p>"
+                "details": "<p>The system detects a valid triggering event but responds too late to be useful. This reflects a trade-off between waiting for more data to increase confidence versus needing to be responsive.</p> <p>Simulate this error by artificially inserting a short delay between the user’s input and the system’s output. Experiment with the different delay lengths to better understand the abovementioned trade-off.</p>"
               }
             ]
           }
@@ -312,7 +312,7 @@
           "examples": [
             {
               "name": "",
-              "details": "<p>A searcher looking for information on the \"US Open\", might want results about golf or for tennis. Likewise, a request for the weather in Cambridge could be interpreted as Cambridge, Massachusetts, or Cambridge, United Kingdom.</p>"
+              "details": "<p>A searcher looking for information on the \"US Open\" might want results about golf or for tennis. Likewise, a request for the weather in Cambridge could be interpreted as Cambridge, Massachusetts, or Cambridge, United Kingdom.</p>"
             },
             {
               "name": "",
@@ -320,7 +320,7 @@
             }
           ],
           "taskCard": {
-            "message": "<p>There may be several valid interpretations of a user's input, and the system mail fail to correctly resolve ambiguities. Consider testing the following scenario:</p>",
+            "message": "<p>There may be several valid interpretations of a user's input, and the system mail fails to correctly resolve ambiguities. Consider testing the following scenario:</p>",
             "tasks": [
 	      {
 	        "name": "Ambiguities",
@@ -426,22 +426,22 @@
 	      {
                 "name": "Implausible or incoherent response",
 	        "visibleIf": "{responseType} = 'single_response'",
-                "details": "<p>Your system could respond in a way that is obviously incorrect, perhaps because it is implausible or incoherent.</p><p>Simulate this error by composing the first few words of a correct answer, then using a predictive keyboard (or similar unsophisticated language model) to automatically fill in the rest of the sentence.</p>"
+                "details": "<p>Your system could respond in a way that is obviously incorrect, perhaps because the response is implausible or incoherent.</p><p>Simulate this error by composing the first few words of a correct answer, then using a predictive keyboard (or similar unsophisticated language model) to automatically fill in the rest of the sentence.</p>"
               },
 	      {
                 "name": "Plausible but incorrect response",
 	        "visibleIf": "{responseType} = 'single_response'",
-                "details": "<p>Your system could respond in a way that seems plausible, but is nonetheless providing incorrect information.</p><p>Simulate this error by composing an incorrect response to the user's question by making up key numbers or details rather than relying on reliable sources.</p>"
+                "details": "<p>Your system could respond in a way that seems plausible but is nonetheless providing incorrect information.</p><p>Simulate this error by composing an incorrect response to the user's question by making up key numbers or details rather than relying on reliable sources.</p>"
               },
               {
                 "name": "Inappropriate response",
 	        "visibleIf": "{responseType} = 'single_response'",
-                "details": "<p>Your system may generate an answer that is inappropriate, and that may violate social norms.</p> <p>Care must be taken when simulating such errors. Consider including a scenario where the response includes non-specific placeholders such as \"[EXPLETIVE]\", or  \"[CLASS STEROTYPE]\" to indicate the possibility of such errors."
+                "details": "<p>Your system may generate an answer that is inappropriate and may violate social norms.</p> <p>Care must be taken when simulating such errors. Consider including a scenario where the response includes non-specific placeholders such as \"[EXPLETIVE]\", or  \"[CLASS STEROTYPE]\" to indicate the possibility of such errors."
               },
 	      {
                 "name": "Results include implausible or incoherent items",
 	        "visibleIf": "{responseType} = 'ranked_list'",
-                "details": "<p>Your system's results could include items that are obviously incorrect, implausible or incoherent.</p><p>Simulate this error adding incoherent items to the result list. Incoherent items can be generated by composing the first few words of a correct answer, then using a predictive keyboard (or similar unsophisticated language model) to automatically fill in the rest of the sentence.</p>"
+                "details": "<p>Your system's results could include items that are obviously incorrect, implausible, or incoherent.</p><p>Simulate this error adding incoherent items to the result list. Incoherent items can be generated by composing the first few words of a correct answer, then using a predictive keyboard (or similar unsophisticated language model) to automatically fill in the rest of the sentence.</p>"
               },
 	      {
                 "name": "Results include plausible but incorrect items",
@@ -451,12 +451,12 @@
               {
                 "name": "Results include inappropriate items",
 	        "visibleIf": "{responseType} = 'ranked_list'",
-                "details": "<p>Your system's results could include items that are inappropriate, and that may violate social norms.</p> <p>Care must be taken when simulating such errors. Consider including items that employ non-specific placeholders such as \"[EXPLETIVE]\", or  \"[CLASS STEROTYPE]\" to indicate the possibility of such errors."
+                "details": "<p>Your system's results could include items that are inappropriate and may violate social norms.</p> <p>Care must be taken when simulating such errors. Consider including items that employ non-specific placeholders such as \"[EXPLETIVE]\", or  \"[CLASS STEROTYPE]\" to indicate the possibility of such errors."
               },
 	      {
 		"name": "Poor ranking",
 	        "visibleIf": "{responseType} = 'ranked_list'",
-                "details": "<p>Poor ranking occurs when the order of items in the results list does not match an intended natural order (e.g., of relevance, probability, importance, etc.)</p><p>Simulate this error by shuffling or reversing the order of the ranked list.</p>"
+                "details": "<p>Poor ranking occurs when the order of items in the results list does not match an intended natural order (e.g., of relevance, probability, or importance)</p><p>Simulate this error by shuffling or reversing the order of the ranked list.</p>"
 	      },
 	      {
 		"name": "Low result diversity",
@@ -508,7 +508,7 @@
 	      {
 		"name": "Poor ranking",
 	        "visibleIf": "{responseType} = 'ranked_list'",
-                "details": "<p>Poor ranking occurs when the order of items in the results list does not match an intended natural order (e.g., of relevance, probability, importance, etc.)</p><p>Simulate this error by shuffling or reversing the order of the ranked list.</p>"
+                "details": "<p>Poor ranking occurs when the order of items in the results list does not match an intended natural order (e.g., of relevance, probability, or importance)</p><p>Simulate this error by shuffling or reversing the order of the ranked list.</p>"
 	      },
 	      {
 		"name": "Low result diversity",

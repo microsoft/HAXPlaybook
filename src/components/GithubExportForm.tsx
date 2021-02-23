@@ -16,6 +16,7 @@ const GithubExportForm: React.FunctionComponent<GithubExportProps> = ({ taskMap,
   const [repoOwner, setRepoOwner] = useState("");
   const [repoName, setRepoName] = useState("");
   const [progress, setProgress] = useState(0);
+  const [failureLog, setFailureLog] = useState(Array<any>());
   const categories = Array.from(taskMap.keys());
 
   const handleGithubExport = () => {
@@ -48,9 +49,10 @@ const GithubExportForm: React.FunctionComponent<GithubExportProps> = ({ taskMap,
             title: `${category}: ${task.name}`,
             body: task.details
           }).then(() => {
-            console.log("Issue creation success!");
-          }).catch(() => {
-            console.log("Issue creation failed :(")
+            console.log("Issue creation succeded");
+          }).catch((reason) => {
+            console.log("Issue creation failed", reason);
+            setFailureLog([...failureLog, reason]);
           }).finally(() => {
             numFinished += 1;
             setProgress(Math.ceil(numFinished / numTasks * 100));
@@ -77,6 +79,9 @@ const GithubExportForm: React.FunctionComponent<GithubExportProps> = ({ taskMap,
             <ProgressBar variant="info" now={progress} />
           </>
         ) : null}
+        {failureLog.map((failure) => 
+          (<div style={{color: "red"}}>[Error] {`${failure}`}</div>)
+        )}
       </Modal.Body>
       <Modal.Footer>
         <button className="blue-button" onClick={() => hideForm()}>

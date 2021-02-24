@@ -38,7 +38,20 @@ const GithubExportForm: React.FunctionComponent<GithubExportProps> = ({ taskMap,
         },
       },
     });
-    let numFinished = 0;
+
+    // Counts the number of finished promises
+    // The count has to be wrapped in a closure to avoid race conditions
+    // Fixes eslint no-loop-func warning
+    function progressIncrementer() {
+      let numFinished = 0;
+      function update() {
+        numFinished += 1;
+        setProgress(Math.ceil(numFinished / numTasks * 100));
+      }
+      return update;
+    }
+
+    let updateProgress = progressIncrementer();
     for (const category of categories) {
       const taskCards = taskMap.get(category) ?? [];
       for (const card of taskCards) {
@@ -54,8 +67,7 @@ const GithubExportForm: React.FunctionComponent<GithubExportProps> = ({ taskMap,
             console.log("Issue creation failed", reason);
             setFailureLog([...failureLog, reason]);
           }).finally(() => {
-            numFinished += 1;
-            setProgress(Math.ceil(numFinished / numTasks * 100));
+            updateProgress();
           });
         }
       }

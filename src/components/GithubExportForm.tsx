@@ -68,10 +68,14 @@ const GithubExportForm: React.FunctionComponent<GithubExportProps> = ({ taskMap,
         <Modal.Title>Github Export</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <div>
+          <p>This form will export your survey results to issues on your GitHub repository.</p>
+          <p>Go to the <a href="https://github.com/settings/tokens">token section of GitHub Developer Settings</a> to generate a personal access token.</p>
+        </div>
         <form onSubmit={handleGithubExport}>
           <label>Repo owner: <input type="text" value={repoOwner} onChange={(event) => setRepoOwner(event.target.value)} /></label>
           <label>Repo name: <input type="text" value={repoName} onChange={(event) => setRepoName(event.target.value)} /></label>
-          <label>Auth token: <input type="text" value={authToken} onChange={(event) => setAuthToken(event.target.value)} /></label>
+          <label>Personal access token: <input type="text" value={authToken} onChange={(event) => setAuthToken(event.target.value)} /></label>
         </form>
         {progress > 0 ? (
           <>

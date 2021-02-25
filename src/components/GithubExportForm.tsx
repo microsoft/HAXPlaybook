@@ -53,16 +53,17 @@ const GithubExportForm: React.FunctionComponent<GithubExportProps> = ({ taskMap,
 
     let updateProgress = progressIncrementer();
     for (const category of categories) {
-      const taskCards = taskMap.get(category) ?? [];
+      const taskCards = TaskCard.filterTasks(taskMap.get(category) ?? []);
       for (const card of taskCards) {
         for (const task of card.tasks) {
+          let title = `${category}: ${task.name}`;
           octokit.issues.create({
             owner: repoOwner,
             repo: repoName,
-            title: `${category}: ${task.name}`,
+            title: title,
             body: task.details
           }).then(() => {
-            console.log("Issue creation succeded");
+            console.log("Issue creation succeded", title);
           }).catch((reason) => {
             console.log("Issue creation failed", reason);
             setFailureLog([...failureLog, reason]);

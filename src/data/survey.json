@@ -113,17 +113,17 @@
           "choices": [
             {
               "value": "single_response",
-              "visibleIf": "{systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other'",
+              "visibleIf": "{systemDomain} = 'search' or {systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other'",
               "text": "Single response"
             },
             {
               "value": "ranked_list",
-              "visibleIf": "{systemDomain}='search' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other'",
+              "visibleIf": "{systemDomain}='search' or {systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='text_prediction_and_assistance' or {systemDomain}='other'",
               "text": "Ranked list"
             },
             {
               "value": "action_execution",
-              "visibleIf": "{systemDomain}='search' or {systemDomain}='recommendation' or {systemDomain}='conversational_ai' or {systemDomain}='other'",
+              "visibleIf": "{systemDomain}='conversational_ai' or {systemDomain}='other'",
               "text": "Action execution"
             }
           ]
@@ -131,11 +131,12 @@
         {
           "type": "radiogroup",
           "name": "responseMechanism",
-          "title": "Is the {responseType} generated or selected from an existing set?",
-          "visibleIf": "{responseType} = 'ranked_list'",
+          "title": "How is the system's response produced?",
+          "visibleIf": "{responseType} = 'single_response' or {responseType} = 'ranked_list'",
           "choices": [
             {
               "value": "generated",
+              "visibleIf": "{systemDomain} <> 'search' and {systemDomain} <> 'recommendation'",
               "text": "Generated"
             },
             {

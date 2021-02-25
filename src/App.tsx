@@ -12,7 +12,9 @@ import TaskList from './components/TaskList';
 import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes'
 import TaskHeader from './components/TaskHeader';
+import GithubExportForm from './components/GithubExportForm';
 import { BsArrowCounterclockwise } from 'react-icons/bs';
+import { saveAs } from 'file-saver';
 
 interface AppProps {
   surveyData: any,
@@ -47,6 +49,7 @@ function createTaskMap(contentData: any) {
 const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => {
   const [showIntro, setShowIntro] = useState(true);
   const [undoStack, setUndoStack] = useState(new Array<Map<string, string>>());
+  const [showGithubForm, setShowGithubForm] = useState(false);
 
   console.log("STATE: showIntro=", showIntro, " undo=", undoStack);
 
@@ -103,11 +106,26 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
 
   useEffect(() => {
     if (showIntro) return;
+    
     const titleBar = document.getElementById("title-bar");
     const grid = document.getElementById("grid-container");
     const footer = document.getElementById("footer");
     if (grid) {
       grid.style.height = `calc(100vh - ${footer?.offsetHeight}px - ${titleBar?.offsetHeight}px)`;
+    }
+
+    const svRows = document.getElementsByClassName("sv_row");
+    if (svRows.length > 0) {
+      svRows[svRows.length-1].scrollIntoView(true);
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const autoScrollScenarios = urlParams.get('autoScrollScenarios');
+    if (autoScrollScenarios === "true") {
+      const taskCards = document.getElementsByClassName("task-card");
+      if (taskCards.length > 0) {
+        taskCards[taskCards.length-1].scrollIntoView(true);
+      }
     }
   });
 
@@ -137,6 +155,24 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
                        .map(card => card.tasks)
                        .map(tasks => tasks.length)
                        .reduce((prev, n) => prev + n);
+
+  const handleAdoExport = () => {
+    let csv = "Work Item Type,Title,Description\n";
+    for (const category of categories) {
+      const taskCards = taskMap.get(category) ?? [];
+      for (const card of taskCards) {
+        for (const task of card.tasks) {
+          // In CSV, quotation marks are escaped with 2 quotation marks
+          // e.g. "Hello World" => ""Hello World""
+          const name = task.name.replaceAll(/"/g, "\"\"");
+          const details = task.details.replaceAll(/"/g, "\"\"");
+          csv += `"Issue","${category}: ${name}","${details}"\n`;
+        }
+      }
+    }
+    const blob = new Blob([csv], {type: "text/csv"});
+    saveAs(blob, "scenarios.csv");
+  }
 
   return (
       <>
@@ -168,7 +204,9 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <button onClick={handleClear} className="blue-button">Start over</button>
           </div>
           <div className="right-column d-flex justify-content-end">
-            <button onClick={() => window.print()} className="blue-button">Download report</button>
+            <button onClick={handleAdoExport} className="blue-button">Export to ADO</button>
+            <button onClick={() => setShowGithubForm(true)} className="blue-button ml-2">Export to Github</button>
+            <button onClick={() => window.print()} className="blue-button ml-2">Download report</button>
           </div>
           <div className="left-column pt-3 scroll-pane">
             <Survey json={surveyData} onValueChanged={handleValueChanged} />
@@ -179,6 +217,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             </div>
           </div>
         </div>
+        <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} hideForm={() => setShowGithubForm(false)}/>
         <div id="footer" className="footer">
           <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
           <a style={{marginLeft: "auto", marginRight: "1em"}} href="mailto:aiguidelines@microsoft.com">Contact us</a>

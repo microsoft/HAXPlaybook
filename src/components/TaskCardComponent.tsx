@@ -18,7 +18,7 @@ const App: React.FunctionComponent<TaskCardProps> = ({ card }) => {
       { card.tasks.length !== 0 ? 
         <div>
           {card.tasks.map(task => (
-            <div key={task.id} className="border-left border-primary px-4 py-1 my-4">
+            <div key={task.id} className="task-card">
               <span className="bold-text">{task.name}</span>
               <div dangerouslySetInnerHTML={{ __html: task.details }} />
             </div>

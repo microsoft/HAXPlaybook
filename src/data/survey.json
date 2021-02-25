@@ -131,7 +131,7 @@
         {
           "type": "radiogroup",
           "name": "responseMechanism",
-          "title": "Is the {responseType} generated or selected from an existing set?",
+          "title": "How is the system's response produced?",
           "visibleIf": "{responseType} = 'single_response' or {responseType} = 'ranked_list'",
           "choices": [
             {

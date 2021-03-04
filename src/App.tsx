@@ -10,8 +10,7 @@ import { ReactSurveyModel, Survey } from 'survey-react';
 import Intro from './components/Intro';
 import TaskList from './components/TaskList';
 import { TaskCard } from './models/Types';
-import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes'
-import TaskHeader from './components/TaskHeader';
+import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes';
 import GithubExportForm from './components/GithubExportForm';
 import { BsArrowCounterclockwise } from 'react-icons/bs';
 import { saveAs } from 'file-saver';
@@ -176,13 +175,12 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
 
   return (
       <>
-        <div id="title-bar" className="title-bar">
-          <span>HAX Playbook</span>
-          <div className="title-circle-container">
-            <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="circle-text circle-text-large undo-button"><BsArrowCounterclockwise /></button>
-            <div className="circle-text circle-text-large">
-              {numTasks}
-            </div>
+        <div id="title-bar" className="title-bar py-2">
+          <span className="title-bar-text ml-3">HAX Playbook</span>
+          <div style={{marginLeft: "auto"}} className="d-flex justify-content-end">
+            <button onClick={handleAdoExport} className="blue-button">Export to ADO</button>
+            <button onClick={() => setShowGithubForm(true)} className="blue-button ml-3">Export to Github</button>
+            <button onClick={() => window.print()} className="blue-button mx-3">Download report</button>
           </div>
         </div>
         <div id="grid-container" className="grid-container">
@@ -191,8 +189,14 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
               <span>{instructionHeader}</span>
             </div>
           </div>
-          <div className="right-column">
-            <TaskHeader title={scenarioHeader} />
+          <div className="right-column d-flex flex-row align-items-center">
+            <div className="my-3 column-header" >
+              <span>{scenarioHeader}</span>
+            </div>
+            <span style={{marginLeft: "auto"}}>Total error scenarios:</span>
+            <div className="d-inline-block circle-text circle-text-large">
+              {numTasks}
+            </div>
           </div>
           <div className="left-column">
             <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} />
@@ -200,13 +204,12 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           <div className="right-column">
             <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: scenarioMsg }} />
           </div>
-          <div className="left-column">
+          <div className="left-column bottom-shadow">
             <button onClick={handleClear} className="blue-button">Start over</button>
+            <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
           </div>
-          <div className="right-column d-flex justify-content-end">
-            <button onClick={handleAdoExport} className="blue-button">Export to ADO</button>
-            <button onClick={() => setShowGithubForm(true)} className="blue-button ml-2">Export to Github</button>
-            <button onClick={() => window.print()} className="blue-button ml-2">Download report</button>
+          <div className="right-column bottom-shadow">
+            Tags here!
           </div>
           <div className="left-column pt-3 scroll-pane">
             <Survey json={surveyData} onValueChanged={handleValueChanged} />

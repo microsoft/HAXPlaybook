@@ -223,6 +223,11 @@ a:hover, a:visited, a:active {
   line-height: 1em;
 }
 
+.sv_qstn .sv-q-col-1, .sv-question .sv-q-col-1 {
+  width: auto !important;
+  padding-right: 0.5em !important;
+}
+
 /*****************/
 /* Media queries */
 /*****************/

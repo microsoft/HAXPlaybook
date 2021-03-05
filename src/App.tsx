@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { ReactSurveyModel, Survey } from 'survey-react';
 import Intro from './components/Intro';
 import TaskList from './components/TaskList';
+import CategoryList from './components/CategoryList';
 import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes';
 import GithubExportForm from './components/GithubExportForm';
@@ -105,7 +106,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
 
   useEffect(() => {
     if (showIntro) return;
-    
+
     const titleBar = document.getElementById("title-bar");
     const grid = document.getElementById("grid-container");
     const footer = document.getElementById("footer");
@@ -115,7 +116,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
 
     const svRows = document.getElementsByClassName("sv_row");
     if (svRows.length > 0) {
-      svRows[svRows.length-1].scrollIntoView(true);
+      svRows[svRows.length - 1].scrollIntoView(true);
     }
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -123,7 +124,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     if (autoScrollScenarios === "true") {
       const taskCards = document.getElementsByClassName("task-card");
       if (taskCards.length > 0) {
-        taskCards[taskCards.length-1].scrollIntoView(true);
+        taskCards[taskCards.length - 1].scrollIntoView(true);
       }
     }
   });
@@ -149,11 +150,11 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   const scenarioMsg = contentData.taskInstructions?.message;
   const categories = Array.from(taskMap.keys());
   const numTasks = categories.length === 0 ? 0 :
-                     categories.map(category => TaskCard.filterTasks(taskMap.get(category) ?? []))
-                       .flat()
-                       .map(card => card.tasks)
-                       .map(tasks => tasks.length)
-                       .reduce((prev, n) => prev + n);
+    categories.map(category => TaskCard.filterTasks(taskMap.get(category) ?? []))
+      .flat()
+      .map(card => card.tasks)
+      .map(tasks => tasks.length)
+      .reduce((prev, n) => prev + n);
 
   const handleAdoExport = () => {
     let csv = "Work Item Type,Title,Description\n";
@@ -169,63 +170,61 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         }
       }
     }
-    const blob = new Blob([csv], {type: "text/csv"});
+    const blob = new Blob([csv], { type: "text/csv" });
     saveAs(blob, "scenarios.csv");
   }
 
   return (
-      <>
-        <div id="title-bar" className="title-bar py-2">
-          <span className="title-bar-text ml-3">HAX Playbook</span>
-          <div style={{marginLeft: "auto"}} className="d-flex justify-content-end">
-            <button onClick={handleAdoExport} className="blue-button">Export to ADO</button>
-            <button onClick={() => setShowGithubForm(true)} className="blue-button ml-3">Export to Github</button>
-            <button onClick={() => window.print()} className="blue-button mx-3">Download report</button>
+    <>
+      <div id="title-bar" className="title-bar py-2">
+        <span className="title-bar-text ml-3">HAX Playbook</span>
+        <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
+          <button onClick={handleAdoExport} className="blue-button">Export to ADO</button>
+          <button onClick={() => setShowGithubForm(true)} className="blue-button ml-3">Export to Github</button>
+          <button onClick={() => window.print()} className="blue-button mx-3">Download report</button>
+        </div>
+      </div>
+      <div id="grid-container" className="grid-container">
+        <div className="left-column">
+          <div className="my-3 column-header">
+            <span>{instructionHeader}</span>
           </div>
         </div>
-        <div id="grid-container" className="grid-container">
-          <div className="left-column">
-            <div className="my-3 column-header">
-              <span>{instructionHeader}</span>
-            </div>
+        <div className="right-column d-flex flex-row align-items-center">
+          <div className="my-3 column-header" >
+            <span>{scenarioHeader}</span>
           </div>
-          <div className="right-column d-flex flex-row align-items-center">
-            <div className="my-3 column-header" >
-              <span>{scenarioHeader}</span>
-            </div>
-            <span style={{marginLeft: "auto"}}>Total error scenarios:</span>
-            <div className="d-inline-block circle-text circle-text-large">
-              {numTasks}
-            </div>
-          </div>
-          <div className="left-column">
-            <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} />
-          </div>
-          <div className="right-column">
-            <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: scenarioMsg }} />
-          </div>
-          <div className="left-column bottom-shadow">
-            <button onClick={handleClear} className="blue-button">Start over</button>
-            <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
-          </div>
-          <div className="right-column bottom-shadow">
-            Tags here!
-          </div>
-          <div className="left-column pt-3 scroll-pane">
-            <Survey json={surveyData} onValueChanged={handleValueChanged} />
-          </div>
-          <div className="right-column scroll-pane">
-            <div className="">
-              <TaskList taskMap={taskMap} />
-            </div>
+          <span style={{ marginLeft: "auto" }}>Total error scenarios:</span>
+          <div className="d-inline-block circle-text circle-text-large">
+            {numTasks}
           </div>
         </div>
-        <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} hideForm={() => setShowGithubForm(false)}/>
-        <div id="footer" className="footer">
-          <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
-          <a style={{marginLeft: "auto", marginRight: "1em"}} href="mailto:aiguidelines@microsoft.com">Contact us</a>
+        <div className="left-column">
+          {instructionsMsg != null && instructionsMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
         </div>
-      </>
+        <div className="right-column">
+          {scenarioMsg != null && scenarioMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
+        </div>
+        <div className="left-column bottom-shadow py-3">
+          <button onClick={handleClear} className="blue-button">Start over</button>
+          <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
+        </div>
+        <div className="right-column bottom-shadow">
+          <CategoryList taskMap={taskMap} />
+        </div>
+        <div className="left-column pt-3 scroll-pane">
+          <Survey json={surveyData} onValueChanged={handleValueChanged} />
+        </div>
+        <div className="right-column scroll-pane">
+          <TaskList taskMap={taskMap} />
+        </div>
+      </div>
+      <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} hideForm={() => setShowGithubForm(false)} />
+      <div id="footer" className="footer">
+        <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
+        <a style={{ marginLeft: "auto", marginRight: "1em" }} href="mailto:aiguidelines@microsoft.com">Contact us</a>
+      </div>
+    </>
   );
 }
 

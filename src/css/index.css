@@ -39,6 +39,7 @@ a:hover, a:visited, a:active {
 .blue-button:hover {
   background-color: #00ECF2;
   color: #01395E;
+  border-radius: 2px;
 }
 
 .blue-button:active, .blue-button:focus {
@@ -47,17 +48,7 @@ a:hover, a:visited, a:active {
   outline: none;
 }
 
-.undo-button {
-  transition-duration: 0.3s;
-  cursor: pointer;
-  border: none;
-}
-
-.undo-button:hover {
-  background-color: #CFCFCF;
-}
-
-.undo-button:disabled {
+.blue-button:disabled {
   background-color: #999999;
   cursor: not-allowed;
 }
@@ -67,7 +58,7 @@ a:hover, a:visited, a:active {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto 1fr;
-  align-items: start;
+  align-items: stretch;
   overflow: hidden;
 }
 
@@ -123,6 +114,13 @@ a:hover, a:visited, a:active {
   display: flex;
   flex-direction: row;
   font-size: 2rem;
+}
+
+.category-tag {
+  padding: 0em 0.75em;
+  background: rgba(23, 143, 232, 0.2);
+  color: black;
+  border-radius: 2px;
 }
 
 .circle-text {

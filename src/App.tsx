@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { ReactSurveyModel, Survey } from 'survey-react';
 import Intro from './components/Intro';
 import TaskList from './components/TaskList';
-import CategoryList from './components/CategoryList';
+import CategoryTags from './components/CategoryTags';
 import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes';
 import GithubExportForm from './components/GithubExportForm';
@@ -195,7 +195,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <span>{scenarioHeader}</span>
           </div>
           <span style={{ marginLeft: "auto" }}>Total error scenarios:</span>
-          <div className="d-inline-block circle-text circle-text-large">
+          <div className="circle-text circle-text-large">
             {numTasks}
           </div>
         </div>
@@ -210,7 +210,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
         </div>
         <div className="right-column bottom-shadow">
-          <CategoryList taskMap={taskMap} />
+          <CategoryTags taskMap={taskMap} />
         </div>
         <div className="left-column pt-3 scroll-pane">
           <Survey json={surveyData} onValueChanged={handleValueChanged} />

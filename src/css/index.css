@@ -41,6 +41,7 @@ a:hover, a:visited, a:active {
   background-color: #58C1FD;
   border: solid #58C1FD 1px;
   color: #01395E;
+  border-radius: 2px;
 }
 
 .blue-button:active:enabled, .blue-button:focus:enabled {

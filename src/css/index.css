@@ -29,28 +29,30 @@ a:hover, a:visited, a:active {
 
 .blue-button {
   background-color: #01395E;
-  color: #00ECF2;
-  border: solid #00ECF2 1px;
+  color: #6CCAFF;
+  border: solid #6CCAFF 1px;
+  border-radius: 2px;
   padding: 0em 0.75em;
   height: 2em;
   transition-duration: 0.3s;
 }
 
-.blue-button:hover {
-  background-color: #00ECF2;
+.blue-button:hover:enabled {
+  background-color: #58C1FD;
+  border: solid #58C1FD 1px;
   color: #01395E;
-  border-radius: 2px;
 }
 
-.blue-button:active, .blue-button:focus {
-  background-color: #00B8BC;
+.blue-button:active:enabled, .blue-button:focus:enabled {
+  background-color: #2EB3FF;
+  border: solid #58C1FD 1px;
   color: #01395E;
   outline: none;
 }
 
 .blue-button:disabled {
-  background-color: #999999;
-  cursor: not-allowed;
+  border: solid #A19F9D 1px;
+  color: #A19F9D;
 }
 
 .grid-container {
@@ -78,6 +80,10 @@ a:hover, a:visited, a:active {
   overflow-y: scroll;
   align-self: stretch;
   justify-self: stretch;
+}
+
+.right-column.scroll-pane {
+  background-color: #F2F6F8;
 }
 
 .bottom-shadow {

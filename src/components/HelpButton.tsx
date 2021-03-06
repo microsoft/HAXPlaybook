@@ -15,7 +15,7 @@ const HelpButton: React.FunctionComponent<HelpButtonProps> = ({ name, examples }
 
   return (
     <>
-      <BsFillQuestionCircleFill color="#00ECF2" style={{ cursor: 'pointer', marginTop: "-3px" }} onClick={() => setShowHelp(true)} />
+      <BsFillQuestionCircleFill color="#6CCAFF" style={{ cursor: 'pointer', marginTop: "-3px" }} onClick={() => setShowHelp(true)} />
       <Help name={name} examples={examples} show={showHelp} onClose={() => setShowHelp(false)} />
     </>
   );

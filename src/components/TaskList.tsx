@@ -16,7 +16,7 @@ const TaskList: React.FunctionComponent<TaskListProps> = ({ taskMap }) => {
   return (
     <div style={{marginBottom: "3rem"}}>
       {categories.map(category => (
-        <CollapsibleSection taskMap={taskMap} category={category}/>
+        <CollapsibleSection key={category} taskMap={taskMap} category={category}/>
       ))}
     </div>
   )

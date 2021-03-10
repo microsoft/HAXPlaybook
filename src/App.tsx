@@ -15,6 +15,7 @@ import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes';
 import GithubExportForm from './components/GithubExportForm';
 import { BsArrowCounterclockwise } from 'react-icons/bs';
 import { saveAs } from 'file-saver';
+import { getCategorySectionId } from './util/Utils';
 
 interface AppProps {
   surveyData: any,
@@ -102,6 +103,10 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     questions.forEach(q => {
       q.clearValue();
     });
+  }
+
+  const handleCategoryClick = (category: string) => {
+    document.getElementById(getCategorySectionId(category))?.scrollIntoView(true);
   }
 
   useEffect(() => {
@@ -210,7 +215,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
         </div>
         <div className="right-column bottom-shadow">
-          <CategoryTags taskMap={taskMap} />
+          <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />
         </div>
         <div className="left-column pt-3 scroll-pane">
           <Survey json={surveyData} onValueChanged={handleValueChanged} />

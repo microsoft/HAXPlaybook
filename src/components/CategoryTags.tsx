@@ -7,17 +7,18 @@ import React from 'react'
 import { TaskCard } from '../models/Types';
 
 interface CategoryTagsProps {
-  taskMap: Map<string, TaskCard[]>
+  taskMap: Map<string, TaskCard[]>,
+  onClick: (category: string) => void
 }
 
-const CategoryTags: React.FunctionComponent<CategoryTagsProps> = ({ taskMap }) => {
+const CategoryTags: React.FunctionComponent<CategoryTagsProps> = ({ taskMap, onClick }) => {
   const categories = Array.from(taskMap.keys());
   return (
     <>
       {categories.map(category => {
         const tasks = TaskCard.filterTasks(taskMap.get(category) ?? []);
         const numTasks = tasks.map(task => task.tasks.length).reduce((prev, n) => prev + n) ?? 0;
-        return (<div className="category-tag"><span>{category}</span><div className="circle-text circle-text-small">{numTasks}</div></div>)
+        return (<div className="category-tag" onClick={() => onClick(category)}><span>{category}</span><div className="circle-text circle-text-small">{numTasks}</div></div>)
       })}
     </>
   )

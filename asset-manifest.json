@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/HAXPlaybook-PR/static/css/main.3f64204e.chunk.css",
+    "main.js": "/HAXPlaybook-PR/static/js/main.fa1eb3d6.chunk.js",
+    "main.js.map": "/HAXPlaybook-PR/static/js/main.fa1eb3d6.chunk.js.map",
+    "runtime-main.js": "/HAXPlaybook-PR/static/js/runtime-main.b929cffa.js",
+    "runtime-main.js.map": "/HAXPlaybook-PR/static/js/runtime-main.b929cffa.js.map",
+    "static/css/2.20aa2d7b.chunk.css": "/HAXPlaybook-PR/static/css/2.20aa2d7b.chunk.css",
+    "static/js/2.1cdedf78.chunk.js": "/HAXPlaybook-PR/static/js/2.1cdedf78.chunk.js",
+    "static/js/2.1cdedf78.chunk.js.map": "/HAXPlaybook-PR/static/js/2.1cdedf78.chunk.js.map",
+    "static/js/3.fb761be0.chunk.js": "/HAXPlaybook-PR/static/js/3.fb761be0.chunk.js",
+    "static/js/3.fb761be0.chunk.js.map": "/HAXPlaybook-PR/static/js/3.fb761be0.chunk.js.map",
+    "index.html": "/HAXPlaybook-PR/index.html",
+    "static/css/2.20aa2d7b.chunk.css.map": "/HAXPlaybook-PR/static/css/2.20aa2d7b.chunk.css.map",
+    "static/css/main.3f64204e.chunk.css.map": "/HAXPlaybook-PR/static/css/main.3f64204e.chunk.css.map",
+    "static/js/2.1cdedf78.chunk.js.LICENSE.txt": "/HAXPlaybook-PR/static/js/2.1cdedf78.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b929cffa.js",
+    "static/css/2.20aa2d7b.chunk.css",
+    "static/js/2.1cdedf78.chunk.js",
+    "static/css/main.3f64204e.chunk.css",
+    "static/js/main.fa1eb3d6.chunk.js"
+  ]
+}

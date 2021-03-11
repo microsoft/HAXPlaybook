@@ -176,7 +176,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       }
     }
     const blob = new Blob([csv], { type: "text/csv" });
-    saveAs(blob, "scenarios.csv");
+    saveAs(blob, "azureDevOps.csv");
   }
 
   return (
@@ -184,9 +184,9 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       <div id="title-bar" className="title-bar py-2">
         <span className="title-bar-text ml-3">HAX Playbook</span>
         <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
-          <button onClick={handleAdoExport} className="blue-button">Export to ADO</button>
+          <button onClick={handleAdoExport} className="blue-button">Export CSV</button>
           <button onClick={() => setShowGithubForm(true)} className="blue-button ml-3">Export to Github</button>
-          <button onClick={() => window.print()} className="blue-button mx-3">Download report</button>
+          <button onClick={() => window.print()} className="blue-button mx-3">Print report</button>
         </div>
       </div>
       <div id="grid-container" className="grid-container">
@@ -199,7 +199,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           <div className="my-3 column-header" >
             <span>{scenarioHeader}</span>
           </div>
-          <span style={{ marginLeft: "auto" }}>Total error scenarios:</span>
+          <span style={{ marginLeft: "auto" }}>Total scenarios:</span>
           <div className="circle-text circle-text-large">
             {numTasks}
           </div>

@@ -296,3 +296,41 @@ a:hover, a:visited, a:active {
     font-size: 50%;
   }
 }
+
+@media print {
+  .grid-container {
+    display: block;
+  }
+
+  .title-bar {
+    display: none;
+  }
+
+  .left-column {
+    display: none;
+  }
+
+  /* Content will be clipped without this */
+  * {
+    overflow: visible !important;
+  }
+
+  .footer {
+    display: none;
+  }
+
+  .circle-text {
+    color: black;
+    border: solid black 1px;
+    background-color: white;
+  }
+
+  .category-tag {
+    border: dashed black 2px
+  }
+
+  .scenario-bar {
+    border-top: solid black 1px;
+  }
+
+}

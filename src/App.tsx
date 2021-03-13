@@ -5,7 +5,7 @@
 // This component manages the state of the survey and determines
 // which page to show based on the status of the survey.
 
-import React, { useEffect, useState } from 'react';
+import React, { createElement, useEffect, useState } from 'react';
 import { ReactSurveyModel, Survey } from 'survey-react';
 import Intro from './components/Intro';
 import TaskList from './components/TaskList';
@@ -22,7 +22,9 @@ interface AppProps {
   contentData: any
 }
 
-// Captures the survey model object upon the first time handleValueChanged is called
+let isFirstRender = true;
+
+// Captures the survey model object after the page renders
 // Exposes some encapsulated state needed for undo functionality
 export let surveyModel: ReactSurveyModel;
 
@@ -56,7 +58,6 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
 
   const handleValueChanged = (sender: ReactSurveyModel, options: SurveyValueChangedOptions) => {
     console.log("ValueChanged", sender, options);
-    surveyModel = sender;
     const questions = sender.getAllQuestions();
     const valueMap = new Map<string, string>();
     questions.forEach(q => {
@@ -66,6 +67,97 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       valueMap.set(q.name, q.value);
     });
     setUndoStack([...undoStack, valueMap]);
+  }
+
+  function deserializeState(state: string) {
+    console.log("Deserializing state: ", state);
+    let regex = /^[0-9x]*$/g;
+    if (!regex.test(state)) {
+      console.error("Unsupported state string: ", state);
+      return;
+    }
+
+    const questions = surveyModel.getAllQuestions();
+    if (state.length !== questions.length) {
+      console.error("State string length != number of questions");
+      return;
+    }
+
+    const valueMap = new Map<string, string>();
+    let stateIx = 0;
+    for (let i = 0; i < surveyData.pages?.length; i++) {
+      const page = surveyData.pages[i];
+      for (let j = 0; j < page.elements?.length; j++) {
+        if (stateIx > state.length) {
+          console.error("survey.json contains more questions than state");
+          return;
+        }
+        if (state.charAt(stateIx) === "x") {
+          stateIx++;
+          continue;
+        }
+        const choiceIx = parseInt(state.charAt(stateIx));
+        const value = page.elements[j].choices[choiceIx];
+        const questionName = page.elements[j].name;
+        if (value) {
+          valueMap.set(questionName, value);
+        } else {
+          console.error(`Choice not found for state index=${stateIx}`);
+          return;
+        }
+        stateIx++;
+      }
+    }
+
+    questions.forEach(q => {
+      q.value = valueMap.get(q.name);
+    });
+    setUndoStack([valueMap]);
+    console.log("Deserialization successful", valueMap);
+  }
+
+  const handleAfterRender = (sender: ReactSurveyModel, options: any) => {
+    console.log("AfterRender", sender, options);
+    surveyModel = sender;
+    // Todo: Deserialize query string (1st time only!)
+    if (isFirstRender) {
+      isFirstRender = false;
+      const urlParams = new URLSearchParams(window.location.search);
+      const state = urlParams.get('state');
+      if (state) {
+        deserializeState(state);
+      }
+    }
+  }
+
+  const handleSerialize = () => {
+    if (surveyModel == null) {
+      console.log("Can't serialize: surveyModel is undefined");
+      return;
+    }
+
+    // Values is a map of {questionName: questionValue}
+    const values = surveyModel.getAllValues();
+    let serialized = "";
+    for (let i = 0; i < surveyData.pages?.length; i++) {
+      let page = surveyData.pages[i];
+      for (let j = 0; j < page.elements?.length; j++) {
+        let choices = page.elements[j].choices;
+        let questionName = page.elements[j].name;
+        let found = false;
+        for (let k = 0; k < choices?.length && !found; k++) {
+          if (values[questionName] === choices[k].value) {
+            serialized += k;
+            found = true;
+          }
+        }
+        if (!found) {
+          serialized += "x";
+        }
+      }
+    }
+
+    console.log(`Serialized state: ${serialized}`);
   }
 
   const handleUndo = () => {
@@ -186,6 +278,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
           <button onClick={handleAdoExport} className="blue-button">Export CSV</button>
           <button onClick={() => setShowGithubForm(true)} className="blue-button ml-3">Export to Github</button>
+          <button onClick={handleSerialize} className="blue-button ml-3">Serialize</button>
           <button onClick={() => window.print()} className="blue-button mx-3">Print report</button>
         </div>
       </div>
@@ -218,7 +311,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />
         </div>
         <div className="left-column pt-3 scroll-pane">
-          <Survey json={surveyData} onValueChanged={handleValueChanged} />
+          <Survey json={surveyData} onAfterRenderPage={handleAfterRender} onValueChanged={handleValueChanged} />
         </div>
         <div className="right-column scroll-pane">
           <TaskList taskMap={taskMap} />

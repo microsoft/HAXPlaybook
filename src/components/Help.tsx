@@ -28,7 +28,7 @@ function filterExamples(examples: Array<any>) {
 
 const App: React.FunctionComponent<HelpProps> = ({ name, examples, show, onClose }) => {
   const visibleExamples = filterExamples(examples);
-  console.log(`Filtered ${visibleExamples.length} visible examples out of ${examples.length} total examples for help=${name}`);
+  console.debug(`Filtered ${visibleExamples.length} visible examples out of ${examples.length} total examples for help=${name}`);
   const body = visibleExamples?.map((example, i) => {
     return (
       <>

@@ -97,7 +97,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           continue;
         }
         const choiceIx = parseInt(state.charAt(stateIx));
-        const value = page.elements[j].choices[choiceIx];
+        const value = page.elements[j].choices[choiceIx]?.value;
         const questionName = page.elements[j].name;
         if (value) {
           valueMap.set(questionName, value);
@@ -130,10 +130,10 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     }
   }
 
-  const handleSerialize = () => {
+  const serializeState = () => {
     if (surveyModel == null) {
       console.log("Can't serialize: surveyModel is undefined");
-      return;
+      return "";
     }
 
     // Values is a map of {questionName: questionValue}
@@ -157,7 +157,14 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       }
     }
 
-    console.log(`Serialized state: ${serialized}`);
+    return serialized;
+  }
+
+  const handleCopyLink = () => {
+    const state = serializeState()
+    const url = window.location.origin + "?state=" + state;
+    // In Chrome, this only works if page served with https
+    navigator.clipboard.writeText(url);
   }
 
   const handleUndo = () => {
@@ -278,7 +285,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
           <button onClick={handleAdoExport} className="blue-button">Export CSV</button>
           <button onClick={() => setShowGithubForm(true)} className="blue-button ml-3">Export to Github</button>
-          <button onClick={handleSerialize} className="blue-button ml-3">Serialize</button>
+          <button onClick={handleCopyLink} className="blue-button ml-3">Copy shareable link</button>
           <button onClick={() => window.print()} className="blue-button mx-3">Print report</button>
         </div>
       </div>

@@ -56,19 +56,6 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
 
   console.log("STATE: showIntro=", showIntro, " undo=", undoStack);
 
-  const handleValueChanged = (sender: ReactSurveyModel, options: SurveyValueChangedOptions) => {
-    console.log("ValueChanged", sender, options);
-    const questions = sender.getAllQuestions();
-    const valueMap = new Map<string, string>();
-    questions.forEach(q => {
-      if (!q.isVisible) {
-        q.clearValue();
-      }
-      valueMap.set(q.name, q.value);
-    });
-    setUndoStack([...undoStack, valueMap]);
-  }
-
   function deserializeState(state: string) {
     console.log("Deserializing state: ", state);
     let regex = /^[0-9x]*$/g;
@@ -116,20 +103,6 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     console.log("Deserialization successful", valueMap);
   }
 
-  const handleAfterRender = (sender: ReactSurveyModel, options: any) => {
-    console.log("AfterRender", sender, options);
-    surveyModel = sender;
-    // Todo: Deserialize query string (1st time only!)
-    if (isFirstRender) {
-      isFirstRender = false;
-      const urlParams = new URLSearchParams(window.location.search);
-      const state = urlParams.get('state');
-      if (state) {
-        deserializeState(state);
-      }
-    }
-  }
-
   const serializeState = () => {
     if (surveyModel == null) {
       console.log("Can't serialize: surveyModel is undefined");
@@ -160,12 +133,44 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     return serialized;
   }
 
+  const handleAfterRender = (sender: ReactSurveyModel, options: any) => {
+    console.log("AfterRender", sender, options);
+    surveyModel = sender;
+    // Todo: Deserialize query string (1st time only!)
+    if (isFirstRender) {
+      isFirstRender = false;
+      const urlParams = new URLSearchParams(window.location.search);
+      const state = urlParams.get('state');
+      if (state) {
+        deserializeState(state);
+      }
+    }
+  }
+
+  const handleValueChanged = (sender: ReactSurveyModel, options: SurveyValueChangedOptions) => {
+    console.log("ValueChanged", sender, options);
+    const questions = sender.getAllQuestions();
+    const valueMap = new Map<string, string>();
+    questions.forEach(q => {
+      if (!q.isVisible) {
+        q.clearValue();
+      }
+      valueMap.set(q.name, q.value);
+    });
+    setUndoStack([...undoStack, valueMap]);
+    const url = new URL(window.location.toString());
+    url.searchParams.set("state", serializeState());
+    window.history.replaceState({}, '', url.toString());
+  }
+
+  /*
   const handleCopyLink = () => {
     const state = serializeState()
     const url = window.location.origin + "?state=" + state;
     // In Chrome, this only works if page served with https
     navigator.clipboard.writeText(url);
   }
+  */
 
   const handleUndo = () => {
     if (surveyModel == null) {
@@ -285,7 +290,6 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
           <button onClick={handleAdoExport} className="blue-button">Export CSV</button>
           <button onClick={() => setShowGithubForm(true)} className="blue-button ml-3">Export to Github</button>
-          <button onClick={handleCopyLink} className="blue-button ml-3">Copy shareable link</button>
           <button onClick={() => window.print()} className="blue-button mx-3">Print report</button>
         </div>
       </div>

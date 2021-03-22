@@ -1,31 +1,35 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
-// This component renders the card for a task
+// This component renders the card for a group of tasks
+// The rendered structure looks like this:
+//
+// <message>
+// <task_1>
+// ...
+// <task_n>
 
 import React from 'react'
 import { TaskCard } from '../models/Types';
+import TaskComponent from './TaskComponent';
 
 interface TaskCardProps {
   card: TaskCard;
 }
 
-const App: React.FunctionComponent<TaskCardProps> = ({ card }) => {
+const TaskCardComponent: React.FunctionComponent<TaskCardProps> = ({ card }) => {
   const hasMessage = card.message != null && card.message.length > 0;
   return (
     <div className="normal-text">
       { hasMessage ? <div className="my-3" dangerouslySetInnerHTML={{ __html: card.message }} /> : null}
       { card.tasks.length !== 0 ? 
-        <div>
+        <>
           {card.tasks.map(task => (
-            <div key={task.id} className="task-card">
-              <span className="bold-text">{task.name}</span>
-              <div dangerouslySetInnerHTML={{ __html: task.details }} />
-            </div>
+            <TaskComponent task={task}/>
           ))}
-        </div> : null }
+        </> : null }
     </div>
   )
 }
 
-export default App;
+export default TaskCardComponent;

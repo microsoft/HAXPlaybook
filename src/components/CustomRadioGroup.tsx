@@ -5,6 +5,7 @@ import { SurveyQuestionRadiogroup } from 'survey-react';
 import * as React from 'react';
 import contentData from '../data/content.json';
 import RadioDefinition from './RadioDefinition';
+import HelpButton from './HelpButton';
 
 export class CustomRadiogroup extends SurveyQuestionRadiogroup {
   protected getItems(cssClasses: any): Array<any> {
@@ -16,10 +17,11 @@ export class CustomRadiogroup extends SurveyQuestionRadiogroup {
       const contentChoice = contentQuestion.choices.find((cq: any) => cq.name === choice.value);
       return (
         contentChoice != null ? (
-          <RadioDefinition key={contentChoice.name + "__customradiogroup"}
-                           name={choice.text} 
-                           definition={contentChoice.definition}
-                           examples={contentChoice.examples} />
+          <>
+            <HelpButton name={choice.text} examples={contentChoice.examples} />
+            <RadioDefinition key={contentChoice.name + "__customradiogroup"}
+                            definition={contentChoice.definition}  />
+          </>
         ) : null
       )
     });

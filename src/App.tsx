@@ -13,7 +13,7 @@ import CategoryTags from './components/CategoryTags';
 import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes';
 import GithubExportForm from './components/GithubExportForm';
-import { BsArrowCounterclockwise } from 'react-icons/bs';
+import { BsArrowCounterclockwise, BsChevronRight } from 'react-icons/bs';
 import { saveAs } from 'file-saver';
 import { getCategorySectionId } from './util/Utils';
 
@@ -22,11 +22,15 @@ interface AppProps {
   contentData: any
 }
 
-let isFirstRender = true;
-
 // Captures the survey model object after the page renders
 // Exposes some encapsulated state needed for undo functionality
 export let surveyModel: ReactSurveyModel;
+
+// SurveyJS will re-render its component when pages are changed or when the
+// app switches from mobile to desktop view. Some things need to only happen
+// on the first render.
+let isFirstRender = true;
+let isDeserializing = false;
 
 function createTaskMap(contentData: any) {
   const questions = surveyModel?.getAllQuestions() ?? [];
@@ -49,14 +53,45 @@ function createTaskMap(contentData: any) {
   return taskMap;
 }
 
+function isWideScreen() {
+  return window.innerWidth > 425;
+}
+
+function arrangeSurveyPages(surveyData: any, isMobileLayout: boolean) {
+  const surveyQuestions = [];
+  for (let i = 0; i < surveyData.pages?.length; i++) {
+    const page = surveyData.pages[i];
+    for (let j = 0; j < page.elements?.length; j++) {
+      surveyQuestions.push(page.elements[j]);
+    }
+  }
+  surveyData.pages = [];
+  if (isMobileLayout) {
+    // Split the survey into multiple pages
+    for (let q of surveyQuestions) {
+      surveyData.pages.push({ elements: [q] });
+    }
+  } else {
+    // Combine all pages into 1 page
+    surveyData.pages.push({ elements: surveyQuestions });
+  }
+  return surveyData;
+}
+
 const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => {
   const [showIntro, setShowIntro] = useState(true);
+  const [showSurvey, setShowSurvey] = useState(true);
   const [undoStack, setUndoStack] = useState(new Array<Map<string, string>>());
   const [showGithubForm, setShowGithubForm] = useState(false);
+  const [isMobileLayout, setMobileLayout] = useState(!isWideScreen());
 
-  console.log("STATE: showIntro=", showIntro, " undo=", undoStack);
+  console.log("STATE: showIntro=", showIntro, " showSurvey=", showSurvey,
+    " showGithubForm=", showGithubForm, " isMobileLayout=", isMobileLayout,
+    " undo=", undoStack);
 
-  function deserializeState(state: string) {
+  //surveyData = arrangeSurveyPages(surveyData, isMobileLayout);
+
+  const deserializeState = (state: string) => {
     console.log("Deserializing state: ", state);
     let regex = /^[0-9x]*$/g;
     if (!regex.test(state)) {
@@ -71,35 +106,40 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     }
 
     const valueMap = new Map<string, string>();
-    let stateIx = 0;
+    let numQuestions = 0;
+    isDeserializing = true;
     for (let i = 0; i < surveyData.pages?.length; i++) {
       const page = surveyData.pages[i];
       for (let j = 0; j < page.elements?.length; j++) {
-        if (stateIx > state.length) {
+        numQuestions++;
+        if (numQuestions > state.length) {
           console.error("survey.json contains more questions than state");
+          isDeserializing = false;
           return;
         }
-        if (state.charAt(stateIx) === "x") {
-          stateIx++;
+        if (state.charAt(j) === "x") {
           continue;
         }
-        const choiceIx = parseInt(state.charAt(stateIx));
+        const choiceIx = parseInt(state.charAt(j));
         const value = page.elements[j].choices[choiceIx]?.value;
         const questionName = page.elements[j].name;
         if (value) {
           valueMap.set(questionName, value);
         } else {
-          console.error(`Choice not found for state index=${stateIx}`);
+          console.error(`Choice not found for state index=${j}`);
+          isDeserializing = false;
           return;
         }
-        stateIx++;
       }
     }
 
     questions.forEach(q => {
       q.value = valueMap.get(q.name);
     });
-    setUndoStack([valueMap]);
+    if (isFirstRender) {
+      setUndoStack([valueMap]);
+    }
+    isDeserializing = false;
     console.log("Deserialization successful", valueMap);
   }
 
@@ -130,28 +170,31 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       }
     }
 
+    console.log("Serialized state: ", serialized);
     return serialized;
   }
 
   const handleAfterRender = (sender: ReactSurveyModel, options: any) => {
     console.log("AfterRender", sender, options);
     surveyModel = sender;
-    // Todo: Deserialize query string (1st time only!)
-    if (isFirstRender) {
-      isFirstRender = false;
-      const urlParams = new URLSearchParams(window.location.search);
-      const state = urlParams.get('state');
-      if (state) {
-        deserializeState(state);
-      }
+    const urlParams = new URLSearchParams(window.location.search);
+    const state = urlParams.get('state');
+    if (state) {
+      deserializeState(state);
     }
+    isFirstRender = false;
   }
 
   const handleValueChanged = (sender: ReactSurveyModel, options: SurveyValueChangedOptions) => {
+    if (isDeserializing) {
+      return;
+    }
     console.log("ValueChanged", sender, options);
     const questions = sender.getAllQuestions();
     const valueMap = new Map<string, string>();
     questions.forEach(q => {
+      // Clear answers from invisible questions
+      // Questions can become invisible when the user changes a previous selection
       if (!q.isVisible) {
         q.clearValue();
       }
@@ -216,25 +259,44 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   useEffect(() => {
     if (showIntro) return;
 
+    // Resize the page to fill the screen vertically
     const titleBar = document.getElementById("title-bar");
-    const grid = document.getElementById("grid-container");
-    const footer = document.getElementById("footer");
-    if (grid) {
-      grid.style.height = `calc(100vh - ${footer?.offsetHeight}px - ${titleBar?.offsetHeight}px)`;
+    if (isMobileLayout) {
+      const surveyContainer = document.getElementById("survey-container");
+      if (surveyContainer) {
+        surveyContainer.style.height = `calc(100vh - ${titleBar?.offsetHeight}px)`;
+      }
+      const scenarioContainer = document.getElementById("scenario-header-container");
+      if (scenarioContainer) {
+        scenarioContainer.style.height = "";
+      }
+    } else {
+      const footer = document.getElementById("footer");
+      const grid = document.getElementById("grid-container");
+      if (grid) {
+        grid.style.height = `calc(100vh - ${footer?.offsetHeight}px - ${titleBar?.offsetHeight}px)`;
+      }
     }
 
+    // Auto-scroll when the user selects a choice
     const svRows = document.getElementsByClassName("sv_row");
     if (svRows.length > 0) {
       svRows[svRows.length - 1].scrollIntoView(true);
     }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const autoScrollScenarios = urlParams.get('autoScrollScenarios');
-    if (autoScrollScenarios === "true") {
-      const taskCards = document.getElementsByClassName("task-card");
-      if (taskCards.length > 0) {
-        taskCards[taskCards.length - 1].scrollIntoView(true);
+    const handleResize = () => {
+      if (isMobileLayout && isWideScreen()) {
+        console.log("Switching to desktop layout");
+        setMobileLayout(false);
+      } else if (!isMobileLayout && !isWideScreen()) {
+        console.log("Switching to mobile layout");
+        setMobileLayout(true);
       }
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
     }
   });
 
@@ -283,58 +345,116 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     saveAs(blob, "azureDevOps.csv");
   }
 
-  return (
-    <>
-      <div id="title-bar" className="title-bar py-2">
-        <span className="title-bar-text ml-3">HAX Playbook</span>
-        <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
-          <button onClick={handleAdoExport} className="blue-button">Export CSV</button>
-          <button onClick={() => setShowGithubForm(true)} className="blue-button ml-3">Export to Github</button>
-          <button onClick={() => window.print()} className="blue-button mx-3">Print report</button>
-        </div>
+  if (isMobileLayout) {
+    return (
+      <div>
+        { showSurvey ?
+          <>
+            <div id="title-bar" className="title-bar py-2">
+              <span className="title-bar-text">HAX Playbook</span>
+              <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
+                <button onClick={handleClear} className="blue-button">Start over</button>
+              </div>
+            </div>
+            <div onClick={() => setShowSurvey(false)} className="view-scenarios-bar py-2" id="view-scenarios-bar">
+              <span style={{ color: "white" }}>View testing scenarios</span>
+              <div className="circle-text circle-text-large">
+                {numTasks}
+              </div>
+              <BsChevronRight color="#708491" style={{marginLeft: "auto", fontSize: "24px", paddingRight: "2%" }}/>
+            </div>
+            <div className="left-column" id="survey-container">
+              <div className="column-header py-3">
+                <span style={{paddingLeft: "2%"}}>{instructionHeader}</span>
+              </div>
+              <Survey json={surveyData} onAfterRenderPage={handleAfterRender} onValueChanged={handleValueChanged} />
+            </div>
+          </>
+          :
+          <>
+            <div id="title-bar" className="title-bar py-2">
+              <span className="title-bar-text ml-3">HAX Playbook</span>
+              <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
+                <button onClick={() => {/*TODO*/return }} className="blue-button">Export</button>
+              </div>
+            </div>
+            <div className="title-bar py-2">
+              <button onClick={() => setShowSurvey(true)}>Back to survey</button>
+            </div>
+            <div className="right-column d-flex flex-row align-items-center" id="scenario-header-container">
+              <div className="my-3 column-header" >
+                <span>{scenarioHeader}</span>
+              </div>
+              <span style={{ marginLeft: "auto" }}>Total scenarios:</span>
+              <div className="circle-text circle-text-large">
+                {numTasks}
+              </div>
+            </div>
+            <div className="right-column">
+              {scenarioMsg != null && scenarioMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
+            </div>
+            <div className="right-column bottom-shadow">
+              <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />
+            </div>
+            <TaskList taskMap={taskMap} />
+          </>
+        }
       </div>
-      <div id="grid-container" className="grid-container">
-        <div className="left-column">
-          <div className="my-3 column-header">
-            <span>{instructionHeader}</span>
+    );
+  } else {
+    return (
+      <>
+        <div id="title-bar" className="title-bar py-2">
+          <span className="title-bar-text ml-3">HAX Playbook</span>
+          <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
+            <button onClick={handleAdoExport} className="blue-button">Export CSV</button>
+            <button onClick={() => setShowGithubForm(true)} className="blue-button ml-3">Export to Github</button>
+            <button onClick={() => window.print()} className="blue-button mx-3">Print report</button>
           </div>
         </div>
-        <div className="right-column d-flex flex-row align-items-center">
-          <div className="my-3 column-header" >
-            <span>{scenarioHeader}</span>
+        <div id="grid-container" className="grid-container">
+          <div className="left-column">
+            <div className="my-3 column-header">
+              <span>{instructionHeader}</span>
+            </div>
           </div>
-          <span style={{ marginLeft: "auto" }}>Total scenarios:</span>
-          <div className="circle-text circle-text-large">
-            {numTasks}
+          <div className="right-column d-flex flex-row align-items-center">
+            <div className="my-3 column-header" >
+              <span>{scenarioHeader}</span>
+            </div>
+            <span style={{ marginLeft: "auto" }}>Total scenarios:</span>
+            <div className="circle-text circle-text-large">
+              {numTasks}
+            </div>
+          </div>
+          <div className="left-column">
+            {instructionsMsg != null && instructionsMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
+          </div>
+          <div className="right-column">
+            {scenarioMsg != null && scenarioMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
+          </div>
+          <div className="left-column bottom-shadow py-3">
+            <button onClick={handleClear} className="blue-button">Start over</button>
+            <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
+          </div>
+          <div className="right-column bottom-shadow">
+            <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />
+          </div>
+          <div className="left-column pt-3 scroll-pane">
+            <Survey json={surveyData} onAfterRenderPage={handleAfterRender} onValueChanged={handleValueChanged} />
+          </div>
+          <div className="right-column scroll-pane">
+            <TaskList taskMap={taskMap} />
           </div>
         </div>
-        <div className="left-column">
-          {instructionsMsg != null && instructionsMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
+        <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} hideForm={() => setShowGithubForm(false)} />
+        <div id="footer" className="footer">
+          <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
+          <a style={{ marginLeft: "auto", marginRight: "1em" }} href="mailto:aiguidelines@microsoft.com">Contact us</a>
         </div>
-        <div className="right-column">
-          {scenarioMsg != null && scenarioMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
-        </div>
-        <div className="left-column bottom-shadow py-3">
-          <button onClick={handleClear} className="blue-button">Start over</button>
-          <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
-        </div>
-        <div className="right-column bottom-shadow">
-          <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />
-        </div>
-        <div className="left-column pt-3 scroll-pane">
-          <Survey json={surveyData} onAfterRenderPage={handleAfterRender} onValueChanged={handleValueChanged} />
-        </div>
-        <div className="right-column scroll-pane">
-          <TaskList taskMap={taskMap} />
-        </div>
-      </div>
-      <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} hideForm={() => setShowGithubForm(false)} />
-      <div id="footer" className="footer">
-        <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
-        <a style={{ marginLeft: "auto", marginRight: "1em" }} href="mailto:aiguidelines@microsoft.com">Contact us</a>
-      </div>
-    </>
-  );
+      </>
+    );
+  }
 }
 
 export default App;

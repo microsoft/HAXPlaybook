@@ -361,11 +361,11 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
               <div className="circle-text circle-text-large">
                 {numTasks}
               </div>
-              <BsChevronRight color="#708491" style={{marginLeft: "auto", fontSize: "24px", paddingRight: "2%" }}/>
+              <BsChevronRight color="#708491" style={{ marginLeft: "auto", fontSize: "24px", paddingRight: "2%" }} />
             </div>
             <div className="left-column" id="survey-container">
-              <div className="column-header py-3">
-                <span style={{paddingLeft: "2%"}}>{instructionHeader}</span>
+              <div className="column-header">
+                <span style={{ paddingLeft: "4%", paddingTop: "16px", fontSize: "22px", lineHeight: "26px", color: "#ACDEFB" }}>{instructionHeader}</span>
               </div>
               <Survey json={surveyData} onAfterRenderPage={handleAfterRender} onValueChanged={handleValueChanged} />
             </div>

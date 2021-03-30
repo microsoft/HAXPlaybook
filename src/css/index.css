@@ -190,6 +190,9 @@ a:hover, a:visited, a:active {
 }
 
 .light-text {
+  display: inline;
+  font-size: 0.85em;
+  margin-right: 0.75em;
   font-weight: 200;
 }
 
@@ -270,9 +273,6 @@ a:hover, a:visited, a:active {
   .column-header {
     font-size: 1.5rem;
   }
-  .radio-definition {
-    margin-left: 0px;
-  }
   .sv_main {
     width: 100% !important;
   }
@@ -306,14 +306,14 @@ a:hover, a:visited, a:active {
 
   .title-bar {
     font-size: 20px;
-    padding-left: 2%;
+    padding-left: 4%;
   }
 
   .view-scenarios-bar {
     display: flex;
     background-color: #042b46;
     font-size: 16px;
-    padding-left: 2%;
+    padding-left: 4%;
   }
 
   .left-column {
@@ -361,6 +361,50 @@ a:hover, a:visited, a:active {
     outline: none;
   }
 
+  .light-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .radio-definition {
+    margin-left: calc(1.75em + 3px);
+    margin-top: -2px;
+    margin-bottom: 12px;
+  }
+
+  /****************************/
+  /* SurveyJS style overrides */
+  /****************************/
+  .sv_complete_btn {
+    display: none
+  }
+
+  .sv_main {
+    font-size: 14px !important;
+    line-height: 20px !important;
+  }
+
+  .sv_main .sv_body {
+    background-color: #01395E !important;
+    border-top: none !important;
+    padding: 0px !important;
+  }
+
+  .sv_q.sv_qstn {
+    padding-left: 4% !important;
+    padding-right: 4% !important;
+    padding-top: 14px !important;
+  }
+
+  .sv_q_title {
+    font-weight: 450 !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+  }
+
+  .sv_main .sv_p_root > .sv_row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
+  }
 }
 
 @media print {

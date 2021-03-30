@@ -10,7 +10,7 @@ interface RadioDefinitionProps {
 const RadioDefinition: React.FunctionComponent<RadioDefinitionProps> = ({definition}) => {
   return (
     <div className="radio-definition">
-      <div className="light-text" style={{ display: "inline", fontSize: "0.85em", marginRight: "0.75em" }} dangerouslySetInnerHTML={{ __html: definition }}></div>
+      <div className="light-text" dangerouslySetInnerHTML={{ __html: definition }}></div>
     </div>);
 }
 

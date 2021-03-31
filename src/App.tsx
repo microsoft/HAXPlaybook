@@ -13,7 +13,7 @@ import CategoryTags from './components/CategoryTags';
 import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes';
 import GithubExportForm from './components/GithubExportForm';
-import { BsArrowCounterclockwise, BsChevronRight } from 'react-icons/bs';
+import { BsArrowCounterclockwise, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { saveAs } from 'file-saver';
 import { getCategorySectionId } from './util/Utils';
 
@@ -262,17 +262,23 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     // Resize the page to fill the screen vertically
     const titleBar = document.getElementById("title-bar");
     if (isMobileLayout) {
+      const viewScenariosBar = document.getElementById("view-scenarios-bar");
       const surveyContainer = document.getElementById("survey-container");
       if (surveyContainer) {
-        surveyContainer.style.height = `calc(100vh - ${titleBar?.offsetHeight}px)`;
+        if (viewScenariosBar) {
+          surveyContainer.style.height = `calc(100vh - ${titleBar?.offsetHeight}px - ${viewScenariosBar?.offsetHeight}px)`;
+        } else {
+          surveyContainer.style.height = `calc(100vh - ${titleBar?.offsetHeight}px)`;
+        }
       }
+
       const scenarioContainer = document.getElementById("scenario-header-container");
       if (scenarioContainer) {
         scenarioContainer.style.height = "";
       }
     } else {
       const footer = document.getElementById("footer");
-      const grid = document.getElementById("grid-container");
+      const grid = document.getElementById("two-column-grid");
       if (grid) {
         grid.style.height = `calc(100vh - ${footer?.offsetHeight}px - ${titleBar?.offsetHeight}px)`;
       }
@@ -349,13 +355,15 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     return (
       <div>
         { showSurvey ?
-          <>
+          <div className="mobile-grid">
             <div id="title-bar" className="title-bar py-2">
               <span className="title-bar-text">HAX Playbook</span>
               <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
-                <button onClick={handleClear} className="blue-button">Start over</button>
+                <button onClick={handleClear} className="blue-button">Restart</button>
+                <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
               </div>
             </div>
+            { numTasks > 0 ? 
             <div onClick={() => setShowSurvey(false)} className="view-scenarios-bar py-2" id="view-scenarios-bar">
               <span style={{ color: "white" }}>View testing scenarios</span>
               <div className="circle-text circle-text-large">
@@ -363,29 +371,33 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
               </div>
               <BsChevronRight color="#708491" style={{ marginLeft: "auto", fontSize: "24px", paddingRight: "2%" }} />
             </div>
-            <div className="left-column" id="survey-container">
+            : <div></div> }
+            <div className="left-column scroll-pane" id="survey-container">
               <div className="column-header">
                 <span style={{ paddingLeft: "4%", paddingTop: "16px", fontSize: "22px", lineHeight: "26px", color: "#ACDEFB" }}>{instructionHeader}</span>
               </div>
               <Survey json={surveyData} onAfterRenderPage={handleAfterRender} onValueChanged={handleValueChanged} />
             </div>
-          </>
+          </div>
           :
           <>
             <div id="title-bar" className="title-bar py-2">
-              <span className="title-bar-text ml-3">HAX Playbook</span>
+              <span className="title-bar-text">HAX Playbook</span>
               <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
                 <button onClick={() => {/*TODO*/return }} className="blue-button">Export</button>
               </div>
             </div>
-            <div className="title-bar py-2">
-              <button onClick={() => setShowSurvey(true)}>Back to survey</button>
+            <div onClick={() => setShowSurvey(true)} className="back-bar pt-3 pb-1">
+              <BsChevronLeft color="#004578" style={{ fontSize: "18px", paddingLeft: "2%", marginBottom: "4px" }} />
+              <div style={{display: "inline-block", marginLeft: "10px"}}>Back to survey</div>
             </div>
             <div className="right-column d-flex flex-row align-items-center" id="scenario-header-container">
-              <div className="my-3 column-header" >
-                <span>{scenarioHeader}</span>
+              <div className="mb-2 column-header" >
+                <span style={{fontSize: "22px", color:"#004578", fontWeight: "bold"}}>{scenarioHeader}</span>
               </div>
-              <span style={{ marginLeft: "auto" }}>Total scenarios:</span>
+            </div>
+            <div className="right-column mb-3">
+              <span style={{ fontSize: "14px" }}>Total scenarios:</span>
               <div className="circle-text circle-text-large">
                 {numTasks}
               </div>
@@ -412,7 +424,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <button onClick={() => window.print()} className="blue-button mx-3">Print report</button>
           </div>
         </div>
-        <div id="grid-container" className="grid-container">
+        <div id="two-column-grid" className="two-column-grid">
           <div className="left-column">
             <div className="my-3 column-header">
               <span>{instructionHeader}</span>

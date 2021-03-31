@@ -14,7 +14,7 @@ interface TaskListProps {
 const TaskList: React.FunctionComponent<TaskListProps> = ({ taskMap }) => {
   const categories = Array.from(taskMap.keys());
   return (
-    <div style={{marginBottom: "3rem"}}>
+    <div className="task-list" >
       {categories.map(category => (
         <CollapsibleSection key={category} taskMap={taskMap} category={category}/>
       ))}

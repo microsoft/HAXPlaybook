@@ -56,11 +56,20 @@ a:hover, a:visited, a:active {
   color: #A19F9D;
 }
 
-.grid-container {
+.two-column-grid {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto 1fr;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+.mobile-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr;
   align-items: stretch;
   overflow: hidden;
 }
@@ -131,6 +140,7 @@ a:hover, a:visited, a:active {
   border-radius: 2px;
   margin-right: 1em;
   margin-bottom: 1em;
+  font-size: 1rem;
 }
 
 .category-tag:hover {
@@ -200,8 +210,13 @@ a:hover, a:visited, a:active {
   font-weight: normal;
 }
 
-.bold-text {
+.task-header-text {
   font-weight: bold;
+  margin-left: 0.5em;
+}
+
+.task-card-caret {
+  font-size: 0.88rem;
 }
 
 .task-card {
@@ -215,6 +230,10 @@ a:hover, a:visited, a:active {
   margin-left: calc(1.75em + 3px);
   margin-top: -0.8em;
   line-height: 1.4em;
+}
+
+.task-list {
+  margin-bottom: 3rem;
 }
 
 /****************************/
@@ -314,6 +333,13 @@ a:hover, a:visited, a:active {
     background-color: #042b46;
     font-size: 16px;
     padding-left: 4%;
+    cursor: pointer;
+  }
+
+  .back-bar {
+    font-size: 14px;
+    color: #004578;
+    cursor: pointer;
   }
 
   .left-column {
@@ -342,9 +368,15 @@ a:hover, a:visited, a:active {
     margin-left: auto;
   }
 
+  .title-bar-text {
+    font-size: 20px;
+  }
+
   .blue-button {
     background-color: #011B2D;
     color: #6CCAFF;
+    font-size: 16px;
+    line-height: 20px;
     border: solid #6CCAFF 1px;
   }
 
@@ -370,6 +402,28 @@ a:hover, a:visited, a:active {
     margin-left: calc(1.75em + 3px);
     margin-top: -2px;
     margin-bottom: 12px;
+  }
+
+  .category-tag {
+    font-size: 12px;
+  }
+
+  .task-list {
+    margin-left: 2%;
+    margin-right: 2%;
+    font-size: 12px;
+  }
+  
+  .scenario-bar {
+    font-size: 14px;
+  }
+
+  .task-header-text {
+    font-size: 14px;
+  }
+
+  .task-card-caret {
+    font-size: 12px;
   }
 
   /****************************/
@@ -408,7 +462,7 @@ a:hover, a:visited, a:active {
 }
 
 @media print {
-  .grid-container {
+  .two-column-grid {
     display: block;
   }
 

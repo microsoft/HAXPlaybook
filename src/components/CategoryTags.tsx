@@ -18,7 +18,12 @@ const CategoryTags: React.FunctionComponent<CategoryTagsProps> = ({ taskMap, onC
       {categories.map(category => {
         const tasks = TaskCard.filterTasks(taskMap.get(category) ?? []);
         const numTasks = tasks.map(task => task.tasks.length).reduce((prev, n) => prev + n) ?? 0;
-        return (<div className="category-tag" onClick={() => onClick(category)}><span>{category}</span><div className="circle-text circle-text-small">{numTasks}</div></div>)
+        return (
+          <div className="category-tag" onClick={() => onClick(category)}>
+            <div style={{display: "inline-block", marginTop: "-5px"}}>{category}</div>
+            <div className="circle-text circle-text-small">{numTasks}</div>
+          </div>
+        )
       })}
     </>
   )

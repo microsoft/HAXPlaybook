@@ -13,8 +13,8 @@ const TaskComponent: React.FunctionComponent<TaskProps> = ({ task }) => {
   const [isExpanded, setExpanded] = useState(true);
   return (
     <div key={task.id} className="task-card" onClick={() => setExpanded(!isExpanded)}>
-      <span style={{fontSize: "0.88rem"}}>{isExpanded ? <BsFillCaretDownFill /> : <BsFillCaretRightFill />}</span>
-      <span className="bold-text ml-1">{task.name}</span>
+      <span className="task-header-caret">{isExpanded ? <BsFillCaretDownFill /> : <BsFillCaretRightFill />}</span>
+      <span className="task-header-text">{task.name}</span>
       {isExpanded ? <div dangerouslySetInnerHTML={{ __html: task.details }} /> : null}
     </div>
   )

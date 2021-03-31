@@ -13,6 +13,7 @@ import CategoryTags from './components/CategoryTags';
 import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes';
 import GithubExportForm from './components/GithubExportForm';
+import ExportDialog from './components/ExportDialog';
 import { BsArrowCounterclockwise, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { saveAs } from 'file-saver';
 import { getCategorySectionId } from './util/Utils';
@@ -82,6 +83,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   const [showIntro, setShowIntro] = useState(true);
   const [showSurvey, setShowSurvey] = useState(true);
   const [undoStack, setUndoStack] = useState(new Array<Map<string, string>>());
+  const [showExportForm, setShowExportForm] = useState(false);
   const [showGithubForm, setShowGithubForm] = useState(false);
   const [isMobileLayout, setMobileLayout] = useState(!isWideScreen());
 
@@ -384,7 +386,14 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <div id="title-bar" className="title-bar py-2">
               <span className="title-bar-text">HAX Playbook</span>
               <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
-                <button onClick={() => {/*TODO*/return }} className="blue-button">Export</button>
+                <button onClick={() => {/*TODO*/return }} className="blue-button mr-3">Export</button>
+                <ExportDialog 
+                  show={showExportForm}
+                  onClose={() => setShowExportForm(false)}
+                  onCsvExport={handleAdoExport}
+                  onGithubExport={() => setShowGithubForm(true)}
+                  onPdfExport={() => window.print()}
+                  onLinkExport={() => {return;}}/>
               </div>
             </div>
             <div onClick={() => setShowSurvey(true)} className="back-bar pt-3 pb-1">
@@ -419,10 +428,15 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         <div id="title-bar" className="title-bar py-2">
           <span className="title-bar-text ml-3">HAX Playbook</span>
           <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
-            <button onClick={handleAdoExport} className="blue-button">Export CSV</button>
-            <button onClick={() => setShowGithubForm(true)} className="blue-button ml-3">Export to Github</button>
-            <button onClick={() => window.print()} className="blue-button mx-3">Print report</button>
+            <button onClick={() => setShowExportForm(true)} className="blue-button mr-3">Export</button>
           </div>
+          <ExportDialog 
+            show={showExportForm}
+            onClose={() => setShowExportForm(false)}
+            onCsvExport={handleAdoExport}
+            onGithubExport={() => setShowGithubForm(true)}
+            onPdfExport={() => window.print()}
+            onLinkExport={() => {return;}}/>
         </div>
         <div id="two-column-grid" className="two-column-grid">
           <div className="left-column">
@@ -446,7 +460,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             {scenarioMsg != null && scenarioMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
           </div>
           <div className="left-column bottom-shadow py-3">
-            <button onClick={handleClear} className="blue-button">Start over</button>
+            <button onClick={handleClear} className="blue-button">Restart</button>
             <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
           </div>
           <div className="right-column bottom-shadow">

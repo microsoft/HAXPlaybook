@@ -12,6 +12,9 @@ import surveyData from './data/survey.json';
 import contentData from './data/content.json';
 import { ReactQuestionFactory } from 'survey-react';
 import { CustomRadiogroup } from './components/CustomRadioGroup';
+import { initializeIcons } from '@fluentui/react/lib/Icons';
+
+initializeIcons();
 
 // ReactQuestionFactory sets the type of component that will be rendered for a given
 // type of question

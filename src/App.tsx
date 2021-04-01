@@ -14,6 +14,7 @@ import { TaskCard } from './models/Types';
 import { SurveyValueChangedOptions } from './models/SurveyCallbackTypes';
 import GithubExportForm from './components/GithubExportForm';
 import ExportDialog from './components/ExportDialog';
+import LinkDialog from './components/LinkDialog';
 import { BsArrowCounterclockwise, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { saveAs } from 'file-saver';
 import { getCategorySectionId } from './util/Utils';
@@ -84,6 +85,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   const [showSurvey, setShowSurvey] = useState(true);
   const [undoStack, setUndoStack] = useState(new Array<Map<string, string>>());
   const [showExportForm, setShowExportForm] = useState(false);
+  const [showLinkDialog, setShowLinkDialog] = useState(false);
   const [showGithubForm, setShowGithubForm] = useState(false);
   const [isMobileLayout, setMobileLayout] = useState(!isWideScreen());
 
@@ -386,14 +388,17 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <div id="title-bar" className="title-bar py-2">
               <span className="title-bar-text">HAX Playbook</span>
               <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
-                <button onClick={() => {/*TODO*/return }} className="blue-button mr-3">Export</button>
+                <button onClick={() => { setShowExportForm(true) }} className="blue-button mr-3">Export</button>
                 <ExportDialog 
                   show={showExportForm}
                   onClose={() => setShowExportForm(false)}
                   onCsvExport={handleAdoExport}
                   onGithubExport={() => setShowGithubForm(true)}
                   onPdfExport={() => window.print()}
-                  onLinkExport={() => {return;}}/>
+                  onLinkExport={() => setShowLinkDialog(true)}/>
+                <LinkDialog 
+                  show={showLinkDialog}
+                  onClose={() => setShowLinkDialog(false)} />
               </div>
             </div>
             <div onClick={() => setShowSurvey(true)} className="back-bar pt-3 pb-1">
@@ -436,7 +441,10 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             onCsvExport={handleAdoExport}
             onGithubExport={() => setShowGithubForm(true)}
             onPdfExport={() => window.print()}
-            onLinkExport={() => {return;}}/>
+            onLinkExport={() => setShowLinkDialog(true)}/>
+          <LinkDialog 
+            show={showLinkDialog}
+            onClose={() => setShowLinkDialog(false)} />
         </div>
         <div id="two-column-grid" className="two-column-grid">
           <div className="left-column">

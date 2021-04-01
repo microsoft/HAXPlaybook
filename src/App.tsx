@@ -210,15 +210,6 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     window.history.replaceState({}, '', url.toString());
   }
 
-  /*
-  const handleCopyLink = () => {
-    const state = serializeState()
-    const url = window.location.origin + "?state=" + state;
-    // In Chrome, this only works if page served with https
-    navigator.clipboard.writeText(url);
-  }
-  */
-
   const handleUndo = () => {
     if (surveyModel == null) {
       console.log("Can't undo: surveyModel is undefined");

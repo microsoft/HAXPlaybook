@@ -390,6 +390,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
                 <LinkDialog 
                   show={showLinkDialog}
                   onClose={() => setShowLinkDialog(false)} />
+                <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} onClose={() => setShowGithubForm(false)} />
               </div>
             </div>
             <div onClick={() => setShowSurvey(true)} className="back-bar pt-3 pb-1">
@@ -472,7 +473,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <TaskList taskMap={taskMap} />
           </div>
         </div>
-        <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} hideForm={() => setShowGithubForm(false)} />
+        <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} onClose={() => setShowGithubForm(false)} />
         <div id="footer" className="footer">
           <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
           <a style={{ marginLeft: "auto", marginRight: "1em" }} href="mailto:aiguidelines@microsoft.com">Contact us</a>

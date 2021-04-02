@@ -1,17 +1,30 @@
 import React, { useState } from 'react';
 import { TaskCard } from '../models/Types';
-import { Modal, ProgressBar } from 'react-bootstrap';
 import { Octokit } from "@octokit/rest";
 import { throttling } from "@octokit/plugin-throttling";
+import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog';
+import { TextField } from '@fluentui/react/lib/TextField';
+import { PrimaryButton, DefaultButton } from '@fluentui/react/lib/Button';
+import { ProgressIndicator } from '@fluentui/react/lib/ProgressIndicator';
+
+// Fluent UI props
+const modelProps = {
+  isBlocking: false,
+  styles: { main: { maxWidth: 450 } },
+};
+const dialogContentProps = {
+  type: DialogType.largeHeader,
+  title: 'Github Export',
+};
 
 interface GithubExportProps {
   taskMap: Map<string, TaskCard[]>;
   numTasks: number;
   showForm: boolean;
-  hideForm: Function;
+  onClose: Function;
 }
 
-const GithubExportForm: React.FunctionComponent<GithubExportProps> = ({ taskMap, numTasks, showForm, hideForm }) => {
+const GithubExportForm: React.FunctionComponent<GithubExportProps> = ({ taskMap, numTasks, showForm, onClose }) => {
   const [authToken, setAuthToken] = useState("");
   const [repoOwner, setRepoOwner] = useState("");
   const [repoName, setRepoName] = useState("");
@@ -46,7 +59,7 @@ const GithubExportForm: React.FunctionComponent<GithubExportProps> = ({ taskMap,
       let numFinished = 0;
       function update() {
         numFinished += 1;
-        setProgress(Math.ceil(numFinished / numTasks * 100));
+        setProgress(numFinished / numTasks);
       }
       return update;
     }
@@ -76,39 +89,31 @@ const GithubExportForm: React.FunctionComponent<GithubExportProps> = ({ taskMap,
   }
 
   return (
-    <Modal show={showForm} onHide={() => hideForm()}>
-      <Modal.Header closeButton>
-        <Modal.Title>Github Export</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div>
-          <p>This form will export your survey results to issues on your GitHub repository.</p>
-          <p>Go to the <a href="https://github.com/settings/tokens">token section of GitHub Developer Settings</a> to generate a personal access token.</p>
-        </div>
-        <form onSubmit={handleGithubExport}>
-          <label>Repo owner: <input type="text" value={repoOwner} onChange={(event) => setRepoOwner(event.target.value)} /></label>
-          <label>Repo name: <input type="text" value={repoName} onChange={(event) => setRepoName(event.target.value)} /></label>
-          <label>Personal access token: <input type="text" value={authToken} onChange={(event) => setAuthToken(event.target.value)} /></label>
-        </form>
-        {progress > 0 ? (
-          <>
-            <span>{progress}% complete</span>
-            <ProgressBar variant="info" now={progress} />
-          </>
-        ) : null}
-        {failureLog.map((failure) => 
-          (<div style={{color: "red"}}>[Error] {`${failure}`}</div>)
-        )}
-      </Modal.Body>
-      <Modal.Footer>
-        <button className="blue-button" onClick={() => hideForm()}>
-          Close
-        </button>
-        <button className="blue-button" onClick={handleGithubExport}>
-          Export
-        </button>
-      </Modal.Footer>
-    </Modal>)
+    <Dialog
+      hidden={!showForm}
+      onDismiss={() => onClose()}
+      dialogContentProps={dialogContentProps}
+      modalProps={modelProps}
+    >
+      <div>
+        <p>This form will export your survey results to issues on your GitHub repository.</p>
+        <p>Go to the <a href="https://github.com/settings/tokens">token section of GitHub Developer Settings</a> to generate a personal access token.</p>
+      </div>
+      <TextField label="Repo owner" onChange={(_, newValue) => setRepoOwner(newValue ?? "")}  />
+      <TextField label="Repo name" onChange={(_, newValue) => setRepoName(newValue ?? "")}  />
+      <TextField label="Personal access token" onChange={(_, newValue) => setAuthToken(newValue ?? "")}  />
+      {progress > 0 ? (
+        <ProgressIndicator label="Creating issues" description="Issues are being created in your Github repository" percentComplete={progress} />
+      ) : null}
+      {failureLog.map((failure) =>
+        (<div style={{ color: "red" }}>[Error] {`${failure}`}</div>)
+      )}
+      <DialogFooter>
+        <PrimaryButton onClick={() => handleGithubExport()} text="Export" />
+        <DefaultButton onClick={() => onClose()} text="Cancel" />
+      </DialogFooter>
+    </Dialog>
+  )
 }
 
 export default GithubExportForm;

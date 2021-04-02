@@ -6,24 +6,7 @@ import { Dialog, DialogType, DialogFooter } from '@fluentui/react/lib/Dialog';
 import { TextField } from '@fluentui/react/lib/TextField';
 import { PrimaryButton, DefaultButton } from '@fluentui/react/lib/Button';
 
-const options = [
-  {
-    key: 'CSV',
-    text: 'CSV',
-  },
-  {
-    key: 'Github',
-    text: 'Github',
-  },
-  {
-    key: 'PDF',
-    text: 'PDF',
-  },
-  {
-    key: 'link',
-    text: 'Shareable link'
-  }
-];
+// FluentUI props
 const modelProps = {
   isBlocking: false,
   styles: { main: { maxWidth: 450 } },

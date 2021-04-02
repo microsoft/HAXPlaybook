@@ -65,11 +65,11 @@
           "choices": [
             {
               "value": "yes",
-              "text": "Yes, it will have a clear way of knowing when to trigger"
+              "text": "Yes"
             },
             {
               "value": "no",
-              "text": "No, it will not have a clear way of knowing when to trigger"
+              "text": "No"
             }
           ]
         },
@@ -81,11 +81,11 @@
           "choices": [
             {
               "value": "yes",
-              "text": "Yes, it will have a clear way of delimiting the user's input"
+              "text": "Yes"
             },
             {
               "value": "no",
-              "text": "No, it will not have a clear way of delimiting the user's input"
+              "text": "No"
             }
           ]
         },
@@ -97,11 +97,11 @@
           "choices": [
             {
               "value": "yes",
-              "text": "Yes, there will be multiple valid interpretations of the user's input"
+              "text": "Yes"
             },
             {
               "value": "no",
-              "text": "No, there is only one valid interpretation of the user's input"
+              "text": "No"
             }
           ]
         },

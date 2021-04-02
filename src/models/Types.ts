@@ -48,7 +48,7 @@ export class TaskCard {
   static fromQuestionChoice(questionName: string, choiceValue: string) {
     const choice = getChoiceFromContent(questionName, choiceValue);
     if (choice == null || choice.taskCard == null || choice.taskCard.tasks == null) {
-      console.log("Null taskcard for question %s choice %s", questionName, choiceValue);
+      console.debug("Null taskcard for question %s choice %s", questionName, choiceValue);
       return null;
     }
 

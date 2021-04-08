@@ -20,10 +20,10 @@ const CollapsibleSection: React.FunctionComponent<CollapsibleSectionProps> = ({ 
   // If there are no tasks and there's no message for the category, then render nothing
   return (numTasks > 0 || hasMessage) ? (
     <React.Fragment>
-      <div id={getCategorySectionId(category)} className="scenario-bar my-3" onClick={() => setExpanded(!isExpanded)}>
+      <button id={getCategorySectionId(category)} className="scenario-bar my-3" onClick={() => setExpanded(!isExpanded)}>
         {isExpanded ? <BsFillCaretDownFill /> : <BsFillCaretRightFill />}
         <span className="scenario-bar-text">{category}</span>
-      </div>
+      </button>
       {isExpanded ? tasks.map(tc => <TaskCardComponent key={tc.id} card={tc} />) : null}
     </React.Fragment>
   ) : null;

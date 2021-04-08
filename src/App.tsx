@@ -354,8 +354,8 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <div id="title-bar" className="title-bar py-2">
               <span className="title-bar-text">HAX Playbook</span>
               <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
-                <button onClick={handleClear} className="blue-button">Restart</button>
-                <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
+                <button name="Restart" onClick={handleClear} className="blue-button">Restart</button>
+                <button name="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
               </div>
             </div>
             { numTasks > 0 ? 
@@ -379,7 +379,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <div id="title-bar" className="title-bar py-2">
               <span className="title-bar-text">HAX Playbook</span>
               <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
-                <button onClick={() => { setShowExportForm(true) }} className="blue-button mr-3">Export</button>
+                <button name="Export" onClick={() => { setShowExportForm(true) }} className="blue-button mr-3">Export</button>
                 <ExportDialog 
                   show={showExportForm}
                   onClose={() => setShowExportForm(false)}
@@ -425,7 +425,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         <div id="title-bar" className="title-bar py-2">
           <span className="title-bar-text ml-3">HAX Playbook</span>
           <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
-            <button onClick={() => setShowExportForm(true)} className="blue-button mr-3">Export</button>
+            <button name="Export" onClick={() => setShowExportForm(true)} className="blue-button mr-3">Export</button>
           </div>
           <ExportDialog 
             show={showExportForm}
@@ -460,8 +460,8 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             {scenarioMsg != null && scenarioMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
           </div>
           <div className="left-column bottom-shadow py-3">
-            <button onClick={handleClear} className="blue-button">Restart</button>
-            <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
+            <button name="Restart" onClick={handleClear} className="blue-button">Restart</button>
+            <button name="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
           </div>
           <div className="right-column bottom-shadow">
             <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />

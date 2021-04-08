@@ -56,6 +56,21 @@ a:hover, a:visited, a:active {
   color: #A19F9D;
 }
 
+#title-bar .blue-button {
+  background-color: #011B2D;
+  color: #6CCAFF;
+}
+
+#title-bar .blue-button:hover:enabled {
+  background-color: #004E8A;
+  color: #6CCAFF;
+}
+
+#title-bar .blue-button:active:enabled, #title-bar .blue-button:focus:enabled {
+  background-color: #004E8A;
+  color: #6CCAFF;
+}
+
 .two-column-grid {
   width: 100%;
   display: grid;
@@ -138,6 +153,7 @@ a:hover, a:visited, a:active {
   display: inline-block;
   color: black;
   border-radius: 2px;
+  border: none;
   margin-right: 1em;
   margin-bottom: 1em;
   font-size: 1rem;
@@ -193,6 +209,8 @@ a:hover, a:visited, a:active {
   background-color: #dddddd;
   font-size: 1rem;
   cursor: pointer;
+  width: 100%;
+  border: none;
 }
 
 .scenario-bar-text {
@@ -213,6 +231,11 @@ a:hover, a:visited, a:active {
 .task-header-text {
   font-weight: bold;
   margin-left: 0.5em;
+}
+
+.task-header-button {
+  border: none;
+  background-color: transparent;
 }
 
 .task-card-caret {

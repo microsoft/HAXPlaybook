@@ -6,3 +6,7 @@
 export function getCategorySectionId(category: string) {
   return `${category}_section`
 }
+
+export function isNullOrEmpty(str: string) {
+  return (!str || str.trim().length === 0 );
+}

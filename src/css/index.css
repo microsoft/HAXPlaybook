@@ -75,9 +75,8 @@ a:hover, a:visited, a:active {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto auto 1fr;
+  grid-template-rows: 1fr;
   align-items: stretch;
-  overflow: hidden;
 }
 
 .mobile-grid {
@@ -90,6 +89,11 @@ a:hover, a:visited, a:active {
 }
 
 .left-column {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto 1fr;
+  align-items: stretch;
+  overflow: hidden;
   background-color: #01395E;
   color: white;
   padding-left: 2%;
@@ -97,6 +101,11 @@ a:hover, a:visited, a:active {
 }
 
 .right-column {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto 1fr;
+  align-items: stretch;
+  overflow: hidden;
   padding-left: 2%;
   padding-right: 2%;
 }

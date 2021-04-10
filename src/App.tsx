@@ -5,7 +5,7 @@
 // This component manages the state of the survey and determines
 // which page to show based on the status of the survey.
 
-import React, { createElement, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactSurveyModel, Survey } from 'survey-react';
 import Intro from './components/Intro';
 import TaskList from './components/TaskList';
@@ -17,7 +17,7 @@ import ExportDialog from './components/ExportDialog';
 import LinkDialog from './components/LinkDialog';
 import { BsArrowCounterclockwise, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { saveAs } from 'file-saver';
-import { getCategorySectionId } from './util/Utils';
+import { getCategorySectionId, isNullOrEmpty } from './util/Utils';
 
 interface AppProps {
   surveyData: any,
@@ -78,6 +78,25 @@ function arrangeSurveyPages(surveyData: any, isMobileLayout: boolean) {
     surveyData.pages.push({ elements: surveyQuestions });
   }
   return surveyData;
+}
+
+function adjustVerticalAlignment() {
+  // vertically align the button container with the category container
+  const categoryDiv = document.getElementById("category-container");
+  const buttonDiv = document.getElementById("survey-buttons");
+  if (categoryDiv && buttonDiv) {
+    if (isNullOrEmpty(categoryDiv.style.minHeight)) {
+      categoryDiv.style.minHeight = `${buttonDiv.clientHeight}px`;
+    }
+    const heightDiff = categoryDiv.clientHeight - buttonDiv.clientHeight;
+    // parse the padding - it will be in format of "5px"
+    const matches = buttonDiv.style.paddingBottom?.match(/[0-9]+/);
+    const pb = matches == null ? 0 : parseInt(matches[0]);
+
+    if (heightDiff != 0) {
+      buttonDiv.style.paddingBottom = `${pb + heightDiff}px`;
+    }
+  }
 }
 
 const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => {
@@ -277,6 +296,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       if (grid) {
         grid.style.height = `calc(100vh - ${footer?.offsetHeight}px - ${titleBar?.offsetHeight}px)`;
       }
+      adjustVerticalAlignment();
     }
 
     // Auto-scroll when the user selects a choice
@@ -292,6 +312,8 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       } else if (!isMobileLayout && !isWideScreen()) {
         console.log("Switching to mobile layout");
         setMobileLayout(true);
+      } else if (!isMobileLayout) {
+        adjustVerticalAlignment();
       }
     }
 
@@ -353,7 +375,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           <div className="mobile-grid">
             <div id="title-bar" className="title-bar py-2">
               <span className="title-bar-text">HAX Playbook</span>
-              <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
+              <div id="survey-buttons" style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
                 <button name="Restart" onClick={handleClear} className="blue-button">Restart</button>
                 <button name="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
               </div>
@@ -411,7 +433,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <div className="right-column">
               {scenarioMsg != null && scenarioMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
             </div>
-            <div className="right-column bottom-shadow">
+            <div id="category-container" className="right-column bottom-shadow">
               <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />
             </div>
             <TaskList taskMap={taskMap} />
@@ -443,34 +465,32 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <div className="my-3 column-header">
               <span>{instructionHeader}</span>
             </div>
-          </div>
-          <div className="right-column d-flex flex-row align-items-center">
-            <div className="my-3 column-header" >
-              <span>{scenarioHeader}</span>
+            { isNullOrEmpty(instructionsMsg) ? <div/> : <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> }
+            <div id="survey-buttons"  className="bottom-shadow">
+              <button name="Restart" onClick={handleClear} className="blue-button">Restart</button>
+              <button name="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
             </div>
-            <span style={{ marginLeft: "auto" }}>Total scenarios:</span>
-            <div className="circle-text circle-text-large">
-              {numTasks}
+            <div className="pt-3 scroll-pane">
+              <Survey json={surveyData} onAfterRenderPage={handleAfterRender} onValueChanged={handleValueChanged} />
             </div>
-          </div>
-          <div className="left-column">
-            {instructionsMsg != null && instructionsMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
           </div>
           <div className="right-column">
-            {scenarioMsg != null && scenarioMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
-          </div>
-          <div className="left-column bottom-shadow py-3">
-            <button name="Restart" onClick={handleClear} className="blue-button">Restart</button>
-            <button name="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
-          </div>
-          <div className="right-column bottom-shadow">
-            <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />
-          </div>
-          <div className="left-column pt-3 scroll-pane">
-            <Survey json={surveyData} onAfterRenderPage={handleAfterRender} onValueChanged={handleValueChanged} />
-          </div>
-          <div className="right-column scroll-pane">
-            <TaskList taskMap={taskMap} />
+            <div className="d-flex flex-row align-items-center">
+              <div className="my-3 column-header" >
+                <span>{scenarioHeader}</span>
+              </div>
+              <span style={{ marginLeft: "auto" }}>Total scenarios:</span>
+              <div className="circle-text circle-text-large">
+                {numTasks}
+              </div>
+            </div>
+            { isNullOrEmpty(scenarioMsg) ? <div/> : <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: scenarioMsg }} /> }
+            <div id="category-container" className="bottom-shadow">
+              <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />
+            </div>
+            <div className="scroll-pane">
+              <TaskList taskMap={taskMap} />
+            </div>
           </div>
         </div>
         <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} onClose={() => setShowGithubForm(false)} />

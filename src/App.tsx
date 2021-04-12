@@ -383,7 +383,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       <div>
         { showSurvey ?
           <div className="mobile-grid">
-            <div id="title-bar" className="title-bar py-2" style={{borderBottom: highContrastBorder}}>
+            <div id="title-bar" className="title-bar" style={{borderBottom: highContrastBorder}}>
               <span className="title-bar-text">HAX Playbook</span>
               <div id="survey-buttons" style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
                 <button name="Restart" onClick={handleClear} className="blue-button">Restart</button>
@@ -391,7 +391,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
               </div>
             </div>
             { numTasks > 0 ? 
-            <div onClick={() => setShowSurvey(false)} className="view-scenarios-bar py-2" id="view-scenarios-bar">
+            <div onClick={() => setShowSurvey(false)} className="view-scenarios-bar" id="view-scenarios-bar">
               <span style={{ color: "white" }}>View testing scenarios</span>
               <div className="circle-text circle-text-large" style={{border: highContrastBorder}}>
                 {numTasks}
@@ -434,7 +434,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
                 <span style={{fontSize: "22px", color:"#004578", fontWeight: "bold"}}>{scenarioHeader}</span>
               </div>
             </div>
-            <div className="right-column mb-3">
+            <div className="right-column pb-4">
               <span style={{ fontSize: "14px", border: highContrastBorder}}>Total scenarios:</span>
               <div className="circle-text circle-text-large" style={{border: highContrastBorder}}>
                 {numTasks}

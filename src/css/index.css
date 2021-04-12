@@ -351,13 +351,11 @@ a:hover, a:visited, a:active {
 
 /* Mobile UX */
 @media (max-width: 425px) {
-  html {
-    font-size: 62.5%;
-  }
-
   .title-bar {
     font-size: 20px;
     padding-left: 4%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .view-scenarios-bar {
@@ -366,6 +364,8 @@ a:hover, a:visited, a:active {
     font-size: 16px;
     padding-left: 4%;
     cursor: pointer;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .back-bar {
@@ -375,8 +375,14 @@ a:hover, a:visited, a:active {
   }
 
   .left-column {
+    font-size: 14px;
     padding-left: 0%;
     padding-right: 0%;
+  }
+  
+  .right-column {
+    font-size: 14px;
+    display: block;
   }
 
   .column-header {
@@ -384,9 +390,10 @@ a:hover, a:visited, a:active {
   }
 
   .circle-text-large {
-    width: 2rem;
-    height: 2rem;
-    font-size: 12px;
+    line-height: 1.7em;
+    width: 1.75em;
+    height: 1.75em;
+    font-size: 14px;
     flex-shrink: 0;
     margin-bottom: -2px;
   }
@@ -432,12 +439,12 @@ a:hover, a:visited, a:active {
 
   .radio-definition {
     margin-left: calc(1.75em + 3px);
-    margin-top: -2px;
-    margin-bottom: 12px;
+    margin-top: -5px;
+    margin-bottom: 10px;
   }
 
   .category-tag {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .task-list {

@@ -59,6 +59,7 @@ function isWideScreen() {
   return window.innerWidth > 425;
 }
 
+// Switches the survey to multi-page or single-page format
 function arrangeSurveyPages(surveyData: any, isMobileLayout: boolean) {
   const surveyQuestions = [];
   for (let i = 0; i < surveyData.pages?.length; i++) {
@@ -106,11 +107,11 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   const [showExportForm, setShowExportForm] = useState(false);
   const [showLinkDialog, setShowLinkDialog] = useState(false);
   const [showGithubForm, setShowGithubForm] = useState(false);
+  const [isHighContrast, setHighContrast] = useState(false);
   const [isMobileLayout, setMobileLayout] = useState(!isWideScreen());
 
   console.log("STATE: showIntro=", showIntro, " showSurvey=", showSurvey,
-    " showGithubForm=", showGithubForm, " isMobileLayout=", isMobileLayout,
-    " undo=", undoStack);
+    " isMobileLayout=", isMobileLayout, " isHighContrast=", isHighContrast);
 
   //surveyData = arrangeSurveyPages(surveyData, isMobileLayout);
 
@@ -273,6 +274,14 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   useEffect(() => {
     if (showIntro) return;
 
+    // Detect high contrast mode by checking if the background color has been modified
+    if (!isHighContrast) {
+      const leftColumnBg = window.getComputedStyle(document.getElementsByClassName("title-bar")[0], null).getPropertyValue('background-color'); 
+      if (leftColumnBg !== "rgb(0, 27, 46)") {
+        setHighContrast(true);
+      }
+    }
+
     // Resize the page to fill the screen vertically
     const titleBar = document.getElementById("title-bar");
     if (isMobileLayout) {
@@ -343,6 +352,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   const scenarioHeader = contentData.taskInstructions?.title;
   const scenarioMsg = contentData.taskInstructions?.message;
   const categories = Array.from(taskMap.keys());
+  const highContrastBorder = isHighContrast ? "solid white 1px" : "";
   const numTasks = categories.length === 0 ? 0 :
     categories.map(category => TaskCard.filterTasks(taskMap.get(category) ?? []))
       .flat()
@@ -373,7 +383,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       <div>
         { showSurvey ?
           <div className="mobile-grid">
-            <div id="title-bar" className="title-bar py-2">
+            <div id="title-bar" className="title-bar py-2" style={{borderBottom: highContrastBorder}}>
               <span className="title-bar-text">HAX Playbook</span>
               <div id="survey-buttons" style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
                 <button name="Restart" onClick={handleClear} className="blue-button">Restart</button>
@@ -383,10 +393,10 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             { numTasks > 0 ? 
             <div onClick={() => setShowSurvey(false)} className="view-scenarios-bar py-2" id="view-scenarios-bar">
               <span style={{ color: "white" }}>View testing scenarios</span>
-              <div className="circle-text circle-text-large">
+              <div className="circle-text circle-text-large" style={{border: highContrastBorder}}>
                 {numTasks}
               </div>
-              <BsChevronRight color="#708491" style={{ marginLeft: "auto", fontSize: "24px", paddingRight: "2%" }} />
+              <BsChevronRight color={isHighContrast ? "#FFFFFF" : "#708491"} style={{ marginLeft: "auto", fontSize: "24px", paddingRight: "2%" }} />
             </div>
             : <div></div> }
             <div className="left-column scroll-pane" id="survey-container">
@@ -398,7 +408,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           </div>
           :
           <>
-            <div id="title-bar" className="title-bar py-2">
+            <div id="title-bar" className="title-bar py-2" style={{borderBottom: highContrastBorder}}>
               <span className="title-bar-text">HAX Playbook</span>
               <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
                 <button name="Export" onClick={() => { setShowExportForm(true) }} className="blue-button mr-3">Export</button>
@@ -415,8 +425,8 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
                 <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} onClose={() => setShowGithubForm(false)} />
               </div>
             </div>
-            <div onClick={() => setShowSurvey(true)} className="back-bar pt-3 pb-1">
-              <BsChevronLeft color="#004578" style={{ fontSize: "18px", paddingLeft: "2%", marginBottom: "4px" }} />
+            <div onClick={() => setShowSurvey(true)} className="back-bar pt-3 pb-1" style={{border: isHighContrast ? "solid white 1px" : ""}}>
+              <BsChevronLeft color={isHighContrast ? "#FFFFFF" : "#004578"} style={{ fontSize: "18px", paddingLeft: "2%", marginBottom: "4px" }} />
               <div style={{display: "inline-block", marginLeft: "10px"}}>Back to survey</div>
             </div>
             <div className="right-column d-flex flex-row align-items-center" id="scenario-header-container">
@@ -425,8 +435,8 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
               </div>
             </div>
             <div className="right-column mb-3">
-              <span style={{ fontSize: "14px" }}>Total scenarios:</span>
-              <div className="circle-text circle-text-large">
+              <span style={{ fontSize: "14px", border: highContrastBorder}}>Total scenarios:</span>
+              <div className="circle-text circle-text-large" style={{border: highContrastBorder}}>
                 {numTasks}
               </div>
             </div>
@@ -434,9 +444,9 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
               {scenarioMsg != null && scenarioMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
             </div>
             <div id="category-container" className="right-column bottom-shadow">
-              <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />
+              <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} isHighContrast={isHighContrast}/>
             </div>
-            <TaskList taskMap={taskMap} />
+            <TaskList taskMap={taskMap} isHighContrast={isHighContrast}/>
           </>
         }
       </div>
@@ -444,7 +454,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   } else {
     return (
       <>
-        <div id="title-bar" className="title-bar py-2">
+        <div id="title-bar" className="title-bar py-2" style={{borderBottom: highContrastBorder}}>
           <span className="title-bar-text ml-3">HAX Playbook</span>
           <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
             <button name="Export" onClick={() => setShowExportForm(true)} className="blue-button mr-3">Export</button>
@@ -480,16 +490,16 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
                 <span>{scenarioHeader}</span>
               </div>
               <span style={{ marginLeft: "auto" }}>Total scenarios:</span>
-              <div className="circle-text circle-text-large">
+              <div className="circle-text circle-text-large" style={{border: highContrastBorder}}>
                 {numTasks}
               </div>
             </div>
             { isNullOrEmpty(scenarioMsg) ? <div/> : <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: scenarioMsg }} /> }
             <div id="category-container" className="bottom-shadow">
-              <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />
+              <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} isHighContrast={isHighContrast}/>
             </div>
             <div className="scroll-pane">
-              <TaskList taskMap={taskMap} />
+              <TaskList taskMap={taskMap} isHighContrast={isHighContrast}/>
             </div>
           </div>
         </div>

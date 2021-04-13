@@ -34,6 +34,12 @@ export let surveyModel: ReactSurveyModel;
 let isFirstRender = true;
 let isDeserializing = false;
 
+const autoscroll = (() => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const autoscroll = urlParams.get('autoscroll');
+  return autoscroll !== "false";
+})();
+
 function createTaskMap(contentData: any) {
   const questions = surveyModel?.getAllQuestions() ?? [];
   const taskMap = new Map<string, TaskCard[]>();
@@ -81,8 +87,8 @@ function arrangeSurveyPages(surveyData: any, isMobileLayout: boolean) {
   return surveyData;
 }
 
+// vertically align the button row with the category tags row
 function adjustVerticalAlignment() {
-  // vertically align the button container with the category container
   const categoryDiv = document.getElementById("category-container");
   const buttonDiv = document.getElementById("survey-buttons");
   if (categoryDiv && buttonDiv) {
@@ -309,9 +315,11 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     }
 
     // Auto-scroll when the user selects a choice
-    const svRows = document.getElementsByClassName("sv_row");
-    if (svRows.length > 0) {
-      svRows[svRows.length - 1].scrollIntoView(true);
+    if (autoscroll) {
+      const svRows = document.getElementsByClassName("sv_row");
+      if (svRows.length > 0) {
+        svRows[svRows.length - 1].scrollIntoView(true);
+      }
     }
 
     const handleResize = () => {
@@ -384,20 +392,20 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         { showSurvey ?
           <div className="mobile-grid">
             <div id="title-bar" className="title-bar" style={{borderBottom: highContrastBorder}}>
-              <span className="title-bar-text">HAX Playbook</span>
+              <header className="title-bar-text">HAX Playbook</header>
               <div id="survey-buttons" style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
                 <button name="Restart" onClick={handleClear} className="blue-button">Restart</button>
                 <button name="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
               </div>
             </div>
             { numTasks > 0 ? 
-            <div onClick={() => setShowSurvey(false)} className="view-scenarios-bar" id="view-scenarios-bar">
+            <button onClick={() => setShowSurvey(false)} className="view-scenarios-bar" id="view-scenarios-bar">
               <span style={{ color: "white" }}>View testing scenarios</span>
               <div className="circle-text circle-text-large" style={{border: highContrastBorder}}>
                 {numTasks}
               </div>
               <BsChevronRight color={isHighContrast ? "#FFFFFF" : "#708491"} style={{ marginLeft: "auto", fontSize: "24px", paddingRight: "2%" }} />
-            </div>
+            </button>
             : <div></div> }
             <div className="left-column scroll-pane" id="survey-container">
               <div className="column-header">
@@ -409,7 +417,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           :
           <>
             <div id="title-bar" className="title-bar py-2" style={{borderBottom: highContrastBorder}}>
-              <span className="title-bar-text">HAX Playbook</span>
+              <header className="title-bar-text">HAX Playbook</header>
               <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
                 <button name="Export" onClick={() => { setShowExportForm(true) }} className="blue-button mr-3">Export</button>
                 <ExportDialog 
@@ -425,10 +433,10 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
                 <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} onClose={() => setShowGithubForm(false)} />
               </div>
             </div>
-            <div onClick={() => setShowSurvey(true)} className="back-bar pt-3 pb-1" style={{border: isHighContrast ? "solid white 1px" : ""}}>
+            <button onClick={() => setShowSurvey(true)} className="back-bar pt-3 pb-1" style={{border: isHighContrast ? "solid white 1px" : ""}}>
               <BsChevronLeft color={isHighContrast ? "#FFFFFF" : "#004578"} style={{ fontSize: "18px", paddingLeft: "2%", marginBottom: "4px" }} />
               <div style={{display: "inline-block", marginLeft: "10px"}}>Back to survey</div>
-            </div>
+            </button>
             <div className="right-column d-flex flex-row align-items-center" id="scenario-header-container">
               <div className="mb-2 column-header" >
                 <span style={{fontSize: "22px", color:"#004578", fontWeight: "bold"}}>{scenarioHeader}</span>
@@ -455,7 +463,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     return (
       <>
         <div id="title-bar" className="title-bar py-2" style={{borderBottom: highContrastBorder}}>
-          <span className="title-bar-text ml-3">HAX Playbook</span>
+          <header role="banner" className="title-bar-text ml-3">HAX Playbook</header>
           <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
             <button name="Export" onClick={() => setShowExportForm(true)} className="blue-button mr-3">Export</button>
           </div>
@@ -471,26 +479,26 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             onClose={() => setShowLinkDialog(false)} />
         </div>
         <div id="two-column-grid" className="two-column-grid">
-          <div className="left-column">
-            <div className="my-3 column-header">
-              <span>{instructionHeader}</span>
-            </div>
-            { isNullOrEmpty(instructionsMsg) ? <div/> : <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> }
-            <div id="survey-buttons"  className="bottom-shadow">
+          <main role="main" className="left-column">
+            <h1 className="my-3 column-header">
+              {instructionHeader}
+            </h1>
+            { isNullOrEmpty(instructionsMsg) ? <div/> : <div className="mb-3 normal-text" aria-label="survey instructions" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> }
+            <div id="survey-buttons" className="bottom-shadow">
               <button name="Restart" onClick={handleClear} className="blue-button">Restart</button>
               <button name="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
             </div>
             <div className="pt-3 scroll-pane">
               <Survey json={surveyData} onAfterRenderPage={handleAfterRender} onValueChanged={handleValueChanged} />
             </div>
-          </div>
+          </main>
           <div className="right-column">
             <div className="d-flex flex-row align-items-center">
-              <div className="my-3 column-header" >
-                <span>{scenarioHeader}</span>
-              </div>
-              <span style={{ marginLeft: "auto" }}>Total scenarios:</span>
-              <div className="circle-text circle-text-large" style={{border: highContrastBorder}}>
+              <h1 className="my-3 column-header" >
+                {scenarioHeader}
+              </h1>
+              <span id="total-scenarios-label" style={{ marginLeft: "auto" }}>Total scenarios:</span>
+              <div className="circle-text circle-text-large" aria-aria-labelledby="total-scenarios-label" style={{border: highContrastBorder}}>
                 {numTasks}
               </div>
             </div>
@@ -504,10 +512,12 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           </div>
         </div>
         <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} onClose={() => setShowGithubForm(false)} />
-        <div id="footer" className="footer">
+        <footer role="contentinfo" id="footer" className="footer">
           <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
-          <a style={{ marginLeft: "auto", marginRight: "1em" }} href="mailto:aiguidelines@microsoft.com">Contact us</a>
-        </div>
+          <address style={{ marginLeft: "auto", marginRight: "1em", marginBottom: "0px", display: "inline-block", fontStyle: "normal" }}>
+            <a href="mailto:aiguidelines@microsoft.com">Contact us</a>
+          </address>
+        </footer>
       </>
     );
   }

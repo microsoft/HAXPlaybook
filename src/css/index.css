@@ -61,6 +61,10 @@ a:hover, a:visited, a:active {
   color: #6CCAFF;
 }
 
+#title-bar .blue-button:disabled {
+  color: #A19F9D;
+}
+
 #title-bar .blue-button:hover:enabled {
   background-color: #004E8A;
   color: #6CCAFF;
@@ -154,6 +158,8 @@ a:hover, a:visited, a:active {
   display: flex;
   flex-direction: row;
   font-size: 2rem;
+  font-style: normal;
+  line-height: normal;
 }
 
 .category-tag {
@@ -223,7 +229,9 @@ a:hover, a:visited, a:active {
 }
 
 .scenario-bar-text {
-  margin-left: 0.25em;
+  margin-left: 0.5em;
+  margin-bottom: 0px;
+  font-size: 1rem;
 }
 
 .light-text {
@@ -238,7 +246,9 @@ a:hover, a:visited, a:active {
 }
 
 .task-header-text {
+  display: inline;
   font-weight: bold;
+  font-size: 1rem;
   margin-left: 0.5em;
 }
 
@@ -363,15 +373,20 @@ a:hover, a:visited, a:active {
     background-color: #042b46;
     font-size: 16px;
     padding-left: 4%;
-    cursor: pointer;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    border: none;
+  }
+
+  .scenario-bar-text {
+    font-size: 14px;
   }
 
   .back-bar {
     font-size: 14px;
     color: #004578;
-    cursor: pointer;
+    border: none;
+    background-color: white;
   }
 
   .left-column {
@@ -509,8 +524,16 @@ a:hover, a:visited, a:active {
     display: none;
   }
 
+  .back-bar {
+    display: none;
+  }
+
   .left-column {
     display: none;
+  }
+
+  .right-column {
+    display: block;
   }
 
   /* Content will be clipped without this */

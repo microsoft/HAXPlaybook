@@ -62,18 +62,20 @@ export const HelpDialog: React.FunctionComponent<HelpProps> = ({ name, examples,
         isBlocking={false}
         containerClassName={contentStyles.container}
       >
-        <div className={contentStyles.header}>
-          <span id={titleId}>{name} - Examples</span>
-          <IconButton
-            styles={iconButtonStyles}
-            iconProps={cancelIcon}
-            ariaLabel="Close popup modal"
-            onClick={onClose}
-          />
-        </div>
-        <div className={contentStyles.body}>
-          {body}
-        </div>
+        <section>
+          <header className={contentStyles.header}>
+            <h3 id={titleId}>{name} - Examples</h3>
+            <IconButton
+              styles={iconButtonStyles}
+              iconProps={cancelIcon}
+              ariaLabel="Close popup modal"
+              onClick={onClose}
+            />
+          </header>
+          <div className={contentStyles.body}>
+            {body}
+          </div>
+        </section>
       </Modal>
     </div>
   );

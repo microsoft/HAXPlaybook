@@ -21,9 +21,9 @@ const CategoryTags: React.FunctionComponent<CategoryTagsProps> = ({ taskMap, onC
         const tasks = TaskCard.filterTasks(taskMap.get(category) ?? []);
         const numTasks = tasks.map(task => task.tasks.length).reduce((prev, n) => prev + n) ?? 0;
         return (
-          <button name={`Show or hide ${category} tasks`} className="category-tag" onClick={() => onClick(category)} style={{border: highContrastBorder}}>
+          <button aria-label={`Go to ${category} scenarios`} className="category-tag" onClick={() => onClick(category)} style={{border: highContrastBorder}}>
             <div style={{display: "inline-block", marginTop: "-5px"}}>{category}</div>
-            <div className="circle-text circle-text-small" style={{border: highContrastBorder}}>{numTasks}</div>
+            <div className="circle-text circle-text-small" aria-label={`Number of ${category} scenarios`} style={{border: highContrastBorder}}>{numTasks}</div>
           </button>
         )
       })}

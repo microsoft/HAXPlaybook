@@ -480,11 +480,11 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         </div>
         <div id="two-column-grid" className="two-column-grid">
           <main role="main" className="left-column">
-            <h1 className="my-3 column-header">
+            <h1 className="my-3 column-header side-padding">
               {instructionHeader}
             </h1>
             { isNullOrEmpty(instructionsMsg) ? <div/> : <div className="mb-3 normal-text" aria-label="survey instructions" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> }
-            <div id="survey-buttons" className="bottom-shadow">
+            <div id="survey-buttons" className="bottom-shadow side-padding">
               <button name="Restart" onClick={handleClear} className="blue-button">Restart</button>
               <button name="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
             </div>
@@ -494,7 +494,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           </main>
           <div className="right-column">
             <div className="d-flex flex-row align-items-center">
-              <h1 className="my-3 column-header" >
+              <h1 className="my-3 column-header side-padding">
                 {scenarioHeader}
               </h1>
               <span id="total-scenarios-label" style={{ marginLeft: "auto" }}>Total scenarios:</span>
@@ -503,10 +503,10 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
               </div>
             </div>
             { isNullOrEmpty(scenarioMsg) ? <div/> : <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: scenarioMsg }} /> }
-            <div id="category-container" className="bottom-shadow">
+            <div id="category-container" className="bottom-shadow side-padding">
               <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} isHighContrast={isHighContrast}/>
             </div>
-            <div className="scroll-pane">
+            <div className="scroll-pane side-padding">
               <TaskList taskMap={taskMap} isHighContrast={isHighContrast}/>
             </div>
           </div>

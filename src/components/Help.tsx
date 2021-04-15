@@ -45,11 +45,11 @@ export const HelpDialog: React.FunctionComponent<HelpProps> = ({ name, examples,
   console.debug(`Filtered ${visibleExamples.length} visible examples out of ${examples.length} total examples for help=${name}`);
   const body = visibleExamples?.map((example, i) => {
     return (
-      <>
+      <div key={example.name}>
         <h5>{example.name}</h5>
         <div dangerouslySetInnerHTML={{ __html: example.details }}></div>
         {i < visibleExamples.length-1 ? (<hr style={{ width: "100%", marginTop: "1.5em", marginBottom: "1.5em" }}/>) : null}
-      </>
+      </div>
     )
   });
 

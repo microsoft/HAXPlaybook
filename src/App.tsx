@@ -61,6 +61,7 @@ function isWideScreen() {
 }
 
 // Switches the survey to multi-page or single-page format
+// eslint-disable-next-line
 function arrangeSurveyPages(surveyData: any, isMobileLayout: boolean) {
   const surveyQuestions = [];
   for (let i = 0; i < surveyData.pages?.length; i++) {
@@ -95,7 +96,7 @@ function adjustVerticalAlignment() {
     const matches = buttonDiv.style.paddingBottom?.match(/[0-9]+/);
     const pb = matches == null ? 0 : parseInt(matches[0]);
 
-    if (heightDiff != 0) {
+    if (heightDiff !== 0) {
       buttonDiv.style.paddingBottom = `${pb + heightDiff}px`;
     }
   }
@@ -272,6 +273,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     document.getElementById(getCategorySectionId(category))?.scrollIntoView(true);
   }
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (showIntro) return;
 
@@ -340,11 +342,11 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
     window.addEventListener('resize', handleResize);
     document.addEventListener('keypress', handleKeyPress);
     document.addEventListener('mousedown', handleMouseClick);
-    return () => {
+    return function cleanup() {
       window.removeEventListener('resize', handleResize);
-      document.removeEventListener('keypress', handleKeyPress)
+      document.removeEventListener('keypress', handleKeyPress);
       document.removeEventListener('mousedown', handleMouseClick);
-    }
+    };
   });
 
   if (showIntro) {
@@ -505,7 +507,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
                 {scenarioHeader}
               </h1>
               <span id="total-scenarios-label" style={{ marginLeft: "auto" }}>Total scenarios:</span>
-              <div className="circle-text circle-text-large" aria-aria-labelledby="total-scenarios-label" style={{border: highContrastBorder}}>
+              <div className="circle-text circle-text-large" aria-labelledby="total-scenarios-label" style={{border: highContrastBorder}}>
                 {numTasks}
               </div>
             </div>

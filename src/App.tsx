@@ -33,12 +33,7 @@ export let surveyModel: ReactSurveyModel;
 // on the first render.
 let isFirstRender = true;
 let isDeserializing = false;
-
-const autoscroll = (() => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const autoscroll = urlParams.get('autoscroll');
-  return autoscroll !== "false";
-})();
+let autoscroll = true;
 
 function createTaskMap(contentData: any) {
   const questions = surveyModel?.getAllQuestions() ?? [];
@@ -334,9 +329,21 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       }
     }
 
+    const handleKeyPress = () => {
+      autoscroll = false;
+    }
+
+    const handleMouseClick = () => {
+      autoscroll = true;
+    }
+
     window.addEventListener('resize', handleResize);
+    document.addEventListener('keypress', handleKeyPress);
+    document.addEventListener('mousedown', handleMouseClick);
     return () => {
       window.removeEventListener('resize', handleResize);
+      document.removeEventListener('keypress', handleKeyPress)
+      document.removeEventListener('mousedown', handleMouseClick);
     }
   });
 

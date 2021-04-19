@@ -280,7 +280,11 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   }
 
   const handleCategoryClick = (category: string) => {
-    document.getElementById(getCategorySectionId(category))?.scrollIntoView(true);
+    const categorySection = document.getElementById(getCategorySectionId(category))
+    if (categorySection) {
+      categorySection.scrollIntoView(true);
+      categorySection.focus();
+    }
   }
 
   /* eslint-disable react-hooks/exhaustive-deps */
@@ -413,8 +417,8 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <div id="title-bar" className="title-bar" style={{borderBottom: highContrastBorder}}>
               <header className="title-bar-text">HAX Playbook</header>
               <div id="survey-buttons" style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
-                <button name="Restart" onClick={handleClear} className="blue-button">Restart</button>
-                <button name="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
+                <button aria-label="Restart" onClick={handleClear} className="blue-button">Restart</button>
+                <button aria-label="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
               </div>
             </div>
             { numTasks > 0 ? 
@@ -438,7 +442,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             <div id="title-bar" className="title-bar py-2" style={{borderBottom: highContrastBorder}}>
               <header className="title-bar-text">HAX Playbook</header>
               <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
-                <button name="Export" onClick={() => { setShowExportForm(true) }} className="blue-button mr-3">Export</button>
+                <button aria-label="Export" onClick={() => { setShowExportForm(true) }} className="blue-button mr-3">Export</button>
                 <ExportDialog 
                   show={showExportForm}
                   onClose={() => setShowExportForm(false)}
@@ -484,7 +488,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         <div id="title-bar" className="title-bar py-2" style={{borderBottom: highContrastBorder}}>
           <header role="banner" className="title-bar-text ml-3">HAX Playbook</header>
           <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
-            <button name="Export" onClick={() => setShowExportForm(true)} className="blue-button mr-3">Export</button>
+            <button aria-label="Export" onClick={() => setShowExportForm(true)} className="blue-button mr-3">Export</button>
           </div>
           <ExportDialog 
             show={showExportForm}
@@ -504,8 +508,8 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             </h1>
             { isNullOrEmpty(instructionsMsg) ? <div/> : <div className="mb-3 normal-text" aria-label="survey instructions" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> }
             <div id="survey-buttons" className="bottom-shadow side-padding">
-              <button name="Restart" onClick={handleClear} className="blue-button">Restart</button>
-              <button name="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
+              <button aria-label="Restart" onClick={handleClear} className="blue-button">Restart</button>
+              <button aria-label="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
             </div>
             <div className="pt-3 scroll-pane">
               <Survey json={surveyData} onAfterRenderPage={handleAfterRender} onValueChanged={handleValueChanged} />

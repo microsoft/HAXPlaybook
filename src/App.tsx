@@ -163,7 +163,17 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       q.value = valueMap.get(q.name);
     });
     if (isFirstRender) {
-      setUndoStack([valueMap]);
+      // Set the undo stack up if the page is loading from a saved state
+      let valueMap = new Map<string, string>();
+      let firstUndoStack: Map<string, string>[] = []
+      questions.forEach(q => {
+        if (q.value) {
+          valueMap = new Map<string, string>(valueMap);
+          valueMap.set(q.name, q.value);
+          firstUndoStack = [...firstUndoStack, valueMap];
+        }
+      });
+      setUndoStack(firstUndoStack);
     }
     isDeserializing = false;
     console.log("Deserialization successful", valueMap);

@@ -416,7 +416,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           <div className="mobile-grid">
             <div id="title-bar" className="title-bar" style={{borderBottom: highContrastBorder}}>
               <header className="title-bar-text">HAX Playbook</header>
-              <div id="survey-buttons" style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
+              <div id="survey-buttons" style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
                 <button aria-label="Restart" onClick={handleClear} className="blue-button">Restart</button>
                 <button aria-label="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
               </div>
@@ -439,10 +439,10 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           </div>
           :
           <>
-            <div id="title-bar" className="title-bar py-2" style={{borderBottom: highContrastBorder}}>
+            <div id="title-bar" className="title-bar" style={{borderBottom: highContrastBorder}}>
               <header className="title-bar-text">HAX Playbook</header>
-              <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
-                <button aria-label="Export" onClick={() => { setShowExportForm(true) }} className="blue-button mr-3">Export</button>
+              <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
+                <button aria-label="Export" onClick={() => { setShowExportForm(true) }} className="blue-button">Export</button>
                 <ExportDialog 
                   show={showExportForm}
                   onClose={() => setShowExportForm(false)}
@@ -456,12 +456,12 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
                 <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} onClose={() => setShowGithubForm(false)} />
               </div>
             </div>
-            <button onClick={() => setShowSurvey(true)} className="back-bar pt-3 pb-1" style={{border: isHighContrast ? "solid white 1px" : ""}}>
-              <BsChevronLeft color={isHighContrast ? "#FFFFFF" : "#004578"} style={{ fontSize: "18px", paddingLeft: "2%", marginBottom: "4px" }} />
-              <div style={{display: "inline-block", marginLeft: "10px"}}>Back to survey</div>
+            <button onClick={() => setShowSurvey(true)} className="back-bar" style={{border: isHighContrast ? "solid white 1px" : "", marginLeft: "15px", padding: "10px 0px"}}>
+              <BsChevronLeft color={isHighContrast ? "#FFFFFF" : "#004578"} style={{ fontSize: "18px", marginBottom: "2px" }} />
+              <div style={{display: "inline-block", marginLeft: "5px"}}>Back to survey</div>
             </button>
             <div className="right-column d-flex flex-row align-items-center" id="scenario-header-container">
-              <div className="mb-2 column-header" >
+              <div className="mb-3 column-header" >
                 <span style={{fontSize: "22px", color:"#004578", fontWeight: "bold"}}>{scenarioHeader}</span>
               </div>
             </div>

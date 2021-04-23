@@ -237,9 +237,18 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       valueMap.set(q.name, q.value);
     });
     setUndoStack([...undoStack, valueMap]);
+
     const url = new URL(window.location.toString());
     url.searchParams.set("state", serializeState());
     window.history.replaceState({}, '', url.toString());
+
+    const countPreview = document.getElementById("scenario-count-preview");
+    if (countPreview) {
+      countPreview.classList.add("pulse-animation")
+      setTimeout(() => {
+        countPreview.classList.remove("pulse-animation");
+      }, 1500)
+    }
   }
 
   const handleUndo = () => {
@@ -424,7 +433,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             { numTasks > 0 ? 
             <button onClick={() => setShowSurvey(false)} className="view-scenarios-bar" id="view-scenarios-bar">
               <span style={{ color: "white" }}>View testing scenarios</span>
-              <div className="circle-text circle-text-large" style={{border: highContrastBorder}}>
+              <div className="circle-text circle-text-large" id="scenario-count-preview" style={{border: highContrastBorder}}>
                 {numTasks}
               </div>
               <BsChevronRight color={isHighContrast ? "#FFFFFF" : "#708491"} style={{ marginLeft: "auto", fontSize: "24px", paddingRight: "2%" }} />

@@ -424,7 +424,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
         { showSurvey ?
           <div className="mobile-grid">
             <div id="title-bar" className="title-bar" style={{borderBottom: highContrastBorder}}>
-              <header className="title-bar-text">HAX Playbook</header>
+              <header role="banner" className="title-bar-text">HAX Playbook</header>
               <div id="survey-buttons" style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
                 <button aria-label="Restart" onClick={handleClear} className="blue-button">Restart</button>
                 <button aria-label="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
@@ -449,7 +449,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           :
           <>
             <div id="title-bar" className="title-bar" style={{borderBottom: highContrastBorder}}>
-              <header className="title-bar-text">HAX Playbook</header>
+              <header role="banner" className="title-bar-text">HAX Playbook</header>
               <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
                 <button aria-label="Export" onClick={() => { setShowExportForm(true) }} className="blue-button">Export</button>
                 <ExportDialog 

@@ -5,7 +5,7 @@
 // This component manages the state of the survey and determines
 // which page to show based on the status of the survey.
 
-import React, { createElement, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactSurveyModel, Survey } from 'survey-react';
 import Intro from './components/Intro';
 import TaskList from './components/TaskList';
@@ -17,7 +17,7 @@ import ExportDialog from './components/ExportDialog';
 import LinkDialog from './components/LinkDialog';
 import { BsArrowCounterclockwise, BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 import { saveAs } from 'file-saver';
-import { getCategorySectionId } from './util/Utils';
+import { getCategorySectionId, isNullOrEmpty } from './util/Utils';
 
 interface AppProps {
   surveyData: any,
@@ -33,6 +33,7 @@ export let surveyModel: ReactSurveyModel;
 // on the first render.
 let isFirstRender = true;
 let isDeserializing = false;
+let autoscroll = true;
 
 function createTaskMap(contentData: any) {
   const questions = surveyModel?.getAllQuestions() ?? [];
@@ -59,6 +60,8 @@ function isWideScreen() {
   return window.innerWidth > 425;
 }
 
+// Switches the survey to multi-page or single-page format
+// eslint-disable-next-line
 function arrangeSurveyPages(surveyData: any, isMobileLayout: boolean) {
   const surveyQuestions = [];
   for (let i = 0; i < surveyData.pages?.length; i++) {
@@ -80,6 +83,25 @@ function arrangeSurveyPages(surveyData: any, isMobileLayout: boolean) {
   return surveyData;
 }
 
+// vertically align the button row with the category tags row
+function adjustVerticalAlignment() {
+  const categoryDiv = document.getElementById("category-container");
+  const buttonDiv = document.getElementById("survey-buttons");
+  if (categoryDiv && buttonDiv) {
+    if (isNullOrEmpty(categoryDiv.style.minHeight)) {
+      categoryDiv.style.minHeight = `${buttonDiv.clientHeight}px`;
+    }
+    const heightDiff = categoryDiv.clientHeight - buttonDiv.clientHeight;
+    // parse the padding - it will be in format of "5px"
+    const matches = buttonDiv.style.paddingBottom?.match(/[0-9]+/);
+    const pb = matches == null ? 0 : parseInt(matches[0]);
+
+    if (heightDiff !== 0) {
+      buttonDiv.style.paddingBottom = `${pb + heightDiff}px`;
+    }
+  }
+}
+
 const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => {
   const [showIntro, setShowIntro] = useState(true);
   const [showSurvey, setShowSurvey] = useState(true);
@@ -87,11 +109,11 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   const [showExportForm, setShowExportForm] = useState(false);
   const [showLinkDialog, setShowLinkDialog] = useState(false);
   const [showGithubForm, setShowGithubForm] = useState(false);
+  const [isHighContrast, setHighContrast] = useState(false);
   const [isMobileLayout, setMobileLayout] = useState(!isWideScreen());
 
   console.log("STATE: showIntro=", showIntro, " showSurvey=", showSurvey,
-    " showGithubForm=", showGithubForm, " isMobileLayout=", isMobileLayout,
-    " undo=", undoStack);
+    " isMobileLayout=", isMobileLayout, " isHighContrast=", isHighContrast);
 
   //surveyData = arrangeSurveyPages(surveyData, isMobileLayout);
 
@@ -141,7 +163,17 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       q.value = valueMap.get(q.name);
     });
     if (isFirstRender) {
-      setUndoStack([valueMap]);
+      // Set the undo stack up if the page is loading from a saved state
+      let valueMap = new Map<string, string>();
+      let firstUndoStack: Map<string, string>[] = []
+      questions.forEach(q => {
+        if (q.value) {
+          valueMap = new Map<string, string>(valueMap);
+          valueMap.set(q.name, q.value);
+          firstUndoStack = [...firstUndoStack, valueMap];
+        }
+      });
+      setUndoStack(firstUndoStack);
     }
     isDeserializing = false;
     console.log("Deserialization successful", valueMap);
@@ -205,9 +237,18 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       valueMap.set(q.name, q.value);
     });
     setUndoStack([...undoStack, valueMap]);
+
     const url = new URL(window.location.toString());
     url.searchParams.set("state", serializeState());
     window.history.replaceState({}, '', url.toString());
+
+    const countPreview = document.getElementById("scenario-count-preview");
+    if (countPreview) {
+      countPreview.classList.add("pulse-animation")
+      setTimeout(() => {
+        countPreview.classList.remove("pulse-animation");
+      }, 1500)
+    }
   }
 
   const handleUndo = () => {
@@ -248,11 +289,24 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   }
 
   const handleCategoryClick = (category: string) => {
-    document.getElementById(getCategorySectionId(category))?.scrollIntoView(true);
+    const categorySection = document.getElementById(getCategorySectionId(category))
+    if (categorySection) {
+      categorySection.scrollIntoView(true);
+      categorySection.focus();
+    }
   }
 
+  /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (showIntro) return;
+
+    // Detect high contrast mode by checking if the background color has been modified
+    if (!isHighContrast) {
+      const leftColumnBg = window.getComputedStyle(document.getElementsByClassName("title-bar")[0], null).getPropertyValue('background-color'); 
+      if (leftColumnBg !== "rgb(0, 27, 46)") {
+        setHighContrast(true);
+      }
+    }
 
     // Resize the page to fill the screen vertically
     const titleBar = document.getElementById("title-bar");
@@ -277,12 +331,15 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       if (grid) {
         grid.style.height = `calc(100vh - ${footer?.offsetHeight}px - ${titleBar?.offsetHeight}px)`;
       }
+      adjustVerticalAlignment();
     }
 
     // Auto-scroll when the user selects a choice
-    const svRows = document.getElementsByClassName("sv_row");
-    if (svRows.length > 0) {
-      svRows[svRows.length - 1].scrollIntoView(true);
+    if (autoscroll) {
+      const svRows = document.getElementsByClassName("sv_row");
+      if (svRows.length > 0) {
+        svRows[svRows.length - 1].scrollIntoView(true);
+      }
     }
 
     const handleResize = () => {
@@ -292,13 +349,27 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       } else if (!isMobileLayout && !isWideScreen()) {
         console.log("Switching to mobile layout");
         setMobileLayout(true);
+      } else if (!isMobileLayout) {
+        adjustVerticalAlignment();
       }
     }
 
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
+    const handleKeyPress = () => {
+      autoscroll = false;
     }
+
+    const handleMouseClick = () => {
+      autoscroll = true;
+    }
+
+    window.addEventListener('resize', handleResize);
+    document.addEventListener('keypress', handleKeyPress);
+    document.addEventListener('mousedown', handleMouseClick);
+    return function cleanup() {
+      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('keypress', handleKeyPress);
+      document.removeEventListener('mousedown', handleMouseClick);
+    };
   });
 
   if (showIntro) {
@@ -321,6 +392,7 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   const scenarioHeader = contentData.taskInstructions?.title;
   const scenarioMsg = contentData.taskInstructions?.message;
   const categories = Array.from(taskMap.keys());
+  const highContrastBorder = isHighContrast ? "solid white 1px" : "";
   const numTasks = categories.length === 0 ? 0 :
     categories.map(category => TaskCard.filterTasks(taskMap.get(category) ?? []))
       .flat()
@@ -351,21 +423,21 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
       <div>
         { showSurvey ?
           <div className="mobile-grid">
-            <div id="title-bar" className="title-bar py-2">
-              <span className="title-bar-text">HAX Playbook</span>
-              <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
-                <button onClick={handleClear} className="blue-button">Restart</button>
-                <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
+            <div id="title-bar" className="title-bar" style={{borderBottom: highContrastBorder}}>
+              <header role="banner" className="title-bar-text">HAX Playbook</header>
+              <div id="survey-buttons" style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
+                <button aria-label="Restart" onClick={handleClear} className="blue-button">Restart</button>
+                <button aria-label="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
               </div>
             </div>
             { numTasks > 0 ? 
-            <div onClick={() => setShowSurvey(false)} className="view-scenarios-bar py-2" id="view-scenarios-bar">
+            <button onClick={() => setShowSurvey(false)} className="view-scenarios-bar" id="view-scenarios-bar">
               <span style={{ color: "white" }}>View testing scenarios</span>
-              <div className="circle-text circle-text-large">
+              <div className="circle-text circle-text-large" id="scenario-count-preview" style={{border: highContrastBorder}}>
                 {numTasks}
               </div>
-              <BsChevronRight color="#708491" style={{ marginLeft: "auto", fontSize: "24px", paddingRight: "2%" }} />
-            </div>
+              <BsChevronRight color={isHighContrast ? "#FFFFFF" : "#708491"} style={{ marginLeft: "auto", fontSize: "24px", paddingRight: "2%" }} />
+            </button>
             : <div></div> }
             <div className="left-column scroll-pane" id="survey-container">
               <div className="column-header">
@@ -376,10 +448,10 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
           </div>
           :
           <>
-            <div id="title-bar" className="title-bar py-2">
-              <span className="title-bar-text">HAX Playbook</span>
-              <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end mr-3">
-                <button onClick={() => { setShowExportForm(true) }} className="blue-button mr-3">Export</button>
+            <div id="title-bar" className="title-bar" style={{borderBottom: highContrastBorder}}>
+              <header role="banner" className="title-bar-text">HAX Playbook</header>
+              <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
+                <button aria-label="Export" onClick={() => { setShowExportForm(true) }} className="blue-button">Export</button>
                 <ExportDialog 
                   show={showExportForm}
                   onClose={() => setShowExportForm(false)}
@@ -393,28 +465,28 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
                 <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} onClose={() => setShowGithubForm(false)} />
               </div>
             </div>
-            <div onClick={() => setShowSurvey(true)} className="back-bar pt-3 pb-1">
-              <BsChevronLeft color="#004578" style={{ fontSize: "18px", paddingLeft: "2%", marginBottom: "4px" }} />
-              <div style={{display: "inline-block", marginLeft: "10px"}}>Back to survey</div>
-            </div>
+            <button onClick={() => setShowSurvey(true)} className="back-bar" style={{border: isHighContrast ? "solid white 1px" : "", marginLeft: "15px", padding: "10px 0px"}}>
+              <BsChevronLeft color={isHighContrast ? "#FFFFFF" : "#004578"} style={{ fontSize: "18px", marginBottom: "2px" }} />
+              <div style={{display: "inline-block", marginLeft: "5px"}}>Back to survey</div>
+            </button>
             <div className="right-column d-flex flex-row align-items-center" id="scenario-header-container">
-              <div className="mb-2 column-header" >
+              <div className="mb-3 column-header" >
                 <span style={{fontSize: "22px", color:"#004578", fontWeight: "bold"}}>{scenarioHeader}</span>
               </div>
             </div>
-            <div className="right-column mb-3">
-              <span style={{ fontSize: "14px" }}>Total scenarios:</span>
-              <div className="circle-text circle-text-large">
+            <div className="right-column pb-4">
+              <span style={{ fontSize: "14px", border: highContrastBorder}}>Total scenarios:</span>
+              <div className="circle-text circle-text-large" style={{border: highContrastBorder}}>
                 {numTasks}
               </div>
             </div>
             <div className="right-column">
               {scenarioMsg != null && scenarioMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
             </div>
-            <div className="right-column bottom-shadow">
-              <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />
+            <div id="category-container" className="right-column bottom-shadow">
+              <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} isHighContrast={isHighContrast}/>
             </div>
-            <TaskList taskMap={taskMap} />
+            <TaskList taskMap={taskMap} isHighContrast={isHighContrast}/>
           </>
         }
       </div>
@@ -422,10 +494,10 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
   } else {
     return (
       <>
-        <div id="title-bar" className="title-bar py-2">
-          <span className="title-bar-text ml-3">HAX Playbook</span>
+        <div id="title-bar" className="title-bar py-2" style={{borderBottom: highContrastBorder}}>
+          <header role="banner" className="title-bar-text ml-3">HAX Playbook</header>
           <div style={{ marginLeft: "auto" }} className="d-flex justify-content-end">
-            <button onClick={() => setShowExportForm(true)} className="blue-button mr-3">Export</button>
+            <button aria-label="Export" onClick={() => setShowExportForm(true)} className="blue-button mr-3">Export</button>
           </div>
           <ExportDialog 
             show={showExportForm}
@@ -439,45 +511,45 @@ const App: React.FunctionComponent<AppProps> = ({ surveyData, contentData }) => 
             onClose={() => setShowLinkDialog(false)} />
         </div>
         <div id="two-column-grid" className="two-column-grid">
-          <div className="left-column">
-            <div className="my-3 column-header">
-              <span>{instructionHeader}</span>
+          <main role="main" className="left-column">
+            <h1 className="my-3 column-header side-padding">
+              {instructionHeader}
+            </h1>
+            { isNullOrEmpty(instructionsMsg) ? <div/> : <div className="mb-3 normal-text" aria-label="survey instructions" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> }
+            <div id="survey-buttons" className="bottom-shadow side-padding">
+              <button aria-label="Restart" onClick={handleClear} className="blue-button">Restart</button>
+              <button aria-label="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
             </div>
-          </div>
-          <div className="right-column d-flex flex-row align-items-center">
-            <div className="my-3 column-header" >
-              <span>{scenarioHeader}</span>
+            <div className="pt-3 scroll-pane">
+              <Survey json={surveyData} onAfterRenderPage={handleAfterRender} onValueChanged={handleValueChanged} />
             </div>
-            <span style={{ marginLeft: "auto" }}>Total scenarios:</span>
-            <div className="circle-text circle-text-large">
-              {numTasks}
-            </div>
-          </div>
-          <div className="left-column">
-            {instructionsMsg != null && instructionsMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
-          </div>
+          </main>
           <div className="right-column">
-            {scenarioMsg != null && scenarioMsg.length > 0 ? <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: instructionsMsg }} /> : null}
-          </div>
-          <div className="left-column bottom-shadow py-3">
-            <button onClick={handleClear} className="blue-button">Restart</button>
-            <button title="Undo" onClick={handleUndo} disabled={undoStack.length === 0} className="blue-button ml-3"><BsArrowCounterclockwise /> Undo</button>
-          </div>
-          <div className="right-column bottom-shadow">
-            <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} />
-          </div>
-          <div className="left-column pt-3 scroll-pane">
-            <Survey json={surveyData} onAfterRenderPage={handleAfterRender} onValueChanged={handleValueChanged} />
-          </div>
-          <div className="right-column scroll-pane">
-            <TaskList taskMap={taskMap} />
+            <div className="d-flex flex-row align-items-center">
+              <h1 className="my-3 column-header side-padding">
+                {scenarioHeader}
+              </h1>
+              <span id="total-scenarios-label" style={{ marginLeft: "auto" }}>Total scenarios:</span>
+              <div className="circle-text circle-text-large" aria-labelledby="total-scenarios-label" style={{border: highContrastBorder}}>
+                {numTasks}
+              </div>
+            </div>
+            { isNullOrEmpty(scenarioMsg) ? <div/> : <div className="mb-3 normal-text" dangerouslySetInnerHTML={{ __html: scenarioMsg }} /> }
+            <div id="category-container" className="bottom-shadow side-padding">
+              <CategoryTags taskMap={taskMap} onClick={handleCategoryClick} isHighContrast={isHighContrast}/>
+            </div>
+            <div className="scroll-pane side-padding">
+              <TaskList taskMap={taskMap} isHighContrast={isHighContrast}/>
+            </div>
           </div>
         </div>
         <GithubExportForm taskMap={taskMap} numTasks={numTasks} showForm={showGithubForm} onClose={() => setShowGithubForm(false)} />
-        <div id="footer" className="footer">
+        <footer role="contentinfo" id="footer" className="footer">
           <span className="mx-3">Copyright &copy; Microsoft Corporation</span>
-          <a style={{ marginLeft: "auto", marginRight: "1em" }} href="mailto:aiguidelines@microsoft.com">Contact us</a>
-        </div>
+          <address style={{ marginLeft: "auto", marginRight: "1em", marginBottom: "0px", display: "inline-block", fontStyle: "normal" }}>
+            <a href="mailto:aiguidelines@microsoft.com">Contact us</a>
+          </address>
+        </footer>
       </>
     );
   }

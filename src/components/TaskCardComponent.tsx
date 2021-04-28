@@ -14,10 +14,11 @@ import { TaskCard } from '../models/Types';
 import TaskComponent from './TaskComponent';
 
 interface TaskCardProps {
-  card: TaskCard;
+  card: TaskCard,
+  isHighContrast: boolean
 }
 
-const TaskCardComponent: React.FunctionComponent<TaskCardProps> = ({ card }) => {
+const TaskCardComponent: React.FunctionComponent<TaskCardProps> = ({ card, isHighContrast }) => {
   const hasMessage = card.message != null && card.message.length > 0;
   return (
     <div className="normal-text">
@@ -25,7 +26,7 @@ const TaskCardComponent: React.FunctionComponent<TaskCardProps> = ({ card }) => 
       { card.tasks.length !== 0 ? 
         <>
           {card.tasks.map(task => (
-            <TaskComponent task={task}/>
+            <TaskComponent task={task} isHighContrast={isHighContrast}/>
           ))}
         </> : null }
     </div>

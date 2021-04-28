@@ -25,7 +25,7 @@
             "tasks": [
               {
                 "name": "Normal operation",
-                "details": "As usual, include scenarios where the system demonstrates normal operation."
+                "details": "<p>As usual, include scenarios where the system demonstrates normal operation.</p>"
               }
             ]
           }
@@ -43,7 +43,7 @@
             "tasks": [
               {
                 "name": "Normal operation",
-                "details": " As usual, include scenarios where the system demonstrates normal operation."
+                "details": "<p>As usual, include scenarios where the system demonstrates normal operation.</p>"
               }
             ]
           }
@@ -61,7 +61,7 @@
             "tasks": [
               {
                 "name": "Normal operation",
-                "details": " As usual, include scenarios where the system demonstrates normal operation. "
+                "details": "<p>As usual, include scenarios where the system demonstrates normal operation.</p>"
               }
             ]
           }
@@ -79,7 +79,7 @@
             "tasks": [
               {
                 "name": "Normal operation",
-                "details": " As usual, include scenarios where the system demonstrates normal operation."
+                "details": "<p>As usual, include scenarios where the system demonstrates normal operation.</p>"
               }
             ]
           }
@@ -97,7 +97,7 @@
             "tasks": [
               {
                 "name": "Normal operation",
-                "details": " As usual, include scenarios where the system demonstrates normal operation."
+                "details": "<p>As usual, include scenarios where the system demonstrates normal operation.<p>"
               }
             ]
           }
@@ -116,17 +116,17 @@
             {
               "name": "",
               "visibleIf": "{systemDomain} = 'search'",
-              "details": "A search engine that accepts written queries and then retrieves relevant documents."
+              "details": "<p>A search engine that accepts written queries and then retrieves relevant documents.</p>"
             },
             {
               "name": "",
               "visibleIf": "{systemDomain} = 'recommendation'",
-              "details": "A news recommendation service that recommends news stories based on the topics and news narratives a person is known to have followed in the past."
+              "details": "<p>A news recommendation service that recommends news stories based on the topics and news narratives a person is known to have followed in the past.</p>"
             },
             {
               "name": "",
               "visibleIf": "{systemDomain} = 'conversational_ai'",
-              "details": "A chatbot that communicates with people over a text channel such as instant messaging or email."
+              "details": "<p>A chatbot that communicates with people over a text channel such as instant messaging or email.</p>"
             },
             {
               "name": "",
@@ -136,7 +136,7 @@
             {
               "name": "",
               "visibleIf": "{systemDomain} = 'classification'",
-              "details": "A system that organizes emails, or other communications, into categories like: spam, promotions/marketing, social media, etc."
+              "details": "<p>A system that organizes emails, or other communications, into categories like: spam, promotions/marketing, social media, etc.</p>"
             }
           ],
           "taskCard": {
@@ -156,7 +156,7 @@
             {
               "name": "",
               "visibleIf": "{systemDomain} = 'search'",
-              "details": "Search systems that are integrated into voice assistants enable users to retrieve information by entering speech queries."
+              "details": "<p>Search systems that are integrated into voice assistants enable users to retrieve information by entering speech queries.</p>"
             },
             {
               "name": "",
@@ -166,7 +166,7 @@
             {
               "name": "",
               "visibleIf": "{systemDomain} = 'conversational_ai'",
-              "details": "A voice assistant is a user interface that allows a user to complete an action or retrieve information simply by speaking a command."
+              "details": "<p>A voice assistant is a user interface that allows a user to complete an action or retrieve information simply by speaking a command.</p>"
             }
           ],
           "taskCard": {
@@ -179,6 +179,26 @@
               {
                 "name": "Noisy channel",
                 "details": "<p> User input is corrupted by background noise, including by capturing other people who may be speaking in the background.</p> <p>Simulate this error by including unrelated text in the transcription, or by removing portions of correctly transcribed text.</p>"
+              }
+            ]
+          }
+        },
+        {
+          "name": "action_sequence",
+          "definition": "",
+          "examples": [
+            {
+              "name": "",
+              "visibleIf": "",
+              "details": ""
+            }
+          ],
+          "taskCard": {
+            "message": "",
+            "tasks": [
+              {
+                "name": "",
+                "details": ""
               }
             ]
           }
@@ -217,12 +237,12 @@
             {
               "name": "",
               "visibleIf": "{inputModality} = 'text'",
-              "details": "A scheduling assistant that must decide if an email mentions setting up a meeting."
+              "details": "<p>A scheduling assistant that must decide if an email mentions setting up a meeting.</p>"
             },
             {
               "name": "",
               "visibleIf": "{inputModality} = 'speech'",
-              "details": "A virtual assistant that must decide if a sound captured by the microphone contains a \"wake word\"."
+              "details": "<p>A virtual assistant that must decide if a sound captured by the microphone contains a \"wake word\".</p>"
             }
           ],
           "taskCard": {
@@ -277,7 +297,7 @@
             {
               "name": "",
               "visibleIf": "{inputModality} = 'text'",
-              "details": "Systems that process text one sentence at a time must first differentiate between internal punctuation (e.g., \"Mr.\", \"Yahoo!\") and punctuation that terminates the sentence."
+              "details": "<p>Systems that process text one sentence at a time must first differentiate between internal punctuation (e.g., \"Mr.\", \"Yahoo!\") and punctuation that terminates the sentence.</p>"
             },
             {
               "name": "",
@@ -356,7 +376,7 @@
           "examples": [
             {
               "name": "",
-              "details": "Advanced chatbot systems can generate short blurbs of text in interactive conversations by building on the tone and relevant topics detected from user utterances."
+              "details": "<p>Advanced chatbot systems can generate short blurbs of text in interactive conversations by building on the tone and relevant topics detected from user utterances.</p>"
             },
             {
               "name": "",
@@ -364,7 +384,7 @@
             },
             {
               "name": "",
-              "details": "Advanced writing assistants often generate a single response to suggest a paraphrase or sentence that eliminates a grammatical error or redundant information."
+              "details": "<p>Advanced writing assistants often generate a single response to suggest a paraphrase or sentence that eliminates a grammatical error or redundant information.</p>"
             }
           ],
           "taskCard": {
@@ -417,7 +437,7 @@
           "examples": [
             {
               "name": "",
-              "details": "Email reply prediction systems use automated response generation to suggest a list of phrases for beginning a reply email."
+              "details": "<p>Email reply prediction systems use automated response generation to suggest a list of phrases for beginning a reply email.</p>"
             }
           ],
           "taskCard": {
@@ -531,7 +551,7 @@
           "examples": [
             {
               "name": "",
-              "details": "Email spam filters apply binary classification rules to determine whether to label an email as junk."
+              "details": "<p>Email spam filters apply binary classification rules to determine whether to label an email as junk.</p>"
             }
           ],
           "taskCard": {
@@ -554,7 +574,7 @@
           "examples": [
             {
               "name": "Multi-class classification",
-              "details": "Multi-class is the task of classifying datapoints into one of three or more categories."
+              "details": "<p>Multi-class is the task of classifying datapoints into one of three or more categories.</p>"
             },
             {
               "name": "Example",

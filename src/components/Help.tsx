@@ -45,11 +45,11 @@ export const HelpDialog: React.FunctionComponent<HelpProps> = ({ name, examples,
   console.debug(`Filtered ${visibleExamples.length} visible examples out of ${examples.length} total examples for help=${name}`);
   const body = visibleExamples?.map((example, i) => {
     return (
-      <>
+      <div key={example.name}>
         <h5>{example.name}</h5>
         <div dangerouslySetInnerHTML={{ __html: example.details }}></div>
         {i < visibleExamples.length-1 ? (<hr style={{ width: "100%", marginTop: "1.5em", marginBottom: "1.5em" }}/>) : null}
-      </>
+      </div>
     )
   });
 
@@ -62,18 +62,20 @@ export const HelpDialog: React.FunctionComponent<HelpProps> = ({ name, examples,
         isBlocking={false}
         containerClassName={contentStyles.container}
       >
-        <div className={contentStyles.header}>
-          <span id={titleId}>{name} - Examples</span>
-          <IconButton
-            styles={iconButtonStyles}
-            iconProps={cancelIcon}
-            ariaLabel="Close popup modal"
-            onClick={onClose}
-          />
-        </div>
-        <div className={contentStyles.body}>
-          {body}
-        </div>
+        <section>
+          <header className={contentStyles.header}>
+            <h3 id={titleId}>{name} - Examples</h3>
+            <IconButton
+              styles={iconButtonStyles}
+              iconProps={cancelIcon}
+              ariaLabel="Close popup modal"
+              onClick={onClose}
+            />
+          </header>
+          <div className={contentStyles.body}>
+            {body}
+          </div>
+        </section>
       </Modal>
     </div>
   );

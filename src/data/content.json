@@ -185,20 +185,19 @@
         },
         {
           "name": "action_sequence",
-          "definition": "",
+          "definition": "An action sequence is a sequence of one or more events, or choices, that triggers a system response.",
           "examples": [
             {
               "name": "",
-              "visibleIf": "",
-              "details": ""
+              "details": "<ul><li>Clicking on one or more news stories in a news feed may update the news recommendations.</li><li>Inserting an image into a document can trigger an intelligent page layout feature.</li></ul>"
             }
           ],
           "taskCard": {
-            "message": "",
+            "message": "Your system will take an action sequence as its primary input modality. Here are some scenarios that you can consider including in your user-testing protocol.",
             "tasks": [
               {
-                "name": "",
-                "details": ""
+                "name": "Action sequence includes spurious events",
+                "details": "<p>People may misclick or trigger accidental actions which they may then try to undo. The resultant action sequence will contain spurious events that can confuse the system. Here are some ways to simulate spurious events:</p><ul> <li>Introduce accidental clicks on nearby, or neighboring buttons or links.</li><li>Click buttons that have similar iconography to the intended buttons.</li><li>Include all actions needed to recover from, or undo, the misclicks.</li></ul>"
               }
             ]
           }

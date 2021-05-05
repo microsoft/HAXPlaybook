@@ -111,7 +111,7 @@ Check [CONTRIBUTING](CONTRIBUTING.md) page.
 # Research and acknowledgements 
 This project materializes and implements ideas from ongoing research on Human-AI interaction. Here is a list of development and research contributors:
 
-**Current Contributors**: [Nicholas King](https://www.nickbking.com/), [Kathleen Walker](https://www.linkedin.com/in/kathleenedits/), [Mihaela Vorvoreanu](https://mihaelav.com/), [Xavier Fernandes](https://www.linkedin.com/in/praphat-xavier-fernandes-86574814/), [Juan Lema](http://juanlema.com), [Adam Fourney](https://www.adamfourney.com/),  [Saleema Amershi](https://www.linkedin.com/in/saleema-amershi/)
+**Current Contributors**: [Nicholas King](https://www.nickbking.com/), [Jingya Chen](https://www.jingyachen.net/), [Kathleen Walker](https://www.linkedin.com/in/kathleenedits/), [Mihaela Vorvoreanu](https://mihaelav.com/), [Xavier Fernandes](https://www.linkedin.com/in/praphat-xavier-fernandes-86574814/), [Juan Lema](http://juanlema.com), [Adam Fourney](https://www.adamfourney.com/),  [Saleema Amershi](https://www.linkedin.com/in/saleema-amershi/)
 
 **Research Contributors**: [Matthew K. Hong](https://www.matthewkhong.com/), [Adam Fourney](https://www.adamfourney.com/), [Derek DeBellis](https://www.linkedin.com/in/derekdebellis/), [Saleema Amershi](https://www.linkedin.com/in/saleema-amershi/)
 
